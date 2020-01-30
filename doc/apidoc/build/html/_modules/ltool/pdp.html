@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ltool.pdp &mdash; ltool 0.01 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ltool
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ltool</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">模块代码</a> &raquo;</li>
+        
+      <li>ltool.pdp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>ltool.pdp 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span>    <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">functools</span>          <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">operator</span>           <span class="kn">import</span> <span class="n">concat</span>
+
+
+<span class="k">class</span> <span class="nc">__PdpEmpty</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="get_config"><a class="viewcode-back" href="../../ltool.html#ltool.pdp.get_config">[文档]</a><span class="k">def</span> <span class="nf">get_config</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;返回一个配置对象cfg,通过往这个配置对象中添加属性，并将该对象传给</span>
+<span class="sd">        explain_file和explain_string_list，完成对pdp的解释。</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">__PdpEmpty</span>
+    <span class="k">return</span> <span class="n">e</span></div>
+
+<span class="k">def</span> <span class="nf">__iterable</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 这个函数将传入的data变为iterable类型的变量，进行变换的策略如下：</span>
+<span class="sd">        如果输入的数据类型是str或tuple，则返回一个长度为1的iterable类型，其唯一的内容为data</span>
+<span class="sd">        如果输入的数据类型是其它的iterable类型，则直接返回data</span>
+<span class="sd">        如果data不是iterable类型，则返回一个长度为1的iterable类型，其唯一的内容为data</span>
+
+<span class="sd">        这么做的目的在于，返回一个iterable类型的变量，来让后续的代码用类似于for item in data的形式来遍历。</span>
+<span class="sd">        但这里有一个例外，str和tuple也是iterable的，但是它在后续的代码中应该被当作一个元素来使用。</span>
+<span class="sd">        因此在判断的时候会先判断是不是str和tuple，如果是则当作单个元素，随后再判断是不是iterable的。</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">tuple</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">,)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">Iterable</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">,)</span>
+
+
+<span class="k">def</span> <span class="nf">__merge_line</span><span class="p">(</span><span class="n">text_in_list</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 这个函数识别行内的关键字&quot;$&gt;&quot;，识别到关键字之后会把该行和下一行合并为一行</span>
+<span class="sd">    </span>
+<span class="sd">        对每行进行逐行遍历，每次遍历中，都把该行推入tmp列表，如果该行没有关键字&quot;&amp;&gt;&quot;</span>
+<span class="sd">        那么就把tmp展开成一行推入输出list,并清空tmp,如果该行有关键字,则什么都不做</span>
+<span class="sd">        在有&quot;&amp;&gt;&quot;关键字的情况下，tmp会一直进行保留，把通过关键字延续的多行拼接成一行输出</span>
+<span class="sd">        在没有关键字的情况下，则这一行先进入tmp,然后马上从tmp又进入输出列表 </span>
+
+<span class="sd">        在有关键字的时候，推入tmp列表前会在字符串后面加上一个特殊的，几乎不会在实际</span>
+<span class="sd">        文本中出现的字符串&quot;!@#$%&quot;，便于后续函数重新把由关键字合并成一行的代码重新展开</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">text_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp</span>      <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text_in_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\$\&gt;&#39;</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">text_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">+</span><span class="s1">&#39;!@#$%&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text_out</span>
+
+
+
+<span class="k">def</span> <span class="nf">__split_line</span><span class="p">(</span><span class="n">text_in_list</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 这个函数识别行内的关键字&quot;!@#$%&quot;,根据这个关键字把一行文本拆成多行</span>
+<span class="sd">        是__merge_line的逆过程</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">text_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">text_in_list</span><span class="p">:</span>
+        <span class="n">text_out</span> <span class="o">+=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;!@#$%&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text_out</span>
+
+
+
+<span class="k">def</span> <span class="nf">__replace_line</span><span class="p">(</span><span class="n">text_in</span><span class="p">,</span><span class="n">cfg</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 这个函数用于将本行内的$x$标注替换为实际字符串，其中x为行尾标注$$y的key,</span>
+<span class="sd">        即这里y可以是dict或list</span>
+
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">text_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">re_result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;\$\$([\:\w.\(\)\[\]\,]+)&#39;</span><span class="p">,</span><span class="n">text_in</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">re_result</span><span class="p">:</span>                       <span class="c1">#如果改行匹配到了关键词&quot;$$&quot;标注的变量</span>
+        <span class="c1">#print(re_result[0])</span>
+        <span class="c1">#print(re_result[1])</span>
+        <span class="c1">#print(&quot;%s&quot; % re_result[1])</span>
+        <span class="c1">#print(eval(&quot;%s&quot; % re_result[1]))</span>
+        <span class="n">param_iter</span> <span class="o">=</span> <span class="n">__iterable</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">re_result</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">param_iter</span><span class="p">:</span>
+            <span class="n">text_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__replace_mark</span><span class="p">(</span><span class="n">text_in</span><span class="p">,</span><span class="n">param</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text_out</span>
+
+
+
+<span class="k">def</span> <span class="nf">__replace_mark</span><span class="p">(</span><span class="n">text_in</span><span class="p">,</span><span class="n">param</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 替换一个字符串中的&quot;$x$&quot;,其中x是整数，用于索引param，即将&quot;$x$&quot;替换为param[x]</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">text_in</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="n">param_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">param</span><span class="p">,)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">param_iter</span> <span class="o">=</span> <span class="n">param</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">param_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">param</span><span class="p">,)</span>
+
+    <span class="n">index_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\$([0-9]+)\$&#39;</span><span class="p">,</span><span class="n">text_in</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_list</span><span class="p">:</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">%s</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">param_iter</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">l</span>
+    <span class="c1">#print(text_in,&#39;   &#39;,param,&#39;   &#39;,param_iter,&#39;   &#39;,index_list)</span>
+    <span class="c1">#l = l.replace(&#39;$_$&#39;,str(param))</span>
+
+
+
+<div class="viewcode-block" id="explain_file"><a class="viewcode-back" href="../../ltool.html#ltool.pdp.explain_file">[文档]</a><span class="k">def</span> <span class="nf">explain_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">cfg</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 解释file_path路径指明的文件，使用cfg进行展开，并输出文本list</span>
+<span class="sd">    </span>
+<span class="sd">        :param str file_path:</span>
+<span class="sd">            file_path是将被解释的源文本的文件路径，内部包含的pdp格式的文本将会被使用cfg进行解释</span>
+
+<span class="sd">        :param cfg:</span>
+<span class="sd">            用于对源文本进行解释的对象，必须包含有源文本中使用的属性</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            本函数的返回类型为list[str],其内容为将源文本使用cfg进行解释后的结果</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span> <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+	    <span class="n">text_list</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">explain_string_list</span><span class="p">(</span><span class="n">text_list</span><span class="p">,</span><span class="n">cfg</span><span class="p">)</span>    </div>
+
+
+
+<div class="viewcode-block" id="explain_string_list"><a class="viewcode-back" href="../../ltool.html#ltool.pdp.explain_string_list">[文档]</a><span class="k">def</span> <span class="nf">explain_string_list</span><span class="p">(</span><span class="n">string_list</span><span class="p">,</span><span class="n">cfg</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; 解释string_list中的文本，使用cfg进行展开，并输出文本list</span>
+
+<span class="sd">        :param list[str] string_list:</span>
+<span class="sd">            string_list是按行分割的源文本，内部包含的pdp格式的文本将会被使用cfg进行解释</span>
+
+<span class="sd">        :param cfg:      </span>
+<span class="sd">            用于对源文本进行解释的对象，必须包含有源文本中使用的属性</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            本函数的返回类型为list[str],其内容为将源文本使用cfg进行解释后的结果</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">merge_list</span>          <span class="o">=</span> <span class="n">__merge_line</span><span class="p">(</span><span class="n">string_list</span><span class="p">)</span>
+    <span class="c1">#因为__replace_line存在针对一个cfg中的list展开成多行的情况,因此返回的是list</span>
+    <span class="n">replaced_list_list</span>  <span class="o">=</span> <span class="p">[</span><span class="n">__replace_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">cfg</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">merge_list</span><span class="p">]</span>
+    <span class="n">replaced_list</span>       <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="p">,</span> <span class="n">replaced_list_list</span><span class="p">)</span>
+    <span class="n">result_list</span>         <span class="o">=</span> <span class="n">__split_line</span><span class="p">(</span><span class="n">replaced_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_list</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yunqi Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
