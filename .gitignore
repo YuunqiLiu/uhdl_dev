@@ -1,3 +1,4 @@
 /.VSCodeCounter
+/output
 __pycache__
-*.pyc
+*.pyc 

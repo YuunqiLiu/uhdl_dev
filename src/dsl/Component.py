@@ -1,5 +1,12 @@
 import os,shutil
+from operator import concat
+from functools import reduce
 
+
+#import FileProcess
+from .              import FileProcess
+
+from .VFile         import VFile
 from .LinkManager   import LinkManager
 from .Entity        import Entity
 from .Container     import Container,PortContainer,ComponentContainer
@@ -17,6 +24,8 @@ class Component(Entity):
         self.set_father(self.__port)
         self.set_father(self.__com)
         self.set_father(self.__link_manager)
+        self.__vfile = None
+        self.output_path = './'
 
     @property
     def port(self):
@@ -25,6 +34,10 @@ class Component(Entity):
     @property
     def component(self):
         return self.__com
+
+    @property
+    def vfile(self):
+        return self.__vfile
 
     def new(self,**args):
         for name,item in args.items():
@@ -66,19 +79,87 @@ class Component(Entity):
         text += ['endmodule']
         return text
 
+    #=============================================================================================
+    # output verilog/file list generate
+    #=============================================================================================
+
+    #def check_vfile(self,func):
 
 
-    def gen_file(self,path='./',recursion=True):
-        if not os.path.exists(path):
-            os.makedirs(path)
 
-        f  = os.path.join(path,'%s.v' % self.module_name)
-        if os.path.exists(f):
-            os.remove(f)
-            
-        fp = open(f,'w')
-        fp.write('\n'.join(self.gen_rtl_def()))
-        fp.close()
+    #    return vfile
 
-        for item in self.__com():
-            item.gen_file()
+    #@FileProcess.check_vfile
+    def gen_vfile(self,path='-',recursion=True):
+        path = self.output_path if path == '-' else path
+        
+        sub_vfile   = self.__com.gen_vfile(path=path,recursion=recursion)
+        top_path    = FileProcess.create_file(  path = os.path.join(path,self.module_name+'.v'),
+                                                text = self.gen_rtl_def())
+        file_list   = FileProcess.file_list_dedup(reduce(concat,[p.file_list for p in sub_vfile],[]) + [top_path])
+        
+        #self.__vfile = VFile(path = path,top_path = top_path,file_list = file_list)
+        #return self.__vfile
+        return VFile(path = path,top_path = top_path,file_list = file_list)
+
+
+    def gen_flist(self,abs_path=False,path='-'):
+        path = self.output_path if path == '-' else path
+        FileProcess.create_file( path = os.path.join(path,'flist.f'),
+                                 text = [os.path.abspath(f) if abs_path else './'+os.path.relpath(f,path) for f in self.__vfile.file_list] )
+
+
+    def generate(self,abs_path=False,path='-',recursion=True):
+        path = self.output_path if path == '-' else path
+
+        FileProcess.refresh_directory(path)
+
+        self.__vfile = self.gen_vfile(path=path,recursion=recursion)
+        self.gen_flist(abs_path=abs_path,path=path)
+
+
+
+        #if os.path.exists(path):
+        #    shutil.rmtree(path)
+            #os.remove(path)
+
+        #file_list   = self.__file_list_process(reduce(concat,[p.file_list for p in sub_vfile],[]) + [top_path])
+        #top_path    = self.__gen_file(path=path)
+
+
+    #def __file_list_process(self,file_list):
+    #    new_list=list(set(file_list))
+    #    new_list.sort(key=file_list.index)
+    #    return new_list 
+
+        # if not os.path.exists(path):
+        #     os.makedirs(path)
+# 
+        # f  = os.path.join(path,'flist.f')
+        # if os.path.exists(f):
+        #     os.remove(f)
+# 
+# 
+        # 
+# 
+        # fp = open(f,'w')
+        # #print(path)
+        # #for f in self.__vfile.file_list:
+        # #    print(f)
+        # fp.write('\n'.join([os.path.abspath(f) if abs_path else './'+os.path.relpath(f,path) for f in self.__vfile.file_list]))
+        # fp.close()
+
+
+    #def __gen_file(self,path='./'):
+    #    if not os.path.exists(path):
+    #        os.makedirs(path)
+#
+    #    f  = os.path.join(path,'%s.v' % self.module_name)
+    #    if os.path.exists(f):
+    #        os.remove(f)
+    #        
+    #    fp = open(f,'w')
+    #    fp.write('\n'.join(self.gen_rtl_def()))
+    #    fp.close()
+    #    
+    #    return f 

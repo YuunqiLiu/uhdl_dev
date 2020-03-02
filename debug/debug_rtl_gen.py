@@ -30,18 +30,22 @@ def debug_rtl_gen():
     top.link(top.c1.axio,top.c2.axii)
     top.link(top.c2.axio,top.axio)
 
-    top.gen_file('./')
+
+    top.output_path = './output'
+    top.generate()
+    #top.gen_vfile()
+    #top.gen_flist()
+
+
+    #print(top.vfile.file_list)
     #print_list(top.gen_rtl_def())
     #print(top.c1.gen_rtl_inst())
     #print_list(top.gen_rtl_inst())
     #c = Component('com')
-
     #p = Port()
     #p.new(clk=Wire(INPUT,1))
     #p.new(rst=Wire(INPUT,1))
-
     #c.new(axi=AXI4Port())
-
     #print(c.gen_rtl_inst())
     #print(c.gen_rtl_def())
 

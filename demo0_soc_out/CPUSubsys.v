@@ -1,0 +1,42 @@
+module CPUSubsys(
+    input  acr_clk,
+    input  acr_rst,
+    output [31:0] axi_awaddr,
+    output [3:0] axi_awlen,
+    output [2:0] axi_awsize,
+    output [1:0] axi_awburst,
+    output  axi_awlock,
+    output [3:0] axi_awcache,
+    output [2:0] axi_awprot,
+    output  axi_awvalid,
+    input  axi_awready,
+    output [63:0] axi_wdata,
+    output [7:0] axi_wstrb,
+    output  axi_wlast,
+    output  axi_wvalid,
+    input  axi_wready,
+    input [7:0] axi_bid,
+    input [1:0] axi_bresp,
+    input  axi_bvalid,
+    output  axi_bready,
+    output [7:0] axi_arid,
+    output [31:0] axi_araddr,
+    output [3:0] axi_arlen,
+    output [2:0] axi_arsize,
+    output [1:0] axi_arburst,
+    output  axi_arlock,
+    output [3:0] axi_arcache,
+    output [2:0] axi_arprot,
+    output  axi_arvalid,
+    input  axi_arready,
+    input [7:0] axi_rid,
+    input [63:0] axi_rdata,
+    input [1:0] axi_rresp,
+    input  axi_rlast,
+    input  axi_rvalid,
+    output  axi_rready
+);
+
+
+
+endmodule

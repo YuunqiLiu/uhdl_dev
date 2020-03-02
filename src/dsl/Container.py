@@ -75,6 +75,10 @@ class ComponentContainer(Container):
     # RTL gen 
     #=============================================================================================
 
+    def gen_vfile(self,path='./',recursion=True):
+        return [p.gen_vfile(path=path,recursion=recursion) for p in self.as_list] #if self.as_list else []
+        #return reduce(concat,[p.gen_vfile() for p in self.as_list],[])
+
     def gen_rtl_inst(self):
         return reduce(concat,[p.gen_rtl_inst()+[''] for p in self.as_list],[])
         #return [] if self.as_list is [] else reduce(concat,[p.gen_rtl_inst()+[''] for p in self.as_list])
