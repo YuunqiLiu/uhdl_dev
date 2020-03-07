@@ -1,0 +1,14 @@
+./CPUSubsys.v
+./GPUSubsys.v
+./AISRAM.v
+./AICPU.v
+./AIDMA.v
+./AIAccelerator.v
+./AICrossbar.v
+./AISubsys.v
+./VideoSubsys.v
+./DDRSubsys.v
+./PeriSubsys.v
+./HSPeriSubsys.v
+./AXICrossbar.v
+./Chip.v

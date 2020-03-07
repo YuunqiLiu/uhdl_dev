@@ -46,11 +46,6 @@ class Port(Interface):
         return True
 
     def __str__(self):
-        for i in self.sub_port():
-            print(i)
-        print(self.sub_port())
-
-
         return "Port(sub=%d,port=,wire=)" % len(self.sub_port())
 
     #=============================================================================================

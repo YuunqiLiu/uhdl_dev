@@ -31,11 +31,28 @@ class AIAccelerator(Component):
         self.new(acr=CR())
         self.new(axi=AXI4PortNoUQR_A32_D64_I8_B4())
 
-class AICrossbar(AXICrossbar):
+# class AICrossbar(AXICrossbar):
 
-    def __init__(self):
-        super(AICrossbar,self).__init__(INPUT_NUM=3,OUTPUT_NUM=3)
+#     def __init__(self):
+#         # super(AICrossbar,self).__init__(INPUT_NUM=3,OUTPUT_NUM=3)
+#         AXICrossbar.__init__(self,INPUT_NUM=3,OUTPUT_NUM=3)
+#         Component.__init__(self,'AICrossbar')
+
+class AICrossbar(Component):
+
+    def __init__(self,INPUT_NUM=3,OUTPUT_NUM=3):
         Component.__init__(self,'AICrossbar')
+        self.INPUT_NUM  = INPUT_NUM
+        self.OUTPUT_NUM = OUTPUT_NUM
+
+        self.new(acr=CR())
+
+        for i in range(0,self.INPUT_NUM):
+            #self.new(axio=AXI4PortNoUQR_A32_D64_I8_B4())
+            self.new(**{'axii%s' % i:AXI4PortNoUQR_A32_D64_I8_B4().reverse()})
+        for i in range(0,self.OUTPUT_NUM):
+            #self.new(axii=AXI4PortNoUQR_A32_D64_I8_B4().reverse())
+            self.new(**{'axio%s' % i:AXI4PortNoUQR_A32_D64_I8_B4()})
 
 class AISubsys(Component):
 
@@ -51,9 +68,6 @@ class AISubsys(Component):
         self.new(inst_ai_accelerator    = AIAccelerator())
 
         self.new(inst_ai_corssbar = AICrossbar())
-
-        print(self.axi)
-        print(self.inst_ai_corssbar.axio0)
 
         self.link(self.axi, self.inst_ai_corssbar.axio0)
         self.link(self.inst_ai_sram0.axi, self.inst_ai_corssbar.axio1)

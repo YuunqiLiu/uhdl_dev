@@ -47,14 +47,14 @@ class LinkNode(Virtual):
     def __add_input(self,port):
         if (self.output_port_list != []) and (self.__op_wrapper(self.output_port_list[0]) != self.__op_wrapper(port).reverse()):
             raise ArithmeticError('This node has link with output port %s,not match the input port %s.' %(self.output_port_list[0],self.__op_wrapper(port)))
-        elif (self.input_port_list != []) and (self.input_port_list[0] != self.__op_wrapper(port)):
+        elif (self.input_port_list != []) and (self.__op_wrapper(self.input_port_list[0]) != self.__op_wrapper(port)):
             raise ArithmeticError('This node has link with input port %s,not match the input port %s.' %(self.input_port_list[0],self.__op_wrapper(port)))
         self.input_port_list.append(port)
 
     def __add_output(self,port):
         if (self.output_port_list != []):
             raise ArithmeticError('This node has link with a ouput port,not allow another output port.')
-        elif (self.input_port_list != []) and (self.input_port_list[0] != self.__op_wrapper(port).reverse()):
+        elif (self.input_port_list != []) and (self.__op_wrapper(self.input_port_list[0]) != self.__op_wrapper(port).reverse()):
             raise ArithmeticError('This node had link with input port %s,not match the output port %s' %(self.input_port_list[0],self.__op_wrapper(port)))
         self.output_port_list.append(port)
 
