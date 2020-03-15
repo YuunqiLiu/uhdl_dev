@@ -9,7 +9,7 @@ class Wire(Interface):
 
     def __init__(self,direction,data_width):
         Interface.__init__(self)
-        self.constraint_father_type(Port)
+        self.constraint_father_type(Port,Component)
         self.__direction    = direction
         self.__data_width   = data_width
         self.__param_check()

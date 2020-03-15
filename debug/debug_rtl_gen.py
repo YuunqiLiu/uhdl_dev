@@ -15,6 +15,7 @@ class SubCom(Component):
 
     def __init__(self):
         Component.__init__(self,'subcom')
+        self.new(clk=Wire(INPUT,1))
         self.new(axii=AXI4Port())
         self.new(axio=AXI4Port().reverse())
 
@@ -26,10 +27,14 @@ def debug_rtl_gen():
     top.new(axio=AXI4Port().reverse())
     top.new(c1=SubCom())
     top.new(c2=SubCom())
-    top.link(top.axii,top.c1.axii)
+    top.new(clk=Wire(INPUT,1))
+
+    top.link(top.axii.exclude('rst'),top.c1.axii.exclude('rst'))
+    #top.link(top.axii.exclude('clk'),top.c1.axii.exclude('rst'))
+
     top.link(top.c1.axio,top.c2.axii)
     top.link(top.c2.axio,top.axio)
-
+    top.link(top.c1.clk,top.c2.clk,top.clk)
 
     top.output_path = './output'
     top.generate()

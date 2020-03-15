@@ -5,6 +5,7 @@ from .Interface import Interface
 from .Entity    import Entity
 from .Virtual   import Virtual
 from .Port      import Port
+#from .Wire      import Wire
 
 class LinkNode(Virtual):
 
@@ -102,7 +103,7 @@ class LinkManager(Virtual):
 
 
     def __link_port_check(self,port):
-        if not isinstance(port,Port):
+        if not isinstance(port,Interface):
             raise TypeError('The item to link should be a Port,but get a %s' % type(port))
         elif not (port.father_component is self.father or port.father_component in self.father.component()):
             raise ArithmeticError('the port to link is not in this component.')

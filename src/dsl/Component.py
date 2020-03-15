@@ -10,7 +10,9 @@ from .VFile         import VFile
 from .LinkManager   import LinkManager
 from .Entity        import Entity
 from .Container     import Container,PortContainer,ComponentContainer
-from .Port          import Port
+
+from .Interface     import Interface
+#from .Port          import Port
 
 class Component(Entity):
 
@@ -18,7 +20,7 @@ class Component(Entity):
         Entity.__init__(self)
         self.module_name = module_name 
         self.constraint_father_type(Component)
-        self.__port = PortContainer(Port)
+        self.__port = PortContainer(Interface)
         self.__com  = ComponentContainer(Component)
         self.__link_manager = LinkManager()
         self.set_father(self.__port)
@@ -45,7 +47,7 @@ class Component(Entity):
                 raise NameError("The name '%s' has used in this Component." % name)
             elif isinstance(item,Component):
                 self.component.new(**{name:item})
-            elif isinstance(item,Port):
+            elif isinstance(item,Interface):
                 self.port.new(**{name:item})
             else:
                 raise TypeError("The item new in a Component should be a Port or a Component,should not be a %s" % type(item))

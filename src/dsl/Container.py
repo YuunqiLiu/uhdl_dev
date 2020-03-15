@@ -1,8 +1,9 @@
-from operator import concat
-from functools import reduce
+from copy       import copy
+from operator   import concat
+from functools  import reduce
 
-from .Virtual import Virtual
-from .Entity import Entity
+from .Virtual   import Virtual
+from .Entity    import Entity
 
 class Container(Virtual):
 
@@ -16,9 +17,20 @@ class Container(Virtual):
     def __call__(self):
         return self.__payload.values()
     
+    def set_list(self,list_in):
+        self.__list = list_in
+
+    def set_payload(self,payload_in):
+        self.__payload = payload_in
+
     @property
     def as_list(self):
         return self.__list
+
+    @property
+    def as_payload(self):
+        return self.__payload
+
 
     def sort(self):
         self.__list.sort()
@@ -38,7 +50,18 @@ class Container(Virtual):
                 item.set_name(name)
                 self.__payload[name] = item
                 self.__list.append(item)
+    
+    def _exclude_copy(self,exclude):
+        exclude_container = copy(self)
+        exclude_container.set_list([e for e in self.as_list if not e.name in exclude])
+        exclude_container.set_payload({k:v for k,v in self.as_payload.items() if k not in exclude})
 
+        #exclude_port.sub_port = exclude_port.sub_port._exclude_copy()
+        return exclude_container
+
+
+    #def exclude_remove(self,name):
+    #    pass
 
 
 class PortContainer(Container):

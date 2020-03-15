@@ -1,4 +1,4 @@
-from copy       import deepcopy
+from copy       import deepcopy,copy
 from operator   import concat
 from functools  import reduce
 
@@ -11,6 +11,9 @@ class Port(Interface):
         Interface.__init__(self)
         self.__sub_port = Container(Interface)
         self.set_father(self.__sub_port)
+
+    def set_sub_port(self,sub_port):
+        self.__sub_port = sub_port
 
     @property
     def sub_port(self):
@@ -25,11 +28,20 @@ class Port(Interface):
         for item in self.sub_port():
             item.reverse_direction()
 
-    def expand(self):
+    def expand(self,exclude=[]):
         '''将本port展开为一个wire形式，输出为List[Wire]'''
-        result = reduce(concat,[p.expand() for p in self.sub_port()])
+        process_port_list = [p for p in self.sub_port() if not p.name in exclude]
+        result = reduce(concat,[p.expand() for p in process_port_list])
         result.sort()
         return result
+
+    def exclude(self,*args):
+        return self._exclude_copy(args)
+
+    def _exclude_copy(self,exclude=[]):
+        exclude_port = copy(self)
+        exclude_port.set_sub_port( exclude_port.sub_port._exclude_copy(exclude))
+        return exclude_port
 
     #=============================================================================================
     # inner function
