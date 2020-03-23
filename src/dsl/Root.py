@@ -4,39 +4,61 @@ from abc import abstractmethod
 class Root(object):
 
     def __init__(self):
-        self.__name        = None
-        self.__father_type = None               #保留father type为空，子类不修改father_type就会出错
+        self._name        = None
+        self._father      = None
+        self._father_type = None               #保留father type为空，子类不修改father_type就会出错
+
+
+    def set_name(self,name:str):
+        object.__setattr__(self,'_name',name)
+
+    def set_father(self,father):
+        object.__setattr__(self,'_father',father)
+    
+    def set_father_type(self,*T):
+        ''' 这个方法设置了本对象应当指向的father对象的类型,默认的father对象的类型为None'''
+        self._father_type = T
+
 
     @property
-    def name(self):
-        return self.__name
+    def name(self) -> str:
+        return self._name
 
     @property
     def father(self):
-        return self.__father
+        return self._father
+    
 
-    def set_name(self,name):
-        self.__name = name
 
-    @father.setter
-    def father(self,father):
-        ''' 获取father的时候应当检查father的类型是否正确，对于Root而言
-            father必须是Root类型'''
-        if not isinstance(father,self.__father_type):
-            raise TypeError("The father set is a %s,expect a %s." %(type(father),self.__father_type))
-        self.__father = father
+    def __setattr__(self,name,value):
+        if isinstance(value,Root):
+            #print(name,'  ',value)
+            value.set_name(name)
+            value.set_father(self)
+            #print(value.name)
+        object.__setattr__(self,name,value)
 
-    @abstractmethod
-    def set_father(self,son):
-        ''' 这个方法用来指明传入的son对象它的"fahter"是哪个对象，通过定义这个方法
-            可以让对象能够逆向地索引数据结构，并且通过对这个方法的某些定义方式，来
-            跨越实际的数据结构，重新定义一个抽象的结构关系'''
-        pass
- 
-    def constraint_father_type(self,*T):
-        ''' 这个方法设置了本对象应当指向的father对象的类型,默认的father对象的类型
-            为None'''
-        self.__father_type = T
+
+
+
+
+
+
+
+
+    # @father.setter
+    # def father(self,father):
+    #     ''' 获取father的时候应当检查father的类型是否正确，对于Root而言
+    #         father必须是Root类型'''
+    #     if not isinstance(father,self._father_type):
+    #         raise TypeError("The father set is a %s,expect a %s." %(type(father),self._father_type))
+    #     self._father = father
+    # @abstractmethod
+
+
+
+
+
 
     #=============================================================================================
     # father get
@@ -63,7 +85,8 @@ class Root(object):
     #=============================================================================================
 
     def join_name(self,*args):
-        return '_'.join(args)
+        args_without_none = [x for x in args if x is not None]
+        return '_'.join(args_without_none)
 
     def full_name(self):
         if self.father is None:
@@ -88,6 +111,9 @@ class Root(object):
             return self.join_name(self.father.name_before(T),self.name)
 
     def name_until_not(self,T):
+        #print(self.father,self.name)
+        #print(T)
+        #print(isinstance(self,T))
         if not isinstance(self,T):
             return self.name
         elif self.father is None:

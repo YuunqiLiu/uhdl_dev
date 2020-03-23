@@ -1,0 +1,69 @@
+
+from dsl.Component  import Component
+from dsl.Value      import Combine,Const
+from dsl.Variable   import Input,Output,Wire,IOGroup
+
+class sub1(Component):
+
+    def __init__(self,DW=32):
+        Component.__init__(self)
+        self.clk = Input()
+        self.rst = Input()
+
+class io0(IOGroup):
+
+    def __init__(self):
+        IOGroup.__init__(self)
+        self.clk    = Input()
+        self.rst    = Input()
+        print(self.__dict__)
+
+class test(Component):
+
+    def __init__(self,DW=32):
+        Component.__init__(self)
+        self.op1    = Input(DW)
+        self.op2    = Input(DW)
+        self.op3    = Input(DW)
+        self.res1   = Output(DW+1)
+        self.res2   = Output(DW+1)
+        self.cut    = Output(10)
+        self.comb   = Output(DW*2)
+        self.const  = Output(DW*2)
+
+        self.ingroup = io0()
+        self.outgroup = io0().reverse()
+
+        self.sub1   = sub1()                      #实例化
+        self.tmp    = Wire(DW)                    #定义Wire
+
+        self.outgroup += self.ingroup
+
+        self.tmp    += self.op1                   #赋值
+        self.cut    += self.op1[9:0]              #截断
+        self.comb   += Combine(self.op1,self.op2) #拼接
+        self.const  += Const(32,DW*2)             #常量
+        self.res1   += self.tmp + self.op2        #二元运算
+        self.res2   += self.op2 + self.op3
+
+t = test()
+
+#self.cut  += CutExpression(self.op1,9,0)
+#t.set_father_to_sub()
+ # for l in t.output_list:
+ #     print(l)
+ #     print(l.name)
+ #     print(l.verilog_assignment)
+ #     print(l.verilog_def)
+ #     print(l.verilog_inst)
+ #     print(l.verilog_outer_def)
+
+#print(t.output_list)
+#print('23333')
+
+with open('result.v','w') as f:
+    #for i in t.verilog_def:
+    f.writelines([x+'\n' for x in t.verilog_def])
+
+#print(t.verilog_def)
+#print(t.verilog_inst)
