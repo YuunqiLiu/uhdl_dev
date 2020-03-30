@@ -3,6 +3,10 @@ from dsl.Component  import Component
 from dsl.Value      import Combine,Const
 from dsl.Variable   import Input,Output,Wire,IOGroup
 
+def link(opl,opr):
+    tmp =  opl
+    tmp += opr
+
 class sub1(Component):
 
     def __init__(self,DW=32):
@@ -16,7 +20,7 @@ class io0(IOGroup):
         IOGroup.__init__(self)
         self.clk    = Input()
         self.rst    = Input()
-        print(self.__dict__)
+        #print(self.__dict__)
 
 class test(Component):
 
@@ -37,7 +41,11 @@ class test(Component):
         self.sub1   = sub1()                      #实例化
         self.tmp    = Wire(DW)                    #定义Wire
 
-        self.outgroup += self.ingroup
+        link(self.outgroup.exclude('clk'),self.ingroup.exclude('clk'))
+
+        # tmp = self.outgroup.exclude('clk')
+        # tmp += self.ingroup.exclude('clk')
+        # self.outgroup['clk'] += self.ingroup['clk']
 
         self.tmp    += self.op1                   #赋值
         self.cut    += self.op1[9:0]              #截断

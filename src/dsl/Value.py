@@ -134,11 +134,10 @@ class CutExpression(Expression):
         return self.op.string + '[%s:%s]' % ( self.hbound, self.lbound )
 
 
-
-class AddExpression(Expression):
+class TwoOpExpression(Expression):
 
     def __init__(self,opL:Value,opR:Value):
-        super(AddExpression,self).__init__()
+        super(TwoOpExpression,self).__init__()
         self.check_rvalue(opL)
         self.check_rvalue(opR)
         self.opL = opL
@@ -146,8 +145,46 @@ class AddExpression(Expression):
 
     @property
     def attribute(self) -> int:
+        raise NotImplementedError
+
+    @property
+    def string(self) -> str:
+        raise NotImplementedError
+
+
+
+class AddExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
         return max(self.opL.attribute,self.opR.attribute) + 1
 
     @property
     def string(self) -> str:
-        return self.opL.string + ' + ' + self.opR.string
+        return '(%s + %s)'  % (self.opL.string ,self.opR.string)
+
+
+
+class MinusExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return max(self.opL.attribute,self.opR.attribute) + 1
+
+    @property
+    def string(self) -> str:
+        return '(%s - %s)'  % (self.opL.string ,self.opR.string)
+
+
+
+class TimesExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return self.opL.attribute + self.opR.attribute
+
+    @property
+    def string(self) -> str:
+        return '(%s * %s)'  % (self.opL.string ,self.opR.string)
+
+

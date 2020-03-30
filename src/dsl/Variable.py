@@ -3,36 +3,14 @@ import re
 from functools  import reduce
 from operator   import concat
 
-
-from copy import deepcopy
-
-#from .Component import Component
-#from .Entity    import Entity
+from copy       import copy
 from .Root      import Root
-#from .Virtual import Virtual
-from .Value import *
+from .Value     import *
 
 class Variable(Root):
 
     def __init__(self):
         super(Variable,self).__init__()
-        #self.__name = None
-        #if self.__name is None:
-        #self.__get_name()
-
-    #@property
-    #def name(self):
-    #    return self.__name
-
-    #def __get_name(self):
-    #    x = inspect.currentframe()
-    #    while 1:
-    #        for line in inspect.getframeinfo(x)[3]:
-    #            m = re.search(r'([a-zA-Z0-9][a-zA-Z0-9_]*)\s*=\s*([a-zA-Z0-9][a-zA-Z0-9_]*)',line)
-    #            if m:
-    #                self.__name = m.group(1)
-    #                return 
-    #        x = x.f_back
 
     @property
     def name_until_component(self):
@@ -42,7 +20,6 @@ class Variable(Root):
     def name_before_component(self):
         return self.name_before_not(Variable)
             
-
     def __gt__(self,other):
         if not isinstance(other,Variable):
             raise TypeError('%s should compare with a Variable,but get a %s' %(type(self),type(other)))
@@ -78,26 +55,14 @@ class SingleVar(Variable,Value):
 
 
 
-    #@property
-    #def verilog_assignment(self):
-    #    raise NotImplementedError
-
-
-
-
 
 class WireSig(SingleVar):
-
-    #@property
-    #def verilog_assignment(self):
-    #    return 'assign %s = %s' %(self.string,self._rvalue.string)
-
-
-
     pass
+
 
 class Reg(SingleVar):
     pass
+
 
 class Wire(WireSig):
 
@@ -114,7 +79,6 @@ class Wire(WireSig):
     def verilog_def(self):
         '''生成端口定义的RTL'''
         return ['wire [%s:0] %s' % ((self.attribute-1),self.name_before_component)]
-
 
 
 class IOSig(WireSig):
@@ -138,9 +102,6 @@ class IOSig(WireSig):
         return ['%s %s %s' % (self._iosig_type_prefix,'' if self.attribute==1 else '[%s:0]' %(self.attribute-1),self.name_before_component)]
 
 
-
-
-
 class Input(IOSig):
 
     @property
@@ -154,6 +115,7 @@ class Input(IOSig):
     def reverse(self):
         return Output(self.width)
 
+
 class Output(IOSig):
 
     @property
@@ -166,7 +128,6 @@ class Output(IOSig):
 
     def reverse(self):
         return Input(self.width)
-
 
 
 class Inout(IOSig):
@@ -184,18 +145,18 @@ class Constant(WireSig):
     def __init__(self,num):
         self.__width = math.ceil(math.log(num,2))
         self.__value = num
-    pass
 
     def string(self):
         return str(self.__value)
 
 
+class Parameter(SingleVar):
 
-
+    def __init__(self):
+        pass
 
 
 class GroupVar(Variable):
-
 
     def exclude(self,*str_list):
         pass
@@ -209,8 +170,6 @@ class IOGroup(GroupVar):
 
     @property
     def io_list(self) -> list:
-        
-        #print(sorted([self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],IOSig)]))
         return sorted([self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],IOSig)])
 
     # += as circuit assignment
@@ -230,19 +189,27 @@ class IOGroup(GroupVar):
             #self.__rvalue = rvalue
         return self
 
+    def exclude(self,*args):
+        result = copy(self)
+        for a in args:
+            delattr(result,a)
+        return result
+
+    def __getitem__(self,*args):
+        result = copy(self)
+        for a in args:
+            delattr(result,a)
+        return result
+
 
     @property
     def verilog_assignment(self) -> str:
-        #if not hasattr(self,'_rvalue') or self._rvalue is None:
-        #    return None
-        #else:
         return reduce(concat,[x.verilog_assignment for x in self.io_list if x.verilog_assignment is not None],[])
 
 
     @property
     def verilog_def(self):
         return reduce(concat,[x.verilog_def for x in self.io_list if x.verilog_def is not None],[])
-        #return ['%s %s %s' % (self._iosig_type_prefix,'' if self.attribute==1 else '[%s:0]' %(self.attribute-1),self.name_before_component)]
 
 
     def reverse(self):
@@ -265,3 +232,23 @@ class IOGroup(GroupVar):
     #     '''生成信号声明的RTL'''
     #     return ["wire %s %s;" %('' if self.data_width==1 else '[%s:0]' % (self.data_width-1),self.name_until(Component))]
 
+#from .Entity    import Entity
+#from .Virtual import Virtual
+#from .Component import Component
+        #self.__name = None
+        #if self.__name is None:
+        #self.__get_name()
+
+    #@property
+    #def name(self):
+    #    return self.__name
+
+    #def __get_name(self):
+    #    x = inspect.currentframe()
+    #    while 1:
+    #        for line in inspect.getframeinfo(x)[3]:
+    #            m = re.search(r'([a-zA-Z0-9][a-zA-Z0-9_]*)\s*=\s*([a-zA-Z0-9][a-zA-Z0-9_]*)',line)
+    #            if m:
+    #                self.__name = m.group(1)
+    #                return 
+    #        x = x.f_back
