@@ -3,6 +3,7 @@ import re
 from functools  import reduce
 from operator   import concat
 
+from .Num       import UInt
 from copy       import copy
 from .Root      import Root
 from .Value     import *
@@ -36,13 +37,15 @@ class Variable(Root):
 
 class SingleVar(Variable,Value):
 
-    def __init__(self,width=1):
+    def __init__(self,template=UInt(1,0)):
         super(SingleVar,self).__init__()
-        self.__width = width
+        self.__template = template
+        # self.__width = width
 
     @property
     def width(self):
-        return self.__width
+        return self.__template.width
+        # return self.__width
 
     @property
     def string(self):
@@ -50,7 +53,8 @@ class SingleVar(Variable,Value):
 
     @property
     def attribute(self):
-        return self.__width
+        return self.__template
+        # return self.__width
 
 
 
@@ -78,7 +82,7 @@ class Wire(WireSig):
     @property
     def verilog_def(self):
         '''生成端口定义的RTL'''
-        return ['wire [%s:0] %s' % ((self.attribute-1),self.name_before_component)]
+        return ['wire [%s:0] %s' % ((self.attribute.width-1),self.name_before_component)]
 
 
 class IOSig(WireSig):
@@ -91,7 +95,7 @@ class IOSig(WireSig):
     @property
     def verilog_outer_def(self):
         '''生成信号声明的RTL'''
-        return ["wire %s %s" %('' if self.attribute==1 else '[%s:0]' % (self.attribute-1),self.name_until_component)]
+        return ["wire %s %s" %('' if self.attribute.width==1 else '[%s:0]' % (self.attribute.width-1),self.name_until_component)]
 
     @property
     def _iosig_type_prefix(self):
@@ -99,7 +103,7 @@ class IOSig(WireSig):
 
     @property
     def verilog_def(self):
-        return ['%s %s %s' % (self._iosig_type_prefix,'' if self.attribute==1 else '[%s:0]' %(self.attribute-1),self.name_before_component)]
+        return ['%s %s %s' % (self._iosig_type_prefix,'' if self.attribute.width==1 else '[%s:0]' %(self.attribute.width-1),self.name_before_component)]
 
 
 class Input(IOSig):
@@ -113,7 +117,7 @@ class Input(IOSig):
         return 'input'
 
     def reverse(self):
-        return Output(self.width)
+        return Output(self.attribute)
 
 
 class Output(IOSig):
@@ -127,7 +131,7 @@ class Output(IOSig):
         return 'output'
 
     def reverse(self):
-        return Input(self.width)
+        return Input(self.attribute)
 
 
 class Inout(IOSig):
@@ -137,23 +141,41 @@ class Inout(IOSig):
         return 'inout'
 
     def reverse(self):
-        return Inout(self.width)
+        return Inout(self.attribute)
 
 
 class Constant(WireSig):
     
-    def __init__(self,num):
-        self.__width = math.ceil(math.log(num,2))
-        self.__value = num
+    # def __init__(self,template=UInt(1,0)):
+    #     self.__width = math.ceil(math.log(num,2))
+    #     self.__value = num
 
+    @property
     def string(self):
-        return str(self.__value)
+        return self.attribute.string   #str(self.__value)
 
 
 class Parameter(SingleVar):
 
-    def __init__(self):
-        pass
+    pass
+    # @property
+    # def width(self):
+    #     return self.__width
+# 
+    # @property
+    # def string(self):
+    #     return self.name_before_component #self.__name
+# 
+    # @property
+    # def attribute(self):
+    #     return self.__width
+
+
+    #@attribute.setter
+    #def atrribute(self,value):
+    #    self.__attribute = value
+
+
 
 
 class GroupVar(Variable):
@@ -180,6 +202,8 @@ class IOGroup(GroupVar):
         #     raise ArithmeticError('Left value attribute/Right value attribute mismatch.')
         else:
             for iol,ior in zip(self.io_list,rvalue.io_list):
+                #print(iol,ior)
+                #print(iol.width,ior.width)
                 if isinstance(iol,Input):
                     ior += iol
                 else:

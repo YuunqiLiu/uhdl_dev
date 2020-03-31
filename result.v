@@ -18,8 +18,8 @@ module test (
 	assign res2 = (op2 + op3);
 	assign cut = op1[9:0];
 	assign comb = {op1, op2};
-	assign const = 32;
-	assign outgroup_rst = ingroup_rst;
+	assign const = 64'b1000000;
+	assign outgroup_clk = ingroup_clk;
 	assign tmp = op1;
 	sub1 sub1 (
 		.clk(sub1_clk),

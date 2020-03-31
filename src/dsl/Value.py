@@ -1,4 +1,5 @@
 import math
+from .Num import UInt
 
 class Value():
 
@@ -75,23 +76,23 @@ class Expression(Value):
             raise ArithmeticError('Input %s can not be a Right Value.' % type(op))
 
 
-class ConstExpression(Expression):
-
-    def __init__(self,const,width):
-        super(ConstExpression,self).__init__()
-        self.const = const
-        self.width = width
-
-    @property
-    def attribute(self) -> int:
-        return self.width
-
-    @property
-    def string(self) -> str:
-        return str(self.const)
-
-def Const(const,width):
-    return ConstExpression(const,width)
+# class ConstExpression(Expression):
+# 
+#     def __init__(self,const,width):
+#         super(ConstExpression,self).__init__()
+#         self.const = const
+#         self.width = width
+# 
+#     @property
+#     def attribute(self) -> int:
+#         return self.width
+# 
+#     @property
+#     def string(self) -> str:
+#         return str(self.const)
+# 
+# def Const(const,width):
+#     return ConstExpression(const,width)
 
 
 class CombineExpression(Expression):
@@ -102,7 +103,7 @@ class CombineExpression(Expression):
 
     @property
     def attribute(self) -> int:
-        return sum([op.attribute for op in self.op_list])
+        return UInt(sum([op.attribute.width for op in self.op_list]))
 
     @property
     def string(self) -> str:
@@ -118,7 +119,7 @@ class CutExpression(Expression):
 
     def __init__(self,op:Value,hbound:int,lbound:int):
         super(CutExpression,self).__init__()
-        if hbound > op.attribute or lbound <0:
+        if hbound > op.attribute.width or lbound <0:
             raise ArithmeticError('index out of range.')
         self.check_rvalue(op)
         self.op     = op
@@ -127,7 +128,7 @@ class CutExpression(Expression):
 
     @property
     def attribute(self) -> int:
-        return self.hbound - self.lbound + 1
+        return type(self.op.attribute)(self.hbound - self.lbound + 1)
 
     @property
     def string(self) -> str:
@@ -157,7 +158,7 @@ class AddExpression(TwoOpExpression):
 
     @property
     def attribute(self) -> int:
-        return max(self.opL.attribute,self.opR.attribute) + 1
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
 
     @property
     def string(self) -> str:
@@ -169,7 +170,7 @@ class MinusExpression(TwoOpExpression):
 
     @property
     def attribute(self) -> int:
-        return max(self.opL.attribute,self.opR.attribute) + 1
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
 
     @property
     def string(self) -> str:
@@ -181,7 +182,7 @@ class TimesExpression(TwoOpExpression):
 
     @property
     def attribute(self) -> int:
-        return self.opL.attribute + self.opR.attribute
+        return type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
 
     @property
     def string(self) -> str:
