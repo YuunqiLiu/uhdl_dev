@@ -1,12 +1,11 @@
-import math
-import re
+import math,re
 from functools  import reduce
 from operator   import concat
-
-from .Num       import UInt
 from copy       import copy
+
+#from .Num       import UInt
 from .Root      import Root
-from .Value     import *
+from .Value     import Value
 
 class Variable(Root):
 
@@ -37,7 +36,7 @@ class Variable(Root):
 
 class SingleVar(Variable,Value):
 
-    def __init__(self,template=UInt(1,0)):
+    def __init__(self,template):#=UInt(1,0)):
         super(SingleVar,self).__init__()
         self.__template = template
         # self.__width = width
@@ -150,9 +149,51 @@ class Constant(WireSig):
     #     self.__width = math.ceil(math.log(num,2))
     #     self.__value = num
 
+    pass
+
+
+class Bits(Constant):
+
+    def __init__(self,width,value=0):
+        super(Bits,self).__init__(self)
+        self.__width = width
+        self.__value = value
+
+    @property
+    def width(self):
+        return self.__width
+
+    @property
+    def value(self):
+        return self.__value
+
+    @property
+    def template(self):
+        return self
+
     @property
     def string(self):
-        return self.attribute.string   #str(self.__value)
+        return '%s\'b%s' % (self.__width,bin(self.__value).replace('0b','') )           #pass
+
+    def __eq__(self,other):
+        #print(self,other)
+        #print(self.width,other.width)
+        return True if type(self) == type(other) and self.width == other.width else False
+
+
+
+class UInt(Bits):
+    pass
+
+class SInt(Bits):
+    pass
+  
+
+
+
+
+
+
 
 
 class Parameter(SingleVar):

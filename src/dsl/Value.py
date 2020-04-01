@@ -1,5 +1,5 @@
 import math
-from .Num import UInt
+#from .Num import UInt
 
 class Value():
 
@@ -47,7 +47,9 @@ class Value():
         if not hasattr(self,'_rvalue') or self._rvalue is None:
             return None
         else:
-            return ['assign ' + self.string + ' = ' + self._rvalue.string]
+            if self._rvalue.string is None:
+                print(self._rvalue)
+            return ['assign ' + str(self.string) + ' = ' + str(self._rvalue.string)]
 
 
 
@@ -103,7 +105,7 @@ class CombineExpression(Expression):
 
     @property
     def attribute(self) -> int:
-        return UInt(sum([op.attribute.width for op in self.op_list]))
+        return type(self.op_list[0].attribute)(sum([op.attribute.width for op in self.op_list]))
 
     @property
     def string(self) -> str:

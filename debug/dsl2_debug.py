@@ -1,8 +1,8 @@
 
 from dsl.Component  import Component
 from dsl.Value      import Combine
-from dsl.Variable   import Input,Output,Wire,IOGroup,Parameter,Constant
-from dsl.Num        import UInt,SInt
+from dsl.Variable   import Input,Output,Wire,IOGroup,Parameter,UInt
+#from dsl.Num        import UInt,SInt
 
 
 def link(opl,opr):
@@ -54,7 +54,7 @@ class test(Component):
         self.tmp    += self.op1                   #赋值
         self.cut    += self.op1[9:0]              #截断
         self.comb   += Combine(self.op1,self.op2) #拼接
-        self.const  += Constant(UInt(DW*2,64))             #常量
+        self.const  += UInt(DW*2,64)             #常量
         self.res1   += self.tmp + self.op2        #二元运算
         self.res2   += self.op2 + self.op3
 
