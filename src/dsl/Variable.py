@@ -51,6 +51,16 @@ class SingleVar(Variable,Value):
         return self.name_before_component #self.__name
 
     @property
+    def lstring(self):
+        return self.name_before_component #self.__name
+
+    @property
+    def rstring(self):
+        return self.name_before_component #self.__name
+
+
+
+    @property
     def attribute(self):
         return self.__template
         # return self.__width
@@ -112,6 +122,14 @@ class Input(IOSig):
         pass
 
     @property
+    def lstring(self):
+        return self.name_until_component #self.__name
+
+    @property
+    def rstring(self):
+        return self.name_before_component #self.__name
+
+    @property
     def _iosig_type_prefix(self):
         return 'input'
 
@@ -124,6 +142,14 @@ class Output(IOSig):
     @property
     def is_lvalue(self):
         pass
+
+    @property
+    def lstring(self):
+        return self.name_before_component #self.__name
+
+    @property
+    def rstring(self):
+        return self.name_until_component #self.__name
 
     @property
     def _iosig_type_prefix(self):
@@ -174,6 +200,14 @@ class Bits(Constant):
     @property
     def string(self):
         return '%s\'b%s' % (self.__width,bin(self.__value).replace('0b','') )           #pass
+
+    @property
+    def rstring(self):
+        return '%s\'b%s' % (self.__width,bin(self.__value).replace('0b','') )           #pass
+
+    @property
+    def lstring(self):
+        raise NotImplementedError
 
     def __eq__(self,other):
         #print(self,other)
@@ -244,6 +278,7 @@ class IOGroup(GroupVar):
         else:
             for iol,ior in zip(self.io_list,rvalue.io_list):
                 #print(iol,ior)
+                #print(iol,ior)
                 #print(iol.width,ior.width)
                 if isinstance(iol,Input):
                     ior += iol
@@ -269,12 +304,25 @@ class IOGroup(GroupVar):
 
     @property
     def verilog_assignment(self) -> str:
-        return reduce(concat,[x.verilog_assignment for x in self.io_list if x.verilog_assignment is not None],[])
+        return reduce(concat,[x.verilog_assignment for x in self.io_list],[])
+
+  
 
 
     @property
     def verilog_def(self):
-        return reduce(concat,[x.verilog_def for x in self.io_list if x.verilog_def is not None],[])
+        return reduce(concat,[x.verilog_def for x in self.io_list],[])
+    
+    @property
+    def verilog_outer_def(self):
+        #print(self.name,self.io_list)
+        #print(self.io_list[0].name,self.io_list[1].io_list)
+        return reduce(concat,[x.verilog_outer_def for x in self.io_list],[])
+
+    @property
+    def verilog_inst(self):
+        return reduce(concat,[x.verilog_inst for x in self.io_list],[])
+
 
 
     def reverse(self):

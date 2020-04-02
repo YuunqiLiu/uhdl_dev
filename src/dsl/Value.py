@@ -39,19 +39,26 @@ class Value():
         raise NotImplementedError
 
     @property
+    def lstring(self):
+        raise NotImplementedError
+
+    @property
+    def rstring(self):
+        raise NotImplementedError
+
+
+    @property
     def attribute(self):
         raise NotImplementedError
 
     @property
     def verilog_assignment(self) -> str:
         if not hasattr(self,'_rvalue') or self._rvalue is None:
-            return None
+            return []
         else:
-            if self._rvalue.string is None:
-                print(self._rvalue)
-            return ['assign ' + str(self.string) + ' = ' + str(self._rvalue.string)]
-
-
+            #if self._rvalue.string is None:
+            #    print(self._rvalue)
+            return ['assign ' + str(self.lstring) + ' = ' + str(self._rvalue.rstring)]
 
 
 #class LValue(Value):
@@ -111,6 +118,14 @@ class CombineExpression(Expression):
     def string(self) -> str:
         #', '.join([op.string for op in self.op_list])
         return '{%s}' % ', '.join([op.string for op in self.op_list])
+    
+    @property
+    def rstring(self) -> str:
+        #', '.join([op.string for op in self.op_list])
+        return '{%s}' % ', '.join([op.rstring for op in self.op_list])
+
+
+
 
 def Combine(*op_list):
     return CombineExpression(*op_list)
@@ -135,6 +150,10 @@ class CutExpression(Expression):
     @property
     def string(self) -> str:
         return self.op.string + '[%s:%s]' % ( self.hbound, self.lbound )
+    
+    @property
+    def rstring(self) -> str:
+        return self.op.rstring + '[%s:%s]' % ( self.hbound, self.lbound )
 
 
 class TwoOpExpression(Expression):
@@ -165,6 +184,10 @@ class AddExpression(TwoOpExpression):
     @property
     def string(self) -> str:
         return '(%s + %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s + %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
 
@@ -177,7 +200,10 @@ class MinusExpression(TwoOpExpression):
     @property
     def string(self) -> str:
         return '(%s - %s)'  % (self.opL.string ,self.opR.string)
-
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s - %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
 class TimesExpression(TwoOpExpression):
@@ -189,5 +215,9 @@ class TimesExpression(TwoOpExpression):
     @property
     def string(self) -> str:
         return '(%s * %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s * %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 

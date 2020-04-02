@@ -2,48 +2,29 @@ import os,shutil
 from operator       import concat
 from functools      import reduce
 
-from .Value         import Value
-from .Variable      import *
-from .              import FileProcess
 from .Root          import Root
-from .VFile         import VFile
+from .Variable      import Wire,IOSig,IOGroup,Variable
+from .              import FileProcess
+
+#from .VFile         import VFile
+#from .              import FileProcess
+#from .Value         import Value
 
 class Component(Root):
 
-    #def __new__(cls):
-    #    obj = object.__new__(cls)
-    #    obj.init()    
-    #    return obj
-
-#    #def __init__(self):
-#    #    print('233')
-
-    #def init(self):
-    #    super(type(self),self).__init__()
-
     def __init__(self):
-        #Root.__init__(self)
         super(Component,self).__init__()
         self.set_father_type(Component)
         self.__vfile     = None
-        self.output_path = './'
-        #self.circuit()
+        self.output_path = './%s' % self.module_name
 
     @property
     def module_name(self):
         return type(self).__name__
 
-    def circuit(self):
-        pass
-
-
     @property
     def vfile(self):
         return self.__vfile
-
-    #@property
-    #def lvalue_list(self):
-    #    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Value)]
 
     @property
     def var_list(self) -> list:
@@ -59,13 +40,7 @@ class Component(Root):
 
     @property
     def component_list(self) -> list:
-        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Component)]
-
-
-
-    #@property
-    #def output_list(self) -> list:
-    #    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Output)]
+        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != '_father']
 
     @property
     def verilog_outer_def(self):
@@ -76,37 +51,43 @@ class Component(Root):
         str_list = ['module %s (' % self.module_name]
 
         # module io define
-        io_def_str_list = reduce(concat,[i.verilog_def for i in self.io_list])
+        io_def_str_list = reduce(concat,[i.verilog_def for i in self.io_list],[])
 
         for i in io_def_str_list[0:-1]:
             str_list.append('\t%s,' % i )
         str_list.append('\t%s);' % io_def_str_list[-1])
 
         # module wire define
-        wire_def_str_list = reduce(concat,[i.verilog_def for i in self.wire_list])
+        str_list+=['','\t//Wire define for this module.']
+        wire_def_str_list = reduce(concat,[i.verilog_def for i in self.wire_list],[])
         for i in wire_def_str_list:
             str_list.append('\t%s;' % i)
 
-        sub_wire_def_str_list = reduce(concat,[i.verilog_outer_def for i in self.component_list])
+        str_list+=['','\t//Wire define for sub module.']
+        sub_wire_def_str_list = reduce(concat,[i.verilog_outer_def for i in self.component_list],[])
         for i in sub_wire_def_str_list:
             str_list.append('\t%s;' % i)
 
         # combine logic assignment
-        assign_str_list = reduce(concat,[i.verilog_assignment for i in self.var_list if i.verilog_assignment is not None])
+        str_list+=['','\t//Wire sub module connect to this module and inter module connect.']
+        assign_str_list = reduce(concat,[i.verilog_assignment for i in self.var_list if i.verilog_assignment is not None],[])
         for i in assign_str_list:
             str_list.append('\t%s;' % i)
 
+        str_list+=['','\t//Wire this module connect to sub module.']
+        sub_io_list = reduce(concat,[i.io_list for i in self.component_list],[])
+        sub_assign_str_list = reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment is not None],[])
+        for i in sub_assign_str_list:
+            str_list.append('\t%s;' % i)
 
         # component inst
-        comp_inst_str_list = reduce(concat,[i.verilog_inst for i in self.component_list])
+        str_list+=['','\t//module inst.']
+        comp_inst_str_list = reduce(concat,[i.verilog_inst for i in self.component_list],[])
         for i in comp_inst_str_list:
             str_list.append('\t%s' % i)
 
-
-
-        str_list.append('endmodule')
+        str_list+=['','endmodule']
         return str_list
-
 
     @property
     def verilog_inst(self):
@@ -119,6 +100,42 @@ class Component(Root):
         str_list.append('\t%s);' % io_inst_str_list[-1])
 
         return str_list
+
+    def create_this_vfile(self,path):
+        FileProcess.create_file(os.path.join(path,'%s.v' % self.module_name),self.verilog_def)
+
+    def create_all_vfile(self,path):
+        self.create_this_vfile(path)
+        for c in self.component_list:
+            c.create_all_vfile(path)
+
+    def generate_verilog(self,iteration=False):
+        FileProcess.refresh_directory(self.output_path)
+        if iteration:
+            self.create_all_vfile(self.output_path)
+        else:
+            self.create_this_vfile(self.output_path)
+            
+
+    #@property
+    #def output_list(self) -> list:
+    #    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Output)]
+    #@property
+    #def lvalue_list(self):
+    #    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Value)]
+
+        #self.circuit()
+    #def __new__(cls):
+    #    obj = object.__new__(cls)
+    #    obj.init()    
+    #    return obj
+
+#    #def __init__(self):
+#    #    print('233')
+
+    #def init(self):
+    #    super(type(self),self).__init__()
+
 
         #Entity.__init__(self)
         # self.set_name(module_name)
