@@ -1,5 +1,7 @@
 
+__all__ = ['assign','Component','Combine','Input','Output','UInt','SInt','IOGroup','Parameter','Wire']
 
+from .Function  import assign
 from .Component import Component
 from .Variable  import Input,Output,UInt,SInt,IOGroup,Parameter,Wire
 from .Value     import Combine

@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dsl package &mdash; ltool 0.01 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ltool
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">dsl package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-dsl.Component">dsl.Component module</a></li>
+<li><a class="reference internal" href="#module-dsl.FileProcess">dsl.FileProcess module</a></li>
+<li><a class="reference internal" href="#module-dsl.Function">dsl.Function module</a></li>
+<li><a class="reference internal" href="#module-dsl.Root">dsl.Root module</a></li>
+<li><a class="reference internal" href="#module-dsl.VFile">dsl.VFile module</a></li>
+<li><a class="reference internal" href="#module-dsl.Value">dsl.Value module</a></li>
+<li><a class="reference internal" href="#module-dsl.Variable">dsl.Variable module</a></li>
+<li><a class="reference internal" href="#module-dsl">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ltool</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>dsl package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dsl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dsl-package">
+<h1>dsl package<a class="headerlink" href="#dsl-package" title="永久链接至标题">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="module-dsl.Component">
+<span id="dsl-component-module"></span><h2>dsl.Component module<a class="headerlink" href="#module-dsl.Component" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="dsl.Component.Component">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Component.</code><code class="sig-name descname">Component</code><a class="reference internal" href="_modules/dsl/Component.html#Component"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.Component" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Root.Root" title="dsl.Root.Root"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Root.Root</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Component.Component.component_list">
+<em class="property">property </em><code class="sig-name descname">component_list</code><a class="headerlink" href="#dsl.Component.Component.component_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.create_all_vfile">
+<code class="sig-name descname">create_all_vfile</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.create_all_vfile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.Component.create_all_vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.create_this_vfile">
+<code class="sig-name descname">create_this_vfile</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.create_this_vfile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.Component.create_this_vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.generate_verilog">
+<code class="sig-name descname">generate_verilog</code><span class="sig-paren">(</span><em class="sig-param">iteration=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.generate_verilog"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.Component.generate_verilog" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.io_list">
+<em class="property">property </em><code class="sig-name descname">io_list</code><a class="headerlink" href="#dsl.Component.Component.io_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.lvalue_list">
+<em class="property">property </em><code class="sig-name descname">lvalue_list</code><a class="headerlink" href="#dsl.Component.Component.lvalue_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.module_name">
+<em class="property">property </em><code class="sig-name descname">module_name</code><a class="headerlink" href="#dsl.Component.Component.module_name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.outer_lvalue_list">
+<em class="property">property </em><code class="sig-name descname">outer_lvalue_list</code><a class="headerlink" href="#dsl.Component.Component.outer_lvalue_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.param_list">
+<em class="property">property </em><code class="sig-name descname">param_list</code><a class="headerlink" href="#dsl.Component.Component.param_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.var_list">
+<em class="property">property </em><code class="sig-name descname">var_list</code><a class="headerlink" href="#dsl.Component.Component.var_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Component.Component.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.verilog_inst">
+<em class="property">property </em><code class="sig-name descname">verilog_inst</code><a class="headerlink" href="#dsl.Component.Component.verilog_inst" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.verilog_outer_def">
+<em class="property">property </em><code class="sig-name descname">verilog_outer_def</code><a class="headerlink" href="#dsl.Component.Component.verilog_outer_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.vfile">
+<em class="property">property </em><code class="sig-name descname">vfile</code><a class="headerlink" href="#dsl.Component.Component.vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.Component.wire_list">
+<em class="property">property </em><code class="sig-name descname">wire_list</code><a class="headerlink" href="#dsl.Component.Component.wire_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsl.FileProcess">
+<span id="dsl-fileprocess-module"></span><h2>dsl.FileProcess module<a class="headerlink" href="#module-dsl.FileProcess" title="永久链接至标题">¶</a></h2>
+<dl class="function">
+<dt id="dsl.FileProcess.check_vfile">
+<code class="sig-prename descclassname">dsl.FileProcess.</code><code class="sig-name descname">check_vfile</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/FileProcess.html#check_vfile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.FileProcess.check_vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dsl.FileProcess.create_file">
+<code class="sig-prename descclassname">dsl.FileProcess.</code><code class="sig-name descname">create_file</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/FileProcess.html#create_file"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.FileProcess.create_file" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dsl.FileProcess.file_list_dedup">
+<code class="sig-prename descclassname">dsl.FileProcess.</code><code class="sig-name descname">file_list_dedup</code><span class="sig-paren">(</span><em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/FileProcess.html#file_list_dedup"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.FileProcess.file_list_dedup" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dsl.FileProcess.refresh_directory">
+<code class="sig-prename descclassname">dsl.FileProcess.</code><code class="sig-name descname">refresh_directory</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/FileProcess.html#refresh_directory"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.FileProcess.refresh_directory" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dsl.FileProcess.relpath">
+<code class="sig-prename descclassname">dsl.FileProcess.</code><code class="sig-name descname">relpath</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/FileProcess.html#relpath"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.FileProcess.relpath" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dsl.Function">
+<span id="dsl-function-module"></span><h2>dsl.Function module<a class="headerlink" href="#module-dsl.Function" title="永久链接至标题">¶</a></h2>
+<dl class="function">
+<dt id="dsl.Function.assign">
+<code class="sig-prename descclassname">dsl.Function.</code><code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">opl: dsl.Value.Value</em>, <em class="sig-param">opr: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Function.html#assign"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Function.assign" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dsl.Root">
+<span id="dsl-root-module"></span><h2>dsl.Root module<a class="headerlink" href="#module-dsl.Root" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="dsl.Root.Root">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Root.</code><code class="sig-name descname">Root</code><a class="reference internal" href="_modules/dsl/Root.html#Root"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dsl.Root.Root.father">
+<em class="property">property </em><code class="sig-name descname">father</code><a class="headerlink" href="#dsl.Root.Root.father" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.father_until">
+<code class="sig-name descname">father_until</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.father_until"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.father_until" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.father_until_not">
+<code class="sig-name descname">father_until_not</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.father_until_not"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.father_until_not" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.full_name">
+<code class="sig-name descname">full_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.full_name"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.full_name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.join_name">
+<code class="sig-name descname">join_name</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.join_name"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.join_name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#dsl.Root.Root.name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.name_before">
+<code class="sig-name descname">name_before</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.name_before"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.name_before" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.name_before_not">
+<code class="sig-name descname">name_before_not</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.name_before_not"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.name_before_not" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.name_until">
+<code class="sig-name descname">name_until</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.name_until"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.name_until" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.name_until_not">
+<code class="sig-name descname">name_until_not</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.name_until_not"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.name_until_not" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.set_father">
+<code class="sig-name descname">set_father</code><span class="sig-paren">(</span><em class="sig-param">father</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.set_father"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.set_father" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.set_father_type">
+<code class="sig-name descname">set_father_type</code><span class="sig-paren">(</span><em class="sig-param">*T</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.set_father_type"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.set_father_type" title="永久链接至目标">¶</a></dt>
+<dd><p>这个方法设置了本对象应当指向的father对象的类型,默认的father对象的类型为None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsl.Root.Root.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Root.html#Root.set_name"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Root.Root.set_name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsl.VFile">
+<span id="dsl-vfile-module"></span><h2>dsl.VFile module<a class="headerlink" href="#module-dsl.VFile" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="dsl.VFile.VFile">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.VFile.</code><code class="sig-name descname">VFile</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">top_path</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/VFile.html#VFile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.VFile.VFile" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dsl.VFile.VFile.file_list">
+<em class="property">property </em><code class="sig-name descname">file_list</code><a class="headerlink" href="#dsl.VFile.VFile.file_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.VFile.VFile.path">
+<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#dsl.VFile.VFile.path" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.VFile.VFile.top_path">
+<em class="property">property </em><code class="sig-name descname">top_path</code><a class="headerlink" href="#dsl.VFile.VFile.top_path" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsl.Value">
+<span id="dsl-value-module"></span><h2>dsl.Value module<a class="headerlink" href="#module-dsl.Value" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="dsl.Value.AddExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">AddExpression</code><span class="sig-paren">(</span><em class="sig-param">opL: dsl.Value.Value</em>, <em class="sig-param">opR: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#AddExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.AddExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.TwoOpExpression" title="dsl.Value.TwoOpExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.TwoOpExpression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.AddExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.AddExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.AddExpression.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.AddExpression.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.AddExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.AddExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dsl.Value.Combine">
+<code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">Combine</code><span class="sig-paren">(</span><em class="sig-param">*op_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#Combine"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.Combine" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.CombineExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">CombineExpression</code><span class="sig-paren">(</span><em class="sig-param">*op_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#CombineExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.CombineExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.Expression" title="dsl.Value.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.Expression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.CombineExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.CombineExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.CombineExpression.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.CombineExpression.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.CombineExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.CombineExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.CutExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">CutExpression</code><span class="sig-paren">(</span><em class="sig-param">op: dsl.Value.Value</em>, <em class="sig-param">hbound: int</em>, <em class="sig-param">lbound: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#CutExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.CutExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.Expression" title="dsl.Value.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.Expression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.CutExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.CutExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.CutExpression.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.CutExpression.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.CutExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.CutExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.Expression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">Expression</code><a class="reference internal" href="_modules/dsl/Value.html#Expression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.Expression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.Value" title="dsl.Value.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.Value</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.Expression.check_rvalue">
+<code class="sig-name descname">check_rvalue</code><span class="sig-paren">(</span><em class="sig-param">op: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#Expression.check_rvalue"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.Expression.check_rvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.MinusExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">MinusExpression</code><span class="sig-paren">(</span><em class="sig-param">opL: dsl.Value.Value</em>, <em class="sig-param">opR: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#MinusExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.MinusExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.TwoOpExpression" title="dsl.Value.TwoOpExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.TwoOpExpression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.MinusExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.MinusExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.MinusExpression.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.MinusExpression.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.MinusExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.MinusExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.TimesExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">TimesExpression</code><span class="sig-paren">(</span><em class="sig-param">opL: dsl.Value.Value</em>, <em class="sig-param">opR: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#TimesExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.TimesExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.TwoOpExpression" title="dsl.Value.TwoOpExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.TwoOpExpression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.TimesExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.TimesExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.TimesExpression.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.TimesExpression.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.TimesExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.TimesExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.TwoOpExpression">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">TwoOpExpression</code><span class="sig-paren">(</span><em class="sig-param">opL: dsl.Value.Value</em>, <em class="sig-param">opR: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#TwoOpExpression"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.TwoOpExpression" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Value.Expression" title="dsl.Value.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.Expression</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Value.TwoOpExpression.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.TwoOpExpression.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.TwoOpExpression.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.TwoOpExpression.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Value.Value">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Value.</code><code class="sig-name descname">Value</code><a class="reference internal" href="_modules/dsl/Value.html#Value"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.Value" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dsl.Value.Value.Cut">
+<code class="sig-name descname">Cut</code><span class="sig-paren">(</span><em class="sig-param">hbound: int</em>, <em class="sig-param">lbound: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#Value.Cut"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Value.Value.Cut" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Value.Value.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.is_lvalue">
+<em class="property">property </em><code class="sig-name descname">is_lvalue</code><a class="headerlink" href="#dsl.Value.Value.is_lvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Value.Value.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Value.Value.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Value.Value.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Value.Value.verilog_assignment">
+<em class="property">property </em><code class="sig-name descname">verilog_assignment</code><a class="headerlink" href="#dsl.Value.Value.verilog_assignment" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsl.Variable">
+<span id="dsl-variable-module"></span><h2>dsl.Variable module<a class="headerlink" href="#module-dsl.Variable" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="dsl.Variable.Bits">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Bits</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Bits"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Bits" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Constant" title="dsl.Variable.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Constant</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Bits.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Variable.Bits.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Bits.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Variable.Bits.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Bits.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Variable.Bits.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Bits.template">
+<em class="property">property </em><code class="sig-name descname">template</code><a class="headerlink" href="#dsl.Variable.Bits.template" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Bits.value">
+<em class="property">property </em><code class="sig-name descname">value</code><a class="headerlink" href="#dsl.Variable.Bits.value" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Bits.width">
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#dsl.Variable.Bits.width" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Constant">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Constant</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Constant"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Constant" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.WireSig" title="dsl.Variable.WireSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.WireSig</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.GroupVar">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">GroupVar</code><a class="reference internal" href="_modules/dsl/Variable.html#GroupVar"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.GroupVar" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Variable" title="dsl.Variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Variable</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.GroupVar.exclude">
+<code class="sig-name descname">exclude</code><span class="sig-paren">(</span><em class="sig-param">*str_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#GroupVar.exclude"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.GroupVar.exclude" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.IOGroup">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">IOGroup</code><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.IOGroup" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.GroupVar" title="dsl.Variable.GroupVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.GroupVar</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.exclude">
+<code class="sig-name descname">exclude</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup.exclude"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.IOGroup.exclude" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.io_list">
+<em class="property">property </em><code class="sig-name descname">io_list</code><a class="headerlink" href="#dsl.Variable.IOGroup.io_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.IOGroup.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.verilog_assignment">
+<em class="property">property </em><code class="sig-name descname">verilog_assignment</code><a class="headerlink" href="#dsl.Variable.IOGroup.verilog_assignment" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Variable.IOGroup.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.verilog_inst">
+<em class="property">property </em><code class="sig-name descname">verilog_inst</code><a class="headerlink" href="#dsl.Variable.IOGroup.verilog_inst" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOGroup.verilog_outer_def">
+<em class="property">property </em><code class="sig-name descname">verilog_outer_def</code><a class="headerlink" href="#dsl.Variable.IOGroup.verilog_outer_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.IOSig">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">IOSig</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#IOSig"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.IOSig" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.WireSig" title="dsl.Variable.WireSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.WireSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.IOSig.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Variable.IOSig.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOSig.verilog_inst">
+<em class="property">property </em><code class="sig-name descname">verilog_inst</code><a class="headerlink" href="#dsl.Variable.IOSig.verilog_inst" title="永久链接至目标">¶</a></dt>
+<dd><p>生成端口实例化的RTL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.IOSig.verilog_outer_def">
+<em class="property">property </em><code class="sig-name descname">verilog_outer_def</code><a class="headerlink" href="#dsl.Variable.IOSig.verilog_outer_def" title="永久链接至目标">¶</a></dt>
+<dd><p>生成信号声明的RTL</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Inout">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Inout</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Inout"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Inout" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.IOSig" title="dsl.Variable.IOSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.IOSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Inout.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Inout.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Inout.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Input">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Input"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Input" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.IOSig" title="dsl.Variable.IOSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.IOSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Input.is_lvalue">
+<em class="property">property </em><code class="sig-name descname">is_lvalue</code><a class="headerlink" href="#dsl.Variable.Input.is_lvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Input.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Variable.Input.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Input.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Input.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Input.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Input.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Variable.Input.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Output">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Output"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Output" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.IOSig" title="dsl.Variable.IOSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.IOSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Output.is_lvalue">
+<em class="property">property </em><code class="sig-name descname">is_lvalue</code><a class="headerlink" href="#dsl.Variable.Output.is_lvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Output.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Variable.Output.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Output.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Output.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Output.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Output.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Variable.Output.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Parameter">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Parameter</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Parameter"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Parameter" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.SingleVar" title="dsl.Variable.SingleVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.SingleVar</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Parameter.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Variable.Parameter.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Parameter.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Variable.Parameter.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Parameter.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Variable.Parameter.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Parameter.verilog_assignment">
+<em class="property">property </em><code class="sig-name descname">verilog_assignment</code><a class="headerlink" href="#dsl.Variable.Parameter.verilog_assignment" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Parameter.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Variable.Parameter.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Reg">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Reg</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Reg"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Reg" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.SingleVar" title="dsl.Variable.SingleVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.SingleVar</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.SInt">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">SInt</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#SInt"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.SInt" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Bits" title="dsl.Variable.Bits"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Bits</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.SingleVar">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">SingleVar</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#SingleVar"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.SingleVar" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Variable" title="dsl.Variable.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Variable</span></code></a>, <a class="reference internal" href="#dsl.Value.Value" title="dsl.Value.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Value.Value</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.SingleVar.attribute">
+<em class="property">property </em><code class="sig-name descname">attribute</code><a class="headerlink" href="#dsl.Variable.SingleVar.attribute" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.SingleVar.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Variable.SingleVar.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.SingleVar.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Variable.SingleVar.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.SingleVar.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Variable.SingleVar.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.SingleVar.width">
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#dsl.Variable.SingleVar.width" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.UInt">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">UInt</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#UInt"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.UInt" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Bits" title="dsl.Variable.Bits"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Bits</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Variable">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Variable</code><a class="reference internal" href="_modules/dsl/Variable.html#Variable"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Variable" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Root.Root" title="dsl.Root.Root"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Root.Root</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Variable.name_before_component">
+<em class="property">property </em><code class="sig-name descname">name_before_component</code><a class="headerlink" href="#dsl.Variable.Variable.name_before_component" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Variable.Variable.name_until_component">
+<em class="property">property </em><code class="sig-name descname">name_until_component</code><a class="headerlink" href="#dsl.Variable.Variable.name_until_component" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.Wire">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">Wire</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Wire"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.Wire" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.WireSig" title="dsl.Variable.WireSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.WireSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Variable.Wire.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Variable.Wire.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd><p>生成端口定义的RTL</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Variable.WireSig">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.Variable.</code><code class="sig-name descname">WireSig</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#WireSig"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Variable.WireSig" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.SingleVar" title="dsl.Variable.SingleVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.SingleVar</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsl">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dsl" title="永久链接至标题">¶</a></h2>
+<dl class="function">
+<dt id="dsl.assign">
+<code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">opl: dsl.Value.Value</em>, <em class="sig-param">opr: dsl.Value.Value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Function.html#assign"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.assign" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="dsl.Component">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Component</code><a class="reference internal" href="_modules/dsl/Component.html#Component"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Root.Root" title="dsl.Root.Root"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Root.Root</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Component.component_list">
+<em class="property">property </em><code class="sig-name descname">component_list</code><a class="headerlink" href="#dsl.Component.component_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.create_all_vfile">
+<code class="sig-name descname">create_all_vfile</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.create_all_vfile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.create_all_vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.create_this_vfile">
+<code class="sig-name descname">create_this_vfile</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.create_this_vfile"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.create_this_vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.generate_verilog">
+<code class="sig-name descname">generate_verilog</code><span class="sig-paren">(</span><em class="sig-param">iteration=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Component.html#Component.generate_verilog"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Component.generate_verilog" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.io_list">
+<em class="property">property </em><code class="sig-name descname">io_list</code><a class="headerlink" href="#dsl.Component.io_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.lvalue_list">
+<em class="property">property </em><code class="sig-name descname">lvalue_list</code><a class="headerlink" href="#dsl.Component.lvalue_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.module_name">
+<em class="property">property </em><code class="sig-name descname">module_name</code><a class="headerlink" href="#dsl.Component.module_name" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.outer_lvalue_list">
+<em class="property">property </em><code class="sig-name descname">outer_lvalue_list</code><a class="headerlink" href="#dsl.Component.outer_lvalue_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.param_list">
+<em class="property">property </em><code class="sig-name descname">param_list</code><a class="headerlink" href="#dsl.Component.param_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.var_list">
+<em class="property">property </em><code class="sig-name descname">var_list</code><a class="headerlink" href="#dsl.Component.var_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Component.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.verilog_inst">
+<em class="property">property </em><code class="sig-name descname">verilog_inst</code><a class="headerlink" href="#dsl.Component.verilog_inst" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.verilog_outer_def">
+<em class="property">property </em><code class="sig-name descname">verilog_outer_def</code><a class="headerlink" href="#dsl.Component.verilog_outer_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.vfile">
+<em class="property">property </em><code class="sig-name descname">vfile</code><a class="headerlink" href="#dsl.Component.vfile" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Component.wire_list">
+<em class="property">property </em><code class="sig-name descname">wire_list</code><a class="headerlink" href="#dsl.Component.wire_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dsl.Combine">
+<code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Combine</code><span class="sig-paren">(</span><em class="sig-param">*op_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Value.html#Combine"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Combine" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="dsl.Input">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Input</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Input"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Input" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.IOSig" title="dsl.Variable.IOSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.IOSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Input.is_lvalue">
+<em class="property">property </em><code class="sig-name descname">is_lvalue</code><a class="headerlink" href="#dsl.Input.is_lvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Input.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Input.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Input.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Input.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Input.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Input.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Input.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Output">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Output"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Output" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.IOSig" title="dsl.Variable.IOSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.IOSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Output.is_lvalue">
+<em class="property">property </em><code class="sig-name descname">is_lvalue</code><a class="headerlink" href="#dsl.Output.is_lvalue" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Output.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Output.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Output.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Output.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Output.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Output.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Output.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.UInt">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">UInt</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#UInt"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.UInt" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Bits" title="dsl.Variable.Bits"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Bits</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.SInt">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">SInt</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#SInt"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.SInt" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.Bits" title="dsl.Variable.Bits"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.Bits</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.IOGroup">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">IOGroup</code><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.IOGroup" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.GroupVar" title="dsl.Variable.GroupVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.GroupVar</span></code></a></p>
+<dl class="method">
+<dt id="dsl.IOGroup.exclude">
+<code class="sig-name descname">exclude</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup.exclude"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.IOGroup.exclude" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.io_list">
+<em class="property">property </em><code class="sig-name descname">io_list</code><a class="headerlink" href="#dsl.IOGroup.io_list" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.reverse">
+<code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#IOGroup.reverse"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.IOGroup.reverse" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.verilog_assignment">
+<em class="property">property </em><code class="sig-name descname">verilog_assignment</code><a class="headerlink" href="#dsl.IOGroup.verilog_assignment" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.IOGroup.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.verilog_inst">
+<em class="property">property </em><code class="sig-name descname">verilog_inst</code><a class="headerlink" href="#dsl.IOGroup.verilog_inst" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.IOGroup.verilog_outer_def">
+<em class="property">property </em><code class="sig-name descname">verilog_outer_def</code><a class="headerlink" href="#dsl.IOGroup.verilog_outer_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Parameter">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Parameter</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Parameter"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Parameter" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.SingleVar" title="dsl.Variable.SingleVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.SingleVar</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Parameter.lstring">
+<em class="property">property </em><code class="sig-name descname">lstring</code><a class="headerlink" href="#dsl.Parameter.lstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Parameter.rstring">
+<em class="property">property </em><code class="sig-name descname">rstring</code><a class="headerlink" href="#dsl.Parameter.rstring" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Parameter.string">
+<em class="property">property </em><code class="sig-name descname">string</code><a class="headerlink" href="#dsl.Parameter.string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Parameter.verilog_assignment">
+<em class="property">property </em><code class="sig-name descname">verilog_assignment</code><a class="headerlink" href="#dsl.Parameter.verilog_assignment" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsl.Parameter.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Parameter.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsl.Wire">
+<em class="property">class </em><code class="sig-prename descclassname">dsl.</code><code class="sig-name descname">Wire</code><span class="sig-paren">(</span><em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsl/Variable.html#Wire"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#dsl.Wire" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#dsl.Variable.WireSig" title="dsl.Variable.WireSig"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsl.Variable.WireSig</span></code></a></p>
+<dl class="method">
+<dt id="dsl.Wire.verilog_def">
+<em class="property">property </em><code class="sig-name descname">verilog_def</code><a class="headerlink" href="#dsl.Wire.verilog_def" title="永久链接至目标">¶</a></dt>
+<dd><p>生成端口定义的RTL</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yunqi Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

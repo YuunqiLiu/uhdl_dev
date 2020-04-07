@@ -149,28 +149,6 @@
             
   <div class="section" id="get-file">
 <h1>get_file<a class="headerlink" href="#get-file" title="永久链接至标题">¶</a></h1>
-<dl class="function">
-<dt id="ltool.fop.get_file">
-<code class="sig-prename descclassname">ltool.fop.</code><code class="sig-name descname">get_file</code><span class="sig-paren">(</span><em class="sig-param">dir_path='./'</em>, <em class="sig-param">abs_path=False</em>, <em class="sig-param">match='.*'</em>, <em class="sig-param">recursion=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ltool/fop.html#get_file"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#ltool.fop.get_file" title="永久链接至目标">¶</a></dt>
-<dd><p><strong>这个函数用来获取一个/多个文件夹下的符合名称匹配的文件路径</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">参数</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dir_path</strong> (<em>str/list</em><em>[</em><em>str</em><em>]</em>) – dir_path是将要被搜索的目录的路径，或由被搜索的多个路径构成的list，可以是相对路径、绝对路径，或两者的混用</p></li>
-<li><p><strong>abs_path</strong> (<em>bool</em>) – abs_path是是否返回绝对路径的开关，当为True时返回绝对路径，为False时返回相对路径</p></li>
-<li><p><strong>match</strong> (<em>str/list</em><em>[</em><em>str</em><em>]</em>) – match是搜索文件时用来进行过滤的正则表达式，或由多个正则表达式构成的list，当搜索到的文件符合正则表达式
-之一时将会被返回，否则会被忽略</p></li>
-<li><p><strong>recursion</strong> (<em>bool</em>) – recurion是是否进行递归搜索的开关，当为True时，会在dir_path下进行递归搜索，即也会搜索dir_path内的子文件夹及它们
-的子文件夹，当为False时，只会搜索dir下的文件</p></li>
-<li><p><strong>file_name</strong> (<em>str/list</em><em>[</em><em>str</em><em>]</em>) – file_name是将要被搜索的文件的路径，或将要被搜索的多个文件的路径构成的list，可以是相对路径、绝对路径，或两者的混用</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回</dt>
-<dd class="field-even"><p>本函数的返回类型为list[str],这个list中是所有的符合条件的文件路径。</p>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
 

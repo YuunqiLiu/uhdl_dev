@@ -8,7 +8,6 @@ class Root(object):
         self._father      = None
         self._father_type = None               #保留father type为空，子类不修改father_type就会出错
 
-
     def set_name(self,name:str):
         object.__setattr__(self,'_name',name)
 
@@ -18,7 +17,6 @@ class Root(object):
     def set_father_type(self,*T):
         ''' 这个方法设置了本对象应当指向的father对象的类型,默认的father对象的类型为None'''
         self._father_type = T
-
 
     @property
     def name(self) -> str:
@@ -37,28 +35,6 @@ class Root(object):
             value.set_father(self)
             #print(value.name)
         object.__setattr__(self,name,value)
-
-
-
-
-
-
-
-
-
-    # @father.setter
-    # def father(self,father):
-    #     ''' 获取father的时候应当检查father的类型是否正确，对于Root而言
-    #         father必须是Root类型'''
-    #     if not isinstance(father,self._father_type):
-    #         raise TypeError("The father set is a %s,expect a %s." %(type(father),self._father_type))
-    #     self._father = father
-    # @abstractmethod
-
-
-
-
-
 
     #=============================================================================================
     # father get
@@ -111,9 +87,6 @@ class Root(object):
             return self.join_name(self.father.name_before(T),self.name)
 
     def name_until_not(self,T):
-        #print(self.father,self.name)
-        #print(T)
-        #print(isinstance(self,T))
         if not isinstance(self,T):
             return self.name
         elif self.father is None:
@@ -133,6 +106,29 @@ class Root(object):
 
 
 
+
+
+
+
+
+
+    # @father.setter
+    # def father(self,father):
+    #     ''' 获取father的时候应当检查father的类型是否正确，对于Root而言
+    #         father必须是Root类型'''
+    #     if not isinstance(father,self._father_type):
+    #         raise TypeError("The father set is a %s,expect a %s." %(type(father),self._father_type))
+    #     self._father = father
+    # @abstractmethod
+
+
+
+
+
+
+        #print(self.father,self.name)
+        #print(T)
+        #print(isinstance(self,T))
 
         
     #def __get_name(self):

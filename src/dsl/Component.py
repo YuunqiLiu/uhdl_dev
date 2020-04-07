@@ -1,14 +1,11 @@
-import os,shutil
+import os
 from operator       import concat
 from functools      import reduce
 
 from .Root          import Root
-from .Variable      import Wire,IOSig,IOGroup,Variable
+from .Variable      import Wire,IOSig,IOGroup,Variable,Parameter,Reg,Output,Input,Inout
 from .              import FileProcess
 
-#from .VFile         import VFile
-#from .              import FileProcess
-#from .Value         import Value
 
 class Component(Root):
 
@@ -27,6 +24,10 @@ class Component(Root):
         return self.__vfile
 
     @property
+    def param_list(self) -> list:
+        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Parameter)]
+
+    @property
     def var_list(self) -> list:
         return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Variable)]
 
@@ -43,63 +44,65 @@ class Component(Root):
         return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != '_father']
 
     @property
+    def lvalue_list(self) -> list:
+        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],(Wire,Reg,Output,))]
+
+    @property
+    def outer_lvalue_list(self) -> list:
+        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],(Input,Inout,))] 
+
+    @property
     def verilog_outer_def(self):
         return reduce(concat,[i.verilog_outer_def for i in self.io_list])
 
+
     @property
     def verilog_def(self):
-        str_list = ['module %s (' % self.module_name]
+        str_list = ['module %s %s' % (self.module_name,'#(' if self.param_list else '(')]
+
+        # parameter define
+        if self.param_list:
+            str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.param_list],[]),',','') + [')(']
 
         # module io define
-        io_def_str_list = reduce(concat,[i.verilog_def for i in self.io_list],[])
-
-        for i in io_def_str_list[0:-1]:
-            str_list.append('\t%s,' % i )
-        str_list.append('\t%s);' % io_def_str_list[-1])
+        str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.io_list],[]),',',');')
 
         # module wire define
-        str_list+=['','\t//Wire define for this module.']
-        wire_def_str_list = reduce(concat,[i.verilog_def for i in self.wire_list],[])
-        for i in wire_def_str_list:
-            str_list.append('\t%s;' % i)
+        str_list += ['','\t//Wire define for this module.']
+        str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.wire_list],[]),';')
 
-        str_list+=['','\t//Wire define for sub module.']
-        sub_wire_def_str_list = reduce(concat,[i.verilog_outer_def for i in self.component_list],[])
-        for i in sub_wire_def_str_list:
-            str_list.append('\t%s;' % i)
+        str_list += ['','\t//Wire define for sub module.']
+        str_list += self.__eol_append(reduce(concat,[i.verilog_outer_def for i in self.component_list],[]),';')
 
         # combine logic assignment
-        str_list+=['','\t//Wire sub module connect to this module and inter module connect.']
-        assign_str_list = reduce(concat,[i.verilog_assignment for i in self.var_list if i.verilog_assignment is not None],[])
-        for i in assign_str_list:
-            str_list.append('\t%s;' % i)
+        str_list += ['','\t//Wire sub module connect to this module and inter module connect.']
+        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in self.lvalue_list if i.verilog_assignment],[]),';')
 
-        str_list+=['','\t//Wire this module connect to sub module.']
-        sub_io_list = reduce(concat,[i.io_list for i in self.component_list],[])
-        sub_assign_str_list = reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment is not None],[])
-        for i in sub_assign_str_list:
-            str_list.append('\t%s;' % i)
+        sub_io_list = reduce(concat,[i.outer_lvalue_list for i in self.component_list],[])
+        str_list += ['','\t//Wire this module connect to sub module.']
+        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment],[]),';')
 
         # component inst
-        str_list+=['','\t//module inst.']
-        comp_inst_str_list = reduce(concat,[i.verilog_inst for i in self.component_list],[])
-        for i in comp_inst_str_list:
-            str_list.append('\t%s' % i)
+        str_list += ['','\t//module inst.']
+        str_list += self.__eol_append(reduce(concat,[i.verilog_inst for i in self.component_list],[]),'')
 
-        str_list+=['','endmodule']
+        str_list += ['','endmodule']
         return str_list
+
 
     @property
     def verilog_inst(self):
-        str_list = ['%s %s (' % (self.module_name,self.name)]
+        param_assignment_list = reduce(concat,[i.verilog_assignment for i in self.param_list],[])
+        
+        str_list = ['%s %s %s' % (self.module_name,self.name,'#(' if param_assignment_list else '(')]
 
-        io_inst_str_list = reduce(concat,[i.verilog_inst for i in self.io_list])
+        if param_assignment_list:
+            str_list += self.__eol_append(param_assignment_list,',','') + [')(']
 
-        for i in io_inst_str_list[0:-1]:
-            str_list.append('\t%s,' % i )
-        str_list.append('\t%s);' % io_inst_str_list[-1])
-
+        str_list += self.__eol_append(reduce(concat,[i.verilog_inst for i in self.io_list]),',',');')
         return str_list
+
+
 
     def create_this_vfile(self,path):
         FileProcess.create_file(os.path.join(path,'%s.v' % self.module_name),self.verilog_def)
@@ -116,6 +119,58 @@ class Component(Root):
         else:
             self.create_this_vfile(self.output_path)
             
+    def __eol_append(self,list_in,common_str,end_str=None):
+        if end_str is None:
+            end_str = common_str
+        if list_in:
+            result = []
+            for i in list_in[0:-1]:
+                result.append('\t%s%s' % (i,common_str) )
+            result.append('\t%s%s' % (list_in[-1],end_str))
+            return result
+        else:
+            return []
+
+
+
+
+        #print(list_in)
+        #if len(list_in) == 1:
+        #    return list_in
+        #else:
+
+        # io_inst_str_list = reduce(concat,[i.verilog_inst for i in self.io_list])
+        # 
+        # for i in io_inst_str_list[0:-1]:
+        #     str_list.append('\t%s,' % i )
+        # str_list.append('\t%s);' % io_inst_str_list[-1])
+
+        # comp_inst_str_list = reduce(concat,[i.verilog_inst for i in self.component_list],[])
+        # for i in comp_inst_str_list:
+        #     str_list.append('\t%s' % i)
+
+        # sub_assign_str_list = reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment],[])
+        # for i in sub_assign_str_list:
+        #     str_list.append('\t%s;' % i)
+
+        # assign_str_list = reduce(concat,[i.verilog_assignment for i in self.lvalue_list if i.verilog_assignment is not None],[])
+        # for i in assign_str_list:
+        #     str_list.append('\t%s;' % i)
+
+        # sub_wire_def_str_list = reduce(concat,[i.verilog_outer_def for i in self.component_list],[])
+        # for i in sub_wire_def_str_list:
+        #     str_list.append('\t%s;' % i)
+
+        # wire_def_str_list = reduce(concat,[i.verilog_def for i in self.wire_list],[])
+        # for i in wire_def_str_list:
+        #     str_list.append('\t%s;' % i)
+
+        #io_def_str_list = 
+        # for i in io_def_str_list[0:-1]:
+        #     str_list.append('\t%s,' % i )
+        # str_list.append('\t%s);' % io_def_str_list[-1])
+
+
 
     #@property
     #def output_list(self) -> list:

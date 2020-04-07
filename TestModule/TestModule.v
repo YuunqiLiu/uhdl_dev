@@ -29,7 +29,6 @@ module TestModule (
 	assign cut = op1[9:0];
 	assign comb = {op1, op2};
 	assign const = 64'b1000000;
-	assign outgroup_clk = ingroup_clk;
 	assign tmp = op1;
 
 	//Wire this module connect to sub module.

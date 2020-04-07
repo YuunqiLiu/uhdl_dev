@@ -1,4 +1,6 @@
-module sub1 (
+module sub1 #(
+	parameter DATA_WIDTH = 1'b0
+)(
 	input  clk,
 	input  rst,
 	output  intr);
@@ -8,7 +10,6 @@ module sub1 (
 	//Wire define for sub module.
 
 	//Wire sub module connect to this module and inter module connect.
-	assign sub1_clk = clk;
 
 	//Wire this module connect to sub module.
 

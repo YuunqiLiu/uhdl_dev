@@ -232,7 +232,30 @@ class SInt(Bits):
 
 class Parameter(SingleVar):
 
-    pass
+    @property
+    def string(self):
+        return self.name
+
+    @property
+    def rstring(self):
+        return self.name
+
+    @property
+    def lstring(self):
+        return self.name
+
+    @property
+    def verilog_assignment(self) -> str:
+        if not hasattr(self,'_rvalue') or self._rvalue is None:
+            return []
+        else:
+            return ['.%s(%s)' % (self.lstring,self._rvalue.rstring)]
+
+    @property
+    def verilog_def(self):
+        return ['parameter %s = %s' % (self.lstring,self.attribute.rstring)]
+
+
     # @property
     # def width(self):
     #     return self.__width

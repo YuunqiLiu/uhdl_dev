@@ -1,7 +1,3 @@
-
-import sys
- 
-sys.setrecursionlimit(100)
 # pylint: disable=unused-wildcard-import
 from dsl import *
 # pylint: enable=unused-wildcard-import
