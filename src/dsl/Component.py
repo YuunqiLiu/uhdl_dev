@@ -62,7 +62,9 @@ class Component(Root):
 
         # parameter define
         if self.param_list:
+            # pylint: disable=no-member
             str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.param_list],[]),',','') + [')(']
+            # pylint: enable=no-member
 
         # module io define
         str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.io_list],[]),',',');')

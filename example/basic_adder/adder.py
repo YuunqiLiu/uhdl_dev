@@ -12,6 +12,12 @@ class Adder(Component):
 
     def __init__(self):
         super().__init__()
-        self.DATA_WIDTH = Parameter(UInt(32,32))
-        self.op1 = Input(UInt(self.DATA_WIDTH))
-        self.opr = Input(UInt(self.DATA_WIDTH))
+        self.op1 = Input(UInt(31)) # define op1 as input [30:0] 
+        self.op2 = Input(UInt(31))
+        self.res = Output(UInt(32)) # define res as output [31:0]
+
+        self.res += self.op1 + self.op2 #use += to assign circuit
+
+a = Adder()
+a.output_path = os.path.join(current_path,'vsrc')
+a.generate_verilog(iteration=True)

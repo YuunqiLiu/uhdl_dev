@@ -6,6 +6,7 @@ from copy       import copy
 #from .Num       import UInt
 from .Root      import Root
 from .Value     import Value
+import string
 
 class Variable(Root):
 
@@ -180,10 +181,36 @@ class Constant(WireSig):
 
 class Bits(Constant):
 
-    def __init__(self,width,value=0):
+    def __init__(self,width_or_string,value=0):
         super(Bits,self).__init__(self)
-        self.__width = width
-        self.__value = value
+        if isinstance(width_or_string,int):
+            self.__width = width_or_string
+            self.__value = value
+        elif isinstance(width_or_string,str):
+            self.__width,self.__value = self._slove_wid_val_from_str(width_or_string)
+        else:
+            raise Exception('Input is not String or Int')
+
+    def _slove_wid_val_from_str(self,string):
+        mb = re.match('([0-9]+)(\'[bB])([01_]+)'        ,string)
+        md = re.match('([0-9]+)(\'[dD])([0-9_]+)'       ,string)
+        mh = re.match('([0-9]+)(\'[hH])([0-9a-fA-F_]+)' ,string)
+
+        if mb:
+            width = int(mb.group(1))
+            value = int(mb.group(3).replace('_',''),2)
+        elif md:
+            width = int(md.group(1))
+            value = int(md.group(3).replace('_',''),10)
+        elif mh:
+            width = int(mh.group(1))
+            value = int(mh.group(3).replace('_',''),16)
+        else:
+            raise Exception()
+        if value > (pow(2,width)-1):
+            raise ArithmeticError('Overflow:%s' % string)
+        return width,value
+
 
     @property
     def width(self):
