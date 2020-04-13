@@ -3,7 +3,9 @@
 
 class Root(object):
 
+
     def __init__(self):
+        super(Root,self).__init__()
         self._name        = None
         self._father      = None
         self._father_type = None               #保留father type为空，子类不修改father_type就会出错
@@ -103,7 +105,8 @@ class Root(object):
             return self.join_name(self.father.name_before_not(T),self.name)
 
 
-
+    def ancestors(self):
+        return [self] + self._father.ancestors() if self._father is not None else [self]
 
 
 

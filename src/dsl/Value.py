@@ -5,7 +5,9 @@ class Value():
 
     def __init__(self):
         super(Value,self).__init__()
-        self._rvalue = None
+        #print('init',self)
+        self._rvalue     = None
+        self._des_lvalue = None
 
     # += as circuit assignment
     def __iadd__(self,rvalue):
@@ -16,6 +18,7 @@ class Value():
         else:
             #print('%s get rvalue %s'  %(self,rvalue))
             object.__setattr__(self,'_rvalue',rvalue)
+            object.__setattr__(rvalue,'_des_lvalue',self)
             #self.__rvalue = rvalue
         return self
 
@@ -59,6 +62,14 @@ class Value():
             #if self._rvalue.string is None:
             #    print(self._rvalue)
             return ['assign ' + str(self.lstring) + ' = ' + str(self._rvalue.rstring)]
+
+    @property
+    def des_connect(self):
+        return self._des_lvalue
+
+    @property
+    def src_connect(self):
+        return self._rvalue
 
 
 #class LValue(Value):

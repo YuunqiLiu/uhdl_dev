@@ -9,6 +9,8 @@ module TestModule (
 	output [9:0] cut,
 	output [63:0] comb,
 	output [63:0] const,
+	input  input,
+	output  output,
 	input  ingroup_clk,
 	input  ingroup_rst,
 	output  outgroup_clk,
@@ -29,6 +31,7 @@ module TestModule (
 	assign cut = op1[9:0];
 	assign comb = {op1, op2};
 	assign const = 64'b1000000;
+	assign output = input;
 	assign tmp = op1;
 
 	//Wire this module connect to sub module.

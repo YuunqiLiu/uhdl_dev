@@ -39,6 +39,10 @@ class TestModule(Component):
         self.cut    = Output(UInt(10))
         self.comb   = Output(UInt(DW*2))
         self.const  = Output(UInt(DW*2))
+        self.input =  Input(UInt(1))
+        self.output = Output(UInt(1))
+
+        self.output += self.input
 
         self.ingroup = io0()
         self.outgroup = io0().reverse()
@@ -65,6 +69,9 @@ class TestModule(Component):
 
 t = TestModule()
 t.generate_verilog(iteration=True)
+print(t.output.src_connect)
+print(t.input.des_connect)
+# print(t.sub1.ancestors())
 #t = test()
 
 #self.cut  += CutExpression(self.op1,9,0)

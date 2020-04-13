@@ -38,6 +38,8 @@ class Variable(Root):
 class SingleVar(Variable,Value):
 
     def __init__(self,template):#=UInt(1,0)):
+        #super().__init__()
+        #print(self.__class__.__mro__)
         super(SingleVar,self).__init__()
         self.__template = template
         # self.__width = width
