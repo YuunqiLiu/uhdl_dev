@@ -69,8 +69,16 @@ class TestModule(Component):
 
 t = TestModule()
 t.generate_verilog(iteration=True)
-print(t.output.src_connect)
-print(t.input.des_connect)
+
+print(t.sub1.clk.name_before(t))
+print(t.sub1.clk.name_until(t.sub1))
+
+print(t.sub1.clk.ancestors())
+print(t.sub1.clk.ancestors(until=t.sub1))
+print(t.sub1.clk.ancestors(before=t))
+
+#print(t.output.src_connect)
+#print(t.input.des_connect)
 # print(t.sub1.ancestors())
 #t = test()
 

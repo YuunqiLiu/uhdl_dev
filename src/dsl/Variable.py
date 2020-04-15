@@ -11,7 +11,8 @@ import string
 class Variable(Root):
 
     def __init__(self):
-        super(Variable,self).__init__()
+        super().__init__()
+        #super(Variable,self).__init__()
 
     @property
     def name_until_component(self):
@@ -38,9 +39,10 @@ class Variable(Root):
 class SingleVar(Variable,Value):
 
     def __init__(self,template):#=UInt(1,0)):
+        super().__init__()
         #super().__init__()
         #print(self.__class__.__mro__)
-        super(SingleVar,self).__init__()
+        #super(SingleVar,self).__init__()
         self.__template = template
         # self.__width = width
 
@@ -184,7 +186,8 @@ class Constant(WireSig):
 class Bits(Constant):
 
     def __init__(self,width_or_string,value=0):
-        super(Bits,self).__init__(self)
+        super().__init__(self)
+        #super(Bits,self).__init__(self)
         if isinstance(width_or_string,int):
             self.__width = width_or_string
             self.__value = value
@@ -314,7 +317,8 @@ class GroupVar(Variable):
 class IOGroup(GroupVar):
 
     def __init__(self):
-        super(IOGroup,self).__init__()
+        super().__init__()
+        #super(IOGroup,self).__init__()
         self._rvalue = None
 
     @property

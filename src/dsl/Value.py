@@ -4,7 +4,8 @@ import math
 class Value():
 
     def __init__(self):
-        super(Value,self).__init__()
+        super().__init__()
+        #super(Value,self).__init__()
         #print('init',self)
         self._rvalue     = None
         self._des_lvalue = None
@@ -85,7 +86,8 @@ class Expression(Value):
     #    return False
 
     def __init__(self):
-        super(Expression,self).__init__()
+        super().__init__()
+        #super(Expression,self).__init__()
 
     # def check_lvalue(self,op:Value):
     #     if not op.is_lvalue:
@@ -118,7 +120,8 @@ class Expression(Value):
 class CombineExpression(Expression):
 
     def __init__(self,*op_list):
-        super(CombineExpression,self).__init__()
+        super().__init__()
+        #super(CombineExpression,self).__init__()
         self.op_list = op_list
 
     @property
@@ -146,7 +149,8 @@ def Combine(*op_list):
 class CutExpression(Expression):
 
     def __init__(self,op:Value,hbound:int,lbound:int):
-        super(CutExpression,self).__init__()
+        super().__init__()
+        #super(CutExpression,self).__init__()
         if hbound > op.attribute.width or lbound <0:
             raise ArithmeticError('index out of range.')
         self.check_rvalue(op)
@@ -170,7 +174,8 @@ class CutExpression(Expression):
 class TwoOpExpression(Expression):
 
     def __init__(self,opL:Value,opR:Value):
-        super(TwoOpExpression,self).__init__()
+        super().__init__()
+        #super(TwoOpExpression,self).__init__()
         self.check_rvalue(opL)
         self.check_rvalue(opR)
         self.opL = opL

@@ -148,7 +148,9 @@
 
 <div class="viewcode-block" id="Root"><a class="viewcode-back" href="../../dsl.html#dsl.Root.Root">[文档]</a><span class="k">class</span> <span class="nc">Root</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Root</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>        <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_father</span>      <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_father_type</span> <span class="o">=</span> <span class="kc">None</span>               <span class="c1">#保留father type为空，子类不修改father_type就会出错</span>
@@ -245,10 +247,11 @@
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_before_not</span><span class="p">(</span><span class="n">T</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_before_not</span><span class="p">(</span><span class="n">T</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
 
-
+<div class="viewcode-block" id="Root.ancestors"><a class="viewcode-back" href="../../dsl.html#dsl.Root.Root.ancestors">[文档]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_father</span><span class="o">.</span><span class="n">ancestors</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_father</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span></div></div>
 
 
 

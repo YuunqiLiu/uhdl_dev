@@ -150,7 +150,9 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Value</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_rvalue</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#print(&#39;init&#39;,self)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rvalue</span>     <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_des_lvalue</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># += as circuit assignment</span>
     <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rvalue</span><span class="p">):</span>
@@ -161,6 +163,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#print(&#39;%s get rvalue %s&#39;  %(self,rvalue))</span>
             <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_rvalue&#39;</span><span class="p">,</span><span class="n">rvalue</span><span class="p">)</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">rvalue</span><span class="p">,</span><span class="s1">&#39;_des_lvalue&#39;</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
             <span class="c1">#self.__rvalue = rvalue</span>
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -203,7 +206,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#if self._rvalue.string is None:</span>
             <span class="c1">#    print(self._rvalue)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;assign &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstring</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rvalue</span><span class="o">.</span><span class="n">rstring</span><span class="p">)]</span></div>
+            <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;assign &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstring</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rvalue</span><span class="o">.</span><span class="n">rstring</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">des_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_des_lvalue</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">src_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rvalue</span></div>
 
 
 <span class="c1">#class LValue(Value):</span>

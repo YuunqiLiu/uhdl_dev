@@ -10,7 +10,8 @@ from .              import FileProcess
 class Component(Root):
 
     def __init__(self):
-        super(Component,self).__init__()
+        super().__init__()
+        #super(Component,self).__init__()
         self.set_father_type(Component)
         self.__vfile     = None
         self.output_path = './%s' % self.module_name
@@ -53,7 +54,7 @@ class Component(Root):
 
     @property
     def verilog_outer_def(self):
-        return reduce(concat,[i.verilog_outer_def for i in self.io_list])
+        return reduce(concat,[i.verilog_outer_def for i in self.io_list],[])
 
 
     @property
@@ -101,7 +102,7 @@ class Component(Root):
         if param_assignment_list:
             str_list += self.__eol_append(param_assignment_list,',','') + [')(']
 
-        str_list += self.__eol_append(reduce(concat,[i.verilog_inst for i in self.io_list]),',',');')
+        str_list += self.__eol_append(reduce(concat,[i.verilog_inst for i in self.io_list],[]),',',');')
         return str_list
 
 

@@ -183,6 +183,8 @@
 <div class="viewcode-block" id="SingleVar"><a class="viewcode-back" href="../../dsl.html#dsl.Variable.SingleVar">[文档]</a><span class="k">class</span> <span class="nc">SingleVar</span><span class="p">(</span><span class="n">Variable</span><span class="p">,</span><span class="n">Value</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">template</span><span class="p">):</span><span class="c1">#=UInt(1,0)):</span>
+        <span class="c1">#super().__init__()</span>
+        <span class="c1">#print(self.__class__.__mro__)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SingleVar</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__template</span> <span class="o">=</span> <span class="n">template</span>
         <span class="c1"># self.__width = width</span>

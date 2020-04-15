@@ -5,7 +5,8 @@ class Root(object):
 
 
     def __init__(self):
-        super(Root,self).__init__()
+        super().__init__()
+        #super(Root,self).__init__()
         self._name        = None
         self._father      = None
         self._father_type = None               #保留father type为空，子类不修改father_type就会出错
@@ -72,21 +73,39 @@ class Root(object):
         else:
             return self.join_name(self.father.full_name,self.name)
 
+
     def name_until(self,T):
-        if isinstance(self,T):
-            return self.name
-        elif self.father is None:
-            return ''
+        if isinstance(T,type):
+            if isinstance(self,T):
+                return self.name
+            elif self.father is None:
+                return ''
+            else:
+                return self.join_name(self.father.name_until(T),self.name)
         else:
-            return self.join_name(self.father.name_until(T),self.name)
+            if self is T:
+                return self.name
+            elif self.father is None:
+                return ''
+            else:
+                return self.join_name(self.father.name_until(T),self.name)
 
     def name_before(self,T):
-        if isinstance(self.father,T):
-            return self.name
-        elif self.father is None:
-            return ''
+        if isinstance(T,type):
+            if isinstance(self.father,T):
+                return self.name
+            elif self.father is None:
+                return ''
+            else:
+                return self.join_name(self.father.name_before(T),self.name)
         else:
-            return self.join_name(self.father.name_before(T),self.name)
+            if self.father is T:
+                return self.name
+            elif self.father is None:
+                return ''
+            else:
+                return self.join_name(self.father.name_before(T),self.name)
+
 
     def name_until_not(self,T):
         if not isinstance(self,T):
@@ -105,10 +124,36 @@ class Root(object):
             return self.join_name(self.father.name_before_not(T),self.name)
 
 
-    def ancestors(self):
-        return [self] + self._father.ancestors() if self._father is not None else [self]
+    def ancestors_core(self):
+        return [self] + self._father.ancestors_core() if self._father is not None else [self]
 
 
+    def ancestors(self,until=None,before=None,has_self=False,error=True):
+        full_ancestors = self.ancestors_core()
+
+        if until != None and before != None:
+            raise Exception()
+        elif until != None:
+            if until in full_ancestors:
+                result = full_ancestors[:full_ancestors.index(until)+1]
+            elif not error:
+                result = full_ancestors
+            elif until not in full_ancestors:
+                raise Exception()
+        elif before != None:
+            if before in full_ancestors:
+                result = full_ancestors[:full_ancestors.index(before)]
+            elif not error:
+                result = full_ancestors
+            elif before not in full_ancestors:
+                raise Exception()
+
+        else:
+            result = full_ancestors
+
+        if not has_self:
+            result.remove(self)
+        return result
 
 
 
