@@ -2,6 +2,11 @@
 from .Value import Value
 from .Variable import Input,Output
 from functools import reduce
+from .Root      import Root
+
+
+
+
 
 def assign(opl:Value,opr:Value):
     tmp = opl
@@ -38,5 +43,3 @@ def linkable(op1,op2):
     else:
         return False
 
-def join_name(self,*args):
-    return '_'.join([x for x in args if x is not None])

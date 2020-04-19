@@ -1,5 +1,8 @@
 #import traceback
 #from abc import abstractmethod
+from .BasicFunction import join_name
+
+
 
 class Root(object):
 
@@ -63,15 +66,15 @@ class Root(object):
     # name get
     #=============================================================================================
 
-    def join_name(self,*args):
-        args_without_none = [x for x in args if x is not None]
-        return '_'.join(args_without_none)
+    # def join_name(self,*args):
+    #     args_without_none = [x for x in args if x is not None]
+    #     return '_'.join(args_without_none)
 
     def full_name(self):
         if self.father is None:
             return ''
         else:
-            return self.join_name(self.father.full_name,self.name)
+            return join_name(self.father.full_name,self.name)
 
 
     def name_until(self,T):
@@ -81,14 +84,14 @@ class Root(object):
             elif self.father is None:
                 return ''
             else:
-                return self.join_name(self.father.name_until(T),self.name)
+                return join_name(self.father.name_until(T),self.name)
         else:
             if self is T:
                 return self.name
             elif self.father is None:
                 return ''
             else:
-                return self.join_name(self.father.name_until(T),self.name)
+                return join_name(self.father.name_until(T),self.name)
 
     def name_before(self,T):
         if isinstance(T,type):
@@ -97,14 +100,14 @@ class Root(object):
             elif self.father is None:
                 return ''
             else:
-                return self.join_name(self.father.name_before(T),self.name)
+                return join_name(self.father.name_before(T),self.name)
         else:
             if self.father is T:
                 return self.name
             elif self.father is None:
                 return ''
             else:
-                return self.join_name(self.father.name_before(T),self.name)
+                return join_name(self.father.name_before(T),self.name)
 
 
     def name_until_not(self,T):
@@ -113,7 +116,7 @@ class Root(object):
         elif self.father is None:
             return self.name
         else:
-            return self.join_name(self.father.name_until_not(T),self.name)
+            return join_name(self.father.name_until_not(T),self.name)
 
     def name_before_not(self,T):
         if self.father is None:
@@ -121,7 +124,7 @@ class Root(object):
         elif not isinstance(self.father,T):
             return self.name
         else:
-            return self.join_name(self.father.name_before_not(T),self.name)
+            return join_name(self.father.name_before_not(T),self.name)
 
 
     def ancestors_core(self):
@@ -155,8 +158,22 @@ class Root(object):
             result.remove(self)
         return result
 
+    def get_circuit(self,name:str):
+        return get_circuit(self,name)
+
+    def set_circuit(self,name:str,value):
+        return set_circuit(self,name,value)
+
+    get = get_circuit
+    set = set_circuit
 
 
+def get_circuit(obj:Root,name:str):
+    return getattr(obj,name)
+
+def set_circuit(obj:Root,name:str,value:Root) -> Root:
+    setattr(obj,name,value)
+    return value
 
 
 

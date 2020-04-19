@@ -42,6 +42,9 @@ class TestModule(Component):
         self.input =  Input(UInt(1))
         self.output = Output(UInt(1))
 
+        #self.set_circuit('output',Output(UInt(1)))
+        #self.set('output',Output(UInt(1)))
+
         self.output += self.input
 
         self.ingroup = io0()
