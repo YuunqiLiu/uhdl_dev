@@ -25,15 +25,16 @@ class Component(Root):
         return self.__vfile
 
     def get_io_list(self,iteration=False,has_self=True) -> list:
-        sub_list = [self.__dict__[k].get_io_list(iteration) for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != '_father'] if iteration else []
+        #sub_list = [self.__dict__[k].get_io_list(iteration) for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != '_father'] if iteration else []
+        sub_list = reduce(concat,[self.__dict__[k].get_io_list(iteration) for k in self.component_list] if iteration else [],[])
         return (self.io_list if has_self else []) + sub_list
         
     def get_component_list(self,iteration=False,has_self=True) -> list:
-        sub_list = [self.__dict__[k].get_component_list(iteration) for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != '_father'] if iteration else []
+        sub_list = reduce(concat,[self.__dict__[k].get_component_list(iteration) for k in self.component_list] if iteration else [],[])
         return (self.component_list if has_self else []) + sub_list
 
-    def get_circuit_list(self,iteration=False) -> list:
-        return self.get_component_list(iteration) + self.get_io_list(iteration)
+    def get_circuit_list(self,iteration=False,has_self=True) -> list:
+        return self.get_component_list(iteration,has_self) + self.get_io_list(iteration,has_self)
 
 
     @property
@@ -146,7 +147,8 @@ class Component(Root):
         else:
             return []
 
-
+def isComponent(obj):
+    return isinstance(obj,Component)
 
 
         #print(list_in)

@@ -36,31 +36,35 @@ class Root(object):
 
     def __setattr__(self,name,value):
         if isinstance(value,Root):
-            #print(name,'  ',value)
             value.set_name(name)
             value.set_father(self)
-            #print(value.name)
         object.__setattr__(self,name,value)
+            #print(name,'  ',value)
+            #print(value.name)
 
     #=============================================================================================
     # father get
     #=============================================================================================
 
     def father_until(self,T):
-        if isinstance(self,T):
-            return self
-        elif self.father is None:
-            return self
-        else:
-            return self.father.father_until(T)
+        return self if isinstance(self,T) or self.father is None else self.father.father_until(T)
+
+        #if isinstance(self,T) or self.father is None:
+        #    return self
+        #elif self.father is None:
+        #    return self
+        #else:
+        #    return self.father.father_until(T)
 
     def father_until_not(self,T):
-        if not isinstance(self,T):
-            return self
-        elif self.father is None:
-            return self
-        else:
-            return self.father.father_until_not(T)        
+        return self if not isinstance(self,T) or self.father is None else self.father.father_until_not(T)    
+
+        # if not isinstance(self,T):
+        #     return self
+        # elif self.father is None:
+        #     return self
+        # else:
+        #     return self.father.father_until_not(T)        
 
     #=============================================================================================
     # name get
@@ -71,61 +75,85 @@ class Root(object):
     #     return '_'.join(args_without_none)
 
     def full_name(self):
-        if self.father is None:
-            return ''
-        else:
-            return join_name(self.father.full_name,self.name)
+        return '' if self.father is None else join_name(self.father.full_name,self.name)
+        
+        # if self.father is None:
+        #     return ''
+        # else:
+        #     return join_name(self.father.full_name,self.name)
 
 
-    def name_until(self,T):
-        if isinstance(T,type):
-            if isinstance(self,T):
-                return self.name
-            elif self.father is None:
-                return ''
-            else:
-                return join_name(self.father.name_until(T),self.name)
-        else:
-            if self is T:
-                return self.name
-            elif self.father is None:
-                return ''
-            else:
-                return join_name(self.father.name_until(T),self.name)
-
-    def name_before(self,T):
-        if isinstance(T,type):
-            if isinstance(self.father,T):
-                return self.name
-            elif self.father is None:
-                return ''
-            else:
-                return join_name(self.father.name_before(T),self.name)
-        else:
-            if self.father is T:
-                return self.name
-            elif self.father is None:
-                return ''
-            else:
-                return join_name(self.father.name_before(T),self.name)
-
-
-    def name_until_not(self,T):
-        if not isinstance(self,T):
-            return self.name
-        elif self.father is None:
+    def name_until(self,T,join_str='_'):
+        if self.father is None or self is T or (isinstance(T,type) and isinstance(self,T)):
             return self.name
         else:
-            return join_name(self.father.name_until_not(T),self.name)
+            return join_name(self.father.name_until(T,join_str),self.name,join_str=join_str)
 
-    def name_before_not(self,T):
-        if self.father is None:
-            return self.name
-        elif not isinstance(self.father,T):
+        # if isinstance(T,type):
+        #     if isinstance(self,T):
+        #         return self.name
+        #     elif self.father is None:
+        #         return ''
+        #     else:
+        #         return join_name(self.father.name_until(T,join_str),self.name,join_str=join_str)
+        # else:
+        #     if self is T:
+        #         return self.name
+        #     elif self.father is None:
+        #         return ''
+        #     else:
+        #         return join_name(self.father.name_until(T,join_str),self.name,join_str=join_str)
+
+    def name_before(self,T,join_str='_'):
+        if self.father is None or self.father is T or (isinstance(T,type) and isinstance(self.father,T)):
             return self.name
         else:
-            return join_name(self.father.name_before_not(T),self.name)
+            return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)
 
+
+        # if isinstance(T,type):
+        #     if isinstance(self.father,T) or self.father is None:
+        #         return self.name
+        #     else:
+        #         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)
+        # else:
+        #     if self.father is T or self.father is None:
+        #         return self.name
+        #     else:
+        #         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)
+
+
+        # if isinstance(T,type):
+        #     if isinstance(self.father,T):
+        #         return self.name
+        #     elif self.father is None:
+        #         return ''
+        #     else:
+        #         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)
+        # else:
+        #     if self.father is T:
+        #         return self.name
+        #     elif self.father is None:
+        #         return ''
+        #     else:
+        #         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)
+
+
+    def name_until_not(self,T,join_str='_'):
+        if not isinstance(self,T) or self.father is None:
+            return self.name
+        else:
+            return join_name(self.father.name_until_not(T,join_str),self.name,join_str=join_str)
+        #elif self.father is None:
+        #    return self.name
+
+    def name_before_not(self,T,join_str='_'):
+        if self.father is None or not isinstance(self.father,T):
+            return self.name
+        else:
+            return join_name(self.father.name_before_not(T,join_str),self.name,join_str=join_str)
+        #elif not isinstance(self.father,T):
+        #    return self.name
 
     def ancestors_core(self):
         return [self] + self._father.ancestors_core() if self._father is not None else [self]
@@ -134,29 +162,29 @@ class Root(object):
     def ancestors(self,until=None,before=None,has_self=False,error=True):
         full_ancestors = self.ancestors_core()
 
-        if until != None and before != None:
-            raise Exception()
-        elif until != None:
-            if until in full_ancestors:
-                result = full_ancestors[:full_ancestors.index(until)+1]
-            elif not error:
-                result = full_ancestors
-            elif until not in full_ancestors:
-                raise Exception()
-        elif before != None:
-            if before in full_ancestors:
-                result = full_ancestors[:full_ancestors.index(before)]
-            elif not error:
-                result = full_ancestors
-            elif before not in full_ancestors:
-                raise Exception()
+        if until  != None and before != None                        :    raise Exception()
+        if until  != None and until  not in full_ancestors and error:    raise Exception()
+        if before != None and before not in full_ancestors and error:    raise Exception()
+        
+        if   until  in full_ancestors:  result = full_ancestors[:full_ancestors.index(until)+1]
+        elif before in full_ancestors:  result = full_ancestors[:full_ancestors.index(before)]
+        else:                           result = full_ancestors
 
-        else:
-            result = full_ancestors
-
-        if not has_self:
-            result.remove(self)
+        if not has_self:    result.remove(self)
         return result
+
+        #if until != None:
+            #elif not error:
+            #    result = full_ancestors
+        #elif before != None:
+            #elif not error:
+            #    result = full_ancestors
+            #elif until not in full_ancestors:
+            #    raise Exception()
+            #elif before not in full_ancestors:
+            #    raise Exception()
+
+
 
     def get_circuit(self,name:str):
         return get_circuit(self,name)
@@ -168,7 +196,7 @@ class Root(object):
     set = set_circuit
 
 
-def get_circuit(obj:Root,name:str):
+def get_circuit(obj:Root,name:str) -> Root:
     return getattr(obj,name)
 
 def set_circuit(obj:Root,name:str,value:Root) -> Root:

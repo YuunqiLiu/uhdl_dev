@@ -13,20 +13,12 @@ def assign(opl:Value,opr:Value):
     tmp += opr
 
 def smart_assign(op1:Value,op2:Value,outer=False):
-    if isinstance(op1,Input) and isinstance(op2,Output):
-        if outer:
-            tmp = op1
-            tmp += op2
-        else:
-            tmp = op2
-            tmp += op1
-    elif isinstance(op1,Output) and isinstance (op2,Input):
-        if outer:
-            tmp = op2
-            tmp += op1
-        else:
-            tmp = op1
-            tmp += op2
+    if isinstance(op1,Input):
+        if hasattr(op2,'father') and op1.father is op2.father and outer: assign(op1,op2)
+        else:                                                            assign(op2,op1)
+    elif isinstance(op2,Input):
+        if hasattr(op1,'father') and op1.father is op2.father and outer: assign(op2,op1)
+        else:                                                            assign(op1,op2)
     else:
         raise Exception()
 
