@@ -47,7 +47,7 @@ class Component(Root):
 
     @property
     def wire_list(self) -> list:
-        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Wire)]
+        return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],(Wire,Reg,))]
 
     @property
     def io_list(self) -> list:
@@ -69,6 +69,17 @@ class Component(Root):
     def verilog_outer_def(self):
         return reduce(concat,[i.verilog_outer_def for i in self.io_list],[])
 
+    def __gen_aligned_signal_def(self,io_para_list):
+        max_prefix_length = 0
+        max_width_length = 0
+        max_name_length = 0
+        for i,j,k in io_para_list:
+            max_prefix_length = len(i) if len(i)>max_prefix_length else max_prefix_length
+            max_width_length = len(j) if len(j)>max_width_length else max_width_length
+            max_name_length = len(k) if len(k)>max_name_length else max_name_length
+        
+        template_str = '%%-%ds %%-%ds %%-%ds'%(max_prefix_length,max_width_length,max_name_length)
+        return [template_str%(i,j,k) for i,j,k in io_para_list]
 
     @property
     def verilog_def(self):
@@ -81,22 +92,22 @@ class Component(Root):
             # pylint: enable=no-member
 
         # module io define
-        str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.io_list],[]),',',');')
+        str_list += self.__eol_append(self.__gen_aligned_signal_def([i.verilog_def_as_list for i in self.io_list]),',',');')
 
         # module wire define
         str_list += ['','\t//Wire define for this module.']
-        str_list += self.__eol_append(reduce(concat,[i.verilog_def for i in self.wire_list],[]),';')
+        str_list += self.__eol_append(self.__gen_aligned_signal_def([i.verilog_def_as_list for i in self.wire_list]),';',';')
 
         str_list += ['','\t//Wire define for sub module.']
-        str_list += self.__eol_append(reduce(concat,[i.verilog_outer_def for i in self.component_list],[]),';')
+        str_list += self.__eol_append(self.__gen_aligned_signal_def([i.verilog_outer_def_as_list for i in self.component_list]),';',';')
 
         # combine logic assignment
         str_list += ['','\t//Wire sub module connect to this module and inter module connect.']
-        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in self.lvalue_list if i.verilog_assignment],[]),';')
+        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in self.lvalue_list if i.verilog_assignment],[]),'')
 
         sub_io_list = reduce(concat,[i.outer_lvalue_list for i in self.component_list],[])
         str_list += ['','\t//Wire this module connect to sub module.']
-        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment],[]),';')
+        str_list += self.__eol_append(reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment],[]),'')
 
         # component inst
         str_list += ['','\t//module inst.']

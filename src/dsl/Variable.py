@@ -5,7 +5,7 @@ from copy       import copy
 
 #from .Num       import UInt
 from .Root      import Root
-from .Value     import Value
+#from .Value     import Value
 import string
 
 class Variable(Root):
@@ -34,6 +34,109 @@ class Variable(Root):
 
     def __lt__(self,other):
         return not self.__gt__(other)
+
+
+class Value():
+
+    def __init__(self):
+        super().__init__()
+        #super(Value,self).__init__()
+        #print('init',self)
+        self._rvalue     = None
+        self._des_lvalue = None
+        self._need_always = False
+
+    # += as circuit assignment
+    def __iadd__(self,rvalue):
+        if not isinstance(rvalue,Value):
+            raise ArithmeticError('A left value expect assigned by a right value.')
+        elif self.attribute != rvalue.attribute:
+            raise ArithmeticError('Left value attribute/Right value attribute mismatch.')
+        else:
+            #print('%s get rvalue %s'  %(self,rvalue))
+            object.__setattr__(self,'_rvalue',rvalue)
+            object.__setattr__(rvalue,'_des_lvalue',self)
+            #self.__rvalue = rvalue
+            if isinstance(rvalue,IfExpression):
+                self._need_always = True
+        return self
+
+
+    def __getitem__(self,s:slice):
+        return CutExpression(self,s.start,s.stop)
+
+    def Cut(self,hbound:int,lbound:int):
+        return CutExpression(self,hbound,lbound)
+
+    def __add__(self,rhs):
+        return AddExpression(self,rhs)
+
+    def __sub__(self,rhs):
+        return SubExpression(self,rhs)
+
+    def __mul__(self,rhs):
+        return MulExpression(self,rhs)
+
+    #def __eq__(self,rhs):
+    #    return EqualExpression(self,rhs)
+
+
+
+    @property
+    def is_lvalue(self) -> bool:
+        return False
+
+    @property
+    def string(self):
+        raise NotImplementedError
+
+    @property
+    def lstring(self):
+        raise NotImplementedError
+
+    @property
+    def rstring(self):
+        raise NotImplementedError
+
+    @property
+    def bstring(self,**args):
+        raise NotImplementedError
+
+
+    @property
+    def attribute(self):
+        raise NotImplementedError
+
+    @property
+    def verilog_assignment(self) -> str:
+        if not hasattr(self,'_rvalue') or self._rvalue is None:
+            return []
+        if self._need_always:
+            #if self._rvalue.string is None:
+            #    print(self._rvalue)
+
+            return ['always @(*) begin'] + \
+                     self._rvalue.bstring(self.lstring,"=") + \
+                    ['end']
+
+        else:
+
+            return ['assign ' + str(self.lstring) + ' = ' + str(self._rvalue.rstring) + ';']
+
+    @property
+    def des_connect(self):
+        return self._des_lvalue
+
+    @property
+    def src_connect(self):
+        return self._rvalue
+
+
+
+
+
+
+
 
 
 class SingleVar(Variable,Value):
@@ -79,8 +182,35 @@ class WireSig(SingleVar):
 
 
 class Reg(SingleVar):
-    pass
 
+    def __init__(self,template,clk:SingleVar,arst:SingleVar=None,rst:SingleVar=None):
+        super().__init__(template=template)
+        object.__setattr__(self,'_aclk',clk)
+        object.__setattr__(self,'_arst',arst)
+        object.__setattr__(self,'_rst',rst)
+
+
+    @property
+    def verilog_assignment(self) -> str:
+        if not hasattr(self,'_rvalue') or self._rvalue is None:
+            return []
+        else:
+            #if self._rvalue.string is None:
+            #    print(self._rvalue)
+            return ['always @(posedge %s or negedge %s) begin' %(self._aclk.rstring,self._arst.rstring)] + \
+                    self._rvalue.bstring(self.lstring,"<=") + \
+                    ['end']
+
+            #return ['assign ' + str(self.lstring) + ' = ' + str(self._rvalue.rstring)]
+
+    @property
+    def verilog_def(self):
+        '''生成端口定义的RTL'''
+        return ['reg [%s:0] %s' % ((self.attribute.width-1),self.name_before_component)]
+    
+    @property
+    def verilog_def_as_list(self):
+        return ['reg','[%s:0]'%((self.attribute.width-1)),self.name_before_component]
 
 class Wire(WireSig):
 
@@ -97,6 +227,10 @@ class Wire(WireSig):
     def verilog_def(self):
         '''生成端口定义的RTL'''
         return ['wire [%s:0] %s' % ((self.attribute.width-1),self.name_before_component)]
+    
+    @property
+    def verilog_def_as_list(self):
+        return ['wire','[%s:0]'%(self.attribute.width-1),self.name_before_component]
 
 
 class IOSig(WireSig):
@@ -110,6 +244,12 @@ class IOSig(WireSig):
     def verilog_outer_def(self):
         '''生成信号声明的RTL'''
         return ["wire %s %s" %('' if self.attribute.width==1 else '[%s:0]' % (self.attribute.width-1),self.name_until_component)]
+    
+    @property
+    def verilog_outer_def_as_list(self):
+        return ["wire",
+                '' if self.attribute.width==1 else '[%s:0]' % (self.attribute.width-1),
+                self.name_until_component]
 
     @property
     def _iosig_type_prefix(self):
@@ -118,6 +258,12 @@ class IOSig(WireSig):
     @property
     def verilog_def(self):
         return ['%s %s %s' % (self._iosig_type_prefix,'' if self.attribute.width==1 else '[%s:0]' %(self.attribute.width-1),self.name_before_component)]
+    
+    @property
+    def verilog_def_as_list(self):
+        return [self._iosig_type_prefix,
+                '' if self.attribute.width==1 else '[%s:0]' %(self.attribute.width-1),
+                self.name_before_component]
 
 
 class Input(IOSig):
@@ -343,6 +489,8 @@ class IOGroup(GroupVar):
             #print('%s get rvalue %s'  %(self,rvalue))
             object.__setattr__(self,'_rvalue',rvalue)
             #self.__rvalue = rvalue
+            if isinstance(rvalue,IfExpression):
+                self._need_always = True
         return self
 
     def exclude(self,*args):
@@ -389,12 +537,283 @@ class IOGroup(GroupVar):
 
 
 
+class Expression(Value):
+
+    #@property
+    #def is_lvalue(self):
+    #    return False
+
+    def __init__(self):
+        super().__init__()
+        #super(Expression,self).__init__()
+
+    # def check_lvalue(self,op:Value):
+    #     if not op.is_lvalue:
+    #         raise ArithmeticError('Input %s can not be a Left Value.' % type(op))
+
+    def check_rvalue(self,op:Value):
+        if not isinstance(op,Value):
+            raise ArithmeticError('Input %s can not be a Right Value.' % type(op))
+
+
+
+class IfExpression(Expression):
+    def __init__(self,exp: Expression):
+        super().__init__()
+        self._condition_list = []
+        self._action_list = []
+        self._closed = False
+
+        self.__push_condition(exp)
+        
+    
+    def __push_condition(self,exp: Expression):
+        if exp.attribute != UInt(1):
+            raise ArithmeticError('condition expression must be instance of UInt(1).')
+        elif len(self._condition_list) != len(self._action_list):
+            raise Exception('When and then method must be used in pairs.')
+        self._condition_list.append(exp)
+    
+    def __push_action(self,exp: Expression,tail=False):
+        if self._action_list != []:
+            if self._action_list[0].attribute != exp.attribute:
+                raise ArithmeticError('Attribute mismatch between different paths.')
+        elif not tail:
+            if len(self._condition_list) != len(self._action_list)+1:
+                raise Exception('When and then method don\'t be used in pairs.')
+        self._action_list.append(exp)
+    
+    def when(self,exp: Expression):
+        self.__push_condition(exp)
+        return self
+
+    def then(self,exp:Expression):
+        self.__push_action(exp)
+        return self
+    
+    def otherwise(self,exp: Expression):
+        if self._closed:
+            raise Exception('When expression has already been close.')
+        self.__push_action(exp,tail=True)
+        self._closed = True
+        return self
+
+    @property
+    def attribute(self) -> int:
+        return self._action_list[0].attribute
+
+    def bstring(self,lstring,assign_method) -> str:
+        def get_string(if_pair):
+            str_list = []
+            str_list.append("if(%s)"%(if_pair[0].rstring))
+            if isinstance(if_pair[1],IfExpression):
+                str_list[0] += " begin"
+                str_list += if_pair[1].bstring(lstring,assign_method)
+            else:
+                str_list[0] += " %s %s %s;"%(lstring,assign_method,if_pair[1].rstring)
+            return  str_list
+        str_list = []
+        for index,if_pair in enumerate(zip(self._condition_list,self._action_list[0:len(self._condition_list)])):
+            if_block = get_string(if_pair)
+            if_block[0] = "else "+if_block[0] if index!=0 else if_block[0]
+            str_list += if_block
+        if self._closed:
+            str_list.append("else %s %s %s;"%(lstring,assign_method,self._action_list[-1].rstring))
+        return list(map(lambda x:"    "+x,str_list))
+
+
+# class ConstExpression(Expression):
+# 
+#     def __init__(self,const,width):
+#         super(ConstExpression,self).__init__()
+#         self.const = const
+#         self.width = width
+# 
+#     @property
+#     def attribute(self) -> int:
+#         return self.width
+# 
+#     @property
+#     def string(self) -> str:
+#         return str(self.const)
+# 
+# def Const(const,width):
+#     return ConstExpression(const,width)
+
+
+class CombineExpression(Expression):
+
+    def __init__(self,*op_list):
+        super().__init__()
+        #super(CombineExpression,self).__init__()
+        self.op_list = op_list
+
+    @property
+    def attribute(self) -> int:
+        return type(self.op_list[0].attribute)(sum([op.attribute.width for op in self.op_list]))
+
+    @property
+    def string(self) -> str:
+        #', '.join([op.string for op in self.op_list])
+        return '{%s}' % ', '.join([op.string for op in self.op_list])
+    
+    @property
+    def rstring(self) -> str:
+        #', '.join([op.string for op in self.op_list])
+        return '{%s}' % ', '.join([op.rstring for op in self.op_list])
+
+
+
+
+def Combine(*op_list):
+    return CombineExpression(*op_list)
+
+
+
+class CutExpression(Expression):
+
+    def __init__(self,op:Value,hbound:int,lbound:int):
+        super().__init__()
+        #super(CutExpression,self).__init__()
+        if hbound > op.attribute.width or lbound <0:
+            raise ArithmeticError('index out of range.')
+        self.check_rvalue(op)
+        self.op     = op
+        self.hbound = hbound
+        self.lbound = lbound
+
+    @property
+    def attribute(self) -> int:
+        return type(self.op.attribute)(self.hbound - self.lbound + 1)
+
+    @property
+    def string(self) -> str:
+        return self.op.string + '[%s:%s]' % ( self.hbound, self.lbound )
+    
+    @property
+    def rstring(self) -> str:
+        return self.op.rstring + '[%s:%s]' % ( self.hbound, self.lbound )
+
+
+class TwoOpExpression(Expression):
+
+    def __init__(self,opL:Value,opR:Value):
+        super().__init__()
+        #super(TwoOpExpression,self).__init__()
+        self.check_rvalue(opL)
+        self.check_rvalue(opR)
+        self.opL = opL
+        self.opR = opR
+
+    @property
+    def attribute(self) -> int:
+        raise NotImplementedError
+
+    @property
+    def string(self) -> str:
+        raise NotImplementedError
+
+
+
+class AddExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
+
+    @property
+    def string(self) -> str:
+        return '(%s + %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s + %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+
+
+class SubExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
+
+    @property
+    def string(self) -> str:
+        return '(%s - %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s - %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+
+class MulExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s * %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s * %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+
+class EqualExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+        #type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s == %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s == %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+def Equal(lhs,rhs):
+    return EqualExpression(lhs,rhs)
+
+
     #def __setattr__(self,name,value):
     #    if not isinstance():
     #        pass
 
+class And(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+        #type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s && %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s && %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
+class Or(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+        #type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s || %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s || %s)'  % (self.opL.rstring ,self.opR.rstring)
 
     # @property
     # def gen_rtl_io(self):

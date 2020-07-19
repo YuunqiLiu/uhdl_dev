@@ -41,7 +41,10 @@ class TestModule(Component):
         self.const  = Output(UInt(DW*2))
         self.input =  Input(UInt(1))
         self.output = Output(UInt(1))
+        self.compare = Output(UInt(1))
+        self.dff = Reg(UInt(DW),self.clk,self.intr)
 
+        self.dff += self.op1
         #self.set_circuit('output',Output(UInt(1)))
         #self.set('output',Output(UInt(1)))
 
@@ -49,6 +52,7 @@ class TestModule(Component):
 
         self.ingroup = io0()
         self.outgroup = io0().reverse()
+        self.compare += Equal(self.op1,self.op2)
 
         self.sub1   = sub1()                      #实例化
         self.tmp    = Wire(UInt(DW))                    #定义Wire

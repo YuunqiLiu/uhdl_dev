@@ -11,12 +11,14 @@ module TestModule (
 	output [63:0] const,
 	input  input,
 	output  output,
+	output  compare,
 	input  ingroup_clk,
 	input  ingroup_rst,
 	output  outgroup_clk,
 	output  outgroup_rst);
 
 	//Wire define for this module.
+	reg [31:0] dff;
 	wire [31:0] tmp;
 
 	//Wire define for sub module.
@@ -25,17 +27,41 @@ module TestModule (
 	wire  sub1_intr;
 
 	//Wire sub module connect to this module and inter module connect.
-	assign intr = sub1_intr;
-	assign res1 = (tmp + op2);
-	assign res2 = (op2 + op3);
-	assign cut = op1[9:0];
-	assign comb = {op1, op2};
-	assign const = 64'b1000000;
-	assign output = input;
-	assign tmp = op1;
+	always @(*) begin
+		intr = sub1_intr;
+	end
+	always @(*) begin
+		res1 = (tmp + op2);
+	end
+	always @(*) begin
+		res2 = (op2 + op3);
+	end
+	always @(*) begin
+		cut = op1[9:0];
+	end
+	always @(*) begin
+		comb = {op1, op2};
+	end
+	always @(*) begin
+		const = 64'b1000000;
+	end
+	always @(*) begin
+		output = input;
+	end
+	always @(*) begin
+		compare = (op1 == op2);
+	end
+	always @(posedge clk or negedge intr) begin
+		dff <= op1;
+	end
+	always @(*) begin
+		tmp = op1;
+	end
 
 	//Wire this module connect to sub module.
-	assign sub1_clk = clk;
+	always @(*) begin
+		sub1_clk = clk;
+	end
 
 	//module inst.
 	sub1 sub1 (

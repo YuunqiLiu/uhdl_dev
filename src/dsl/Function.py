@@ -1,6 +1,6 @@
 
-from .Value import Value
-from .Variable import Input,Output
+#from .Value import Value
+from .Variable import Input,Output,Value
 from functools import reduce
 from .Root      import Root
 

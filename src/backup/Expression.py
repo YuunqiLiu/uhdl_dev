@@ -1,111 +1,180 @@
-from .Virtual import Virtual
 from .Value import *
+from .Variable import *
 
+class Expression(Value):
 
-
-
-class Expression(Virtual,Value):
+    #@property
+    #def is_lvalue(self):
+    #    return False
 
     def __init__(self):
-        super(Expression,self).__init__()
+        super().__init__()
+        #super(Expression,self).__init__()
 
-    @property
-    def sig_attribute(self):
-        raise NotImplementedError
+    # def check_lvalue(self,op:Value):
+    #     if not op.is_lvalue:
+    #         raise ArithmeticError('Input %s can not be a Left Value.' % type(op))
 
-    def check_lvalue(self,op):
-        if not isinstance(op,LValue):
-            raise ArithmeticError('Input %s can not be a Left Value.' % type(op))
-
-    def check_rvalue(self,op):
-        if not isinstance(op,RValue):
+    def check_rvalue(self,op:Value):
+        if not isinstance(op,Value):
             raise ArithmeticError('Input %s can not be a Right Value.' % type(op))
 
 
 
-
-#class Operator(Virtual):
-#
-#    def __init__(self):
-#        Virtual.__init__(self)
+class If(Expression):
+    pass
 
 
-#class OpAdd(Operator):
+# class ConstExpression(Expression):
+# 
+#     def __init__(self,const,width):
+#         super(ConstExpression,self).__init__()
+#         self.const = const
+#         self.width = width
+# 
+#     @property
+#     def attribute(self) -> int:
+#         return self.width
+# 
+#     @property
+#     def string(self) -> str:
+#         return str(self.const)
+# 
+# def Const(const,width):
+#     return ConstExpression(const,width)
 
-#    def __init__(self):
-#        Operator.__init__(self)
+
+class CombineExpression(Expression):
+
+    def __init__(self,*op_list):
+        super().__init__()
+        #super(CombineExpression,self).__init__()
+        self.op_list = op_list
+
+    @property
+    def attribute(self) -> int:
+        return type(self.op_list[0].attribute)(sum([op.attribute.width for op in self.op_list]))
+
+    @property
+    def string(self) -> str:
+        #', '.join([op.string for op in self.op_list])
+        return '{%s}' % ', '.join([op.string for op in self.op_list])
+    
+    @property
+    def rstring(self) -> str:
+        #', '.join([op.string for op in self.op_list])
+        return '{%s}' % ', '.join([op.rstring for op in self.op_list])
+
+
+
+
+def Combine(*op_list):
+    return CombineExpression(*op_list)
 
 
 
 class CutExpression(Expression):
 
-    def __init__(self,op,hbound,lbound):
-        super.__init__(self)
+    def __init__(self,op:Value,hbound:int,lbound:int):
+        super().__init__()
+        #super(CutExpression,self).__init__()
+        if hbound > op.attribute.width or lbound <0:
+            raise ArithmeticError('index out of range.')
         self.check_rvalue(op)
         self.op     = op
         self.hbound = hbound
         self.lbound = lbound
 
-    def string(self):
-        return self.op.string() + '[%s:%s]' % ( self.hbound, self.lbound )
+    @property
+    def attribute(self) -> int:
+        return type(self.op.attribute)(self.hbound - self.lbound + 1)
+
+    @property
+    def string(self) -> str:
+        return self.op.string + '[%s:%s]' % ( self.hbound, self.lbound )
+    
+    @property
+    def rstring(self) -> str:
+        return self.op.rstring + '[%s:%s]' % ( self.hbound, self.lbound )
 
 
-def OpCut(op,hbound,lbound):
-    return CutExpression(op,hbound,lbound)
+class TwoOpExpression(Expression):
 
-
-
-
-class AssignmentExpression(Expression):
-
-    def __init__(self,opL,opR):
-        super.__init__(self)
-        self.check_lvalue(opL)
-        self.check_rvalue(opR)
-        self.opL = opL
-        self.opR = opR
-
-    def string(self):
-        return self.opL.string() + ' = ' + self.opR.string()
-
-
-def OpAssignment(opL,opR):
-    return AssignmentExpression(opL,opR)
-
-
-
-
-class AddExpression(Expression,RValue):
-
-    def __init__(self,opL,opR):
-        Expression.__init__(self)
+    def __init__(self,opL:Value,opR:Value):
+        super().__init__()
+        #super(TwoOpExpression,self).__init__()
         self.check_rvalue(opL)
         self.check_rvalue(opR)
         self.opL = opL
         self.opR = opR
 
-    def string(self):
-        return self.opL.string() + ' + ' + self.opR.string()
+    @property
+    def attribute(self) -> int:
+        raise NotImplementedError
+
+    @property
+    def string(self) -> str:
+        raise NotImplementedError
 
 
-def OpAdd(opL,opR):
-    return AddExpression(opL,opR)
+
+class AddExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
+
+    @property
+    def string(self) -> str:
+        return '(%s + %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s + %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
 
+class SubExpression(TwoOpExpression):
 
-class CombineExpression(Expression,RValue):
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(max(self.opL.attribute.width,self.opR.attribute.width) + 1)
 
-    def __init__(self,*op_list):
-        Expression.__init__(self)
-        for o in op_list:
-            self.check_rvalue(o)
-        self.op_list = op_list
+    @property
+    def string(self) -> str:
+        return '(%s - %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s - %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
-    def string(self):
-        return '{ ' + ', '.join([o.string() for o in self.op_list]) + ' }'
+class MulExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s * %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s * %s)'  % (self.opL.rstring ,self.opR.rstring)
 
 
-def OpCombine(*op_list):
-    return CombineExpression(*op_list)
+class EqualExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+        #type(self.opL.attribute)(self.opL.attribute.width + self.opR.attribute.width)
+
+    @property
+    def string(self) -> str:
+        return '(%s == %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s == %s)'  % (self.opL.rstring ,self.opR.rstring)

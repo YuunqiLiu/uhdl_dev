@@ -15,7 +15,7 @@ class Adder(Component):
         self.op1 = Input(UInt(31)) # define op1 as input [30:0] 
         self.op2 = Input(UInt(31))
         self.res = Output(UInt(32)) # define res as output [31:0]
-
+        
         self.res += self.op1 + self.op2 #use += to assign circuit
 
 a = Adder()
