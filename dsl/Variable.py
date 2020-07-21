@@ -780,9 +780,40 @@ def Equal(lhs,rhs):
     return EqualExpression(lhs,rhs)
 
 
-    #def __setattr__(self,name,value):
-    #    if not isinstance():
-    #        pass
+class LessEqualExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+
+    @property
+    def string(self) -> str:
+        return '(%s <= %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s <= %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+def LessEqual(lhs,rhs):
+    return LessEqualExpression(lhs,rhs)
+
+class GreaterEqualExpression(TwoOpExpression):
+
+    @property
+    def attribute(self) -> int:
+        return UInt(1)
+
+    @property
+    def string(self) -> str:
+        return '(%s >= %s)'  % (self.opL.string ,self.opR.string)
+    
+    @property
+    def rstring(self) -> str:
+        return '(%s >= %s)'  % (self.opL.rstring ,self.opR.rstring)
+
+def GreaterEqual(lhs,rhs):
+    return GreaterEqualExpression(lhs,rhs)
+
 
 class And(TwoOpExpression):
 
