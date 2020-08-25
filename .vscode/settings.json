@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./test",
+        ".",
         "-p",
         "test_*.py"
     ],
@@ -10,7 +10,7 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
-    "python.pythonPath": "/usr/bin/python3",
+    "python.pythonPath": "C:\\Users\\liuyu\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
     "python.analysis.disabled": [
         "unresolved-import"
     ],
