@@ -1,13 +1,10 @@
 module Top (
-	output reg       out   ,
-	input      [1:0] sel   ,
-	input            if_sel,
-	input            if_in0,
-	input            if_in1,
-	input            in0   ,
-	input            in1   ,
-	input            in2   ,
-	input            in3   );
+	output reg  out ,
+	input       sel1,
+	input       sel2,
+	input       in0 ,
+	input       in1 ,
+	input       in2 );
 
 	//Wire define for this module.
 
@@ -15,15 +12,11 @@ module Top (
 
 	//Wire sub module connect to this module and inter module connect.
 	always @(*) begin
-	    case(sel)
-	    2'b0 : begin
-	            if(if_sel) out = if_in0;
-	            else out = if_in1;
-	        end
-	    2'b1 : out = in1;
-	    2'b10 : out = in2;
-	    default : out = in3;
-	    endcase
+	    if(sel1) begin
+	        if(sel2) out = in0;
+	        else out = in1;
+	    end
+	    else out = in2;
 	end
 	
 
