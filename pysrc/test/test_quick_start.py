@@ -123,3 +123,6 @@ class TestQuickStart(unittest.TestCase):
 
         inst_dynamic_mux = DynamicMux()                                     #实例化模块
         inst_dynamic_mux.generate_verilog()                                 #生成verilog
+
+        Not,Inverse,Add
+        BitXor,Mul
