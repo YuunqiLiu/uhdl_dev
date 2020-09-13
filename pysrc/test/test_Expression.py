@@ -5,33 +5,88 @@ import unittest
 from ..uhdl            import *
 # pylint: enable  =unused-wildcard-import
 
-from ..uhdl             import ErrAttrMismatch,ErrExpInTypeWrong,ErrListExpNeedMultiOp,ErrCutExpSliceInvalid
+from ..uhdl             import  ErrAttrMismatch         ,\
+                                ErrExpInTypeWrong       ,\
+                                ErrListExpNeedMultiOp   ,\
+                                ErrCutExpSliceInvalid   ,\
+                                ErrAttrTypeWrong        ,\
+                                ErrBitsValOverflow      ,\
+                                ErrBitsInvalidStr
 
-class TestExpression(unittest.TestCase):
+from ..uhdl             import InternalTool as IT
+
+class TestValue(unittest.TestCase):
+
+    def WaitException(self,exp_type,op,*param):
+        try                  : op(*param)
+        except exp_type  as e: print(e)
+        except Exception as e: raise Exception('Expect a %s.But get \n\t%s:%s' % (IT.GetClsNameFromCls(exp_type),IT.GetClsNameFromObj(e),e))
+        else                 : raise Exception('Expect a %s.But not get any Exception.' % IT.GetClsNameFromCls(exp_type) )
 
     def ErrExpInTypeWrongTest(self,op,*param):
-        try                          : op(*param)
-        except ErrExpInTypeWrong as e: print(e)
-        except Exception         as e: raise Exception('Expect a ErrExpInTypeWrong.But get \n\t%s:%s' % (e.__class__.__name__,e))
-        else                         : raise Exception('Expect a ErrExpInTypeWrong.But not get any Exception.')
+        self.WaitException(ErrExpInTypeWrong,op,*param)
 
     def ErrAttrMismatchTest(self,op,*param):
-        try                             : op(*param)
-        except ErrAttrMismatch     as e : print(e)
-        except Exception           as e : raise Exception('Expect a ErrAttrMismatchTest.But get \n\t%s:%s' % (e.__class__.__name__,e))
-        else                            : raise Exception('Expect a ErrAttrMismatchTest.But not get any Exception.')
+        self.WaitException(ErrAttrMismatch,op,*param)
 
     def ErrListExpNeedMultiOpTest(self,op,*param):
-        try                             : op(*param)
-        except ErrListExpNeedMultiOp as e: print(e)
-        except Exception           as e : raise Exception('Expect a ErrListExpNeedMultiOp.But get \n\t%s:%s' % (e.__class__.__name__,e))
-        else                            : raise Exception('Expect a ErrListExpNeedMultiOp.But not get any Exception.')
+        self.WaitException(ErrListExpNeedMultiOp,op,*param)
 
     def ErrCutExpSliceInvalidTest(self,op,hbound,lbound):
-        try                                 : Cut(op,hbound,lbound)
-        except ErrCutExpSliceInvalid as e   : print(e)
-        except Exception           as e     : raise Exception('Expect a ErrCutExpSliceInvalid.But get \n\t%s:%s' % (e.__class__.__name__,e))
-        else                                : raise Exception('Expect a ErrCutExpSliceInvalid.But not get any Exception.')
+        self.WaitException(ErrCutExpSliceInvalid,Cut,op,hbound,lbound)
+
+    def ErrAttrTypeWrongTest(self,op,*param):
+        self.WaitException(ErrAttrTypeWrong,op,*param)
+
+    def ErrBitsOverflowTest(self,op,*param):
+        self.WaitException(ErrBitsValOverflow,op,*param)
+
+    def ErrBitsInvalidStrTest(self,op,*param):
+        self.WaitException(ErrBitsInvalidStr,op,*param)
+
+class TestVariable(TestValue):
+    
+
+    def SingleVarTest(self,op):
+        self.ErrAttrTypeWrongTest(op,1)
+        op(UInt(1))
+
+
+
+    def BitsTest(self,op):
+        op(1,1)
+        op("1'b1")
+        self.ErrBitsOverflowTest(op,1,2)
+        self.ErrBitsOverflowTest(op,"1'b10")
+        self.ErrBitsInvalidStrTest(op,'asdf')
+
+    def test_Reg(self):
+        raise Exception()
+
+    def test_Wire(self):
+        raise Exception()
+
+    def test_UInt(self):
+        self.BitsTest(UInt)
+
+    def test_SInt(self):
+        self.BitsTest(SInt)
+
+    def test_Parameter(self):
+        raise Exception()
+
+    def test_Input(self):
+        self.SingleVarTest(Input)
+
+    def test_Output(self):
+        self.SingleVarTest(Output)
+
+    def test_Inout(self):
+        self.SingleVarTest(Inout)
+
+
+class TestExpression(TestValue):
+
 
 
     def ListExpressionTest(self,op):
@@ -154,8 +209,6 @@ class TestExpression(unittest.TestCase):
 
     def test_Combine(self):
         self.ListExpressionTest(Combine)
-
-
 
     def test_Cut(self):
         self.ErrCutExpSliceInvalidTest(Wire(UInt(32)),1.3,2.3)
