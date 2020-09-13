@@ -1,3 +1,6 @@
 [submodule "pysrc/uhdl"]
 	path = pysrc/uhdl
 	url = https://github.com/YuunqiLiu/uhdl_core.git
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/YuunqiLiu/uhdl.wiki.git
