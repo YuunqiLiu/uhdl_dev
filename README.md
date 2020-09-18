@@ -1,2 +1,2 @@
 
-[My Awesome Wiki](../../wiki)
+[Wiki](../../wiki)
