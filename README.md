@@ -1,1 +1,2 @@
-# lyqtmp200130
+
+[My Awesome Wiki](../../wiki)
