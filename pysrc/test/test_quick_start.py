@@ -125,4 +125,4 @@ class TestQuickStart(unittest.TestCase):
         inst_dynamic_mux.generate_verilog()                                 #生成verilog
 
         Not,Inverse,Add
-        BitXor,Mul
+        BitXor,Mul,SelfXnor
