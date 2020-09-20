@@ -1,5 +1,5 @@
 # pylint: disable=unused-wildcard-import
-from pysrc.uhdl import *
+from .pysrc.uhdl import *
 # pylint: enable=unused-wildcard-import
 
 
