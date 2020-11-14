@@ -5,7 +5,7 @@ import unittest
 from ..uhdl            import *
 # pylint: enable  =unused-wildcard-import
 
-from ..uhdl             import  ErrAttrMismatch         ,\
+from ..uhdl.core             import  ErrAttrMismatch         ,\
                                 ErrExpInTypeWrong       ,\
                                 ErrListExpNeedMultiOp   ,\
                                 ErrCutExpSliceInvalid   ,\
@@ -13,7 +13,8 @@ from ..uhdl             import  ErrAttrMismatch         ,\
                                 ErrBitsValOverflow      ,\
                                 ErrBitsInvalidStr
 
-from ..uhdl             import InternalTool as IT
+from ..uhdl.core             import InternalTool as IT
+
 
 class TestValue(unittest.TestCase):
 

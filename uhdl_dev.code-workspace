@@ -7,6 +7,8 @@
     "settings": {
         "python.testing.unittestEnabled": true,
         "python.testing.autoTestDiscoverOnSaveEnabled": false,
-        "python.pythonPath": "C:\\Users\\liuyu\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+        "python.pythonPath": "C:\\Users\\liuyu\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+        "python.languageServer": "Jedi"
     }
 }
+
