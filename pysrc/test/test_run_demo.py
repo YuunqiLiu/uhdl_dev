@@ -3,6 +3,7 @@ import unittest
 
 # pylint: disable =unused-wildcard-import
 from ..uhdl.Demo         import *
+from ..uhdl              import *
 # pylint: enable  =unused-wildcard-import
 
 
