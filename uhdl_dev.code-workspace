@@ -6,6 +6,10 @@
     ],
     "settings": {
         "python.testing.unittestEnabled": true,
+        "python.testing.pytestArgs": [
+            "--capture=yes",
+            "--show-capture"
+        ],  
         "python.testing.autoTestDiscoverOnSaveEnabled": false,
         "python.pythonPath": "C:\\Users\\liuyu\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
         "python.languageServer": "Jedi"
