@@ -11,93 +11,88 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:1bb16f382f5196f43cd84a8a48633db0]
+//[UHDL]Key Start [md5:ef636ae61002e58ec52d133ea503599c]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 4dd5cc7e75a1d82ce788ef897141dbc4
+//Content Hash: 9d0a633f2242c6ca0bd5b3b72acb5a8f
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:1bb16f382f5196f43cd84a8a48633db0]
+//[UHDL]Key End [md5:ef636ae61002e58ec52d133ea503599c]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:cda437c32f04161dc20423f9c5e5b253]
-//Written by UHDL in 2022-08-11 22:09:42
-//[UHDL]Tool Message End [md5:cda437c32f04161dc20423f9c5e5b253]
+//[UHDL]Tool Message Start [md5:7412bfa4c4b43880b5ad2504da479b8f]
+//Written by UHDL in 2022-08-25 22:29:08
+//[UHDL]Tool Message End [md5:7412bfa4c4b43880b5ad2504da479b8f]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:4dd5cc7e75a1d82ce788ef897141dbc4]
-module DDec_node_D0 (
-	output        out0_vld ,
-	input         out0_rdy ,
-	output        out0_head,
-	output        out0_tail,
-	output [31:0] out0_pld ,
-	output [2:0]  out0_id  ,
-	output        out1_vld ,
-	input         out1_rdy ,
-	output        out1_head,
-	output        out1_tail,
-	output [31:0] out1_pld ,
-	output [2:0]  out1_id  ,
-	input         in0_vld  ,
-	output        in0_rdy  ,
-	input         in0_head ,
-	input         in0_tail ,
-	input  [31:0] in0_pld  ,
-	input  [2:0]  in0_id   );
+//[UHDL]Content Start [md5:9d0a633f2242c6ca0bd5b3b72acb5a8f]
+module DDec_node_D0_pld_width_360_id_type_mst (
+	output         out0_vld   ,
+	output         out1_vld   ,
+	input          out0_rdy   ,
+	input          out1_rdy   ,
+	output         out0_head  ,
+	output         out1_head  ,
+	output         out0_tail  ,
+	output         out1_tail  ,
+	output [359:0] out0_pld   ,
+	output [359:0] out1_pld   ,
+	output [3:0]   out0_mst_id,
+	output [3:0]   out1_mst_id,
+	output [3:0]   out0_slv_id,
+	output [3:0]   out1_slv_id,
+	input          in0_vld    ,
+	output         in0_rdy    ,
+	input          in0_head   ,
+	input          in0_tail   ,
+	input  [359:0] in0_pld    ,
+	input  [3:0]   in0_mst_id ,
+	input  [3:0]   in0_slv_id );
 	wire [0:0] id_hit_p0_id1;
-	wire [0:0] id_hit_p0_id2;
-	wire [0:0] id_hit_p0_id3;
 	wire [0:0] sel_bit0     ;
-	wire [0:0] id_hit_p1_id4;
-	wire [0:0] id_hit_p1_id5;
-	wire [0:0] id_hit_p1_id6;
+	wire [0:0] id_hit_p1_id2;
 	wire [0:0] sel_bit1     ;
 	assign out0_vld = (sel_bit0 && in0_vld);
 	
-	assign out0_head = in0_head;
-	
-	assign out0_tail = in0_tail;
-	
-	assign out0_pld = in0_pld;
-	
-	assign out0_id = in0_id;
-	
 	assign out1_vld = (sel_bit1 && in0_vld);
+	
+	assign out0_head = in0_head;
 	
 	assign out1_head = in0_head;
 	
+	assign out0_tail = in0_tail;
+	
 	assign out1_tail = in0_tail;
+	
+	assign out0_pld = in0_pld;
 	
 	assign out1_pld = in0_pld;
 	
-	assign out1_id = in0_id;
+	assign out0_mst_id = in0_mst_id;
+	
+	assign out1_mst_id = in0_mst_id;
+	
+	assign out0_slv_id = in0_slv_id;
+	
+	assign out1_slv_id = in0_slv_id;
 	
 	assign in0_rdy = ((sel_bit0 && out0_rdy) || (sel_bit1 && out1_rdy));
 	
-	assign id_hit_p0_id1 = (in0_id == 3'b1);
+	assign id_hit_p0_id1 = (in0_mst_id == 4'b1);
 	
-	assign id_hit_p0_id2 = (in0_id == 3'b10);
+	assign sel_bit0 = id_hit_p0_id1;
 	
-	assign id_hit_p0_id3 = (in0_id == 3'b11);
+	assign id_hit_p1_id2 = (in0_mst_id == 4'b10);
 	
-	assign sel_bit0 = (id_hit_p0_id1 | id_hit_p0_id2 | id_hit_p0_id3);
-	
-	assign id_hit_p1_id4 = (in0_id == 3'b100);
-	
-	assign id_hit_p1_id5 = (in0_id == 3'b101);
-	
-	assign id_hit_p1_id6 = (in0_id == 3'b110);
-	
-	assign sel_bit1 = (id_hit_p1_id4 | id_hit_p1_id5 | id_hit_p1_id6);
+	assign sel_bit1 = id_hit_p1_id2;
 	
 
 endmodule
-//[UHDL]Content End [md5:4dd5cc7e75a1d82ce788ef897141dbc4]
+//[UHDL]Content End [md5:9d0a633f2242c6ca0bd5b3b72acb5a8f]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

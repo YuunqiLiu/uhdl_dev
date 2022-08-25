@@ -11,46 +11,49 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:83c86f48ad2e2280699631adffcb7270]
+//[UHDL]Key Start [md5:782e65e4b9aa073e84a44f9916721fdc]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: c2f09afb7823bc6bdb837c46d51c97be
+//Content Hash: 137c33abfe91cb415176a5fdbc0d2399
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:83c86f48ad2e2280699631adffcb7270]
+//[UHDL]Key End [md5:782e65e4b9aa073e84a44f9916721fdc]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:cda437c32f04161dc20423f9c5e5b253]
-//Written by UHDL in 2022-08-11 22:09:42
-//[UHDL]Tool Message End [md5:cda437c32f04161dc20423f9c5e5b253]
+//[UHDL]Tool Message Start [md5:7412bfa4c4b43880b5ad2504da479b8f]
+//Written by UHDL in 2022-08-25 22:29:08
+//[UHDL]Tool Message End [md5:7412bfa4c4b43880b5ad2504da479b8f]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:c2f09afb7823bc6bdb837c46d51c97be]
-module DArb_node_A0 (
-	input         clk      ,
-	input         rst_n    ,
-	input         in0_vld  ,
-	output        in0_rdy  ,
-	input         in0_head ,
-	input         in0_tail ,
-	input  [31:0] in0_pld  ,
-	input  [2:0]  in0_id   ,
-	input         in1_vld  ,
-	output        in1_rdy  ,
-	input         in1_head ,
-	input         in1_tail ,
-	input  [31:0] in1_pld  ,
-	input  [2:0]  in1_id   ,
-	output        out0_vld ,
-	input         out0_rdy ,
-	output        out0_head,
-	output        out0_tail,
-	output [31:0] out0_pld ,
-	output [2:0]  out0_id  );
+//[UHDL]Content Start [md5:137c33abfe91cb415176a5fdbc0d2399]
+module DArb_node_A0_pld_width_360_id_type_slv (
+	input          clk        ,
+	input          rst_n      ,
+	input          in0_vld    ,
+	input          in1_vld    ,
+	output         in0_rdy    ,
+	output         in1_rdy    ,
+	input          in0_head   ,
+	input          in1_head   ,
+	input          in0_tail   ,
+	input          in1_tail   ,
+	input  [359:0] in0_pld    ,
+	input  [359:0] in1_pld    ,
+	input  [3:0]   in0_mst_id ,
+	input  [3:0]   in1_mst_id ,
+	input  [3:0]   in0_slv_id ,
+	input  [3:0]   in1_slv_id ,
+	output         out0_vld   ,
+	input          out0_rdy   ,
+	output         out0_head  ,
+	output         out0_tail  ,
+	output [359:0] out0_pld   ,
+	output [3:0]   out0_mst_id,
+	output [3:0]   out0_slv_id);
 	wire [1:0] msg_update_en   ;
 	wire [0:0] bit_sel_0       ;
 	wire [0:0] bit_sel_1       ;
@@ -76,9 +79,11 @@ module DArb_node_A0 (
 	
 	assign out0_tail = ((in0_tail && bit_set_locked_0) | (in1_tail && bit_set_locked_1));
 	
-	assign out0_pld = ((in0_pld & (32{bit_set_locked_0})) | (in1_pld & (32{bit_set_locked_1})));
+	assign out0_pld = ((in0_pld & (360{bit_set_locked_0})) | (in1_pld & (360{bit_set_locked_1})));
 	
-	assign out0_id = ((in0_id & (3{bit_set_locked_0})) | (in1_id & (3{bit_set_locked_1})));
+	assign out0_mst_id = ((in0_mst_id & (4{bit_set_locked_0})) | (in1_mst_id & (4{bit_set_locked_1})));
+	
+	assign out0_slv_id = ((in0_slv_id & (4{bit_set_locked_0})) | (in1_slv_id & (4{bit_set_locked_1})));
 	
 	assign msg_update_en = {(in0_vld && in0_rdy && in0_head), (in1_vld && in1_rdy && in1_head)};
 	
@@ -132,7 +137,7 @@ module DArb_node_A0 (
 		.age_bits_row_1(arb_msg_age_bits_row_1));
 
 endmodule
-//[UHDL]Content End [md5:c2f09afb7823bc6bdb837c46d51c97be]
+//[UHDL]Content End [md5:137c33abfe91cb415176a5fdbc0d2399]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
