@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:9097540f92a8f46bac2b512bb6df4c1c]
+//[UHDL]Key Start [md5:2288348a6bd12dca4e4e437137933c10]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 918086c76f44b44c8fa502bcf9d8d603
+//Content Hash: 1ab29aeac5f1b956084fd4c3681662ca
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:9097540f92a8f46bac2b512bb6df4c1c]
+//[UHDL]Key End [md5:2288348a6bd12dca4e4e437137933c10]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:7412bfa4c4b43880b5ad2504da479b8f]
-//Written by UHDL in 2022-08-25 22:29:08
-//[UHDL]Tool Message End [md5:7412bfa4c4b43880b5ad2504da479b8f]
+//[UHDL]Tool Message Start [md5:d03a6bee689749cf96e88bd529d1e8c4]
+//Written by UHDL in 2022-08-27 10:08:58
+//[UHDL]Tool Message End [md5:d03a6bee689749cf96e88bd529d1e8c4]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:918086c76f44b44c8fa502bcf9d8d603]
+//[UHDL]Content Start [md5:1ab29aeac5f1b956084fd4c3681662ca]
 module DWrap_network_network0 (
 	input          clk             ,
 	input          rst_n           ,
@@ -75,6 +75,17 @@ module DWrap_network_network0 (
 	output         D_M0_out_b_rdy  ,
 	input  [11:0]  D_M0_out_b_id   ,
 	input  [1:0]   D_M0_out_b_resp ,
+	output         D_M0_out_ar_vld ,
+	input          D_M0_out_ar_rdy ,
+	output [31:0]  D_M0_out_ar_addr,
+	output [11:0]  D_M0_out_ar_id  ,
+	output [31:0]  D_M0_out_ar_user,
+	input          D_M0_out_r_vld  ,
+	output         D_M0_out_r_rdy  ,
+	input  [11:0]  D_M0_out_r_id   ,
+	input  [255:0] D_M0_out_r_data ,
+	input  [1:0]   D_M0_out_r_resp ,
+	input          D_M0_out_r_last ,
 	output         D_M1_out_aw_vld ,
 	input          D_M1_out_aw_rdy ,
 	output [31:0]  D_M1_out_aw_addr,
@@ -88,215 +99,276 @@ module DWrap_network_network0 (
 	input          D_M1_out_b_vld  ,
 	output         D_M1_out_b_rdy  ,
 	input  [11:0]  D_M1_out_b_id   ,
-	input  [1:0]   D_M1_out_b_resp );
-	wire         S0_clk            ;
-	wire         S0_rst_n          ;
-	wire         S0_in_aw_vld      ;
-	wire         S0_in_aw_rdy      ;
-	wire [31:0]  S0_in_aw_addr     ;
-	wire [7:0]   S0_in_aw_id       ;
-	wire [31:0]  S0_in_aw_user     ;
-	wire         S0_in_w_vld       ;
-	wire         S0_in_w_rdy       ;
-	wire         S0_in_w_last      ;
-	wire [31:0]  S0_in_w_strb      ;
-	wire [255:0] S0_in_w_data      ;
-	wire         S0_in_b_vld       ;
-	wire         S0_in_b_rdy       ;
-	wire [7:0]   S0_in_b_id        ;
-	wire [1:0]   S0_in_b_resp      ;
-	wire         S0_out0_req_vld   ;
-	wire         S0_out0_req_rdy   ;
-	wire         S0_out0_req_head  ;
-	wire         S0_out0_req_tail  ;
-	wire [359:0] S0_out0_req_pld   ;
-	wire [3:0]   S0_out0_req_mst_id;
-	wire [3:0]   S0_out0_req_slv_id;
-	wire         S0_out0_ack_vld   ;
-	wire         S0_out0_ack_rdy   ;
-	wire         S0_out0_ack_head  ;
-	wire         S0_out0_ack_tail  ;
-	wire [9:0]   S0_out0_ack_pld   ;
-	wire [3:0]   S0_out0_ack_mst_id;
-	wire [3:0]   S0_out0_ack_slv_id;
-	wire         S1_clk            ;
-	wire         S1_rst_n          ;
-	wire         S1_in_aw_vld      ;
-	wire         S1_in_aw_rdy      ;
-	wire [31:0]  S1_in_aw_addr     ;
-	wire [7:0]   S1_in_aw_id       ;
-	wire [31:0]  S1_in_aw_user     ;
-	wire         S1_in_w_vld       ;
-	wire         S1_in_w_rdy       ;
-	wire         S1_in_w_last      ;
-	wire [31:0]  S1_in_w_strb      ;
-	wire [255:0] S1_in_w_data      ;
-	wire         S1_in_b_vld       ;
-	wire         S1_in_b_rdy       ;
-	wire [7:0]   S1_in_b_id        ;
-	wire [1:0]   S1_in_b_resp      ;
-	wire         S1_out0_req_vld   ;
-	wire         S1_out0_req_rdy   ;
-	wire         S1_out0_req_head  ;
-	wire         S1_out0_req_tail  ;
-	wire [359:0] S1_out0_req_pld   ;
-	wire [3:0]   S1_out0_req_mst_id;
-	wire [3:0]   S1_out0_req_slv_id;
-	wire         S1_out0_ack_vld   ;
-	wire         S1_out0_ack_rdy   ;
-	wire         S1_out0_ack_head  ;
-	wire         S1_out0_ack_tail  ;
-	wire [9:0]   S1_out0_ack_pld   ;
-	wire [3:0]   S1_out0_ack_mst_id;
-	wire [3:0]   S1_out0_ack_slv_id;
-	wire         A0_clk            ;
-	wire         A0_rst_n          ;
-	wire         A0_in0_req_vld    ;
-	wire         A0_in1_req_vld    ;
-	wire         A0_in0_req_rdy    ;
-	wire         A0_in1_req_rdy    ;
-	wire         A0_in0_req_head   ;
-	wire         A0_in1_req_head   ;
-	wire         A0_in0_req_tail   ;
-	wire         A0_in1_req_tail   ;
-	wire [359:0] A0_in0_req_pld    ;
-	wire [359:0] A0_in1_req_pld    ;
-	wire [3:0]   A0_in0_req_mst_id ;
-	wire [3:0]   A0_in1_req_mst_id ;
-	wire [3:0]   A0_in0_req_slv_id ;
-	wire [3:0]   A0_in1_req_slv_id ;
-	wire         A0_in0_ack_vld    ;
-	wire         A0_in1_ack_vld    ;
-	wire         A0_in0_ack_rdy    ;
-	wire         A0_in1_ack_rdy    ;
-	wire         A0_in0_ack_head   ;
-	wire         A0_in1_ack_head   ;
-	wire         A0_in0_ack_tail   ;
-	wire         A0_in1_ack_tail   ;
-	wire [9:0]   A0_in0_ack_pld    ;
-	wire [9:0]   A0_in1_ack_pld    ;
-	wire [3:0]   A0_in0_ack_mst_id ;
-	wire [3:0]   A0_in1_ack_mst_id ;
-	wire [3:0]   A0_in0_ack_slv_id ;
-	wire [3:0]   A0_in1_ack_slv_id ;
-	wire         A0_out0_req_vld   ;
-	wire         A0_out0_req_rdy   ;
-	wire         A0_out0_req_head  ;
-	wire         A0_out0_req_tail  ;
-	wire [359:0] A0_out0_req_pld   ;
-	wire [3:0]   A0_out0_req_mst_id;
-	wire [3:0]   A0_out0_req_slv_id;
-	wire         A0_out0_ack_vld   ;
-	wire         A0_out0_ack_rdy   ;
-	wire         A0_out0_ack_head  ;
-	wire         A0_out0_ack_tail  ;
-	wire [9:0]   A0_out0_ack_pld   ;
-	wire [3:0]   A0_out0_ack_mst_id;
-	wire [3:0]   A0_out0_ack_slv_id;
-	wire         D0_clk            ;
-	wire         D0_rst_n          ;
-	wire         D0_out0_req_vld   ;
-	wire         D0_out1_req_vld   ;
-	wire         D0_out0_req_rdy   ;
-	wire         D0_out1_req_rdy   ;
-	wire         D0_out0_req_head  ;
-	wire         D0_out1_req_head  ;
-	wire         D0_out0_req_tail  ;
-	wire         D0_out1_req_tail  ;
-	wire [359:0] D0_out0_req_pld   ;
-	wire [359:0] D0_out1_req_pld   ;
-	wire [3:0]   D0_out0_req_mst_id;
-	wire [3:0]   D0_out1_req_mst_id;
-	wire [3:0]   D0_out0_req_slv_id;
-	wire [3:0]   D0_out1_req_slv_id;
-	wire         D0_out0_ack_vld   ;
-	wire         D0_out1_ack_vld   ;
-	wire         D0_out0_ack_rdy   ;
-	wire         D0_out1_ack_rdy   ;
-	wire         D0_out0_ack_head  ;
-	wire         D0_out1_ack_head  ;
-	wire         D0_out0_ack_tail  ;
-	wire         D0_out1_ack_tail  ;
-	wire [9:0]   D0_out0_ack_pld   ;
-	wire [9:0]   D0_out1_ack_pld   ;
-	wire [3:0]   D0_out0_ack_mst_id;
-	wire [3:0]   D0_out1_ack_mst_id;
-	wire [3:0]   D0_out0_ack_slv_id;
-	wire [3:0]   D0_out1_ack_slv_id;
-	wire         D0_in0_req_vld    ;
-	wire         D0_in0_req_rdy    ;
-	wire         D0_in0_req_head   ;
-	wire         D0_in0_req_tail   ;
-	wire [359:0] D0_in0_req_pld    ;
-	wire [3:0]   D0_in0_req_mst_id ;
-	wire [3:0]   D0_in0_req_slv_id ;
-	wire         D0_in0_ack_vld    ;
-	wire         D0_in0_ack_rdy    ;
-	wire         D0_in0_ack_head   ;
-	wire         D0_in0_ack_tail   ;
-	wire [9:0]   D0_in0_ack_pld    ;
-	wire [3:0]   D0_in0_ack_mst_id ;
-	wire [3:0]   D0_in0_ack_slv_id ;
-	wire         M0_clk            ;
-	wire         M0_rst_n          ;
-	wire         M0_out_aw_vld     ;
-	wire         M0_out_aw_rdy     ;
-	wire [31:0]  M0_out_aw_addr    ;
-	wire [11:0]  M0_out_aw_id      ;
-	wire [31:0]  M0_out_aw_user    ;
-	wire         M0_out_w_vld      ;
-	wire         M0_out_w_rdy      ;
-	wire         M0_out_w_last     ;
-	wire [31:0]  M0_out_w_strb     ;
-	wire [255:0] M0_out_w_data     ;
-	wire         M0_out_b_vld      ;
-	wire         M0_out_b_rdy      ;
-	wire [11:0]  M0_out_b_id       ;
-	wire [1:0]   M0_out_b_resp     ;
-	wire         M0_in0_req_vld    ;
-	wire         M0_in0_req_rdy    ;
-	wire         M0_in0_req_head   ;
-	wire         M0_in0_req_tail   ;
-	wire [359:0] M0_in0_req_pld    ;
-	wire [3:0]   M0_in0_req_mst_id ;
-	wire [3:0]   M0_in0_req_slv_id ;
-	wire         M0_in0_ack_vld    ;
-	wire         M0_in0_ack_rdy    ;
-	wire         M0_in0_ack_head   ;
-	wire         M0_in0_ack_tail   ;
-	wire [9:0]   M0_in0_ack_pld    ;
-	wire [3:0]   M0_in0_ack_mst_id ;
-	wire [3:0]   M0_in0_ack_slv_id ;
-	wire         M1_clk            ;
-	wire         M1_rst_n          ;
-	wire         M1_out_aw_vld     ;
-	wire         M1_out_aw_rdy     ;
-	wire [31:0]  M1_out_aw_addr    ;
-	wire [11:0]  M1_out_aw_id      ;
-	wire [31:0]  M1_out_aw_user    ;
-	wire         M1_out_w_vld      ;
-	wire         M1_out_w_rdy      ;
-	wire         M1_out_w_last     ;
-	wire [31:0]  M1_out_w_strb     ;
-	wire [255:0] M1_out_w_data     ;
-	wire         M1_out_b_vld      ;
-	wire         M1_out_b_rdy      ;
-	wire [11:0]  M1_out_b_id       ;
-	wire [1:0]   M1_out_b_resp     ;
-	wire         M1_in0_req_vld    ;
-	wire         M1_in0_req_rdy    ;
-	wire         M1_in0_req_head   ;
-	wire         M1_in0_req_tail   ;
-	wire [359:0] M1_in0_req_pld    ;
-	wire [3:0]   M1_in0_req_mst_id ;
-	wire [3:0]   M1_in0_req_slv_id ;
-	wire         M1_in0_ack_vld    ;
-	wire         M1_in0_ack_rdy    ;
-	wire         M1_in0_ack_head   ;
-	wire         M1_in0_ack_tail   ;
-	wire [9:0]   M1_in0_ack_pld    ;
-	wire [3:0]   M1_in0_ack_mst_id ;
-	wire [3:0]   M1_in0_ack_slv_id ;
+	input  [1:0]   D_M1_out_b_resp ,
+	output         D_M1_out_ar_vld ,
+	input          D_M1_out_ar_rdy ,
+	output [31:0]  D_M1_out_ar_addr,
+	output [11:0]  D_M1_out_ar_id  ,
+	output [31:0]  D_M1_out_ar_user,
+	input          D_M1_out_r_vld  ,
+	output         D_M1_out_r_rdy  ,
+	input  [11:0]  D_M1_out_r_id   ,
+	input  [255:0] D_M1_out_r_data ,
+	input  [1:0]   D_M1_out_r_resp ,
+	input          D_M1_out_r_last );
+	wire         S0_clk             ;
+	wire         S0_rst_n           ;
+	wire         S0_in_aw_vld       ;
+	wire         S0_in_aw_rdy       ;
+	wire [31:0]  S0_in_aw_addr      ;
+	wire [7:0]   S0_in_aw_id        ;
+	wire [31:0]  S0_in_aw_user      ;
+	wire         S0_in_w_vld        ;
+	wire         S0_in_w_rdy        ;
+	wire         S0_in_w_last       ;
+	wire [31:0]  S0_in_w_strb       ;
+	wire [255:0] S0_in_w_data       ;
+	wire         S0_in_b_vld        ;
+	wire         S0_in_b_rdy        ;
+	wire [7:0]   S0_in_b_id         ;
+	wire [1:0]   S0_in_b_resp       ;
+	wire         S0_out0_req_vld    ;
+	wire         S0_out0_req_rdy    ;
+	wire         S0_out0_req_head   ;
+	wire         S0_out0_req_tail   ;
+	wire [359:0] S0_out0_req_pld    ;
+	wire [3:0]   S0_out0_req_mst_id ;
+	wire [3:0]   S0_out0_req_slv_id ;
+	wire         S0_out0_ack_vld    ;
+	wire         S0_out0_ack_rdy    ;
+	wire         S0_out0_ack_head   ;
+	wire         S0_out0_ack_tail   ;
+	wire [9:0]   S0_out0_ack_pld    ;
+	wire [3:0]   S0_out0_ack_mst_id ;
+	wire [3:0]   S0_out0_ack_slv_id ;
+	wire         S1_clk             ;
+	wire         S1_rst_n           ;
+	wire         S1_in_aw_vld       ;
+	wire         S1_in_aw_rdy       ;
+	wire [31:0]  S1_in_aw_addr      ;
+	wire [7:0]   S1_in_aw_id        ;
+	wire [31:0]  S1_in_aw_user      ;
+	wire         S1_in_w_vld        ;
+	wire         S1_in_w_rdy        ;
+	wire         S1_in_w_last       ;
+	wire [31:0]  S1_in_w_strb       ;
+	wire [255:0] S1_in_w_data       ;
+	wire         S1_in_b_vld        ;
+	wire         S1_in_b_rdy        ;
+	wire [7:0]   S1_in_b_id         ;
+	wire [1:0]   S1_in_b_resp       ;
+	wire         S1_out0_req_vld    ;
+	wire         S1_out0_req_rdy    ;
+	wire         S1_out0_req_head   ;
+	wire         S1_out0_req_tail   ;
+	wire [359:0] S1_out0_req_pld    ;
+	wire [3:0]   S1_out0_req_mst_id ;
+	wire [3:0]   S1_out0_req_slv_id ;
+	wire         S1_out0_ack_vld    ;
+	wire         S1_out0_ack_rdy    ;
+	wire         S1_out0_ack_head   ;
+	wire         S1_out0_ack_tail   ;
+	wire [9:0]   S1_out0_ack_pld    ;
+	wire [3:0]   S1_out0_ack_mst_id ;
+	wire [3:0]   S1_out0_ack_slv_id ;
+	wire         A0_clk             ;
+	wire         A0_rst_n           ;
+	wire         A0_in0_req_vld     ;
+	wire         A0_in1_req_vld     ;
+	wire         A0_in0_req_rdy     ;
+	wire         A0_in1_req_rdy     ;
+	wire         A0_in0_req_head    ;
+	wire         A0_in1_req_head    ;
+	wire         A0_in0_req_tail    ;
+	wire         A0_in1_req_tail    ;
+	wire [359:0] A0_in0_req_pld     ;
+	wire [359:0] A0_in1_req_pld     ;
+	wire [3:0]   A0_in0_req_mst_id  ;
+	wire [3:0]   A0_in1_req_mst_id  ;
+	wire [3:0]   A0_in0_req_slv_id  ;
+	wire [3:0]   A0_in1_req_slv_id  ;
+	wire         A0_in0_ack_vld     ;
+	wire         A0_in1_ack_vld     ;
+	wire         A0_in0_ack_rdy     ;
+	wire         A0_in1_ack_rdy     ;
+	wire         A0_in0_ack_head    ;
+	wire         A0_in1_ack_head    ;
+	wire         A0_in0_ack_tail    ;
+	wire         A0_in1_ack_tail    ;
+	wire [9:0]   A0_in0_ack_pld     ;
+	wire [9:0]   A0_in1_ack_pld     ;
+	wire [3:0]   A0_in0_ack_mst_id  ;
+	wire [3:0]   A0_in1_ack_mst_id  ;
+	wire [3:0]   A0_in0_ack_slv_id  ;
+	wire [3:0]   A0_in1_ack_slv_id  ;
+	wire         A0_out0_req_vld    ;
+	wire         A0_out0_req_rdy    ;
+	wire         A0_out0_req_head   ;
+	wire         A0_out0_req_tail   ;
+	wire [359:0] A0_out0_req_pld    ;
+	wire [3:0]   A0_out0_req_mst_id ;
+	wire [3:0]   A0_out0_req_slv_id ;
+	wire         A0_out0_ack_vld    ;
+	wire         A0_out0_ack_rdy    ;
+	wire         A0_out0_ack_head   ;
+	wire         A0_out0_ack_tail   ;
+	wire [9:0]   A0_out0_ack_pld    ;
+	wire [3:0]   A0_out0_ack_mst_id ;
+	wire [3:0]   A0_out0_ack_slv_id ;
+	wire         D0_clk             ;
+	wire         D0_rst_n           ;
+	wire         D0_out0_req_vld    ;
+	wire         D0_out1_req_vld    ;
+	wire         D0_out0_req_rdy    ;
+	wire         D0_out1_req_rdy    ;
+	wire         D0_out0_req_head   ;
+	wire         D0_out1_req_head   ;
+	wire         D0_out0_req_tail   ;
+	wire         D0_out1_req_tail   ;
+	wire [359:0] D0_out0_req_pld    ;
+	wire [359:0] D0_out1_req_pld    ;
+	wire [3:0]   D0_out0_req_mst_id ;
+	wire [3:0]   D0_out1_req_mst_id ;
+	wire [3:0]   D0_out0_req_slv_id ;
+	wire [3:0]   D0_out1_req_slv_id ;
+	wire         D0_out0_ack_vld    ;
+	wire         D0_out1_ack_vld    ;
+	wire         D0_out0_ack_rdy    ;
+	wire         D0_out1_ack_rdy    ;
+	wire         D0_out0_ack_head   ;
+	wire         D0_out1_ack_head   ;
+	wire         D0_out0_ack_tail   ;
+	wire         D0_out1_ack_tail   ;
+	wire [9:0]   D0_out0_ack_pld    ;
+	wire [9:0]   D0_out1_ack_pld    ;
+	wire [3:0]   D0_out0_ack_mst_id ;
+	wire [3:0]   D0_out1_ack_mst_id ;
+	wire [3:0]   D0_out0_ack_slv_id ;
+	wire [3:0]   D0_out1_ack_slv_id ;
+	wire         D0_in0_req_vld     ;
+	wire         D0_in0_req_rdy     ;
+	wire         D0_in0_req_head    ;
+	wire         D0_in0_req_tail    ;
+	wire [359:0] D0_in0_req_pld     ;
+	wire [3:0]   D0_in0_req_mst_id  ;
+	wire [3:0]   D0_in0_req_slv_id  ;
+	wire         D0_in0_ack_vld     ;
+	wire         D0_in0_ack_rdy     ;
+	wire         D0_in0_ack_head    ;
+	wire         D0_in0_ack_tail    ;
+	wire [9:0]   D0_in0_ack_pld     ;
+	wire [3:0]   D0_in0_ack_mst_id  ;
+	wire [3:0]   D0_in0_ack_slv_id  ;
+	wire         M0_clk             ;
+	wire         M0_rst_n           ;
+	wire         M0_out_aw_vld      ;
+	wire         M0_out_aw_rdy      ;
+	wire [31:0]  M0_out_aw_addr     ;
+	wire [11:0]  M0_out_aw_id       ;
+	wire [31:0]  M0_out_aw_user     ;
+	wire         M0_out_w_vld       ;
+	wire         M0_out_w_rdy       ;
+	wire         M0_out_w_last      ;
+	wire [31:0]  M0_out_w_strb      ;
+	wire [255:0] M0_out_w_data      ;
+	wire         M0_out_b_vld       ;
+	wire         M0_out_b_rdy       ;
+	wire [11:0]  M0_out_b_id        ;
+	wire [1:0]   M0_out_b_resp      ;
+	wire         M0_in0_req_vld     ;
+	wire         M0_in0_req_rdy     ;
+	wire         M0_in0_req_head    ;
+	wire         M0_in0_req_tail    ;
+	wire [359:0] M0_in0_req_pld     ;
+	wire [3:0]   M0_in0_req_mst_id  ;
+	wire [3:0]   M0_in0_req_slv_id  ;
+	wire         M0_in0_ack_vld     ;
+	wire         M0_in0_ack_rdy     ;
+	wire         M0_in0_ack_head    ;
+	wire         M0_in0_ack_tail    ;
+	wire [9:0]   M0_in0_ack_pld     ;
+	wire [3:0]   M0_in0_ack_mst_id  ;
+	wire [3:0]   M0_in0_ack_slv_id  ;
+	wire         M0_out_ar_vld      ;
+	wire         M0_out_ar_rdy      ;
+	wire [31:0]  M0_out_ar_addr     ;
+	wire [11:0]  M0_out_ar_id       ;
+	wire [31:0]  M0_out_ar_user     ;
+	wire         M0_out_r_vld       ;
+	wire         M0_out_r_rdy       ;
+	wire [11:0]  M0_out_r_id        ;
+	wire [255:0] M0_out_r_data      ;
+	wire [1:0]   M0_out_r_resp      ;
+	wire         M0_out_r_last      ;
+	wire         M0_in0_r_req_vld   ;
+	wire         M0_in0_r_req_rdy   ;
+	wire         M0_in0_r_req_head  ;
+	wire         M0_in0_r_req_tail  ;
+	wire [71:0]  M0_in0_r_req_pld   ;
+	wire [3:0]   M0_in0_r_req_mst_id;
+	wire [3:0]   M0_in0_r_req_slv_id;
+	wire         M0_in0_r_ack_vld   ;
+	wire         M0_in0_r_ack_rdy   ;
+	wire         M0_in0_r_ack_head  ;
+	wire         M0_in0_r_ack_tail  ;
+	wire [265:0] M0_in0_r_ack_pld   ;
+	wire [3:0]   M0_in0_r_ack_mst_id;
+	wire [3:0]   M0_in0_r_ack_slv_id;
+	wire         M1_clk             ;
+	wire         M1_rst_n           ;
+	wire         M1_out_aw_vld      ;
+	wire         M1_out_aw_rdy      ;
+	wire [31:0]  M1_out_aw_addr     ;
+	wire [11:0]  M1_out_aw_id       ;
+	wire [31:0]  M1_out_aw_user     ;
+	wire         M1_out_w_vld       ;
+	wire         M1_out_w_rdy       ;
+	wire         M1_out_w_last      ;
+	wire [31:0]  M1_out_w_strb      ;
+	wire [255:0] M1_out_w_data      ;
+	wire         M1_out_b_vld       ;
+	wire         M1_out_b_rdy       ;
+	wire [11:0]  M1_out_b_id        ;
+	wire [1:0]   M1_out_b_resp      ;
+	wire         M1_in0_req_vld     ;
+	wire         M1_in0_req_rdy     ;
+	wire         M1_in0_req_head    ;
+	wire         M1_in0_req_tail    ;
+	wire [359:0] M1_in0_req_pld     ;
+	wire [3:0]   M1_in0_req_mst_id  ;
+	wire [3:0]   M1_in0_req_slv_id  ;
+	wire         M1_in0_ack_vld     ;
+	wire         M1_in0_ack_rdy     ;
+	wire         M1_in0_ack_head    ;
+	wire         M1_in0_ack_tail    ;
+	wire [9:0]   M1_in0_ack_pld     ;
+	wire [3:0]   M1_in0_ack_mst_id  ;
+	wire [3:0]   M1_in0_ack_slv_id  ;
+	wire         M1_out_ar_vld      ;
+	wire         M1_out_ar_rdy      ;
+	wire [31:0]  M1_out_ar_addr     ;
+	wire [11:0]  M1_out_ar_id       ;
+	wire [31:0]  M1_out_ar_user     ;
+	wire         M1_out_r_vld       ;
+	wire         M1_out_r_rdy       ;
+	wire [11:0]  M1_out_r_id        ;
+	wire [255:0] M1_out_r_data      ;
+	wire [1:0]   M1_out_r_resp      ;
+	wire         M1_out_r_last      ;
+	wire         M1_in0_r_req_vld   ;
+	wire         M1_in0_r_req_rdy   ;
+	wire         M1_in0_r_req_head  ;
+	wire         M1_in0_r_req_tail  ;
+	wire [71:0]  M1_in0_r_req_pld   ;
+	wire [3:0]   M1_in0_r_req_mst_id;
+	wire [3:0]   M1_in0_r_req_slv_id;
+	wire         M1_in0_r_ack_vld   ;
+	wire         M1_in0_r_ack_rdy   ;
+	wire         M1_in0_r_ack_head  ;
+	wire         M1_in0_r_ack_tail  ;
+	wire [265:0] M1_in0_r_ack_pld   ;
+	wire [3:0]   M1_in0_r_ack_mst_id;
+	wire [3:0]   M1_in0_r_ack_slv_id;
 	assign D_S0_in_aw_rdy = S0_in_aw_rdy;
 	
 	assign D_S0_in_w_rdy = S0_in_w_rdy;
@@ -335,6 +407,16 @@ module DWrap_network_network0 (
 	
 	assign D_M0_out_b_rdy = M0_out_b_rdy;
 	
+	assign D_M0_out_ar_vld = M0_out_ar_vld;
+	
+	assign D_M0_out_ar_addr = M0_out_ar_addr;
+	
+	assign D_M0_out_ar_id = M0_out_ar_id;
+	
+	assign D_M0_out_ar_user = M0_out_ar_user;
+	
+	assign D_M0_out_r_rdy = M0_out_r_rdy;
+	
 	assign D_M1_out_aw_vld = M1_out_aw_vld;
 	
 	assign D_M1_out_aw_addr = M1_out_aw_addr;
@@ -352,6 +434,16 @@ module DWrap_network_network0 (
 	assign D_M1_out_w_data = M1_out_w_data;
 	
 	assign D_M1_out_b_rdy = M1_out_b_rdy;
+	
+	assign D_M1_out_ar_vld = M1_out_ar_vld;
+	
+	assign D_M1_out_ar_addr = M1_out_ar_addr;
+	
+	assign D_M1_out_ar_id = M1_out_ar_id;
+	
+	assign D_M1_out_ar_user = M1_out_ar_user;
+	
+	assign D_M1_out_r_rdy = M1_out_r_rdy;
 	
 	assign S0_clk = clk;
 	
@@ -545,6 +637,18 @@ module DWrap_network_network0 (
 	
 	assign M0_in0_ack_rdy = D0_out0_ack_rdy;
 	
+	assign M0_out_ar_rdy = D_M0_out_ar_rdy;
+	
+	assign M0_out_r_vld = D_M0_out_r_vld;
+	
+	assign M0_out_r_id = D_M0_out_r_id;
+	
+	assign M0_out_r_data = D_M0_out_r_data;
+	
+	assign M0_out_r_resp = D_M0_out_r_resp;
+	
+	assign M0_out_r_last = D_M0_out_r_last;
+	
 	assign M1_clk = clk;
 	
 	assign M1_rst_n = rst_n;
@@ -572,6 +676,18 @@ module DWrap_network_network0 (
 	assign M1_in0_req_slv_id = D0_out1_req_slv_id;
 	
 	assign M1_in0_ack_rdy = D0_out1_ack_rdy;
+	
+	assign M1_out_ar_rdy = D_M1_out_ar_rdy;
+	
+	assign M1_out_r_vld = D_M1_out_r_vld;
+	
+	assign M1_out_r_id = D_M1_out_r_id;
+	
+	assign M1_out_r_data = D_M1_out_r_data;
+	
+	assign M1_out_r_resp = D_M1_out_r_resp;
+	
+	assign M1_out_r_last = D_M1_out_r_last;
 	
 	DSlvAxi_node_S0 S0 (
 		.clk(S0_clk),
@@ -755,7 +871,32 @@ module DWrap_network_network0 (
 		.in0_ack_tail(M0_in0_ack_tail),
 		.in0_ack_pld(M0_in0_ack_pld),
 		.in0_ack_mst_id(M0_in0_ack_mst_id),
-		.in0_ack_slv_id(M0_in0_ack_slv_id));
+		.in0_ack_slv_id(M0_in0_ack_slv_id),
+		.out_ar_vld(M0_out_ar_vld),
+		.out_ar_rdy(M0_out_ar_rdy),
+		.out_ar_addr(M0_out_ar_addr),
+		.out_ar_id(M0_out_ar_id),
+		.out_ar_user(M0_out_ar_user),
+		.out_r_vld(M0_out_r_vld),
+		.out_r_rdy(M0_out_r_rdy),
+		.out_r_id(M0_out_r_id),
+		.out_r_data(M0_out_r_data),
+		.out_r_resp(M0_out_r_resp),
+		.out_r_last(M0_out_r_last),
+		.in0_r_req_vld(M0_in0_r_req_vld),
+		.in0_r_req_rdy(M0_in0_r_req_rdy),
+		.in0_r_req_head(M0_in0_r_req_head),
+		.in0_r_req_tail(M0_in0_r_req_tail),
+		.in0_r_req_pld(M0_in0_r_req_pld),
+		.in0_r_req_mst_id(M0_in0_r_req_mst_id),
+		.in0_r_req_slv_id(M0_in0_r_req_slv_id),
+		.in0_r_ack_vld(M0_in0_r_ack_vld),
+		.in0_r_ack_rdy(M0_in0_r_ack_rdy),
+		.in0_r_ack_head(M0_in0_r_ack_head),
+		.in0_r_ack_tail(M0_in0_r_ack_tail),
+		.in0_r_ack_pld(M0_in0_r_ack_pld),
+		.in0_r_ack_mst_id(M0_in0_r_ack_mst_id),
+		.in0_r_ack_slv_id(M0_in0_r_ack_slv_id));
 	DMstAxi_node_M1 M1 (
 		.clk(M1_clk),
 		.rst_n(M1_rst_n),
@@ -786,10 +927,35 @@ module DWrap_network_network0 (
 		.in0_ack_tail(M1_in0_ack_tail),
 		.in0_ack_pld(M1_in0_ack_pld),
 		.in0_ack_mst_id(M1_in0_ack_mst_id),
-		.in0_ack_slv_id(M1_in0_ack_slv_id));
+		.in0_ack_slv_id(M1_in0_ack_slv_id),
+		.out_ar_vld(M1_out_ar_vld),
+		.out_ar_rdy(M1_out_ar_rdy),
+		.out_ar_addr(M1_out_ar_addr),
+		.out_ar_id(M1_out_ar_id),
+		.out_ar_user(M1_out_ar_user),
+		.out_r_vld(M1_out_r_vld),
+		.out_r_rdy(M1_out_r_rdy),
+		.out_r_id(M1_out_r_id),
+		.out_r_data(M1_out_r_data),
+		.out_r_resp(M1_out_r_resp),
+		.out_r_last(M1_out_r_last),
+		.in0_r_req_vld(M1_in0_r_req_vld),
+		.in0_r_req_rdy(M1_in0_r_req_rdy),
+		.in0_r_req_head(M1_in0_r_req_head),
+		.in0_r_req_tail(M1_in0_r_req_tail),
+		.in0_r_req_pld(M1_in0_r_req_pld),
+		.in0_r_req_mst_id(M1_in0_r_req_mst_id),
+		.in0_r_req_slv_id(M1_in0_r_req_slv_id),
+		.in0_r_ack_vld(M1_in0_r_ack_vld),
+		.in0_r_ack_rdy(M1_in0_r_ack_rdy),
+		.in0_r_ack_head(M1_in0_r_ack_head),
+		.in0_r_ack_tail(M1_in0_r_ack_tail),
+		.in0_r_ack_pld(M1_in0_r_ack_pld),
+		.in0_r_ack_mst_id(M1_in0_r_ack_mst_id),
+		.in0_r_ack_slv_id(M1_in0_r_ack_slv_id));
 
 endmodule
-//[UHDL]Content End [md5:918086c76f44b44c8fa502bcf9d8d603]
+//[UHDL]Content End [md5:1ab29aeac5f1b956084fd4c3681662ca]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

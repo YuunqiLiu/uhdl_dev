@@ -11,57 +11,83 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:51eb4e53ef320b819b8fc9a7cae7adb6]
+//[UHDL]Key Start [md5:2487e8146e25b14043b8a387322f558c]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: b7a33592a1390cd60e93ff90e51b676c
+//Content Hash: fc326e7605e6d6401c0030b3f1dcd19c
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:51eb4e53ef320b819b8fc9a7cae7adb6]
+//[UHDL]Key End [md5:2487e8146e25b14043b8a387322f558c]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:7412bfa4c4b43880b5ad2504da479b8f]
-//Written by UHDL in 2022-08-25 22:29:08
-//[UHDL]Tool Message End [md5:7412bfa4c4b43880b5ad2504da479b8f]
+//[UHDL]Tool Message Start [md5:d03a6bee689749cf96e88bd529d1e8c4]
+//Written by UHDL in 2022-08-27 10:08:58
+//[UHDL]Tool Message End [md5:d03a6bee689749cf96e88bd529d1e8c4]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:b7a33592a1390cd60e93ff90e51b676c]
+//[UHDL]Content Start [md5:fc326e7605e6d6401c0030b3f1dcd19c]
 module DMstAxi_node_M0 (
-	input          clk           ,
-	input          rst_n         ,
-	output         out_aw_vld    ,
-	input          out_aw_rdy    ,
-	output [31:0]  out_aw_addr   ,
-	output [11:0]  out_aw_id     ,
-	output [31:0]  out_aw_user   ,
-	output         out_w_vld     ,
-	input          out_w_rdy     ,
-	output         out_w_last    ,
-	output [31:0]  out_w_strb    ,
-	output [255:0] out_w_data    ,
-	input          out_b_vld     ,
-	output         out_b_rdy     ,
-	input  [11:0]  out_b_id      ,
-	input  [1:0]   out_b_resp    ,
-	input          in0_req_vld   ,
-	output         in0_req_rdy   ,
-	input          in0_req_head  ,
-	input          in0_req_tail  ,
-	input  [359:0] in0_req_pld   ,
-	input  [3:0]   in0_req_mst_id,
-	input  [3:0]   in0_req_slv_id,
-	output         in0_ack_vld   ,
-	input          in0_ack_rdy   ,
-	output         in0_ack_head  ,
-	output         in0_ack_tail  ,
-	output [9:0]   in0_ack_pld   ,
-	output [3:0]   in0_ack_mst_id,
-	output [3:0]   in0_ack_slv_id);
-	wire [7:0] internal_slave_axi_id;
+	input          clk             ,
+	input          rst_n           ,
+	output         out_aw_vld      ,
+	input          out_aw_rdy      ,
+	output [31:0]  out_aw_addr     ,
+	output [11:0]  out_aw_id       ,
+	output [31:0]  out_aw_user     ,
+	output         out_w_vld       ,
+	input          out_w_rdy       ,
+	output         out_w_last      ,
+	output [31:0]  out_w_strb      ,
+	output [255:0] out_w_data      ,
+	input          out_b_vld       ,
+	output         out_b_rdy       ,
+	input  [11:0]  out_b_id        ,
+	input  [1:0]   out_b_resp      ,
+	input          in0_req_vld     ,
+	output         in0_req_rdy     ,
+	input          in0_req_head    ,
+	input          in0_req_tail    ,
+	input  [359:0] in0_req_pld     ,
+	input  [3:0]   in0_req_mst_id  ,
+	input  [3:0]   in0_req_slv_id  ,
+	output         in0_ack_vld     ,
+	input          in0_ack_rdy     ,
+	output         in0_ack_head    ,
+	output         in0_ack_tail    ,
+	output [9:0]   in0_ack_pld     ,
+	output [3:0]   in0_ack_mst_id  ,
+	output [3:0]   in0_ack_slv_id  ,
+	output         out_ar_vld      ,
+	input          out_ar_rdy      ,
+	output [31:0]  out_ar_addr     ,
+	output [11:0]  out_ar_id       ,
+	output [31:0]  out_ar_user     ,
+	input          out_r_vld       ,
+	output         out_r_rdy       ,
+	input  [11:0]  out_r_id        ,
+	input  [255:0] out_r_data      ,
+	input  [1:0]   out_r_resp      ,
+	input          out_r_last      ,
+	input          in0_r_req_vld   ,
+	output         in0_r_req_rdy   ,
+	input          in0_r_req_head  ,
+	input          in0_r_req_tail  ,
+	input  [71:0]  in0_r_req_pld   ,
+	input  [3:0]   in0_r_req_mst_id,
+	input  [3:0]   in0_r_req_slv_id,
+	output         in0_r_ack_vld   ,
+	input          in0_r_ack_rdy   ,
+	output         in0_r_ack_head  ,
+	output         in0_r_ack_tail  ,
+	output [265:0] in0_r_ack_pld   ,
+	output [3:0]   in0_r_ack_mst_id,
+	output [3:0]   in0_r_ack_slv_id);
+	wire [7:0] internal_slave_axi_id  ;
+	wire [7:0] internal_slave_r_axi_id;
 	assign out_aw_vld = (in0_req_rdy && in0_req_vld && in0_req_head);
 	
 	assign out_aw_addr = in0_req_pld[359:328];
@@ -94,9 +120,35 @@ module DMstAxi_node_M0 (
 	
 	assign internal_slave_axi_id = in0_req_pld[327:320];
 	
+	assign out_ar_vld = in0_r_req_vld;
+	
+	assign out_ar_addr = in0_r_req_pld[39:8];
+	
+	assign out_ar_id = {in0_r_req_slv_id, internal_slave_r_axi_id};
+	
+	assign out_ar_user = in0_r_req_pld[71:40];
+	
+	assign out_r_rdy = in0_r_ack_rdy;
+	
+	assign in0_r_req_rdy = out_ar_rdy;
+	
+	assign in0_r_ack_vld = out_r_vld;
+	
+	assign in0_r_ack_head = 1'b1;
+	
+	assign in0_r_ack_tail = 1'b1;
+	
+	assign in0_r_ack_pld = {out_r_id[7:0], out_r_resp, out_r_data};
+	
+	assign in0_r_ack_mst_id = 4'b10;
+	
+	assign in0_r_ack_slv_id = out_r_id[11:8];
+	
+	assign internal_slave_r_axi_id = in0_r_req_pld[7:0];
+	
 
 endmodule
-//[UHDL]Content End [md5:b7a33592a1390cd60e93ff90e51b676c]
+//[UHDL]Content End [md5:fc326e7605e6d6401c0030b3f1dcd19c]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
