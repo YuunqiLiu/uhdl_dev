@@ -11,53 +11,32 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:b0ef52f1c02eecabfa1ed7fbc74a0d6d]
+//[UHDL]Key Start [md5:0a5ac2209b6d34bc4fe9993118dc3fb2]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 878d0c3f87e529c3ac3895a391708f1d
+//Content Hash: 81475bc97dfe8c293e4ba8a0b09778d5
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:b0ef52f1c02eecabfa1ed7fbc74a0d6d]
+//[UHDL]Key End [md5:0a5ac2209b6d34bc4fe9993118dc3fb2]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:d03a6bee689749cf96e88bd529d1e8c4]
-//Written by UHDL in 2022-08-27 10:08:58
-//[UHDL]Tool Message End [md5:d03a6bee689749cf96e88bd529d1e8c4]
+//[UHDL]Tool Message Start [md5:929754c90a67c85c14a8f5facf24bf47]
+//Written by UHDL in 2022-09-01 22:45:48
+//[UHDL]Tool Message End [md5:929754c90a67c85c14a8f5facf24bf47]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:878d0c3f87e529c3ac3895a391708f1d]
-module CmnAgeMtx_width_2 (
-	input        clk           ,
-	input        rst_n         ,
-	input  [1:0] update_en     ,
-	output [1:0] age_bits_row_0,
-	output [1:0] age_bits_row_1);
-	wire [0:0] age_bit_0_0;
-	reg  [0:0] age_bit_0_1;
-	wire [0:0] age_bit_1_1;
-	wire [0:0] age_bit_1_0;
-	assign age_bits_row_0 = {age_bit_0_0, age_bit_0_1};
-	
-	assign age_bits_row_1 = {age_bit_1_0, age_bit_1_1};
-	
-	assign age_bit_0_0 = 1'b0;
-	
-	always @(posedge clk or negedge rst_n) begin
-	    if(~rst_n) age_bit_0_1 <= 1'b0;
-	    else age_bit_0_1 <= update_en[1:1];
-	end
-	
-	assign age_bit_1_1 = 1'b0;
-	
-	assign age_bit_1_0 = (!age_bit_0_1);
-	
+//[UHDL]Content Start [md5:81475bc97dfe8c293e4ba8a0b09778d5]
+module Top_ (
+	input         in0_vld,
+	output        in0_rdy,
+	input  [31:0] in0_pld);
 
 endmodule
-//[UHDL]Content End [md5:878d0c3f87e529c3ac3895a391708f1d]
+//[UHDL]Content End [md5:81475bc97dfe8c293e4ba8a0b09778d5]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

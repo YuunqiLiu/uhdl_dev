@@ -1,0 +1,204 @@
+2022-09-03 19:33:58,961 - simple_example - DEBUG - debug message
+2022-09-03 19:33:58,961 - simple_example - INFO - info message
+2022-09-03 19:33:58,961 - simple_example - WARNING - warn message
+2022-09-03 19:33:58,961 - simple_example - ERROR - error message
+2022-09-03 19:33:58,962 - simple_example - CRITICAL - critical message
+2022-09-03 19:34:27,499 - simple_example - DEBUG - debug message
+2022-09-03 19:34:27,499 - simple_example - INFO - info message
+2022-09-03 19:34:27,499 - simple_example - WARNING - warn message
+2022-09-03 19:34:27,499 - simple_example - ERROR - error message
+2022-09-03 19:34:27,499 - simple_example - CRITICAL - critical message
+2022-09-03 19:34:29,215 - simple_example - DEBUG - debug message
+2022-09-03 19:34:29,215 - simple_example - INFO - info message
+2022-09-03 19:34:29,215 - simple_example - WARNING - warn message
+2022-09-03 19:34:29,216 - simple_example - ERROR - error message
+2022-09-03 19:34:29,216 - simple_example - CRITICAL - critical message
+2022-09-03 19:34:30,042 - simple_example - DEBUG - debug message
+2022-09-03 19:34:30,042 - simple_example - INFO - info message
+2022-09-03 19:34:30,042 - simple_example - WARNING - warn message
+2022-09-03 19:34:30,042 - simple_example - ERROR - error message
+2022-09-03 19:34:30,042 - simple_example - CRITICAL - critical message
+2022-09-03 19:34:30,043 - simple_example - INFO - add S1 to node_list
+2022-09-03 19:34:30,043 - simple_example - INFO - add S2 to node_list
+2022-09-03 19:34:30,043 - simple_example - INFO - add A0 to node_list
+2022-09-03 19:34:30,043 - simple_example - INFO - add D0 to node_list
+2022-09-03 19:34:30,043 - simple_example - INFO - add M1 to node_list
+2022-09-03 19:34:30,043 - simple_example - INFO - add M2 to node_list
+2022-09-03 19:35:09,782 - DEBUG - debug message
+2022-09-03 19:35:09,782 - INFO - info message
+2022-09-03 19:35:09,782 - WARNING - warn message
+2022-09-03 19:35:09,782 - ERROR - error message
+2022-09-03 19:35:09,782 - CRITICAL - critical message
+DEBUG - debug message
+INFO - info message
+WARNING - warn message
+ERROR - error message
+CRITICAL - critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[INFO] add S1 to node_list
+[INFO] add S2 to node_list
+[INFO] add A0 to node_list
+[INFO] add D0 to node_list
+[INFO] add M1 to node_list
+[INFO] add M2 to node_list
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[INFO] add S1 to network.
+[INFO] add S2 to network.
+[INFO] add A0 to network.
+[INFO] add D0 to network.
+[INFO] add M1 to network.
+[INFO] add M2 to network.
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[INFO] add S1 to network.
+[INFO] add S2 to network.
+[INFO] add A0 to network.
+[INFO] add D0 to network.
+[INFO] add M1 to network.
+[INFO] add M2 to network.
+[INFO] link S1 to A0.
+[INFO] link S2 to A0.
+[INFO] link A0 to D0.
+[INFO] link D0 to M1.
+[INFO] link D0 to M2.
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[INFO] add S1 to network.
+[INFO] add S2 to network.
+[INFO] add A0 to network.
+[INFO] add D0 to network.
+[INFO] add M1 to network.
+[INFO] add M2 to network.
+[INFO] link S1 to A0.
+[INFO] link S2 to A0.
+[INFO] link A0 to D0.
+[INFO] link D0 to M1.
+[INFO] link D0 to M2.
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[DEBUG] debug message
+[INFO] info message
+[WARNING] warn message
+[ERROR] error message
+[CRITICAL] critical message
+[INFO] add S1 to network.
+[INFO] add S2 to network.
+[INFO] add A0 to network.
+[INFO] add D0 to network.
+[INFO] add M1 to network.
+[INFO] add M2 to network.
+[INFO] link S1 to A0.
+[INFO] link S2 to A0.
+[INFO] link A0 to D0.
+[INFO] link D0 to M1.
+[INFO] link D0 to M2.
+[INFO] System address mapping generation start.
+[INFO] Find a mapping: (0, 65535) -> 1
+[INFO] Find a mapping: (65536, 131071) -> 2
