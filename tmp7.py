@@ -1,12 +1,16 @@
 from pysrc.uhdl.Demo.lwnoc import *
 
+N = Network()
 
 slv1 = SlaveAxi()
+N.add(slv1)
+
 slv2 = SlaveAxi()
+N.add(slv2)
 
-arb1 = ArbiterDual()
+arb1 = ArbiterDual(slv1.w_req_pld_width, slv1.r_req_pld_width, slv1.w_ack_pld_width, slv1.r_ack_pld_width)
 
-dec1 = DecoderDual()
+dec1 = DecoderDual(slv1.w_req_pld_width, slv1.r_req_pld_width, slv1.w_ack_pld_width, slv1.r_ack_pld_width)
 
 mst1 = MasterAxi()
 mst1.address_range_list = [(0x0000,0xffff)]
@@ -14,7 +18,6 @@ mst2 = MasterAxi()
 mst2.address_range_list = [(0x10000,0x1ffff)]
 
 
-N = Network()
 N.add(slv1)
 N.add(slv2)
 N.add(arb1)
@@ -35,3 +38,9 @@ N._generate_local_port_id_mapping()
 
 slv1.create_vinst().generate_verilog()
 mst1.create_vinst().generate_verilog()
+arb1.create_vinst().generate_verilog()
+dec1.create_vinst().generate_verilog()
+
+dwrap = DWrap(N)
+
+dwrap.generate_verilog(iteration=True)
