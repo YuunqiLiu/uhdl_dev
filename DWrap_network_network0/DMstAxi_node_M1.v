@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:db63b6e3436aa659290b6de10f644242]
+//[UHDL]Key Start [md5:60c7c66b382318a0a3e998ab9c4f43bb]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 91d35996745b91ec763349cc95372017
+//Content Hash: d4eddd997820e0c7a39c666e3a20ef11
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:db63b6e3436aa659290b6de10f644242]
+//[UHDL]Key End [md5:60c7c66b382318a0a3e998ab9c4f43bb]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:91d35996745b91ec763349cc95372017]
+//[UHDL]Content Start [md5:d4eddd997820e0c7a39c666e3a20ef11]
 module DMstAxi_node_M1 (
 	input         clk             ,
 	input         rst_n           ,
@@ -75,7 +75,6 @@ module DMstAxi_node_M1 (
 	output        out0_w_last     ,
 	output [31:0] out0_w_data     ,
 	output [3:0]  out0_w_strb     ,
-	output [31:0] out0_w_user     ,
 	input         out0_b_vld      ,
 	output        out0_b_rdy      ,
 	input  [11:0] out0_b_id       ,
@@ -107,6 +106,8 @@ module DMstAxi_node_M1 (
 	
 	assign in0_r_ack_tgt_id = 4'b1;
 	
+	assign in0_r_ack_txn_id = out0_r_id[7:0];
+	
 	assign in0_w_ack_vld = out0_b_vld;
 	
 	assign in0_w_ack_head = 1'b1;
@@ -119,6 +120,8 @@ module DMstAxi_node_M1 (
 	
 	assign in0_w_ack_tgt_id = 4'b1;
 	
+	assign in0_w_ack_txn_id = out0_b_id[7:0];
+	
 	assign out0_aw_vld = (in0_w_req_rdy && in0_w_req_vld && in0_w_req_head);
 	
 	assign out0_aw_addr = in0_w_req_pld[99:68];
@@ -128,6 +131,8 @@ module DMstAxi_node_M1 (
 	assign out0_aw_user = in0_w_req_pld[67:36];
 	
 	assign out0_w_vld = (in0_w_req_rdy && in0_w_req_vld);
+	
+	assign out0_w_last = in0_w_req_tail;
 	
 	assign out0_w_data = in0_w_req_pld[31:0];
 	
@@ -147,7 +152,7 @@ module DMstAxi_node_M1 (
 	
 
 endmodule
-//[UHDL]Content End [md5:91d35996745b91ec763349cc95372017]
+//[UHDL]Content End [md5:d4eddd997820e0c7a39c666e3a20ef11]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

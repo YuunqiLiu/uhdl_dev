@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:039f6b60816ea99248405f20adf1ff39]
+//[UHDL]Key Start [md5:36e20db505f4f5ba7025142a64669f50]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: b107d6f65ef9bbc1d9805e49ab58f394
+//Content Hash: a231200310347077201b658cd63e1a0d
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:039f6b60816ea99248405f20adf1ff39]
+//[UHDL]Key End [md5:36e20db505f4f5ba7025142a64669f50]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:b107d6f65ef9bbc1d9805e49ab58f394]
+//[UHDL]Content Start [md5:a231200310347077201b658cd63e1a0d]
 module DArb_node_A0_pld_width_64_id_type_src (
 	input         clk       ,
 	input         rst_n     ,
@@ -132,6 +132,10 @@ module DArb_node_A0_pld_width_64_id_type_src (
 	    else bit_set_locked_1 = bit_sel_1;
 	end
 	
+	assign arb_msg_clk = clk;
+	
+	assign arb_msg_rst_n = rst_n;
+	
 	assign arb_msg_update_en = msg_update_en;
 	
 	CmnAgeMtx_width_2 arb_msg (
@@ -142,7 +146,7 @@ module DArb_node_A0_pld_width_64_id_type_src (
 		.age_bits_row_1(arb_msg_age_bits_row_1));
 
 endmodule
-//[UHDL]Content End [md5:b107d6f65ef9bbc1d9805e49ab58f394]
+//[UHDL]Content End [md5:a231200310347077201b658cd63e1a0d]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

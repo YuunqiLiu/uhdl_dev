@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:873fb3311c3fb19c80fe010ccb24e238]
+//[UHDL]Key Start [md5:0e0c06c76b24871536bdf1d0c6b7160a]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 228a4936b8ae47167c53c161b6d9f5b5
+//Content Hash: 9c115748b6bb389474868761bf927b72
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:873fb3311c3fb19c80fe010ccb24e238]
+//[UHDL]Key End [md5:0e0c06c76b24871536bdf1d0c6b7160a]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:228a4936b8ae47167c53c161b6d9f5b5]
+//[UHDL]Content Start [md5:9c115748b6bb389474868761bf927b72]
 module DSlvAxi_node_S1 (
 	input             clk              ,
 	input             rst_n            ,
@@ -75,7 +75,6 @@ module DSlvAxi_node_S1 (
 	input             in0_w_last       ,
 	input      [31:0] in0_w_data       ,
 	input      [3:0]  in0_w_strb       ,
-	input      [31:0] in0_w_user       ,
 	output            in0_b_vld        ,
 	input             in0_b_rdy        ,
 	output     [7:0]  in0_b_id         ,
@@ -167,7 +166,7 @@ module DSlvAxi_node_S1 (
 	
 
 endmodule
-//[UHDL]Content End [md5:228a4936b8ae47167c53c161b6d9f5b5]
+//[UHDL]Content End [md5:9c115748b6bb389474868761bf927b72]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

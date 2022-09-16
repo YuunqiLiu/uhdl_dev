@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:fe1966db2a001ae6fdf932246e483e69]
+//[UHDL]Key Start [md5:cdf701f5d440eca221a1bf47b1ec532e]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 4376e5eac61ba1b635f60d2891155067
+//Content Hash: 071e7758080926a1b14ebcc9abbfdbd1
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:fe1966db2a001ae6fdf932246e483e69]
+//[UHDL]Key End [md5:cdf701f5d440eca221a1bf47b1ec532e]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:4376e5eac61ba1b635f60d2891155067]
+//[UHDL]Content Start [md5:071e7758080926a1b14ebcc9abbfdbd1]
 module DDecDual_node_D0 (
 	input         clk              ,
 	input         rst_n            ,
@@ -343,6 +343,10 @@ module DDecDual_node_D0 (
 	
 	assign wdec_out1_rdy = out1_w_req_dy;
 	
+	assign warb_clk = clk;
+	
+	assign warb_rst_n = rst_n;
+	
 	assign warb_out_rdy = in0_w_ack_rdy;
 	
 	assign warb_in0_vld = out0_w_ack_vld;
@@ -390,6 +394,10 @@ module DDecDual_node_D0 (
 	assign rdec_out0_rdy = out0_r_req_dy;
 	
 	assign rdec_out1_rdy = out1_r_req_dy;
+	
+	assign rarb_clk = clk;
+	
+	assign rarb_rst_n = rst_n;
 	
 	assign rarb_out_rdy = in0_r_ack_rdy;
 	
@@ -527,7 +535,7 @@ module DDecDual_node_D0 (
 		.in1_xn_id(rarb_in1_xn_id));
 
 endmodule
-//[UHDL]Content End [md5:4376e5eac61ba1b635f60d2891155067]
+//[UHDL]Content End [md5:071e7758080926a1b14ebcc9abbfdbd1]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

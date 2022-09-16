@@ -229,52 +229,52 @@
 [INFO] [S1] start local port id mapping generation.
 [INFO] [S1] tgt id mapping:
 [INFO] forward port 0 connect to A0, which has reachable tgt id list [1, 2]
-[INFO] [S1] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x021137C0>: [1, 2]}
+[INFO] [S1] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x037BB610>: [1, 2]}
 [INFO] [S1] src id mapping:
 [INFO] [S1] src id mapping dict: {}
 [INFO] [S2] start local port id mapping generation.
 [INFO] [S2] tgt id mapping:
 [INFO] forward port 0 connect to A0, which has reachable tgt id list [1, 2]
-[INFO] [S2] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x021137C0>: [1, 2]}
+[INFO] [S2] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x037BB610>: [1, 2]}
 [INFO] [S2] src id mapping:
 [INFO] [S2] src id mapping dict: {}
 [INFO] [S1] start local port id mapping generation.
 [INFO] [S1] tgt id mapping:
 [INFO] forward port 0 connect to A0, which has reachable tgt id list [1, 2]
-[INFO] [S1] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x021137C0>: [1, 2]}
+[INFO] [S1] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x037BB610>: [1, 2]}
 [INFO] [S1] src id mapping:
 [INFO] [S1] src id mapping dict: {}
 [INFO] [S2] start local port id mapping generation.
 [INFO] [S2] tgt id mapping:
 [INFO] forward port 0 connect to A0, which has reachable tgt id list [1, 2]
-[INFO] [S2] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x021137C0>: [1, 2]}
+[INFO] [S2] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x037BB610>: [1, 2]}
 [INFO] [S2] src id mapping:
 [INFO] [S2] src id mapping dict: {}
 [INFO] [A0] start local port id mapping generation.
 [INFO] [A0] tgt id mapping:
 [INFO] forward port 0 connect to D0, which has reachable tgt id list [1, 2]
-[INFO] [A0] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x111CD058>: [1, 2]}
+[INFO] [A0] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x120702F8>: [1, 2]}
 [INFO] [A0] src id mapping:
 [INFO] backward port 0 connect to S1, which has reachable src id list [1]
 [INFO] backward port 1 connect to S2, which has reachable src id list [2]
-[INFO] [A0] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.SlaveAxi object at 0x00FE9E08>: [1], <pysrc.uhdl.Demo.lwnoc.TopoNode.SlaveAxi object at 0x021137D8>: [2]}
+[INFO] [A0] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.SlaveAxi object at 0x01BDAF40>: [1], <pysrc.uhdl.Demo.lwnoc.TopoNode.SlaveAxi object at 0x037BB628>: [2]}
 [INFO] [D0] start local port id mapping generation.
 [INFO] [D0] tgt id mapping:
 [INFO] forward port 0 connect to M1, which has reachable tgt id list [1]
 [INFO] forward port 1 connect to M2, which has reachable tgt id list [2]
-[INFO] [D0] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.MasterAxi object at 0x123E3820>: [1], <pysrc.uhdl.Demo.lwnoc.TopoNode.MasterAxi object at 0x1119BC88>: [2]}
+[INFO] [D0] tgt id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.MasterAxi object at 0x10FB4AF0>: [1], <pysrc.uhdl.Demo.lwnoc.TopoNode.MasterAxi object at 0x10FB45E0>: [2]}
 [INFO] [D0] src id mapping:
 [INFO] backward port 0 connect to A0, which has reachable src id list [1, 2]
-[INFO] [D0] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x021137C0>: [1, 2]}
+[INFO] [D0] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual object at 0x037BB610>: [1, 2]}
 [INFO] [M1] start local port id mapping generation.
 [INFO] [M1] tgt id mapping:
 [INFO] [M1] tgt id mapping dict: {}
 [INFO] [M1] src id mapping:
 [INFO] backward port 0 connect to D0, which has reachable src id list [1, 2]
-[INFO] [M1] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x111CD058>: [1, 2]}
+[INFO] [M1] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x120702F8>: [1, 2]}
 [INFO] [M2] start local port id mapping generation.
 [INFO] [M2] tgt id mapping:
 [INFO] [M2] tgt id mapping dict: {}
 [INFO] [M2] src id mapping:
 [INFO] backward port 0 connect to D0, which has reachable src id list [1, 2]
-[INFO] [M2] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x111CD058>: [1, 2]}
+[INFO] [M2] src id mapping dict: {<pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual object at 0x120702F8>: [1, 2]}

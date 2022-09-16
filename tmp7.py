@@ -44,3 +44,5 @@ dec1.create_vinst().generate_verilog()
 dwrap = DWrap(N)
 
 dwrap.generate_verilog(iteration=True)
+dwrap.generate_filelist()
+dwrap.run_lint()

@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:56616a527c4527a6b4ee44462d01233b]
+//[UHDL]Key Start [md5:f4b76a14a678c2e5e59f83a79468c739]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: ae592e51cf1222e6cafc52f45ad6165a
+//Content Hash: 494327b56a8aee8c1d39add239b25198
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:56616a527c4527a6b4ee44462d01233b]
+//[UHDL]Key End [md5:f4b76a14a678c2e5e59f83a79468c739]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:ae592e51cf1222e6cafc52f45ad6165a]
+//[UHDL]Content Start [md5:494327b56a8aee8c1d39add239b25198]
 module DWrap_network_network0 (
 	input         clk              ,
 	input         rst_n            ,
@@ -43,7 +43,6 @@ module DWrap_network_network0 (
 	input         D_S1_in0_w_last  ,
 	input  [31:0] D_S1_in0_w_data  ,
 	input  [3:0]  D_S1_in0_w_strb  ,
-	input  [31:0] D_S1_in0_w_user  ,
 	output        D_S1_in0_b_vld   ,
 	input         D_S1_in0_b_rdy   ,
 	output [7:0]  D_S1_in0_b_id    ,
@@ -69,7 +68,6 @@ module DWrap_network_network0 (
 	input         D_S2_in0_w_last  ,
 	input  [31:0] D_S2_in0_w_data  ,
 	input  [3:0]  D_S2_in0_w_strb  ,
-	input  [31:0] D_S2_in0_w_user  ,
 	output        D_S2_in0_b_vld   ,
 	input         D_S2_in0_b_rdy   ,
 	output [7:0]  D_S2_in0_b_id    ,
@@ -95,7 +93,6 @@ module DWrap_network_network0 (
 	output        D_M1_out0_w_last ,
 	output [31:0] D_M1_out0_w_data ,
 	output [3:0]  D_M1_out0_w_strb ,
-	output [31:0] D_M1_out0_w_user ,
 	input         D_M1_out0_b_vld  ,
 	output        D_M1_out0_b_rdy  ,
 	input  [11:0] D_M1_out0_b_id   ,
@@ -121,7 +118,6 @@ module DWrap_network_network0 (
 	output        D_M2_out0_w_last ,
 	output [31:0] D_M2_out0_w_data ,
 	output [3:0]  D_M2_out0_w_strb ,
-	output [31:0] D_M2_out0_w_user ,
 	input         D_M2_out0_b_vld  ,
 	output        D_M2_out0_b_rdy  ,
 	input  [11:0] D_M2_out0_b_id   ,
@@ -181,7 +177,6 @@ module DWrap_network_network0 (
 	wire        S1_in0_w_last       ;
 	wire [31:0] S1_in0_w_data       ;
 	wire [3:0]  S1_in0_w_strb       ;
-	wire [31:0] S1_in0_w_user       ;
 	wire        S1_in0_b_vld        ;
 	wire        S1_in0_b_rdy        ;
 	wire [7:0]  S1_in0_b_id         ;
@@ -241,7 +236,6 @@ module DWrap_network_network0 (
 	wire        S2_in0_w_last       ;
 	wire [31:0] S2_in0_w_data       ;
 	wire [3:0]  S2_in0_w_strb       ;
-	wire [31:0] S2_in0_w_user       ;
 	wire        S2_in0_b_vld        ;
 	wire        S2_in0_b_rdy        ;
 	wire [7:0]  S2_in0_b_id         ;
@@ -497,7 +491,6 @@ module DWrap_network_network0 (
 	wire        M1_out0_w_last      ;
 	wire [31:0] M1_out0_w_data      ;
 	wire [3:0]  M1_out0_w_strb      ;
-	wire [31:0] M1_out0_w_user      ;
 	wire        M1_out0_b_vld       ;
 	wire        M1_out0_b_rdy       ;
 	wire [11:0] M1_out0_b_id        ;
@@ -557,7 +550,6 @@ module DWrap_network_network0 (
 	wire        M2_out0_w_last      ;
 	wire [31:0] M2_out0_w_data      ;
 	wire [3:0]  M2_out0_w_strb      ;
-	wire [31:0] M2_out0_w_user      ;
 	wire        M2_out0_b_vld       ;
 	wire        M2_out0_b_rdy       ;
 	wire [11:0] M2_out0_b_id        ;
@@ -633,8 +625,6 @@ module DWrap_network_network0 (
 	
 	assign D_M1_out0_w_strb = M1_out0_w_strb;
 	
-	assign D_M1_out0_w_user = M1_out0_w_user;
-	
 	assign D_M1_out0_b_rdy = M1_out0_b_rdy;
 	
 	assign D_M1_out0_ar_vld = M1_out0_ar_vld;
@@ -662,8 +652,6 @@ module DWrap_network_network0 (
 	assign D_M2_out0_w_data = M2_out0_w_data;
 	
 	assign D_M2_out0_w_strb = M2_out0_w_strb;
-	
-	assign D_M2_out0_w_user = M2_out0_w_user;
 	
 	assign D_M2_out0_b_rdy = M2_out0_b_rdy;
 	
@@ -729,8 +717,6 @@ module DWrap_network_network0 (
 	
 	assign S1_in0_w_strb = D_S1_in0_w_strb;
 	
-	assign S1_in0_w_user = D_S1_in0_w_user;
-	
 	assign S1_in0_b_rdy = D_S1_in0_b_rdy;
 	
 	assign S1_in0_ar_vld = D_S1_in0_ar_vld;
@@ -794,8 +780,6 @@ module DWrap_network_network0 (
 	assign S2_in0_w_data = D_S2_in0_w_data;
 	
 	assign S2_in0_w_strb = D_S2_in0_w_strb;
-	
-	assign S2_in0_w_user = D_S2_in0_w_user;
 	
 	assign S2_in0_b_rdy = D_S2_in0_b_rdy;
 	
@@ -1170,7 +1154,6 @@ module DWrap_network_network0 (
 		.in0_w_last(S1_in0_w_last),
 		.in0_w_data(S1_in0_w_data),
 		.in0_w_strb(S1_in0_w_strb),
-		.in0_w_user(S1_in0_w_user),
 		.in0_b_vld(S1_in0_b_vld),
 		.in0_b_rdy(S1_in0_b_rdy),
 		.in0_b_id(S1_in0_b_id),
@@ -1231,7 +1214,6 @@ module DWrap_network_network0 (
 		.in0_w_last(S2_in0_w_last),
 		.in0_w_data(S2_in0_w_data),
 		.in0_w_strb(S2_in0_w_strb),
-		.in0_w_user(S2_in0_w_user),
 		.in0_b_vld(S2_in0_b_vld),
 		.in0_b_rdy(S2_in0_b_rdy),
 		.in0_b_id(S2_in0_b_id),
@@ -1490,7 +1472,6 @@ module DWrap_network_network0 (
 		.out0_w_last(M1_out0_w_last),
 		.out0_w_data(M1_out0_w_data),
 		.out0_w_strb(M1_out0_w_strb),
-		.out0_w_user(M1_out0_w_user),
 		.out0_b_vld(M1_out0_b_vld),
 		.out0_b_rdy(M1_out0_b_rdy),
 		.out0_b_id(M1_out0_b_id),
@@ -1551,7 +1532,6 @@ module DWrap_network_network0 (
 		.out0_w_last(M2_out0_w_last),
 		.out0_w_data(M2_out0_w_data),
 		.out0_w_strb(M2_out0_w_strb),
-		.out0_w_user(M2_out0_w_user),
 		.out0_b_vld(M2_out0_b_vld),
 		.out0_b_rdy(M2_out0_b_rdy),
 		.out0_b_id(M2_out0_b_id),
@@ -1569,7 +1549,7 @@ module DWrap_network_network0 (
 		.out0_r_last(M2_out0_r_last));
 
 endmodule
-//[UHDL]Content End [md5:ae592e51cf1222e6cafc52f45ad6165a]
+//[UHDL]Content End [md5:494327b56a8aee8c1d39add239b25198]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

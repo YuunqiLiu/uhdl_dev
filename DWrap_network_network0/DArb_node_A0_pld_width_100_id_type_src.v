@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:a3f40a30df7baa93d0eb319fd192b631]
+//[UHDL]Key Start [md5:7517d944e78e18579b3d8de034e9f4cc]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 4b89b5d64489040967fb222e62ac05dc
+//Content Hash: a57dc605e6753bc046fbc5bb78a52ded
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:a3f40a30df7baa93d0eb319fd192b631]
+//[UHDL]Key End [md5:7517d944e78e18579b3d8de034e9f4cc]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:bae600ef297a3423865d474e391c5285]
-//Written by UHDL in 2022-09-11 22:34:00
-//[UHDL]Tool Message End [md5:bae600ef297a3423865d474e391c5285]
+//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//Written by UHDL in 2022-09-16 20:32:05
+//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:4b89b5d64489040967fb222e62ac05dc]
+//[UHDL]Content Start [md5:a57dc605e6753bc046fbc5bb78a52ded]
 module DArb_node_A0_pld_width_100_id_type_src (
 	input         clk       ,
 	input         rst_n     ,
@@ -132,6 +132,10 @@ module DArb_node_A0_pld_width_100_id_type_src (
 	    else bit_set_locked_1 = bit_sel_1;
 	end
 	
+	assign arb_msg_clk = clk;
+	
+	assign arb_msg_rst_n = rst_n;
+	
 	assign arb_msg_update_en = msg_update_en;
 	
 	CmnAgeMtx_width_2 arb_msg (
@@ -142,7 +146,7 @@ module DArb_node_A0_pld_width_100_id_type_src (
 		.age_bits_row_1(arb_msg_age_bits_row_1));
 
 endmodule
-//[UHDL]Content End [md5:4b89b5d64489040967fb222e62ac05dc]
+//[UHDL]Content End [md5:a57dc605e6753bc046fbc5bb78a52ded]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
