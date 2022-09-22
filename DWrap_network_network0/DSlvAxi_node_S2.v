@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:77c954b2bad8de00c2c91fd3667c2807]
+//[UHDL]Key Start [md5:5afca5bec2901e6a4bea84f35d985e93]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 0a1b057001e6288c9e1be75911bb7ada
+//Content Hash: 9b6b3959e7a35fc86fefa5da8c25fcef
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:77c954b2bad8de00c2c91fd3667c2807]
+//[UHDL]Key End [md5:5afca5bec2901e6a4bea84f35d985e93]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
-//Written by UHDL in 2022-09-16 20:32:05
-//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//Written by UHDL in 2022-09-22 20:11:02
+//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:0a1b057001e6288c9e1be75911bb7ada]
+//[UHDL]Content Start [md5:9b6b3959e7a35fc86fefa5da8c25fcef]
 module DSlvAxi_node_S2 (
 	input             clk              ,
 	input             rst_n            ,
@@ -134,9 +134,9 @@ module DSlvAxi_node_S2 (
 	
 	assign out0_w_ack_rdy = in0_b_rdy;
 	
-	assign in0_aw_rdy = (out0_w_req_vld && out0_w_req_rdy && wait_aw_reg);
+	assign in0_aw_rdy = (S2_out0_w_req_vld && out0_w_req_rdy && wait_aw_reg);
 	
-	assign in0_w_rdy = (out0_w_req_vld && out0_w_req_rdy);
+	assign in0_w_rdy = (S2_out0_w_req_vld && out0_w_req_rdy);
 	
 	assign in0_b_vld = out0_w_ack_vld;
 	
@@ -159,14 +159,14 @@ module DSlvAxi_node_S2 (
 	always @(posedge clk or negedge rst_n) begin
 	    if(~rst_n) wait_aw_reg <= 1'b0;
 	    else begin
-	        if((in0_w_vld && in0_w_rdy && in0_w_last)) wait_aw_reg <= 1'b1;
+	        if((in0_w_vld && S2_in0_w_rdy && in0_w_last)) wait_aw_reg <= 1'b1;
 	        else if((in0_aw_vld && S2_in0_aw_rdy)) wait_aw_reg <= 1'b0;
 	    end
 	end
 	
 
 endmodule
-//[UHDL]Content End [md5:0a1b057001e6288c9e1be75911bb7ada]
+//[UHDL]Content End [md5:9b6b3959e7a35fc86fefa5da8c25fcef]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

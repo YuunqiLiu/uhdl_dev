@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:0a28c6260d09e76e020bdcd674bc05da]
+//[UHDL]Key Start [md5:4e1971d4e43b811edac418c7827d1e07]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 48e160ede891ec4425806c148f2fba29
+//Content Hash: a909eb39433901239c3808bc68a1c233
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:0a28c6260d09e76e020bdcd674bc05da]
+//[UHDL]Key End [md5:4e1971d4e43b811edac418c7827d1e07]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
-//Written by UHDL in 2022-09-16 20:32:05
-//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//Written by UHDL in 2022-09-22 20:11:02
+//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:48e160ede891ec4425806c148f2fba29]
+//[UHDL]Content Start [md5:a909eb39433901239c3808bc68a1c233]
 module DDec_node_A0_pld_width_35_id_type_src (
 	input         din_vld    ,
 	output        din_rdy    ,
@@ -95,17 +95,17 @@ module DDec_node_A0_pld_width_35_id_type_src (
 	
 	assign id_hit_p0_id2 = (din_src_id == 4'b10);
 	
-	assign sel_bit0 = (id_hit_p0_id1 | id_hit_p0_id2);
+	assign sel_bit0 = (id_hit_p0_id1 ^ id_hit_p0_id2);
 	
 	assign id_hit_p1_id1 = (din_src_id == 4'b1);
 	
 	assign id_hit_p1_id2 = (din_src_id == 4'b10);
 	
-	assign sel_bit1 = (id_hit_p1_id1 | id_hit_p1_id2);
+	assign sel_bit1 = (id_hit_p1_id1 ^ id_hit_p1_id2);
 	
 
 endmodule
-//[UHDL]Content End [md5:48e160ede891ec4425806c148f2fba29]
+//[UHDL]Content End [md5:a909eb39433901239c3808bc68a1c233]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

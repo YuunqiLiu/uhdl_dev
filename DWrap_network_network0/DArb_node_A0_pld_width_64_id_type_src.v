@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:36e20db505f4f5ba7025142a64669f50]
+//[UHDL]Key Start [md5:1f79e821a2cf115639f44987b6474b3b]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: a231200310347077201b658cd63e1a0d
+//Content Hash: 2e34f201cf5805a757a6ea5a956058c8
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:36e20db505f4f5ba7025142a64669f50]
+//[UHDL]Key End [md5:1f79e821a2cf115639f44987b6474b3b]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
-//Written by UHDL in 2022-09-16 20:32:05
-//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//Written by UHDL in 2022-09-22 20:11:02
+//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:a231200310347077201b658cd63e1a0d]
+//[UHDL]Content Start [md5:2e34f201cf5805a757a6ea5a956058c8]
 module DArb_node_A0_pld_width_64_id_type_src (
 	input         clk       ,
 	input         rst_n     ,
@@ -72,29 +72,29 @@ module DArb_node_A0_pld_width_64_id_type_src (
 	wire [1:0] arb_msg_update_en     ;
 	wire [1:0] arb_msg_age_bits_row_0;
 	wire [1:0] arb_msg_age_bits_row_1;
-	assign out_vld = ((in0_vld & (1{bit_set_locked_0})) | (in1_vld & (1{bit_set_locked_1})));
+	assign out_vld = ((in0_vld & ({1{bit_set_locked_0}})) ^ (in1_vld & ({1{bit_set_locked_1}})));
 	
-	assign out_head = ((in0_head & (1{bit_set_locked_0})) | (in1_head & (1{bit_set_locked_1})));
+	assign out_head = ((in0_head & ({1{bit_set_locked_0}})) ^ (in1_head & ({1{bit_set_locked_1}})));
 	
-	assign out_tail = ((in0_ail & (1{bit_set_locked_0})) | (in1_ail & (1{bit_set_locked_1})));
+	assign out_tail = ((in0_ail & ({1{bit_set_locked_0}})) ^ (in1_ail & ({1{bit_set_locked_1}})));
 	
-	assign out_pld = ((in0_pld & (64{bit_set_locked_0})) | (in1_pld & (64{bit_set_locked_1})));
+	assign out_pld = ((in0_pld & ({64{bit_set_locked_0}})) ^ (in1_pld & ({64{bit_set_locked_1}})));
 	
-	assign out_src_id = ((in0_src_id & (4{bit_set_locked_0})) | (in1_src_id & (4{bit_set_locked_1})));
+	assign out_src_id = ((in0_src_id & ({4{bit_set_locked_0}})) ^ (in1_src_id & ({4{bit_set_locked_1}})));
 	
-	assign out_tgt_id = ((in0_gt_id & (4{bit_set_locked_0})) | (in1_gt_id & (4{bit_set_locked_1})));
+	assign out_tgt_id = ((in0_gt_id & ({4{bit_set_locked_0}})) ^ (in1_gt_id & ({4{bit_set_locked_1}})));
 	
-	assign out_txn_id = ((in0_xn_id & (8{bit_set_locked_0})) | (in1_xn_id & (8{bit_set_locked_1})));
+	assign out_txn_id = ((in0_xn_id & ({8{bit_set_locked_0}})) ^ (in1_xn_id & ({8{bit_set_locked_1}})));
 	
 	assign in0_rdy = (bit_set_locked_0 && out_rdy);
 	
 	assign in1_rdy = (bit_set_locked_1 && out_rdy);
 	
-	assign msg_update_en = {(in0_vld && in0_rdy && in0_head), (in1_vld && in1_rdy && in1_head)};
+	assign msg_update_en = {(in0_vld && rarb_in0_rdy && in0_head), (in1_vld && rarb_in1_rdy && in1_head)};
 	
-	assign arb_unlock = (out_vld && out_rdy && out_tail);
+	assign arb_unlock = (rarb_out_vld && out_rdy && rarb_out_tail);
 	
-	assign arb_lock = (out_vld && out_rdy && out_head);
+	assign arb_lock = (rarb_out_vld && out_rdy && rarb_out_head);
 	
 	always @(posedge clk or negedge rst_n) begin
 	    if(~rst_n) arb_lock_reg <= 1'b0;
@@ -104,9 +104,9 @@ module DArb_node_A0_pld_width_64_id_type_src (
 	    end
 	end
 	
-	assign bit_sel_0 = ((age_bits_row_0[0:0] && in0_vld) || (age_bits_row_0[1:1] && in1_vld));
+	assign bit_sel_0 = ((arb_msg_age_bits_row_0[0:0] && in0_vld) || (arb_msg_age_bits_row_0[1:1] && in1_vld));
 	
-	assign bit_sel_1 = ((age_bits_row_1[0:0] && in0_vld) || (age_bits_row_1[1:1] && in1_vld));
+	assign bit_sel_1 = ((arb_msg_age_bits_row_1[0:0] && in0_vld) || (arb_msg_age_bits_row_1[1:1] && in1_vld));
 	
 	always @(posedge clk or negedge rst_n) begin
 	    if(~rst_n) bit_set_reg_0 <= 1'b0;
@@ -146,7 +146,7 @@ module DArb_node_A0_pld_width_64_id_type_src (
 		.age_bits_row_1(arb_msg_age_bits_row_1));
 
 endmodule
-//[UHDL]Content End [md5:a231200310347077201b658cd63e1a0d]
+//[UHDL]Content End [md5:2e34f201cf5805a757a6ea5a956058c8]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

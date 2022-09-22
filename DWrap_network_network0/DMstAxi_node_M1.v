@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:60c7c66b382318a0a3e998ab9c4f43bb]
+//[UHDL]Key Start [md5:f7ca86c3d6ff1bb1e90c08b75a519326]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: d4eddd997820e0c7a39c666e3a20ef11
+//Content Hash: 54d68e52a78c981584861572617a2c63
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:60c7c66b382318a0a3e998ab9c4f43bb]
+//[UHDL]Key End [md5:f7ca86c3d6ff1bb1e90c08b75a519326]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:160f514fdc25265ab9d40c47fcf3b5ce]
-//Written by UHDL in 2022-09-16 20:32:05
-//[UHDL]Tool Message End [md5:160f514fdc25265ab9d40c47fcf3b5ce]
+//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//Written by UHDL in 2022-09-22 20:11:02
+//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:d4eddd997820e0c7a39c666e3a20ef11]
+//[UHDL]Content Start [md5:54d68e52a78c981584861572617a2c63]
 module DMstAxi_node_M1 (
 	input         clk             ,
 	input         rst_n           ,
@@ -92,7 +92,7 @@ module DMstAxi_node_M1 (
 	input         out0_r_last     );
 	assign in0_r_req_rdy = out0_ar_rdy;
 	
-	assign in0_w_req_rdy = (out0_aw_vld && out0_aw_rdy);
+	assign in0_w_req_rdy = (M1_out0_aw_vld && out0_aw_rdy);
 	
 	assign in0_r_ack_vld = out0_r_vld;
 	
@@ -122,7 +122,7 @@ module DMstAxi_node_M1 (
 	
 	assign in0_w_ack_txn_id = out0_b_id[7:0];
 	
-	assign out0_aw_vld = (in0_w_req_rdy && in0_w_req_vld && in0_w_req_head);
+	assign out0_aw_vld = (M1_in0_w_req_rdy && in0_w_req_vld && in0_w_req_head);
 	
 	assign out0_aw_addr = in0_w_req_pld[99:68];
 	
@@ -130,7 +130,7 @@ module DMstAxi_node_M1 (
 	
 	assign out0_aw_user = in0_w_req_pld[67:36];
 	
-	assign out0_w_vld = (in0_w_req_rdy && in0_w_req_vld);
+	assign out0_w_vld = (M1_in0_w_req_rdy && in0_w_req_vld);
 	
 	assign out0_w_last = in0_w_req_tail;
 	
@@ -152,7 +152,7 @@ module DMstAxi_node_M1 (
 	
 
 endmodule
-//[UHDL]Content End [md5:d4eddd997820e0c7a39c666e3a20ef11]
+//[UHDL]Content End [md5:54d68e52a78c981584861572617a2c63]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
