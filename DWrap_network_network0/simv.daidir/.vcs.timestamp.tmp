@@ -1,0 +1,104 @@
+0 
+21
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -fPIC -O -I/tools/software/synopsys/vcs/O-2018.09-SP2/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -rdynamic
+-Mobjects= /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libvirsim.so /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/liberrorinf.so /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libsnpsmalloc.so /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libvfs.so
+-Mout=simv
+-Msaverestoreobj=/tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl
+-Mvcsaceobjs=
+-Mxcflags= -pipe -fPIC -I/tools/software/synopsys/vcs/O-2018.09-SP2/include
+-f filelist.f
+-full64
+-gen_obj
+-picarchive
+/tools/software/synopsys/vcs/O-2018.09-SP2/linux64/bin/vcs1
+56
+sysc_uni_pwd=/home/liuyunqi/uhdl_dev/DWrap_network_network0
+_LMFILES__modshare=/usr/share/modules/modulefiles/vcs/O-2018.09-SP2:1:/usr/share/modules/modulefiles/synopsys_lic:1
+_LMFILES_=/usr/share/modules/modulefiles/synopsys_lic:/usr/share/modules/modulefiles/vcs/O-2018.09-SP2
+XDG_SESSION_TYPE=tty
+XDG_SESSION_ID=245
+XDG_SESSION_CLASS=user
+XDG_RUNTIME_DIR=/run/user/1002
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+VSCODE_IPC_HOOK_CLI=/run/user/1002/vscode-ipc-7cbdb46a-2a24-4cf3-8a6b-a731f02683a0.sock
+VSCODE_GIT_IPC_HANDLE=/run/user/1002/vscode-git-1edd421580.sock
+VSCODE_GIT_ASKPASS_NODE=/home/liuyunqi/.vscode-server/bin/e7f30e38c5a4efafeec8ad52861eb772a9ee4dfb/node
+VSCODE_GIT_ASKPASS_MAIN=/home/liuyunqi/.vscode-server/bin/e7f30e38c5a4efafeec8ad52861eb772a9ee4dfb/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+VMR_MODE_FLAG=64
+VCS_MODE_FLAG=64
+VCS_HOME=/tools/software/synopsys/vcs/O-2018.09-SP2
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH_OVERRIDE=linux
+VCS_ARCH=linux64
+UNAME=/bin/uname
+TOOL_HOME=/tools/software/synopsys/vcs/O-2018.09-SP2/linux64
+TERM_PROGRAM_VERSION=1.71.1
+TERM_PROGRAM=vscode
+SSH_CONNECTION=127.0.0.1 46116 127.0.0.1 22
+SSH_CLIENT=127.0.0.1 46116 22
+SNPS_VCS_INTERNAL_UBUNTU_PRE_LDFLAGS= -no-pie 
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+PATH_modshare=/usr/bin:1:/usr/local/bin:1:/bin:1:/snap/bin:1:/home/liuyunqi/.vscode-server/bin/e7f30e38c5a4efafeec8ad52861eb772a9ee4dfb/bin/remote-cli:1:/sbin:1:/tools/software/synopsys/vcs/O-2018.09-SP2/bin:1:/usr/sbin:1:/usr/games:1:/usr/local/sbin:1:/usr/local/games:1:/home/liuyunqi/.local/bin:1
+OVA_UUM=0
+MOTD_SHOWN=pam
+MODULES_LMPREREQ_modshare=vcs/O-2018.09-SP2&synopsys_lic:1
+MODULES_LMPREREQ=vcs/O-2018.09-SP2&synopsys_lic
+MODULES_LMNOTUASKED_modshare=synopsys_lic:1
+MODULES_LMNOTUASKED=synopsys_lic
+MODULES_LMCONFLICT_modshare=synopsys_lic&synopsys_lic:1:vcs/O-2018.09-SP2&vcs:1
+MODULES_LMCONFLICT=synopsys_lic&synopsys_lic:vcs/O-2018.09-SP2&vcs
+MODULES_CMD=/usr/lib/x86_64-linux-gnu/modulecmd.tcl
+MODULESHOME=/usr/share/modules
+MODULEPATH_modshare=/etc/environment-modules/modules:1:/usr/share/modules/$MODULE_VERSION/modulefiles:1:/usr/share/modules/modulefiles:1:/usr/share/modules/versions:1
+MODULEPATH=/etc/environment-modules/modules:/usr/share/modules/versions:/usr/share/modules/$MODULE_VERSION/modulefiles:/usr/share/modules/modulefiles
+LOADEDMODULES_modshare=vcs/O-2018.09-SP2:1:synopsys_lic:1
+LOADEDMODULES=synopsys_lic:vcs/O-2018.09-SP2
+LESSOPEN=| /usr/bin/lesspipe %s
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LC_ALL=C
+GIT_ASKPASS=/home/liuyunqi/.vscode-server/bin/e7f30e38c5a4efafeec8ad52861eb772a9ee4dfb/extensions/git/dist/askpass.sh
+ENV=/usr/share/modules/init/profile.sh
+DVE_HOME=/tools/software/synopsys/vcs/O-2018.09-SP2
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1002/bus
+COLORTERM=truecolor
+BASH_FUNC_switchml%%=() {  typeset swfound=1;_ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then_ typeset swname='main';_ if [ -e /usr/lib/x86_64-linux-gnu/modulecmd.tcl ]; then_ typeset swfound=0;_ unset MODULES_USE_COMPAT_VERSION;_ fi;_ else_ typeset swname='compatibility';_ if [ -e /usr/lib/x86_64-linux-gnu/modulecmd-compat ]; then_ typeset swfound=0;_ MODULES_USE_COMPAT_VERSION=1;_ export MODULES_USE_COMPAT_VERSION;_ fi;_ fi;_ if [ $swfound -eq 0 ]; then_ echo "Switching to Modules $swname version";_ source /usr/share/modules/init/bash;_ else_ echo "Cannot switch to Modules $swname version, command not found";_ return 1;_ fi_}
+BASH_FUNC_module%%=() {  _module_raw "$@" 2>&1_}
+BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then_ case "$-" in _ *v*x*)_ set +vx;_ _mlshdbg='vx'_ ;;_ *v*)_ set +v;_ _mlshdbg='v'_ ;;_ *x*)_ set +x;_ _mlshdbg='x'_ ;;_ *)_ _mlshdbg=''_ ;;_ esac;_ fi;_ unset _mlre _mlIFS;_ if [ -n "${IFS+x}" ]; then_ _mlIFS=$IFS;_ fi;_ IFS=' ';_ for _mlv in ${MODULES_RUN_QUARANTINE:-};_ do_ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then_ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then_ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";_ fi;_ _mlrv="MODULES_RUNENV_${_mlv}";_ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";_ fi;_ done;_ if [ -n "${_mlre:-}" ]; then_ eval `eval ${_mlre}/usr/bin/tclsh8.6 /usr/lib/x86_64-linux-gnu/modulecmd.tcl bash '"$@"'`;_ else_ eval `/usr/bin/tclsh8.6 /usr/lib/x86_64-linux-gnu/modulecmd.tcl bash "$@"`;_ fi;_ _mlstatus=$?;_ if [ -n "${_mlIFS+x}" ]; then_ IFS=$_mlIFS;_ else_ unset IFS;_ fi;_ unset _mlre _mlv _mlrv _mlIFS;_ if [ -n "${_mlshdbg:-}" ]; then_ set -$_mlshdbg;_ fi;_ unset _mlshdbg;_ return $_mlstatus_}
+BASH_ENV=/usr/share/modules/init/bash
+0
+17
+1663986950 DWrap_network_network0.v
+1663986950 DSlvAxi_node_S1.v
+1663986950 DSlvAxi_node_S2.v
+1663986950 DArbDual_node_A0.v
+1663986950 DArb_node_A0_pld_width_100_id_type_src.v
+1663986950 DDec_node_A0_pld_width_2_id_type_src.v
+1663986950 DArb_node_A0_pld_width_64_id_type_src.v
+1663986950 DDec_node_A0_pld_width_35_id_type_src.v
+1663986950 DDecDual_node_D0.v
+1663986950 DDec_node_D0_pld_width_100_id_type_tgt.v
+1663986951 DArb_node_D0_pld_width_2_id_type_tgt.v
+1663986951 DDec_node_D0_pld_width_64_id_type_tgt.v
+1663986951 DArb_node_D0_pld_width_35_id_type_tgt.v
+1663986951 CmnAgeMtx_width_2.v
+1663986951 DMstAxi_node_M1.v
+1663986951 DMstAxi_node_M2.v
+1663986951 filelist.f
+4
+1551422344 /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libvirsim.so
+1551421792 /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/liberrorinf.so
+1551421768 /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libsnpsmalloc.so
+1551421789 /tools/software/synopsys/vcs/O-2018.09-SP2/linux64/lib/libvfs.so

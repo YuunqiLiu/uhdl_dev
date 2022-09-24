@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:00c861e7b02326c349f6fe1ea0588cf4]
+//[UHDL]Key Start [md5:8f031590dc80a674be8335527555bfae]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: 4101284d088834ad763972c4f8688e8a
+//Content Hash: a5af6dc6a146f263cc060f1e294b75bf
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:00c861e7b02326c349f6fe1ea0588cf4]
+//[UHDL]Key End [md5:8f031590dc80a674be8335527555bfae]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
-//Written by UHDL in 2022-09-22 20:11:02
-//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//[UHDL]Tool Message Start [md5:4b9722b668cd5d94704f7a9f51eb047c]
+//Written by UHDL in 2022-09-24 02:35:51
+//[UHDL]Tool Message End [md5:4b9722b668cd5d94704f7a9f51eb047c]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:4101284d088834ad763972c4f8688e8a]
+//[UHDL]Content Start [md5:a5af6dc6a146f263cc060f1e294b75bf]
 module DArb_node_D0_pld_width_35_id_type_tgt (
 	input         clk       ,
 	input         rst_n     ,
@@ -90,11 +90,11 @@ module DArb_node_D0_pld_width_35_id_type_tgt (
 	
 	assign in1_rdy = (bit_set_locked_1 && out_rdy);
 	
-	assign msg_update_en = {(in0_vld && rarb_in0_rdy && in0_head), (in1_vld && rarb_in1_rdy && in1_head)};
+	assign msg_update_en = {(in0_vld && in0_rdy && in0_head), (in1_vld && in1_rdy && in1_head)};
 	
-	assign arb_unlock = (rarb_out_vld && out_rdy && rarb_out_tail);
+	assign arb_unlock = (out_vld && out_rdy && out_tail);
 	
-	assign arb_lock = (rarb_out_vld && out_rdy && rarb_out_head);
+	assign arb_lock = (out_vld && out_rdy && out_head);
 	
 	always @(posedge clk or negedge rst_n) begin
 	    if(~rst_n) arb_lock_reg <= 1'b0;
@@ -146,7 +146,7 @@ module DArb_node_D0_pld_width_35_id_type_tgt (
 		.age_bits_row_1(arb_msg_age_bits_row_1));
 
 endmodule
-//[UHDL]Content End [md5:4101284d088834ad763972c4f8688e8a]
+//[UHDL]Content End [md5:a5af6dc6a146f263cc060f1e294b75bf]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 

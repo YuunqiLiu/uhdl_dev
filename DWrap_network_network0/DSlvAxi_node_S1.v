@@ -11,25 +11,25 @@
 //==========================================================================================================================
 
 
-//[UHDL]Key Start [md5:55f43f304b8fedca5c4ff87c237e3824]
+//[UHDL]Key Start [md5:187b45316121330791d0040e949a87df]
 //Version Control Hash: 3accddf64b1dd03abeb9b0b3e5a7ba44
-//Content Hash: e73c94b9afed6552067ce5b13a1087ed
+//Content Hash: c687c0fd904dbbb2b936c12de57f1e4e
 //Parameter Hash: d41d8cd98f00b204e9800998ecf8427e
-//[UHDL]Key End [md5:55f43f304b8fedca5c4ff87c237e3824]
+//[UHDL]Key End [md5:187b45316121330791d0040e949a87df]
 
 //[UHDL]Version Control Start [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 //[UHDL]Version Control Version:1.0.1
 //[UHDL]Version Control End [md5:3accddf64b1dd03abeb9b0b3e5a7ba44]
 
-//[UHDL]Tool Message Start [md5:82a2ff4f875eeb9da718503c35fda4b2]
-//Written by UHDL in 2022-09-22 20:11:02
-//[UHDL]Tool Message End [md5:82a2ff4f875eeb9da718503c35fda4b2]
+//[UHDL]Tool Message Start [md5:d73a53d24da237f44d6220c7f3b2dbbf]
+//Written by UHDL in 2022-09-24 02:35:50
+//[UHDL]Tool Message End [md5:d73a53d24da237f44d6220c7f3b2dbbf]
 
 //[UHDL]User Message Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
 //[UHDL]User Message End [md5:d41d8cd98f00b204e9800998ecf8427e]
 
-//[UHDL]Content Start [md5:e73c94b9afed6552067ce5b13a1087ed]
+//[UHDL]Content Start [md5:c687c0fd904dbbb2b936c12de57f1e4e]
 module DSlvAxi_node_S1 (
 	input             clk              ,
 	input             rst_n            ,
@@ -114,7 +114,7 @@ module DSlvAxi_node_S1 (
 	    else out0_w_req_vld = in0_w_vld;
 	end
 	
-	assign out0_w_req_head = (in0_aw_vld && S1_in0_aw_rdy);
+	assign out0_w_req_head = (in0_aw_vld && in0_aw_rdy);
 	
 	assign out0_w_req_tail = in0_w_last;
 	
@@ -134,9 +134,9 @@ module DSlvAxi_node_S1 (
 	
 	assign out0_w_ack_rdy = in0_b_rdy;
 	
-	assign in0_aw_rdy = (S1_out0_w_req_vld && out0_w_req_rdy && wait_aw_reg);
+	assign in0_aw_rdy = (out0_w_req_vld && out0_w_req_rdy && wait_aw_reg);
 	
-	assign in0_w_rdy = (S1_out0_w_req_vld && out0_w_req_rdy);
+	assign in0_w_rdy = (out0_w_req_vld && out0_w_req_rdy);
 	
 	assign in0_b_vld = out0_w_ack_vld;
 	
@@ -159,14 +159,14 @@ module DSlvAxi_node_S1 (
 	always @(posedge clk or negedge rst_n) begin
 	    if(~rst_n) wait_aw_reg <= 1'b0;
 	    else begin
-	        if((in0_w_vld && S1_in0_w_rdy && in0_w_last)) wait_aw_reg <= 1'b1;
-	        else if((in0_aw_vld && S1_in0_aw_rdy)) wait_aw_reg <= 1'b0;
+	        if((in0_w_vld && in0_w_rdy && in0_w_last)) wait_aw_reg <= 1'b1;
+	        else if((in0_aw_vld && in0_aw_rdy)) wait_aw_reg <= 1'b0;
 	    end
 	end
 	
 
 endmodule
-//[UHDL]Content End [md5:e73c94b9afed6552067ce5b13a1087ed]
+//[UHDL]Content End [md5:c687c0fd904dbbb2b936c12de57f1e4e]
 
 //[UHDL]Parameter Start [md5:d41d8cd98f00b204e9800998ecf8427e]
 
