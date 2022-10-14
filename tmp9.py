@@ -14,7 +14,7 @@ class Sub1(Component):
 
         self.out1 += self.in1
         self.out2 += self.in1
-woyeb 
+
 class Sub2(Component):
 
     def __init__(self):
