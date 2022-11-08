@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.TopoNode &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.TopoNode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.TopoNode 源代码</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">.DMst</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DSlv</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DArb</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DDec</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DDecDual</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DArbDual</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.Credit</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node">[文档]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+    <span class="n">dst_num_limit</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">src_num_limit</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">vinst_class</span> <span class="o">=</span> <span class="ne">Exception</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reachable_src_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port_tgt_id_mapping_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port_src_id_mapping_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="Node.get_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.get_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">get_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div>
+
+<div class="viewcode-block" id="Node.create_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.create_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">create_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">src_id_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">src_id_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tgt_id_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">tgt_id_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">txn_id_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">txn_id_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">user_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">user_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">addr_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">addr_width</span>
+
+
+<div class="viewcode-block" id="Node.add_dst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.add_dst">[文档]</a>    <span class="k">def</span> <span class="nf">add_dst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst_num_limit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Node.add_src"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.add_src">[文档]</a>    <span class="k">def</span> <span class="nf">add_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_num_limit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Node.get_src_index"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.get_src_index">[文档]</a>    <span class="k">def</span> <span class="nf">get_src_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">src</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Node.get_tgt_index"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.get_tgt_index">[文档]</a>    <span class="k">def</span> <span class="nf">get_tgt_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="Node.report"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Node.report">[文档]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Node </span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">):&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    reacheable tgt_id_list : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    reacheable src_id_list : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_generate_local_port_id_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] start local port id mapping generation.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] tgt id mapping:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;forward port </span><span class="si">%s</span><span class="s1"> connect to </span><span class="si">%s</span><span class="s1">, which has reachable tgt id list </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">tgt</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tgt</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_port_tgt_id_mapping_dict</span><span class="p">[</span><span class="n">tgt</span><span class="p">]</span> <span class="o">=</span> <span class="n">tgt</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] tgt id mapping dict: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_port_tgt_id_mapping_dict</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] src id mapping:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;backward port </span><span class="si">%s</span><span class="s1"> connect to </span><span class="si">%s</span><span class="s1">, which has reachable src id list </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_port_src_id_mapping_dict</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] src id mapping dict: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_port_src_id_mapping_dict</span><span class="p">))</span></div>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Slave"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Slave">[文档]</a><span class="k">class</span> <span class="nc">Slave</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
+    <span class="n">cls_src_id_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dst_num_limit</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">src_num_limit</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">vinst_class</span> <span class="o">=</span> <span class="n">DSlv</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">Slave</span><span class="o">.</span><span class="n">cls_src_id_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_id</span> <span class="o">=</span> <span class="n">Slave</span><span class="o">.</span><span class="n">cls_src_id_cnt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reachable_src_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">src_id</span><span class="p">]</span>
+        <span class="c1">#self.data_width = 128</span>
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def global_slave_id_list(self):</span>
+    <span class="c1">#     return [self.slave_id]</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inst_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;S</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;S</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span></div>
+
+
+
+
+<div class="viewcode-block" id="SlaveAxi"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.SlaveAxi">[文档]</a><span class="k">class</span> <span class="nc">SlaveAxi</span><span class="p">(</span><span class="n">Slave</span><span class="p">):</span>
+
+    <span class="n">vinst_class</span> <span class="o">=</span> <span class="n">DSlvAxi</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_width</span><span class="o">=</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">=</span> <span class="n">data_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address_range_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">w_req_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_width</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">r_req_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">w_ack_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">r_ack_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Master"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Master">[文档]</a><span class="k">class</span> <span class="nc">Master</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+    <span class="n">cls_tgt_id_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dst_num_limit</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">src_num_limit</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">vinst_class</span> <span class="o">=</span> <span class="n">DMst</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">Master</span><span class="o">.</span><span class="n">cls_tgt_id_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tgt_id</span> <span class="o">=</span> <span class="n">Master</span><span class="o">.</span><span class="n">cls_tgt_id_cnt</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tgt_id</span><span class="p">]</span>
+        <span class="c1">#self.data_width = 128</span>
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inst_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_id</span>
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;M</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;M</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span></div>
+
+
+
+
+<div class="viewcode-block" id="MasterAxi"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.MasterAxi">[文档]</a><span class="k">class</span> <span class="nc">MasterAxi</span><span class="p">(</span><span class="n">Master</span><span class="p">):</span>
+
+    <span class="n">vinst_class</span> <span class="o">=</span> <span class="n">DMstAxi</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_width</span><span class="o">=</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">=</span> <span class="n">data_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address_range_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">w_req_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_width</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">r_req_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">addr_width</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">w_ack_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">r_ack_pld_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Switch"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Switch">[文档]</a><span class="k">class</span> <span class="nc">Switch</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span>
+    <span class="n">switch_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">r_ack_pld_width</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_id</span>
+        <span class="n">Switch</span><span class="o">.</span><span class="n">switch_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_req_pld_width</span> <span class="o">=</span> <span class="n">w_req_pld_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r_req_pld_width</span> <span class="o">=</span> <span class="n">r_req_pld_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_ack_pld_width</span> <span class="o">=</span> <span class="n">w_ack_pld_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r_ack_pld_width</span> <span class="o">=</span> <span class="n">r_ack_pld_width</span>
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;D</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;D</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span></div>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Arbiter"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Arbiter">[文档]</a><span class="k">class</span> <span class="nc">Arbiter</span><span class="p">(</span><span class="n">Switch</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span>
+    <span class="n">arbiter_id</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dst_num_limit</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">src_num_limit</span> <span class="o">=</span> <span class="mi">128</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">r_ack_pld_width</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">r_ack_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arbiter_id</span>
+        <span class="n">Arbiter</span><span class="o">.</span><span class="n">arbiter_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;A</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;A</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+<div class="viewcode-block" id="Arbiter.get_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Arbiter.get_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">get_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div>
+
+<div class="viewcode-block" id="Arbiter.create_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Arbiter.create_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">create_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span> <span class="o">=</span> <span class="n">DArb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div></div>
+
+<div class="viewcode-block" id="ArbiterDual"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual">[文档]</a><span class="k">class</span> <span class="nc">ArbiterDual</span><span class="p">(</span><span class="n">Arbiter</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ArbiterDual.create_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.ArbiterDual.create_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">create_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span> <span class="o">=</span> <span class="n">DArbDual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div></div>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+<div class="viewcode-block" id="Decoder"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Decoder">[文档]</a><span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">Switch</span><span class="p">):</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span>
+    <span class="n">decoder_id</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">src_num_limit</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dst_num_limit</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">pld_width</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">id_width</span> <span class="o">=</span> <span class="mi">8</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">r_ack_pld_width</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">r_ack_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder_id</span>
+        <span class="n">Decoder</span><span class="o">.</span><span class="n">decoder_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;D</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;D</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+<div class="viewcode-block" id="Decoder.create_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Decoder.create_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">create_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span> <span class="o">=</span> <span class="n">DDec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div>
+
+
+<div class="viewcode-block" id="Decoder.report"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Decoder.report">[文档]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    dst_list: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst_list</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="DecoderDual"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual">[文档]</a><span class="k">class</span> <span class="nc">DecoderDual</span><span class="p">(</span><span class="n">Decoder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="DecoderDual.create_vinst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.DecoderDual.create_vinst">[文档]</a>    <span class="k">def</span> <span class="nf">create_vinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span> <span class="o">=</span> <span class="n">DDecDual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vinst</span></div></div>
+
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1">#########################################################</span>
+
+<div class="viewcode-block" id="Adapter"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNode.Adapter">[文档]</a><span class="k">class</span> <span class="nc">Adapter</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+
+    <span class="n">adapter_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapter_id</span>
+        <span class="n">Adapter</span><span class="o">.</span><span class="n">adapter_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">=</span> <span class="mi">128</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Adapt</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Adapt</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">inst_id</span></div>
+
+
+
+
+    <span class="c1"># def create_vinst(self):</span>
+    <span class="c1">#     self.vinst = DDec(self)</span>
+    <span class="c1">#     return self.vinst</span>
+
+  <span class="c1">#class Handshake2Credit(Adapter):</span>
+
+      <span class="c1">#def create_vinst(self):</span>
+          <span class="c1">#self.vinst = DHdsk2Cdt()(self)</span>
+          <span class="c1">#return self.vinst</span>
+
+
+
+              <span class="c1"># def get_vinst(self):</span>
+    <span class="c1">#     return self.vinst</span>
+
+    <span class="c1"># def create_vinst(self):</span>
+    <span class="c1">#     self.vinst = DSlv(self)</span>
+    <span class="c1">#     return self.vinst</span>
+
+    <span class="c1"># def create_vinst(self):</span>
+    <span class="c1">#     self.vinst = DSlvAxi(self)</span>
+    <span class="c1">#     return self.vinst</span>
+
+    <span class="c1"># def get_vinst(self):</span>
+    <span class="c1">#     return self.vinst</span>
+
+    <span class="c1"># def create_vinst(self):</span>
+    <span class="c1">#     self.vinst = DMst(self)</span>
+    <span class="c1">#     return self.vinst</span>
+
+    <span class="c1"># def create_vinst(self):</span>
+    <span class="c1">#     self.vinst = DMstAxi(self)</span>
+    <span class="c1">#     return self.vinst</span>
+
+
+    
+
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_req_pld_width(self):</span>
+    <span class="c1">#     return self.network.r_req_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_req_pld_width(self):</span>
+    <span class="c1">#     return self.network.w_req_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_ack_pld_width(self):</span>
+    <span class="c1">#     return self.network.r_ack_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_ack_pld_width(self):</span>
+    <span class="c1">#     return self.network.w_ack_pld_width</span>
+
+
+
+    
+
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_req_pld_width(self):</span>
+    <span class="c1">#     return self.network.r_req_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_req_pld_width(self):</span>
+    <span class="c1">#     return self.network.w_req_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_ack_pld_width(self):</span>
+    <span class="c1">#     return self.network.r_ack_pld_width</span>
+<span class="c1"># </span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_ack_pld_width(self):</span>
+    <span class="c1">#     return self.network.w_ack_pld_width</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.DDecDual &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.DDecDual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.DDecDual 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># pylint: enable  =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">.DDec</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.DArb</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+
+<div class="viewcode-block" id="DDecDual"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.DDecDual.DDecDual">[文档]</a><span class="k">class</span> <span class="nc">DDecDual</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clk</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_req_pld_width</span><span class="p">)</span><span class="o">.</span><span class="n">copy_reverse</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_req_pld_width</span><span class="p">)</span><span class="o">.</span><span class="n">copy_reverse</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_ack_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_ack_pld_width</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_w_req_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;out</span><span class="si">%s</span><span class="s1">_w_req&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_r_req_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;out</span><span class="si">%s</span><span class="s1">_r_req&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_w_ack_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;out</span><span class="si">%s</span><span class="s1">_w_ack&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_r_ack_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;out</span><span class="si">%s</span><span class="s1">_r_ack&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+
+    <span class="c1">###############################################################################################</span>
+    <span class="c1"># Write</span>
+    <span class="c1">###############################################################################################</span>
+
+        <span class="c1"># Forward Decode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wdec</span> <span class="o">=</span> <span class="n">DDec</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_req_pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdec</span><span class="o">.</span><span class="n">out_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_w_req_list</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wdec</span><span class="o">.</span><span class="n">din</span><span class="p">)</span>
+
+        <span class="c1"># Backward Arbitration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warb</span> <span class="o">=</span> <span class="n">DArb</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_ack_pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warb</span><span class="o">.</span><span class="n">in_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_w_ack_list</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warb</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="p">)</span>
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warb</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clk</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warb</span><span class="o">.</span><span class="n">rst_n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span><span class="p">)</span>
+
+    <span class="c1">###############################################################################################</span>
+    <span class="c1"># Read</span>
+    <span class="c1">###############################################################################################</span>
+
+        <span class="c1"># Forward Decode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdec</span> <span class="o">=</span> <span class="n">DDec</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_req_pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rdec</span><span class="o">.</span><span class="n">out_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_r_req_list</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rdec</span><span class="o">.</span><span class="n">din</span><span class="p">)</span>
+
+        <span class="c1"># Backward Arbitration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rarb</span> <span class="o">=</span> <span class="n">DArb</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_ack_pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rarb</span><span class="o">.</span><span class="n">in_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_r_ack_list</span><span class="p">)</span>
+        <span class="n">SmartAssign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rarb</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="p">)</span>
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rarb</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clk</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rarb</span><span class="o">.</span><span class="n">rst_n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># class DDecDual2(Component):</span>
+<span class="c1"># </span>
+<span class="c1">#     def __init__(self, node):</span>
+<span class="c1">#         super().__init__()</span>
+<span class="c1">#         self.node = node</span>
+<span class="c1"># </span>
+<span class="c1">#         num              = len(self.node.dst_list)</span>
+<span class="c1">#         req_pld_width    = node.network.req_pld_width</span>
+<span class="c1">#         ack_pld_width    = node.network.ack_pld_width</span>
+<span class="c1">#         master_id_width  = node.tgt_id_width</span>
+<span class="c1">#         slave_id_width   = node.src_id_width</span>
+<span class="c1"># </span>
+<span class="c1">#         self.clk = Input(UInt(1))</span>
+<span class="c1">#         self.rst_n = Input(UInt(1))</span>
+<span class="c1"># </span>
+<span class="c1">#     ###############################################################################################</span>
+<span class="c1">#     # Write</span>
+<span class="c1">#     ###############################################################################################</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Output</span>
+<span class="c1">#         self.out_req_vld_list    = [self.create(&#39;out%s_req_vld&#39;     % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.out_req_rdy_list    = [self.create(&#39;out%s_req_rdy&#39;     % i, Input(UInt(1)))                for i in range(num)]</span>
+<span class="c1">#         self.out_req_head_list   = [self.create(&#39;out%s_req_head&#39;    % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.out_req_tail_list   = [self.create(&#39;out%s_req_tail&#39;    % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.out_req_pld_list    = [self.create(&#39;out%s_req_pld&#39;     % i, Output(UInt(req_pld_width)))   for i in range(num)]</span>
+<span class="c1">#         self.out_req_mst_id_list = [self.create(&#39;out%s_req_mst_id&#39;  % i, Output(UInt(master_id_width))) for i in range(num)]</span>
+<span class="c1">#         self.out_req_slv_id_list = [self.create(&#39;out%s_req_slv_id&#39;  % i, Output(UInt(slave_id_width)))  for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_ack_vld_list    = [self.create(&#39;out%s_ack_vld&#39;     % i, Input(UInt(1)))                for i in range(num)]</span>
+<span class="c1">#         self.out_ack_rdy_list    = [self.create(&#39;out%s_ack_rdy&#39;     % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.out_ack_head_list   = [self.create(&#39;out%s_ack_head&#39;    % i, Input(UInt(1)))                for i in range(num)]</span>
+<span class="c1">#         self.out_ack_tail_list   = [self.create(&#39;out%s_ack_tail&#39;    % i, Input(UInt(1)))                for i in range(num)]</span>
+<span class="c1">#         self.out_ack_pld_list    = [self.create(&#39;out%s_ack_pld&#39;     % i, Input(UInt(ack_pld_width)))    for i in range(num)]</span>
+<span class="c1">#         self.out_ack_mst_id_list = [self.create(&#39;out%s_ack_mst_id&#39;  % i, Input(UInt(master_id_width)))  for i in range(num)]</span>
+<span class="c1">#         self.out_ack_slv_id_list = [self.create(&#39;out%s_ack_slv_id&#39;  % i, Input(UInt(slave_id_width)))   for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Input</span>
+<span class="c1">#         self.in0_req_vld     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_rdy     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_req_head    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_tail    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_pld     = Input(UInt(req_pld_width))</span>
+<span class="c1">#         self.in0_req_mst_id  = Input(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_req_slv_id  = Input(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_ack_vld     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_rdy     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_ack_head    = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_tail    = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_pld     = Output(UInt(ack_pld_width))</span>
+<span class="c1">#         self.in0_ack_mst_id  = Output(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_ack_slv_id  = Output(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Forward Decode</span>
+<span class="c1">#         self.dec = DDec(self.node, req_pld_width, id_type=&#39;mst&#39;)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_req_rdy      += self.dec.in0_rdy</span>
+<span class="c1">#         self.dec.in0_vld      += self.in0_req_vld</span>
+<span class="c1">#         self.dec.in0_head     += self.in0_req_head</span>
+<span class="c1">#         self.dec.in0_tail     += self.in0_req_tail</span>
+<span class="c1">#         self.dec.in0_pld      += self.in0_req_pld</span>
+<span class="c1">#         self.dec.in0_mst_id   += self.in0_req_mst_id</span>
+<span class="c1">#         self.dec.in0_slv_id   += self.in0_req_slv_id</span>
+<span class="c1"># </span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             self.out_req_vld_list[i]    += self.dec.vld_list[i]    </span>
+<span class="c1">#             self.out_req_head_list[i]   += self.dec.head_list[i]   </span>
+<span class="c1">#             self.out_req_tail_list[i]   += self.dec.tail_list[i]   </span>
+<span class="c1">#             self.out_req_pld_list[i]    += self.dec.pld_list[i]    </span>
+<span class="c1">#             self.out_req_mst_id_list[i] += self.dec.mst_id_list[i] </span>
+<span class="c1">#             self.out_req_slv_id_list[i] += self.dec.slv_id_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#             self.dec.rdy_list[i]        += self.out_req_rdy_list[i]</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Backward Arbitration</span>
+<span class="c1">#         self.arb = DArb(self.node, ack_pld_width, id_type=&#39;mst&#39;)</span>
+<span class="c1"># </span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             self.arb.vld_list[i]        += self.out_ack_vld_list[i]    </span>
+<span class="c1">#             self.arb.head_list[i]       += self.out_ack_head_list[i]   </span>
+<span class="c1">#             self.arb.tail_list[i]       += self.out_ack_tail_list[i]   </span>
+<span class="c1">#             self.arb.pld_list[i]        += self.out_ack_pld_list[i]    </span>
+<span class="c1">#             self.arb.mst_id_list[i]     += self.out_ack_mst_id_list[i] </span>
+<span class="c1">#             self.arb.slv_id_list[i]     += self.out_ack_slv_id_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#             self.out_ack_rdy_list[i]    += self.arb.rdy_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_ack_vld    += self.arb.out0_vld   </span>
+<span class="c1">#         self.in0_ack_head   += self.arb.out0_head  </span>
+<span class="c1">#         self.in0_ack_tail   += self.arb.out0_tail  </span>
+<span class="c1">#         self.in0_ack_pld    += self.arb.out0_pld   </span>
+<span class="c1">#         self.in0_ack_mst_id += self.arb.out0_mst_id</span>
+<span class="c1">#         self.in0_ack_slv_id += self.arb.out0_slv_id</span>
+<span class="c1"># </span>
+<span class="c1">#         self.arb.out0_rdy   += self.in0_ack_rdy</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#     ###############################################################################################</span>
+<span class="c1">#     # Read</span>
+<span class="c1">#     ###############################################################################################</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Output</span>
+<span class="c1">#         self.out_r_req_vld_list    = [self.create(&#39;out%s_r_req_vld&#39;     % i, Output(UInt(1)))                                   for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_rdy_list    = [self.create(&#39;out%s_r_req_rdy&#39;     % i, Input(UInt(1)))                                    for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_head_list   = [self.create(&#39;out%s_r_req_head&#39;    % i, Output(UInt(1)))                                   for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_tail_list   = [self.create(&#39;out%s_r_req_tail&#39;    % i, Output(UInt(1)))                                   for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_pld_list    = [self.create(&#39;out%s_r_req_pld&#39;     % i, Output(UInt(self.node.network.r_req_pld_width)))   for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_mst_id_list = [self.create(&#39;out%s_r_req_mst_id&#39;  % i, Output(UInt(master_id_width)))                     for i in range(num)]</span>
+<span class="c1">#         self.out_r_req_slv_id_list = [self.create(&#39;out%s_r_req_slv_id&#39;  % i, Output(UInt(slave_id_width)))                      for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_r_ack_vld_list    = [self.create(&#39;out%s_r_ack_vld&#39;     % i, Input(UInt(1)))                                    for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_rdy_list    = [self.create(&#39;out%s_r_ack_rdy&#39;     % i, Output(UInt(1)))                                   for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_head_list   = [self.create(&#39;out%s_r_ack_head&#39;    % i, Input(UInt(1)))                                    for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_tail_list   = [self.create(&#39;out%s_r_ack_tail&#39;    % i, Input(UInt(1)))                                    for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_pld_list    = [self.create(&#39;out%s_r_ack_pld&#39;     % i, Input(UInt(self.node.network.r_ack_pld_width)))    for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_mst_id_list = [self.create(&#39;out%s_r_ack_mst_id&#39;  % i, Input(UInt(master_id_width)))                      for i in range(num)]</span>
+<span class="c1">#         self.out_r_ack_slv_id_list = [self.create(&#39;out%s_r_ack_slv_id&#39;  % i, Input(UInt(slave_id_width)))                       for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Input</span>
+<span class="c1">#         self.in0_r_req_vld     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_rdy     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_head    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_tail    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_pld     = Input(UInt(self.node.network.r_req_pld_width))</span>
+<span class="c1">#         self.in0_r_req_mst_id  = Input(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_r_req_slv_id  = Input(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_ack_vld     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_rdy     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_head    = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_tail    = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_pld     = Output(UInt(self.node.network.r_ack_pld_width))</span>
+<span class="c1">#         self.in0_r_ack_mst_id  = Output(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_r_ack_slv_id  = Output(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Forward Decode</span>
+<span class="c1">#         self.decr = DDec(self.node, self.node.network.r_req_pld_width, id_type=&#39;mst&#39;)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_req_rdy     += self.decr.in0_rdy</span>
+<span class="c1">#         self.decr.in0_vld      += self.in0_r_req_vld</span>
+<span class="c1">#         self.decr.in0_head     += self.in0_r_req_head</span>
+<span class="c1">#         self.decr.in0_tail     += self.in0_r_req_tail</span>
+<span class="c1">#         self.decr.in0_pld      += self.in0_r_req_pld</span>
+<span class="c1">#         self.decr.in0_mst_id   += self.in0_r_req_mst_id</span>
+<span class="c1">#         self.decr.in0_slv_id   += self.in0_r_req_slv_id</span>
+<span class="c1"># </span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             self.out_r_req_vld_list[i]    += self.decr.vld_list[i]    </span>
+<span class="c1">#             self.out_r_req_head_list[i]   += self.decr.head_list[i]   </span>
+<span class="c1">#             self.out_r_req_tail_list[i]   += self.decr.tail_list[i]   </span>
+<span class="c1">#             self.out_r_req_pld_list[i]    += self.decr.pld_list[i]    </span>
+<span class="c1">#             self.out_r_req_mst_id_list[i] += self.decr.mst_id_list[i] </span>
+<span class="c1">#             self.out_r_req_slv_id_list[i] += self.decr.slv_id_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#             self.decr.rdy_list[i]         += self.out_r_req_rdy_list[i]</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Backward Arbitration</span>
+<span class="c1">#         self.arbr = DArb(self.node, self.node.network.r_ack_pld_width, id_type=&#39;mst&#39;)</span>
+<span class="c1"># </span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             self.arbr.vld_list[i]       += self.out_r_ack_vld_list[i]    </span>
+<span class="c1">#             self.arbr.head_list[i]      += self.out_r_ack_head_list[i]   </span>
+<span class="c1">#             self.arbr.tail_list[i]      += self.out_r_ack_tail_list[i]   </span>
+<span class="c1">#             self.arbr.pld_list[i]       += self.out_r_ack_pld_list[i]    </span>
+<span class="c1">#             self.arbr.mst_id_list[i]    += self.out_r_ack_mst_id_list[i] </span>
+<span class="c1">#             self.arbr.slv_id_list[i]    += self.out_r_ack_slv_id_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#             self.out_r_ack_rdy_list[i]  += self.arbr.rdy_list[i] </span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_ack_vld    += self.arbr.out0_vld   </span>
+<span class="c1">#         self.in0_r_ack_head   += self.arbr.out0_head  </span>
+<span class="c1">#         self.in0_r_ack_tail   += self.arbr.out0_tail  </span>
+<span class="c1">#         self.in0_r_ack_pld    += self.arbr.out0_pld   </span>
+<span class="c1">#         self.in0_r_ack_mst_id += self.arbr.out0_mst_id</span>
+<span class="c1">#         self.in0_r_ack_slv_id += self.arbr.out0_slv_id</span>
+<span class="c1"># </span>
+<span class="c1">#         self.arbr.out0_rdy    += self.in0_r_ack_rdy</span>
+
+
+
+
+        <span class="c1">#for dst in self.node.dst_list:</span>
+        <span class="c1">#    print(dst.global_id_list)</span>
+
+        <span class="c1">#id_width = node.id_width</span>
+
+        <span class="c1"># self.vld_list = []</span>
+        <span class="c1"># self.rdy_list = []</span>
+        <span class="c1"># self.head_list = []</span>
+        <span class="c1"># self.tail_list = []</span>
+        <span class="c1"># self.pld_list = []</span>
+        <span class="c1"># self.mst_id_list = []</span>
+        <span class="c1"># self.slv_id_list = []</span>
+
+        <span class="c1"># for i in range(num):</span>
+        <span class="c1">#     self.vld_list.append(self.create(&#39;out%s_vld&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.rdy_list.append(self.create(&#39;out%s_rdy&#39; % i, Input(UInt(1))))</span>
+        <span class="c1">#     self.head_list.append(self.create(&#39;out%s_head&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.tail_list.append(self.create(&#39;out%s_tail&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.pld_list.append(self.create(&#39;out%s_pld&#39; % i, Output(UInt(pld_width))))</span>
+        <span class="c1">#     self.mst_id_list.append(self.create(&#39;out%s_id&#39; % i, Output(UInt(master_id_width))))</span>
+        <span class="c1">#     self.slv_id_list.append(self.create(&#39;out%s_id&#39; % i, Output(UInt(slave_id_width))))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -10,7 +10,7 @@ BUILDDIR      = build
 
 
 default:
-	sphinx-apidoc -o ./source ../../src/dsl -f
+	sphinx-apidoc -o ./source ../../pysrc -f
 
 # Put it first so that "make" without argument is like "make help".
 help:

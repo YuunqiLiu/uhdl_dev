@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.DMst &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.DMst</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.DMst 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># pylint: enable  =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">.BasciHdsk</span> <span class="kn">import</span> <span class="n">BasicHdsk</span><span class="p">,</span> <span class="n">BasicHdskReverse</span>
+<span class="kn">from</span> <span class="nn">.AxiInterface</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="DMst"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.DMst.DMst">[文档]</a><span class="k">class</span> <span class="nc">DMst</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_vld</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_rdy</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_head</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_tail</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_pld</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">src_width</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_id</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">id_width</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_vld</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_rdy</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_head</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_tail</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_pld</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">dst_width</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_id</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">id_width</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_vld</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_vld</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_rdy</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0_rdy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_head</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_tail</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_tail</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_pld</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_pld</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0_id</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_id</span></div>
+
+<div class="viewcode-block" id="DMstAxi"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.DMst.DMstAxi">[文档]</a><span class="k">class</span> <span class="nc">DMstAxi</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="n">master_axi_id_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clk</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span> <span class="o">=</span> <span class="n">BasicHdskReverse</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_req_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span> <span class="o">=</span> <span class="n">BasicHdskReverse</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_req_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">r_ack_pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">w_ack_pld_width</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out0</span> <span class="o">=</span> <span class="n">Axi</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">addr_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">data_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">user_width</span><span class="p">)</span>
+
+
+        <span class="c1">################################################################</span>
+        <span class="c1"># Write Req Channel</span>
+        <span class="c1">################################################################</span>
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">rdy</span>  <span class="p">,</span><span class="n">AndList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_vld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_rdy</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_vld</span>    <span class="p">,</span><span class="n">AndList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">vld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">head</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_id</span>     <span class="p">,</span><span class="n">Combine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">src_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">txn_id</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">w_vld</span>     <span class="p">,</span><span class="n">AndList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">vld</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">w_last</span>    <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span>
+        <span class="n">Unpack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_req</span><span class="o">.</span><span class="n">pld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">aw_user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">w_strb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">w_data</span><span class="p">)</span>
+
+
+        <span class="c1">################################################################</span>
+        <span class="c1"># Write Ack Channel</span>
+        <span class="c1">################################################################</span>
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">vld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">b_vld</span><span class="p">)</span>
+
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">pld</span>      <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">b_resp</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">tgt_id</span>   <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_id</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">src_id</span>   <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">b_id</span><span class="p">[</span><span class="n">master_axi_id_width</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">master_axi_id_width</span> <span class="o">-</span> <span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">])</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">txn_id</span>   <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">b_id</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">head</span>     <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">tail</span>     <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">b_rdy</span>         <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_w_ack</span><span class="o">.</span><span class="n">rdy</span><span class="p">)</span>
+
+        <span class="c1">################################################################</span>
+        <span class="c1"># Read Req Channel</span>
+        <span class="c1">################################################################</span>
+        
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">ar_vld</span>    <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">vld</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">ar_id</span>     <span class="p">,</span><span class="n">Combine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">src_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">txn_id</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">rdy</span>  <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">ar_rdy</span><span class="p">)</span>
+        <span class="n">Unpack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_req</span><span class="o">.</span><span class="n">pld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">ar_user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">ar_addr</span><span class="p">)</span>
+
+
+        <span class="c1">################################################################</span>
+        <span class="c1"># Read Ack Channel</span>
+        <span class="c1">################################################################</span>
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_rdy</span>       <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">rdy</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">vld</span>    <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_vld</span><span class="p">)</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">head</span>   <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">tail</span>   <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">pld</span>    <span class="p">,</span><span class="n">Combine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_resp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_last</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">tgt_id</span> <span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_id</span><span class="p">))</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">src_id</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_id</span><span class="p">[</span><span class="n">master_axi_id_width</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">master_axi_id_width</span> <span class="o">-</span> <span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">])</span>
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in0_r_ack</span><span class="o">.</span><span class="n">txn_id</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out0</span><span class="o">.</span><span class="n">r_id</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+
+
+<span class="c1"># class DMstAxi2(Component):</span>
+<span class="c1"># </span>
+<span class="c1">#     def __init__(self, node):</span>
+<span class="c1">#         super().__init__()</span>
+<span class="c1">#         self.node = node</span>
+<span class="c1">#         slave_id_width = self.node.src_id_width</span>
+<span class="c1">#         master_id_width = self.node.tgt_id_width</span>
+<span class="c1">#         slave_axi_id_width = self.node.txn_id_width</span>
+<span class="c1"># </span>
+<span class="c1">#         master_axi_id_width = self.node.txn_id_width + self.node.src_id_width</span>
+<span class="c1">#         </span>
+<span class="c1"># </span>
+<span class="c1">#         self.clk = Input(UInt(1))</span>
+<span class="c1">#         self.rst_n = Input(UInt(1))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_aw_vld = Output(UInt(1))</span>
+<span class="c1">#         self.out_aw_rdy = Input(UInt(1))</span>
+<span class="c1">#         self.out_aw_addr = Output(UInt(32))</span>
+<span class="c1">#         self.out_aw_id = Output(UInt(master_axi_id_width))</span>
+<span class="c1">#         self.out_aw_user = Output(UInt(self.node.network.user_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_w_vld = Output(UInt(1))</span>
+<span class="c1">#         self.out_w_rdy = Input(UInt(1))</span>
+<span class="c1">#         self.out_w_last = Output(UInt(1))</span>
+<span class="c1">#         self.out_w_strb = Output(UInt(int(self.node.network.data_width/8)))</span>
+<span class="c1">#         self.out_w_data = Output(UInt(self.node.network.data_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_b_vld = Input(UInt(1))</span>
+<span class="c1">#         self.out_b_rdy = Output(UInt(1))</span>
+<span class="c1">#         self.out_b_id = Input(UInt(master_axi_id_width))</span>
+<span class="c1">#         self.out_b_resp = Input(UInt(2))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_req_vld = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_rdy = Output(UInt(1))</span>
+<span class="c1">#         self.in0_req_head = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_tail = Input(UInt(1))</span>
+<span class="c1">#         self.in0_req_pld = Input(UInt(self.node.network.req_pld_width))</span>
+<span class="c1">#         self.in0_req_mst_id = Input(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_req_slv_id = Input(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_ack_vld = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_rdy = Input(UInt(1))</span>
+<span class="c1">#         self.in0_ack_head = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_tail = Output(UInt(1))</span>
+<span class="c1">#         self.in0_ack_pld = Output(UInt(self.node.network.ack_pld_width))</span>
+<span class="c1">#         self.in0_ack_mst_id = Output(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_ack_slv_id = Output(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         # Req Channel</span>
+<span class="c1">#         ################################################################</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_req_rdy += And(self.out_aw_vld, self.out_aw_rdy)</span>
+<span class="c1">#         </span>
+<span class="c1">#         self.out_aw_vld += AndList(self.in0_req_rdy, self.in0_req_vld, self.in0_req_head)</span>
+<span class="c1">#         self.out_w_vld += And(self.in0_req_rdy, self.in0_req_vld)</span>
+<span class="c1">#         </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         self.internal_slave_axi_id = Wire(UInt(slave_axi_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         Unpack(self.in0_req_pld, self.out_aw_addr, self.internal_slave_axi_id, self.out_aw_user, self.out_w_strb, self.out_w_data)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_aw_id += Combine(self.in0_req_slv_id, self.internal_slave_axi_id)</span>
+<span class="c1"># </span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         # Ack Channel</span>
+<span class="c1">#         ################################################################</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_ack_vld += self.out_b_vld</span>
+<span class="c1">#         self.in0_ack_pld += Combine(self.out_b_id[master_axi_id_width-slave_id_width-1:0], self.out_b_resp)</span>
+<span class="c1">#         self.in0_ack_mst_id += UInt(master_id_width, self.node.master_id)</span>
+<span class="c1">#         self.in0_ack_slv_id += self.out_b_id[master_axi_id_width-1:master_axi_id_width-slave_id_width]</span>
+<span class="c1">#         self.in0_ack_head += UInt(1, 1)</span>
+<span class="c1">#         self.in0_ack_tail += UInt(1, 1)</span>
+<span class="c1">#         </span>
+<span class="c1">#         self.out_b_rdy += self.in0_ack_rdy</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># #######################################################################################################################</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_ar_vld  = Output(UInt(1))</span>
+<span class="c1">#         self.out_ar_rdy  = Input(UInt(1))</span>
+<span class="c1">#         self.out_ar_addr = Output(UInt(32))</span>
+<span class="c1">#         self.out_ar_id   = Output(UInt(master_axi_id_width))</span>
+<span class="c1">#         self.out_ar_user = Output(UInt(self.node.network.user_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_r_vld   = Input(UInt(1))</span>
+<span class="c1">#         self.out_r_rdy   = Output(UInt(1))</span>
+<span class="c1">#         self.out_r_id    = Input(UInt(master_axi_id_width))</span>
+<span class="c1">#         self.out_r_data  = Input(UInt(self.node.network.data_width))</span>
+<span class="c1">#         self.out_r_resp  = Input(UInt(2))</span>
+<span class="c1">#         self.out_r_last  = Input(UInt(1))</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_req_vld      = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_rdy      = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_head     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_tail     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_req_pld      = Input(UInt(self.node.network.r_req_pld_width))</span>
+<span class="c1">#         self.in0_r_req_mst_id   = Input(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_r_req_slv_id   = Input(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_ack_vld      = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_rdy      = Input(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_head     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_tail     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_r_ack_pld      = Output(UInt(self.node.network.r_ack_pld_width))</span>
+<span class="c1">#         self.in0_r_ack_mst_id   = Output(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_r_ack_slv_id   = Output(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         # Req Channel</span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         self.internal_slave_r_axi_id = Wire(UInt(slave_axi_id_width))</span>
+<span class="c1">#         Unpack(self.in0_r_req_pld, self.out_ar_user, self.out_ar_addr, self.internal_slave_r_axi_id)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.out_ar_vld += self.in0_r_req_vld</span>
+<span class="c1">#         self.out_ar_id += Combine(self.in0_r_req_slv_id, self.internal_slave_r_axi_id)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.in0_r_req_rdy += self.out_ar_rdy</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         # Ack Channel</span>
+<span class="c1">#         ################################################################</span>
+<span class="c1">#         self.in0_r_ack_vld    += self.out_r_vld</span>
+<span class="c1">#         self.out_r_rdy        += self.in0_r_ack_rdy</span>
+<span class="c1">#         self.in0_r_ack_head   += UInt(1, 1)</span>
+<span class="c1">#         self.in0_r_ack_tail   += UInt(1, 1)</span>
+<span class="c1">#         self.in0_r_ack_pld    += Combine(self.out_r_id[slave_axi_id_width-1:0], self.out_r_resp, self.out_r_data, self.out_r_last)</span>
+<span class="c1">#         self.in0_r_ack_mst_id += UInt(master_id_width, self.node.master_id)</span>
+<span class="c1">#         self.in0_r_ack_slv_id += self.out_r_id[master_axi_id_width-1:master_axi_id_width-slave_id_width]</span>
+
+
+        <span class="c1">#strb_width = int(self.node.network.data_width/8)</span>
+        <span class="c1"># self.out_aw_addr += self.in0_req_pld[self.node.network.data_width + strb_width + self.node.network.user_width + master_axi_id_width + 32 - 1 :self.node.network.data_width + strb_width + self.node.network.user_width + master_axi_id_width]</span>
+        <span class="c1"># self.out_aw_id += self.in0_req_pld[self.node.network.data_width + strb_width + self.node.network.user_width + master_axi_id_width -1 :self.node.network.data_width + strb_width + self.node.network.user_width]</span>
+        <span class="c1"># self.out_aw_user += self.in0_req_pld[self.node.network.data_width + strb_width + self.node.network.user_width -1:self.node.network.data_width + strb_width]</span>
+        <span class="c1"># self.out_w_strb += self.in0_req_pld[self.node.network.data_width + strb_width - 1 :self.node.network.data_width]</span>
+        <span class="c1"># self.out_w_data += self.in0_req_pld[self.node.network.data_width-1:0]</span>
+
+
+                <span class="c1">#self.out_aw_vld_pre_rs = Wire(UInt(1))</span>
+        <span class="c1">#self.out_aw_rdy_pre_rs = Wire(UInt(1))</span>
+
+        <span class="c1">#self.out_w_vld_pre_rs = Wire(UInt(1))</span>
+        <span class="c1">#self.out_w_rdy_pre_rs = Wire(UInt(1))</span>
+
+
+
+
+        <span class="c1"># self.in0_req_pld</span>
+
+        <span class="c1"># self.out_aw_addr = Output(UInt(32))</span>
+        <span class="c1"># self.out_aw_id = Output(UInt(self.master_axi_id_width))</span>
+        <span class="c1"># self.out_aw_user = Output(UInt(self.node.network.user_width))</span>
+
+        <span class="c1"># self.out_w_vld = Output(UInt(1))</span>
+        <span class="c1"># self.out_w_rdy = Input(UInt(1))</span>
+        <span class="c1"># self.out_w_last = Output(UInt(1))</span>
+        <span class="c1"># self.out_w_strb = Output(UInt(1))</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core.Root &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core.Root</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.core.Root 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1">#import traceback</span>
+<span class="c1">#from abc import abstractmethod</span>
+<span class="kn">from</span> <span class="nn">.BasicFunction</span> <span class="kn">import</span> <span class="n">join_name</span>
+
+<span class="kn">from</span> <span class="nn">.</span>  <span class="kn">import</span> <span class="n">Component</span>
+
+<div class="viewcode-block" id="Root"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root">[文档]</a><span class="k">class</span> <span class="nc">Root</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1">#super(Root,self).__init__()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>        <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_father</span>      <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_father_type</span> <span class="o">=</span> <span class="kc">None</span>               <span class="c1">#保留father type为空，子类不修改father_type就会出错</span>
+
+<div class="viewcode-block" id="Root.set_name"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_name">[文档]</a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_name&#39;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Root.set_father"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_father">[文档]</a>    <span class="k">def</span> <span class="nf">set_father</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">father</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_father&#39;</span><span class="p">,</span><span class="n">father</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Root.set_father_type"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_father_type">[文档]</a>    <span class="k">def</span> <span class="nf">set_father_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">T</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; 这个方法设置了本对象应当指向的father对象的类型,默认的father对象的类型为None&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_father_type</span> <span class="o">=</span> <span class="n">T</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">father</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_father</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Root</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">set_father</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">_setattr_hook</span><span class="p">()</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="c1">#print(name,&#39;  &#39;,value)</span>
+            <span class="c1">#print(value.name)</span>
+
+    <span class="k">def</span> <span class="nf">_setattr_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">full_hier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;TOP&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">full_hier</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hier</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">hier</span>
+
+    <span class="c1">#=============================================================================================</span>
+    <span class="c1"># father get</span>
+    <span class="c1">#=============================================================================================</span>
+<div class="viewcode-block" id="Root.father_until_component"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until_component">[文档]</a>    <span class="k">def</span> <span class="nf">father_until_component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">father_until</span><span class="p">(</span><span class="n">Component</span><span class="o">.</span><span class="n">Component</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Root.father_until"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until">[文档]</a>    <span class="k">def</span> <span class="nf">father_until</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="c1">#return self if isinstance(self,T) or self.father is None else self.father.father_until(T)</span>
+        <span class="c1">#print(self,&#39;    &#39;,self.father)</span>
+        
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">father_until</span><span class="p">(</span><span class="n">T</span><span class="p">)</span></div>
+
+        
+        <span class="c1">#if self.father is None:</span>
+        <span class="c1">#    return None</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    return self if isinstance(self, T) else self.father.father_until(T)</span>
+
+        <span class="c1">#if isinstance(self,T) or self.father is None:</span>
+        <span class="c1">#    return self</span>
+        <span class="c1">#elif self.father is None:</span>
+        <span class="c1">#    return self</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    return self.father.father_until(T)</span>
+
+<div class="viewcode-block" id="Root.father_until_not"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until_not">[文档]</a>    <span class="k">def</span> <span class="nf">father_until_not</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">father_until_not</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>    </div>
+
+        <span class="c1"># if not isinstance(self,T):</span>
+        <span class="c1">#     return self</span>
+        <span class="c1"># elif self.father is None:</span>
+        <span class="c1">#     return self</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     return self.father.father_until_not(T)        </span>
+
+    <span class="c1">#=============================================================================================</span>
+    <span class="c1"># name get</span>
+    <span class="c1">#=============================================================================================</span>
+
+    <span class="c1"># def join_name(self,*args):</span>
+    <span class="c1">#     args_without_none = [x for x in args if x is not None]</span>
+    <span class="c1">#     return &#39;_&#39;.join(args_without_none)</span>
+
+<div class="viewcode-block" id="Root.full_name"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.full_name">[文档]</a>    <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">full_name</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+        
+        <span class="c1"># if self.father is None:</span>
+        <span class="c1">#     return &#39;&#39;</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     return join_name(self.father.full_name,self.name)</span>
+
+
+<div class="viewcode-block" id="Root.name_until"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_until">[文档]</a>    <span class="k">def</span> <span class="nf">name_until</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">T</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_until</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="n">join_str</span><span class="p">)</span></div>
+
+        <span class="c1"># if isinstance(T,type):</span>
+        <span class="c1">#     if isinstance(self,T):</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     elif self.father is None:</span>
+        <span class="c1">#         return &#39;&#39;</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_until(T,join_str),self.name,join_str=join_str)</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     if self is T:</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     elif self.father is None:</span>
+        <span class="c1">#         return &#39;&#39;</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_until(T,join_str),self.name,join_str=join_str)</span>
+
+<div class="viewcode-block" id="Root.name_before"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_before">[文档]</a>    <span class="k">def</span> <span class="nf">name_before</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="n">T</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="p">,</span><span class="n">T</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_before</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="n">join_str</span><span class="p">)</span></div>
+
+
+        <span class="c1"># if isinstance(T,type):</span>
+        <span class="c1">#     if isinstance(self.father,T) or self.father is None:</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     if self.father is T or self.father is None:</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)</span>
+
+
+        <span class="c1"># if isinstance(T,type):</span>
+        <span class="c1">#     if isinstance(self.father,T):</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     elif self.father is None:</span>
+        <span class="c1">#         return &#39;&#39;</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     if self.father is T:</span>
+        <span class="c1">#         return self.name</span>
+        <span class="c1">#     elif self.father is None:</span>
+        <span class="c1">#         return &#39;&#39;</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return join_name(self.father.name_before(T,join_str),self.name,join_str=join_str)</span>
+
+
+<div class="viewcode-block" id="Root.name_until_not"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_until_not">[文档]</a>    <span class="k">def</span> <span class="nf">name_until_not</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_until_not</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="n">join_str</span><span class="p">)</span></div>
+        <span class="c1">#elif self.father is None:</span>
+        <span class="c1">#    return self.name</span>
+
+<div class="viewcode-block" id="Root.name_before_not"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_before_not">[文档]</a>    <span class="k">def</span> <span class="nf">name_before_not</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">father</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">father</span><span class="o">.</span><span class="n">name_before_not</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">join_str</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">join_str</span><span class="o">=</span><span class="n">join_str</span><span class="p">)</span></div>
+        <span class="c1">#elif not isinstance(self.father,T):</span>
+        <span class="c1">#    return self.name</span>
+
+<div class="viewcode-block" id="Root.ancestors_core"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.ancestors_core">[文档]</a>    <span class="k">def</span> <span class="nf">ancestors_core</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_father</span><span class="o">.</span><span class="n">ancestors_core</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_father</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Root.ancestors"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.ancestors">[文档]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">until</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">before</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">has_self</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">full_ancestors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ancestors_core</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">until</span>  <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">before</span> <span class="o">!=</span> <span class="kc">None</span>                        <span class="p">:</span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">until</span>  <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">until</span>  <span class="ow">not</span> <span class="ow">in</span> <span class="n">full_ancestors</span> <span class="ow">and</span> <span class="n">error</span><span class="p">:</span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">before</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">before</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">full_ancestors</span> <span class="ow">and</span> <span class="n">error</span><span class="p">:</span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        
+        <span class="k">if</span>   <span class="n">until</span>  <span class="ow">in</span> <span class="n">full_ancestors</span><span class="p">:</span>  <span class="n">result</span> <span class="o">=</span> <span class="n">full_ancestors</span><span class="p">[:</span><span class="n">full_ancestors</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">until</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">before</span> <span class="ow">in</span> <span class="n">full_ancestors</span><span class="p">:</span>  <span class="n">result</span> <span class="o">=</span> <span class="n">full_ancestors</span><span class="p">[:</span><span class="n">full_ancestors</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">before</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>                           <span class="n">result</span> <span class="o">=</span> <span class="n">full_ancestors</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_self</span><span class="p">:</span>    <span class="n">result</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+        <span class="c1">#if until != None:</span>
+            <span class="c1">#elif not error:</span>
+            <span class="c1">#    result = full_ancestors</span>
+        <span class="c1">#elif before != None:</span>
+            <span class="c1">#elif not error:</span>
+            <span class="c1">#    result = full_ancestors</span>
+            <span class="c1">#elif until not in full_ancestors:</span>
+            <span class="c1">#    raise Exception()</span>
+            <span class="c1">#elif before not in full_ancestors:</span>
+            <span class="c1">#    raise Exception()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#print(self.father)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_name</span><span class="p">(),</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
+
+
+
+<div class="viewcode-block" id="Root.get_circuit"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.get_circuit">[文档]</a>    <span class="k">def</span> <span class="nf">get_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Root.set_circuit"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_circuit">[文档]</a>    <span class="k">def</span> <span class="nf">set_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">set_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span></div>
+
+    <span class="n">get</span> <span class="o">=</span> <span class="n">get_circuit</span>
+    <span class="nb">set</span> <span class="o">=</span> <span class="n">set_circuit</span>
+
+    <span class="n">Get</span> <span class="o">=</span> <span class="n">get_circuit</span>
+    <span class="n">Set</span> <span class="o">=</span> <span class="n">set_circuit</span></div>
+
+
+<div class="viewcode-block" id="get_circuit"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.get_circuit">[文档]</a><span class="k">def</span> <span class="nf">get_circuit</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span><span class="n">Root</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Root</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="set_circuit"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Root.set_circuit">[文档]</a><span class="k">def</span> <span class="nf">set_circuit</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span><span class="n">Root</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="n">Root</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Root</span><span class="p">:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span></div>
+
+
+
+    <span class="c1"># @father.setter</span>
+    <span class="c1"># def father(self,father):</span>
+    <span class="c1">#     &#39;&#39;&#39; 获取father的时候应当检查father的类型是否正确，对于Root而言</span>
+    <span class="c1">#         father必须是Root类型&#39;&#39;&#39;</span>
+    <span class="c1">#     if not isinstance(father,self._father_type):</span>
+    <span class="c1">#         raise TypeError(&quot;The father set is a %s,expect a %s.&quot; %(type(father),self._father_type))</span>
+    <span class="c1">#     self._father = father</span>
+    <span class="c1"># @abstractmethod</span>
+
+
+
+
+
+
+        <span class="c1">#print(self.father,self.name)</span>
+        <span class="c1">#print(T)</span>
+        <span class="c1">#print(isinstance(self,T))</span>
+
+        
+    <span class="c1">#def __get_name(self):</span>
+    <span class="c1">#    pass</span>
+
+    <span class="c1">#def __not_define(self):</span>
+    <span class="c1">#    raise Exception</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def full_name(self):</span>
+    <span class="c1">#    return self.name_join(self.get_father_full_name(),self.name)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+    <span class="c1">#def name_join(self,*args):</span>
+    <span class="c1">#    return &#39;_&#39;.join(args)</span>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.test.test_Expression &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.test.test_Expression</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.test.test_Expression 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c1"># pylint: disable =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">..uhdl</span>            <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># pylint: enable  =unused-wildcard-import</span>
+
+<span class="kn">from</span> <span class="nn">..uhdl.core</span>             <span class="kn">import</span>  <span class="n">ErrAttrMismatch</span>         <span class="p">,</span>\
+                                <span class="n">ErrExpInTypeWrong</span>       <span class="p">,</span>\
+                                <span class="n">ErrListExpNeedMultiOp</span>   <span class="p">,</span>\
+                                <span class="n">ErrCutExpSliceInvalid</span>   <span class="p">,</span>\
+                                <span class="n">ErrAttrTypeWrong</span>        <span class="p">,</span>\
+                                <span class="n">ErrBitsValOverflow</span>      <span class="p">,</span>\
+                                <span class="n">ErrBitsInvalidStr</span>
+
+<span class="kn">from</span> <span class="nn">..uhdl.core</span>             <span class="kn">import</span> <span class="n">InternalTool</span> <span class="k">as</span> <span class="n">IT</span>
+
+
+<div class="viewcode-block" id="TestValue"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue">[文档]</a><span class="k">class</span> <span class="nc">TestValue</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestValue.WaitException"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.WaitException">[文档]</a>    <span class="k">def</span> <span class="nf">WaitException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exp_type</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="k">try</span>                  <span class="p">:</span> <span class="n">op</span><span class="p">(</span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">exp_type</span>  <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Expect a </span><span class="si">%s</span><span class="s1">.But get </span><span class="se">\n\t</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">IT</span><span class="o">.</span><span class="n">GetClsNameFromCls</span><span class="p">(</span><span class="n">exp_type</span><span class="p">),</span><span class="n">IT</span><span class="o">.</span><span class="n">GetClsNameFromObj</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">else</span>                 <span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Expect a </span><span class="si">%s</span><span class="s1">.But not get any Exception.&#39;</span> <span class="o">%</span> <span class="n">IT</span><span class="o">.</span><span class="n">GetClsNameFromCls</span><span class="p">(</span><span class="n">exp_type</span><span class="p">)</span> <span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrExpInTypeWrongTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrExpInTypeWrongTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrExpInTypeWrongTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrExpInTypeWrong</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrAttrMismatchTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrAttrMismatchTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrAttrMismatchTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrAttrMismatch</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrListExpNeedMultiOpTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrListExpNeedMultiOpTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrListExpNeedMultiOpTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrListExpNeedMultiOp</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrCutExpSliceInvalidTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrCutExpSliceInvalidTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="n">hbound</span><span class="p">,</span><span class="n">lbound</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrCutExpSliceInvalid</span><span class="p">,</span><span class="n">Cut</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="n">hbound</span><span class="p">,</span><span class="n">lbound</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrAttrTypeWrongTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrAttrTypeWrongTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrAttrTypeWrongTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrAttrTypeWrong</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrBitsOverflowTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrBitsOverflowTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrBitsOverflowTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrBitsValOverflow</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestValue.ErrBitsInvalidStrTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestValue.ErrBitsInvalidStrTest">[文档]</a>    <span class="k">def</span> <span class="nf">ErrBitsInvalidStrTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WaitException</span><span class="p">(</span><span class="n">ErrBitsInvalidStr</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="o">*</span><span class="n">param</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="TestVariable"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable">[文档]</a><span class="k">class</span> <span class="nc">TestVariable</span><span class="p">(</span><span class="n">TestValue</span><span class="p">):</span>
+    
+
+<div class="viewcode-block" id="TestVariable.SingleVarTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.SingleVarTest">[文档]</a>    <span class="k">def</span> <span class="nf">SingleVarTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrAttrTypeWrongTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="TestVariable.BitsTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.BitsTest">[文档]</a>    <span class="k">def</span> <span class="nf">BitsTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="n">op</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">op</span><span class="p">(</span><span class="s2">&quot;1&#39;b1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrBitsOverflowTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrBitsOverflowTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="s2">&quot;1&#39;b10&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrBitsInvalidStrTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="s1">&#39;asdf&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Reg"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Reg">[文档]</a>    <span class="k">def</span> <span class="nf">test_Reg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Wire"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Wire">[文档]</a>    <span class="k">def</span> <span class="nf">test_Wire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_UInt"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_UInt">[文档]</a>    <span class="k">def</span> <span class="nf">test_UInt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BitsTest</span><span class="p">(</span><span class="n">UInt</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_SInt"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_SInt">[文档]</a>    <span class="k">def</span> <span class="nf">test_SInt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BitsTest</span><span class="p">(</span><span class="n">SInt</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Parameter"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Parameter">[文档]</a>    <span class="k">def</span> <span class="nf">test_Parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Input"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Input">[文档]</a>    <span class="k">def</span> <span class="nf">test_Input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SingleVarTest</span><span class="p">(</span><span class="n">Input</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Output"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Output">[文档]</a>    <span class="k">def</span> <span class="nf">test_Output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SingleVarTest</span><span class="p">(</span><span class="n">Output</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestVariable.test_Inout"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestVariable.test_Inout">[文档]</a>    <span class="k">def</span> <span class="nf">test_Inout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SingleVarTest</span><span class="p">(</span><span class="n">Inout</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="TestExpression"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression">[文档]</a><span class="k">class</span> <span class="nc">TestExpression</span><span class="p">(</span><span class="n">TestValue</span><span class="p">):</span>
+
+
+
+<div class="viewcode-block" id="TestExpression.ListExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.ListExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">ListExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrExpInTypeWrongTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="TestExpression.MultiListExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.MultiListExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">MultiListExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrListExpNeedMultiOpTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.MultiSameListExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.MultiSameListExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">MultiSameListExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiListExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrAttrMismatchTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrAttrMismatchTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">SInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.OneOpExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.OneOpExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">OneOpExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrExpInTypeWrongTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.OneOpU1ExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.OneOpU1ExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">OneOpU1ExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.OneOpBitExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.OneOpBitExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">OneOpBitExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.TwoOpExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.TwoOpExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">TwoOpExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrExpInTypeWrongTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.TwoSameOpExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.TwoSameOpExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">TwoSameOpExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoOpExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrAttrMismatchTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrAttrMismatchTest</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">SInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.TwoSameOpU1ExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.TwoSameOpU1ExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.TwoSameOpBitExpressionTest"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.TwoSameOpBitExpressionTest">[文档]</a>    <span class="k">def</span> <span class="nf">TwoSameOpBitExpressionTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpExpressionTest</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">attribute</span><span class="p">,</span><span class="n">UInt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Or"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Or">[文档]</a>    <span class="k">def</span> <span class="nf">test_Or</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">Or</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_And"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_And">[文档]</a>    <span class="k">def</span> <span class="nf">test_And</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">And</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Greater"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Greater">[文档]</a>    <span class="k">def</span> <span class="nf">test_Greater</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">Greater</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Less"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Less">[文档]</a>    <span class="k">def</span> <span class="nf">test_Less</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">Less</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_GreaterEqual"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_GreaterEqual">[文档]</a>    <span class="k">def</span> <span class="nf">test_GreaterEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">GreaterEqual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_LessEqual"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_LessEqual">[文档]</a>    <span class="k">def</span> <span class="nf">test_LessEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">LessEqual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_NotEqual"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_NotEqual">[文档]</a>    <span class="k">def</span> <span class="nf">test_NotEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">NotEqual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Equal"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Equal">[文档]</a>    <span class="k">def</span> <span class="nf">test_Equal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpU1ExpressionTest</span><span class="p">(</span><span class="n">Equal</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitXnor"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitXnor">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitXnor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpBitExpressionTest</span><span class="p">(</span><span class="n">BitXnor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitXor"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitXor">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitXor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpBitExpressionTest</span><span class="p">(</span><span class="n">BitXor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitAnd"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitAnd">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitAnd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpBitExpressionTest</span><span class="p">(</span><span class="n">BitAnd</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitOr"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitOr">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitOr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TwoSameOpBitExpressionTest</span><span class="p">(</span><span class="n">BitOr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_SelfXnor"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_SelfXnor">[文档]</a>    <span class="k">def</span> <span class="nf">test_SelfXnor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpU1ExpressionTest</span><span class="p">(</span><span class="n">SelfXnor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_SelfXor"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_SelfXor">[文档]</a>    <span class="k">def</span> <span class="nf">test_SelfXor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpU1ExpressionTest</span><span class="p">(</span><span class="n">SelfXor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_SelfAnd"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_SelfAnd">[文档]</a>    <span class="k">def</span> <span class="nf">test_SelfAnd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpU1ExpressionTest</span><span class="p">(</span><span class="n">SelfAnd</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_SelfOr"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_SelfOr">[文档]</a>    <span class="k">def</span> <span class="nf">test_SelfOr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpU1ExpressionTest</span><span class="p">(</span><span class="n">SelfOr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Not"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Not">[文档]</a>    <span class="k">def</span> <span class="nf">test_Not</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpU1ExpressionTest</span><span class="p">(</span><span class="n">Not</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Inverse"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Inverse">[文档]</a>    <span class="k">def</span> <span class="nf">test_Inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">OneOpBitExpressionTest</span><span class="p">(</span><span class="n">Inverse</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitXnorList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitXnorList">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitXnorList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiSameListExpressionTest</span><span class="p">(</span><span class="n">BitXnorList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitXorList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitXorList">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitXorList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiSameListExpressionTest</span><span class="p">(</span><span class="n">BitXorList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitOrList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitOrList">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitOrList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiSameListExpressionTest</span><span class="p">(</span><span class="n">BitOrList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_BitAndList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_BitAndList">[文档]</a>    <span class="k">def</span> <span class="nf">test_BitAndList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiSameListExpressionTest</span><span class="p">(</span><span class="n">BitAndList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_OrList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_OrList">[文档]</a>    <span class="k">def</span> <span class="nf">test_OrList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiListExpressionTest</span><span class="p">(</span><span class="n">OrList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_AndList"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_AndList">[文档]</a>    <span class="k">def</span> <span class="nf">test_AndList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MultiListExpressionTest</span><span class="p">(</span><span class="n">AndList</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Combine"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Combine">[文档]</a>    <span class="k">def</span> <span class="nf">test_Combine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ListExpressionTest</span><span class="p">(</span><span class="n">Combine</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestExpression.test_Cut"><a class="viewcode-back" href="../../../pysrc.test.html#pysrc.test.test_Expression.TestExpression.test_Cut">[文档]</a>    <span class="k">def</span> <span class="nf">test_Cut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="mf">1.3</span><span class="p">,</span><span class="mf">2.3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="mi">1</span><span class="p">,</span><span class="mf">2.3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ErrCutExpSliceInvalidTest</span><span class="p">(</span><span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

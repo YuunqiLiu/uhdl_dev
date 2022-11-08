@@ -1,7 +1,7 @@
-dsl
-===
+pysrc
+=====
 
 .. toctree::
    :maxdepth: 4
 
-   dsl
+   pysrc

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.TopoNetwork &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.TopoNetwork</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.TopoNetwork 源代码</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">.TopoEdge</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.TopoNode</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">.TopoLogging</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="Network"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNetwork.Network">[文档]</a><span class="k">class</span> <span class="nc">Network</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;network0&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">init_logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">txn_id_width</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_id_width</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tgt_id_width</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr_width</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_width</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_width</span> <span class="o">=</span> <span class="mi">256</span>
+        <span class="c1">#self.ack_user_width = 0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">switch_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1">#self.global_master_id_list = []</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_global_master_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_global_slave_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_global_address_range_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_global_address_range_id_map_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sam_addrrange_tgtid_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_src_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dst_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_global_id_address_range_map_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_global_address_range_id_map_dict</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_global_address_range_id_map_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<div class="viewcode-block" id="Network.add"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNetwork.Network.add">[文档]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Slave</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Master</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Switch</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">switch_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;add </span><span class="si">%s</span><span class="s1"> to network.&#39;</span> <span class="o">%</span> <span class="n">node</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.link"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.TopoNetwork.Network.link">[文档]</a>    <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;link </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">))</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">add_dst</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+        <span class="n">dst</span><span class="o">.</span><span class="n">add_src</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span></div>
+
+
+
+
+
+    <span class="k">def</span> <span class="nf">_src_id_propagation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;src id propagation start.&#39;</span><span class="p">)</span>
+        <span class="n">G_reverse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># get all edge&#39;s src-dst pair with BFM search.</span>
+        <span class="n">edge_pair_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G_reverse</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">tgt</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">src</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Find a backward path: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">path</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+                        <span class="n">edge_pair_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        
+
+        <span class="c1"># foward propagate src id from edge src to dst</span>
+        <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">edge_pair_list</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> reachable src id update from </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> src id list: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dst</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> src id list before update: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">))</span>
+
+            <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span> <span class="o">+=</span> <span class="n">dst</span><span class="o">.</span><span class="n">reachable_src_id_list</span>
+            <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> src id list after update: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_src_id_list</span><span class="p">))</span>
+
+        <span class="c1">#max_useful_slave_id_width = len(format(max(self._global_master_id_list), &quot;b&quot;))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;src id propagation finish.&#39;</span><span class="p">)</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_tgt_id_propagation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;tgt id propagation start.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># get all edge&#39;s src-dst pair with BFM search.</span>
+        <span class="n">edge_pair_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">tgt</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Find a forward path: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">path</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+                        <span class="n">edge_pair_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="c1"># back propagate master id from edge dst to src</span>
+        <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">edge_pair_list</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> reachable tgt id update from </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> tgt id list: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dst</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> tgt id list before update: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">))</span>
+
+            <span class="n">src</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span> <span class="o">+=</span> <span class="n">dst</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span>
+            <span class="n">src</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> tgt id list after update: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">))</span>
+
+        <span class="c1"># set layer for GUI plan.</span>
+        <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">edge_pair_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">src</span><span class="o">.</span><span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">src</span><span class="o">.</span><span class="n">layer</span> <span class="o">&gt;</span> <span class="n">dst</span><span class="o">.</span><span class="n">layer</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">src</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="n">dst</span><span class="o">.</span><span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;tgt id propagation finish.&#39;</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_generate_system_address_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;System address mapping generation start.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sam_addrrange_tgtid_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">addr_range</span> <span class="ow">in</span> <span class="n">tgt</span><span class="o">.</span><span class="n">address_range_list</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Find a mapping: </span><span class="si">%s</span><span class="s1"> -&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">addr_range</span><span class="p">,</span> <span class="n">tgt</span><span class="o">.</span><span class="n">tgt_id</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sam_addrrange_tgtid_dict</span><span class="p">[</span><span class="n">addr_range</span><span class="p">]</span> <span class="o">=</span> <span class="n">tgt</span><span class="o">.</span><span class="n">tgt_id</span>
+
+    <span class="k">def</span> <span class="nf">_generate_local_port_id_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_list</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">_generate_local_port_id_mapping</span><span class="p">()</span>
+
+
+
+
+
+    <span class="k">def</span> <span class="nf">_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_list</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">_show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">:</span>
+            <span class="n">src</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">layer</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">multipartite_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">subset_key</span><span class="o">=</span><span class="s2">&quot;layer&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">color</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">]</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">src_list</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">node_shape</span> <span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">color</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">]</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tgt_list</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">node_shape</span> <span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">color</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_list</span><span class="p">]</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">switch_list</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">node_shape</span> <span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2400</span><span class="p">,</span> <span class="n">node_shape</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_req_pld_width(self):</span>
+    <span class="c1">#     return self.data_width + int(self.data_width/8) + self.user_width + self.addr_width</span>
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_req_pld_width(self):</span>
+    <span class="c1">#     return self.user_width + self.addr_width</span>
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def w_ack_pld_width(self):</span>
+    <span class="c1">#     return 2</span>
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def r_ack_pld_width(self):</span>
+    <span class="c1">#     return 2 + self.data_width + 1</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">src1</span> <span class="o">=</span> <span class="n">Slave</span><span class="p">()</span>
+    <span class="n">src2</span> <span class="o">=</span> <span class="n">Slave</span><span class="p">()</span>
+    <span class="n">src3</span> <span class="o">=</span> <span class="n">Slave</span><span class="p">()</span>
+
+    <span class="n">arb1</span> <span class="o">=</span> <span class="n">Arbiter</span><span class="p">()</span>
+    <span class="n">arb2</span> <span class="o">=</span> <span class="n">Arbiter</span><span class="p">()</span>
+    <span class="n">arb3</span> <span class="o">=</span> <span class="n">Arbiter</span><span class="p">()</span>
+
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span>
+    <span class="n">dec2</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span>
+
+    <span class="n">tgt1</span> <span class="o">=</span> <span class="n">Master</span><span class="p">()</span>
+    <span class="n">tgt1</span><span class="o">.</span><span class="n">global_master_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">tgt2</span> <span class="o">=</span> <span class="n">Master</span><span class="p">()</span>
+    <span class="n">tgt2</span><span class="o">.</span><span class="n">global_master_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">tgt3</span> <span class="o">=</span> <span class="n">Master</span><span class="p">()</span>
+    <span class="n">tgt3</span><span class="o">.</span><span class="n">global_master_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Network</span><span class="p">()</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">src1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">src2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">src3</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">arb1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dec1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dec2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tgt1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tgt2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">arb2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">arb3</span><span class="p">)</span>
+
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">src2</span><span class="p">,</span> <span class="n">arb1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">src3</span><span class="p">,</span> <span class="n">arb1</span><span class="p">)</span>
+
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">arb1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">src1</span><span class="p">,</span> <span class="n">dec2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">dec1</span><span class="p">,</span> <span class="n">arb2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">dec1</span><span class="p">,</span> <span class="n">arb3</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">dec2</span><span class="p">,</span> <span class="n">arb2</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">dec2</span><span class="p">,</span> <span class="n">arb3</span><span class="p">)</span>
+
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">arb2</span><span class="p">,</span> <span class="n">tgt1</span><span class="p">)</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">arb3</span><span class="p">,</span> <span class="n">tgt2</span><span class="p">)</span>
+
+
+    <span class="n">N</span><span class="o">.</span><span class="n">_id_propagation</span><span class="p">()</span>
+    <span class="n">N</span><span class="o">.</span><span class="n">_show</span><span class="p">()</span>
+
+
+
+    <span class="c1"># def _address_to_global_id_mapping(self):</span>
+    <span class="c1">#     global_address_range_list = []</span>
+    <span class="c1">#     for tgt in self.tgt_list:</span>
+    <span class="c1">#         if isinstance(tgt, MasterAxi):</span>
+    <span class="c1">#             raise Exception()</span>
+    <span class="c1">#         for tgt_addr_range in tgt.address_range_list:</span>
+    <span class="c1">#             if tgt_addr_range in global_address_range_list:</span>
+    <span class="c1">#                 raise Exception()</span>
+    <span class="c1">#             global_address_range_list.append(tgt_addr_range)</span>
+
+
+
+        <span class="c1">#print(global_address_range_list)</span>
+
+        <span class="c1">#self.slave_id_width     = 4</span>
+        <span class="c1">#self.master_id_width    = 4</span>
+        <span class="c1">#self.slave_axi_id_width = 8</span>
+        <span class="c1">#self.master_axi_id_width = self.slave_id_width + self.slave_axi_id_width</span>
+        <span class="c1">#self.axi_id_width = 8</span>
+        <span class="c1">#self.id_width = 8</span>
+
+
+
+            <span class="c1"># update master id list to network global list</span>
+           <span class="c1"># self._global_master_id_list += dst.global_master_id_list</span>
+           <span class="c1"># self._global_master_id_list = list(set(self._global_master_id_list))</span>
+
+        <span class="c1"># set master id width</span>
+        <span class="c1">#max_id = max(self._global_master_id_list)</span>
+        <span class="c1">#max_id_width = len(format(max_id, &quot;b&quot;))</span>
+
+        <span class="c1">#print(max_id_width)</span>
+
+        <span class="c1">#for node in self.G.nodes():</span>
+        <span class="c1">#    node.id_width = max_id_width</span>
+
+
+<span class="c1">#     def _collect_init_global_master_id_list(self):</span>
+<span class="c1">#         for tgt in self.tgt_list:</span>
+<span class="c1">#             for tgt_global_id in tgt.global_master_id_list:</span>
+<span class="c1">#                 if tgt_global_id in self._global_master_id_list:</span>
+<span class="c1">#                     raise Exception()</span>
+<span class="c1">#                 self._global_master_id_list.append(tgt_global_id)</span>
+
+
+<span class="c1">#     def _collect_global_address_range_dict(self):</span>
+<span class="c1">#         for tgt in self.tgt_list:</span>
+<span class="c1">#             #if isinstance(tgt, MasterAxi):</span>
+<span class="c1">#             #    raise Exception()</span>
+<span class="c1">#             for tgt_addr_range in tgt.address_range_list:</span>
+<span class="c1">#                 if tgt_addr_range in self._global_address_range_dict.keys():</span>
+<span class="c1">#                     raise Exception()</span>
+<span class="c1">#                 self._global_address_range_dict[tgt_addr_range] = tgt</span>
+
+
+<span class="c1">#     def _map_address_range_to_global_id(self):</span>
+<span class="c1">#         max_id = max(self._global_master_id_list+[0])</span>
+<span class="c1">#         max_id_count = max_id + 1</span>
+<span class="c1">#         for addr_range, tgt in self._global_address_range_dict.items():</span>
+<span class="c1">#             self._global_address_range_id_map_dict[addr_range] = max_id_count</span>
+<span class="c1">#             tgt.global_master_id_list.append(max_id_count)</span>
+<span class="c1">#             max_id_count += 1</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl package &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pysrc.uhdl package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-pysrc.uhdl">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pysrc.uhdl.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysrc-uhdl-package">
+<h1>pysrc.uhdl package<a class="headerlink" href="#pysrc-uhdl-package" title="此标题的永久链接"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="此标题的永久链接"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pysrc.uhdl.Demo.html">pysrc.uhdl.Demo package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.Demo.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html">pysrc.uhdl.Demo.Crossbar package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html#module-pysrc.uhdl.Demo.Crossbar.Crossbar">pysrc.uhdl.Demo.Crossbar.Crossbar module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html#module-pysrc.uhdl.Demo.Crossbar.Mux_1toM">pysrc.uhdl.Demo.Crossbar.Mux_1toM module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html#module-pysrc.uhdl.Demo.Crossbar.Mux_Nto1">pysrc.uhdl.Demo.Crossbar.Mux_Nto1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.Crossbar.html#module-pysrc.uhdl.Demo.Crossbar">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html">pysrc.uhdl.Demo.lwnoc package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.AxiInterface">pysrc.uhdl.Demo.lwnoc.AxiInterface module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.AxiParam">pysrc.uhdl.Demo.lwnoc.AxiParam module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.BasciHdsk">pysrc.uhdl.Demo.lwnoc.BasciHdsk module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.CmnArb">pysrc.uhdl.Demo.lwnoc.CmnArb module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.Credit">pysrc.uhdl.Demo.lwnoc.Credit module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DArb">pysrc.uhdl.Demo.lwnoc.DArb module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DArbDual">pysrc.uhdl.Demo.lwnoc.DArbDual module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DDec">pysrc.uhdl.Demo.lwnoc.DDec module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DDecDual">pysrc.uhdl.Demo.lwnoc.DDecDual module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DMst">pysrc.uhdl.Demo.lwnoc.DMst module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DSlv">pysrc.uhdl.Demo.lwnoc.DSlv module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.DWrap">pysrc.uhdl.Demo.lwnoc.DWrap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.TopoEdge">pysrc.uhdl.Demo.lwnoc.TopoEdge module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.TopoLogging">pysrc.uhdl.Demo.lwnoc.TopoLogging module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.TopoNetwork">pysrc.uhdl.Demo.lwnoc.TopoNetwork module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc.TopoNode">pysrc.uhdl.Demo.lwnoc.TopoNode module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.lwnoc.html#module-pysrc.uhdl.Demo.lwnoc">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.Demo.html#module-pysrc.uhdl.Demo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pysrc.uhdl.core.html">pysrc.uhdl.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.BasicFunction">pysrc.uhdl.core.BasicFunction module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BasicFunction.join_name"><code class="docutils literal notranslate"><span class="pre">join_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Component">pysrc.uhdl.core.Component module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component"><code class="docutils literal notranslate"><span class="pre">Component</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.PARAM"><code class="docutils literal notranslate"><span class="pre">Component.PARAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.compile"><code class="docutils literal notranslate"><span class="pre">Component.compile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.component_list"><code class="docutils literal notranslate"><span class="pre">Component.component_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create"><code class="docutils literal notranslate"><span class="pre">Component.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create_all_vfile"><code class="docutils literal notranslate"><span class="pre">Component.create_all_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create_this_vfile"><code class="docutils literal notranslate"><span class="pre">Component.create_this_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.expose_io"><code class="docutils literal notranslate"><span class="pre">Component.expose_io()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.generate_filelist"><code class="docutils literal notranslate"><span class="pre">Component.generate_filelist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.generate_verilog"><code class="docutils literal notranslate"><span class="pre">Component.generate_verilog()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_circuit_list"><code class="docutils literal notranslate"><span class="pre">Component.get_circuit_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_component_list"><code class="docutils literal notranslate"><span class="pre">Component.get_component_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_io"><code class="docutils literal notranslate"><span class="pre">Component.get_io()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_io_list"><code class="docutils literal notranslate"><span class="pre">Component.get_io_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.input_list"><code class="docutils literal notranslate"><span class="pre">Component.input_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.inter_sig_list"><code class="docutils literal notranslate"><span class="pre">Component.inter_sig_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.io_list"><code class="docutils literal notranslate"><span class="pre">Component.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.lint"><code class="docutils literal notranslate"><span class="pre">Component.lint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.lvalue_list"><code class="docutils literal notranslate"><span class="pre">Component.lvalue_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.module_name"><code class="docutils literal notranslate"><span class="pre">Component.module_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.outer_lvalue_list"><code class="docutils literal notranslate"><span class="pre">Component.outer_lvalue_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.output_list"><code class="docutils literal notranslate"><span class="pre">Component.output_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.output_path"><code class="docutils literal notranslate"><span class="pre">Component.output_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.param_list"><code class="docutils literal notranslate"><span class="pre">Component.param_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.reg_list"><code class="docutils literal notranslate"><span class="pre">Component.reg_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_lint"><code class="docutils literal notranslate"><span class="pre">Component.run_lint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_struct_check"><code class="docutils literal notranslate"><span class="pre">Component.run_struct_check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_undriven_check"><code class="docutils literal notranslate"><span class="pre">Component.run_undriven_check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.var_list"><code class="docutils literal notranslate"><span class="pre">Component.var_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.verilog_def"><code class="docutils literal notranslate"><span class="pre">Component.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.verilog_inst"><code class="docutils literal notranslate"><span class="pre">Component.verilog_inst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.verilog_outer_def_as_list"><code class="docutils literal notranslate"><span class="pre">Component.verilog_outer_def_as_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.vfile"><code class="docutils literal notranslate"><span class="pre">Component.vfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.wire_list"><code class="docutils literal notranslate"><span class="pre">Component.wire_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.PARAM_CONTAINER"><code class="docutils literal notranslate"><span class="pre">PARAM_CONTAINER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.isComponent"><code class="docutils literal notranslate"><span class="pre">isComponent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Config">pysrc.uhdl.core.Config module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.UHDLConfig"><code class="docutils literal notranslate"><span class="pre">UHDLConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.UHDLConfig.set_all_priority"><code class="docutils literal notranslate"><span class="pre">UHDLConfig.set_all_priority()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.UHDLConfig.update_by"><code class="docutils literal notranslate"><span class="pre">UHDLConfig.update_by()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.rich_ext_set_all_priority"><code class="docutils literal notranslate"><span class="pre">rich_ext_set_all_priority()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.rich_ext_setattr"><code class="docutils literal notranslate"><span class="pre">rich_ext_setattr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.uhdl_cfg_descriptor"><code class="docutils literal notranslate"><span class="pre">uhdl_cfg_descriptor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.uhdl_cfg_descriptor.priority"><code class="docutils literal notranslate"><span class="pre">uhdl_cfg_descriptor.priority</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.uhdl_cfg_descriptor.value"><code class="docutils literal notranslate"><span class="pre">uhdl_cfg_descriptor.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.uhdl_cfg_rich_bool"><code class="docutils literal notranslate"><span class="pre">uhdl_cfg_rich_bool</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Config.uhdl_cfg_rich_bool.set_all_priority"><code class="docutils literal notranslate"><span class="pre">uhdl_cfg_rich_bool.set_all_priority()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.ConnectionProperty">pysrc.uhdl.core.ConnectionProperty module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ConnectionProperty.ConnectionProperty"><code class="docutils literal notranslate"><span class="pre">ConnectionProperty</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ConnectionProperty.ConnectionProperty.AssignPair"><code class="docutils literal notranslate"><span class="pre">ConnectionProperty.AssignPair()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ConnectionProperty.ConnectionProperty.Assignable"><code class="docutils literal notranslate"><span class="pre">ConnectionProperty.Assignable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ConnectionProperty.UnitConnectionProperty"><code class="docutils literal notranslate"><span class="pre">UnitConnectionProperty</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ConnectionProperty.UnitConnectionProperty.Assignable"><code class="docutils literal notranslate"><span class="pre">UnitConnectionProperty.Assignable()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.CustConfig">pysrc.uhdl.core.CustConfig module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.CustConfig.ComponentConfig"><code class="docutils literal notranslate"><span class="pre">ComponentConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Exception">pysrc.uhdl.core.Exception module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAssignTypeWrong"><code class="docutils literal notranslate"><span class="pre">ErrAssignTypeWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAttrMismatch"><code class="docutils literal notranslate"><span class="pre">ErrAttrMismatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAttrTypeWrong"><code class="docutils literal notranslate"><span class="pre">ErrAttrTypeWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrBitsInvalidStr"><code class="docutils literal notranslate"><span class="pre">ErrBitsInvalidStr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrBitsValOverflow"><code class="docutils literal notranslate"><span class="pre">ErrBitsValOverflow</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrConstInWrong"><code class="docutils literal notranslate"><span class="pre">ErrConstInWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrCutExpSliceInvalid"><code class="docutils literal notranslate"><span class="pre">ErrCutExpSliceInvalid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrExpInTypeWrong"><code class="docutils literal notranslate"><span class="pre">ErrExpInTypeWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrListExpNeedMultiOp"><code class="docutils literal notranslate"><span class="pre">ErrListExpNeedMultiOp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrLogicSigAttrWrong"><code class="docutils literal notranslate"><span class="pre">ErrLogicSigAttrWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrNeedBool"><code class="docutils literal notranslate"><span class="pre">ErrNeedBool</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrUHDL"><code class="docutils literal notranslate"><span class="pre">ErrUHDL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrUHDLStr"><code class="docutils literal notranslate"><span class="pre">ErrUHDLStr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrVarCmpWrong"><code class="docutils literal notranslate"><span class="pre">ErrVarCmpWrong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrWhenExpOperateWrong"><code class="docutils literal notranslate"><span class="pre">ErrWhenExpOperateWrong</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.ExtensibleFileObject">pysrc.uhdl.core.ExtensibleFileObject module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.CONTENT"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.CONTENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.PARAMETER"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.PARAMETER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.get_MD5"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.get_MD5()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.line_prefix"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.line_prefix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.load"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.save"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.write()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write_tool_message"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.write_tool_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write_version"><code class="docutils literal notranslate"><span class="pre">ExtensibleFileObject.write_version()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock"><code class="docutils literal notranslate"><span class="pre">HashableTextBlock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.clean"><code class="docutils literal notranslate"><span class="pre">HashableTextBlock.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.get_hash"><code class="docutils literal notranslate"><span class="pre">HashableTextBlock.get_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.wrap_text"><code class="docutils literal notranslate"><span class="pre">HashableTextBlock.wrap_text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.write"><code class="docutils literal notranslate"><span class="pre">HashableTextBlock.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ParamBox"><code class="docutils literal notranslate"><span class="pre">ParamBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.VersionControlBlock"><code class="docutils literal notranslate"><span class="pre">VersionControlBlock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.VersionControlBlock.wrap_text"><code class="docutils literal notranslate"><span class="pre">VersionControlBlock.wrap_text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.FileProcess">pysrc.uhdl.core.FileProcess module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.FileProcess.check_vfile"><code class="docutils literal notranslate"><span class="pre">check_vfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.FileProcess.create_file"><code class="docutils literal notranslate"><span class="pre">create_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.FileProcess.file_list_dedup"><code class="docutils literal notranslate"><span class="pre">file_list_dedup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.FileProcess.refresh_directory"><code class="docutils literal notranslate"><span class="pre">refresh_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.FileProcess.relpath"><code class="docutils literal notranslate"><span class="pre">relpath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Function">pysrc.uhdl.core.Function module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.Assign"><code class="docutils literal notranslate"><span class="pre">Assign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.BitMask"><code class="docutils literal notranslate"><span class="pre">BitMask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.LCA"><code class="docutils literal notranslate"><span class="pre">LCA()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.Linkable"><code class="docutils literal notranslate"><span class="pre">Linkable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.SmartAssign"><code class="docutils literal notranslate"><span class="pre">SmartAssign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Function.Unpack"><code class="docutils literal notranslate"><span class="pre">Unpack()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.InternalTool">pysrc.uhdl.core.InternalTool module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.InternalTool.GetClsNameFromCls"><code class="docutils literal notranslate"><span class="pre">GetClsNameFromCls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.InternalTool.GetClsNameFromObj"><code class="docutils literal notranslate"><span class="pre">GetClsNameFromObj()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Lint">pysrc.uhdl.core.Lint module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Lint.Lint"><code class="docutils literal notranslate"><span class="pre">Lint</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Lint.Lint.info"><code class="docutils literal notranslate"><span class="pre">Lint.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Lint.Lint.unconnect"><code class="docutils literal notranslate"><span class="pre">Lint.unconnect()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Operator">pysrc.uhdl.core.Operator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Add"><code class="docutils literal notranslate"><span class="pre">Add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.And"><code class="docutils literal notranslate"><span class="pre">And()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.AndList"><code class="docutils literal notranslate"><span class="pre">AndList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitAnd"><code class="docutils literal notranslate"><span class="pre">BitAnd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitAndList"><code class="docutils literal notranslate"><span class="pre">BitAndList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitOr"><code class="docutils literal notranslate"><span class="pre">BitOr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitOrList"><code class="docutils literal notranslate"><span class="pre">BitOrList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXnor"><code class="docutils literal notranslate"><span class="pre">BitXnor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXnorList"><code class="docutils literal notranslate"><span class="pre">BitXnorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXor"><code class="docutils literal notranslate"><span class="pre">BitXor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXorList"><code class="docutils literal notranslate"><span class="pre">BitXorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Case"><code class="docutils literal notranslate"><span class="pre">Case()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Combine"><code class="docutils literal notranslate"><span class="pre">Combine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Cut"><code class="docutils literal notranslate"><span class="pre">Cut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.EmptyWhen"><code class="docutils literal notranslate"><span class="pre">EmptyWhen()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Equal"><code class="docutils literal notranslate"><span class="pre">Equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Fanout"><code class="docutils literal notranslate"><span class="pre">Fanout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Greater"><code class="docutils literal notranslate"><span class="pre">Greater()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.GreaterEqual"><code class="docutils literal notranslate"><span class="pre">GreaterEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Inverse"><code class="docutils literal notranslate"><span class="pre">Inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Less"><code class="docutils literal notranslate"><span class="pre">Less()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.LessEqual"><code class="docutils literal notranslate"><span class="pre">LessEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Mul"><code class="docutils literal notranslate"><span class="pre">Mul()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Not"><code class="docutils literal notranslate"><span class="pre">Not()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.NotEqual"><code class="docutils literal notranslate"><span class="pre">NotEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Or"><code class="docutils literal notranslate"><span class="pre">Or()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.OrList"><code class="docutils literal notranslate"><span class="pre">OrList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfAnd"><code class="docutils literal notranslate"><span class="pre">SelfAnd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfOr"><code class="docutils literal notranslate"><span class="pre">SelfOr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfXnor"><code class="docutils literal notranslate"><span class="pre">SelfXnor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfXor"><code class="docutils literal notranslate"><span class="pre">SelfXor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Sub"><code class="docutils literal notranslate"><span class="pre">Sub()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.When"><code class="docutils literal notranslate"><span class="pre">When()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Root">pysrc.uhdl.core.Root module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root"><code class="docutils literal notranslate"><span class="pre">Root</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.Get"><code class="docutils literal notranslate"><span class="pre">Root.Get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.Set"><code class="docutils literal notranslate"><span class="pre">Root.Set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.ancestors"><code class="docutils literal notranslate"><span class="pre">Root.ancestors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.ancestors_core"><code class="docutils literal notranslate"><span class="pre">Root.ancestors_core()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father"><code class="docutils literal notranslate"><span class="pre">Root.father</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until"><code class="docutils literal notranslate"><span class="pre">Root.father_until()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until_component"><code class="docutils literal notranslate"><span class="pre">Root.father_until_component()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.father_until_not"><code class="docutils literal notranslate"><span class="pre">Root.father_until_not()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.full_hier"><code class="docutils literal notranslate"><span class="pre">Root.full_hier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.full_name"><code class="docutils literal notranslate"><span class="pre">Root.full_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.get"><code class="docutils literal notranslate"><span class="pre">Root.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.get_circuit"><code class="docutils literal notranslate"><span class="pre">Root.get_circuit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.hier"><code class="docutils literal notranslate"><span class="pre">Root.hier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name"><code class="docutils literal notranslate"><span class="pre">Root.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_before"><code class="docutils literal notranslate"><span class="pre">Root.name_before()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_before_not"><code class="docutils literal notranslate"><span class="pre">Root.name_before_not()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_until"><code class="docutils literal notranslate"><span class="pre">Root.name_until()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.name_until_not"><code class="docutils literal notranslate"><span class="pre">Root.name_until_not()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set"><code class="docutils literal notranslate"><span class="pre">Root.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_circuit"><code class="docutils literal notranslate"><span class="pre">Root.set_circuit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_father"><code class="docutils literal notranslate"><span class="pre">Root.set_father()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_father_type"><code class="docutils literal notranslate"><span class="pre">Root.set_father_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.Root.set_name"><code class="docutils literal notranslate"><span class="pre">Root.set_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.get_circuit"><code class="docutils literal notranslate"><span class="pre">get_circuit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Root.set_circuit"><code class="docutils literal notranslate"><span class="pre">set_circuit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.VComponent">pysrc.uhdl.core.VComponent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VComponent"><code class="docutils literal notranslate"><span class="pre">VComponent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VComponent.create_this_vfile"><code class="docutils literal notranslate"><span class="pre">VComponent.create_this_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VComponent.module_name"><code class="docutils literal notranslate"><span class="pre">VComponent.module_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VComponent.parse_ast"><code class="docutils literal notranslate"><span class="pre">VComponent.parse_ast()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VParameter"><code class="docutils literal notranslate"><span class="pre">VParameter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VParameter.create_uhdl_param"><code class="docutils literal notranslate"><span class="pre">VParameter.create_uhdl_param()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VPort"><code class="docutils literal notranslate"><span class="pre">VPort</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.VPort.create_uhdl_port"><code class="docutils literal notranslate"><span class="pre">VPort.create_uhdl_port()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.VFile">pysrc.uhdl.core.VFile module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VFile.VFile"><code class="docutils literal notranslate"><span class="pre">VFile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VFile.VFile.file_list"><code class="docutils literal notranslate"><span class="pre">VFile.file_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VFile.VFile.path"><code class="docutils literal notranslate"><span class="pre">VFile.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VFile.VFile.top_path"><code class="docutils literal notranslate"><span class="pre">VFile.top_path</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core.Variable">pysrc.uhdl.core.Variable module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AddExpression"><code class="docutils literal notranslate"><span class="pre">AddExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AddExpression.attribute"><code class="docutils literal notranslate"><span class="pre">AddExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AddExpression.op_name"><code class="docutils literal notranslate"><span class="pre">AddExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AddExpression.op_str"><code class="docutils literal notranslate"><span class="pre">AddExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AlwaysCombExpression"><code class="docutils literal notranslate"><span class="pre">AlwaysCombExpression</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndExpression"><code class="docutils literal notranslate"><span class="pre">AndExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndExpression.op_name"><code class="docutils literal notranslate"><span class="pre">AndExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndExpression.op_str"><code class="docutils literal notranslate"><span class="pre">AndExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndListExpression"><code class="docutils literal notranslate"><span class="pre">AndListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">AndListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AndListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">AndListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AnyConstant"><code class="docutils literal notranslate"><span class="pre">AnyConstant</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AnyConstant.attribute"><code class="docutils literal notranslate"><span class="pre">AnyConstant.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AnyConstant.lstring"><code class="docutils literal notranslate"><span class="pre">AnyConstant.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AnyConstant.rstring"><code class="docutils literal notranslate"><span class="pre">AnyConstant.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.AnyConstant.template"><code class="docutils literal notranslate"><span class="pre">AnyConstant.template</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndExpression"><code class="docutils literal notranslate"><span class="pre">BitAndExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitAndExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitAndExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndListExpression"><code class="docutils literal notranslate"><span class="pre">BitAndListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitAndListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitAndListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitAndListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrExpression"><code class="docutils literal notranslate"><span class="pre">BitOrExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitOrExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitOrExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrListExpression"><code class="docutils literal notranslate"><span class="pre">BitOrListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitOrListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitOrListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitOrListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorExpression"><code class="docutils literal notranslate"><span class="pre">BitXnorExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitXnorExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitXnorExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorListExpression"><code class="docutils literal notranslate"><span class="pre">BitXnorListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitXnorListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXnorListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitXnorListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorExpression"><code class="docutils literal notranslate"><span class="pre">BitXorExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitXorExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitXorExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorListExpression"><code class="docutils literal notranslate"><span class="pre">BitXorListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">BitXorListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.BitXorListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">BitXorListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits"><code class="docutils literal notranslate"><span class="pre">Bits</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.attribute"><code class="docutils literal notranslate"><span class="pre">Bits.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.lstring"><code class="docutils literal notranslate"><span class="pre">Bits.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.rstring"><code class="docutils literal notranslate"><span class="pre">Bits.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.template"><code class="docutils literal notranslate"><span class="pre">Bits.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.value"><code class="docutils literal notranslate"><span class="pre">Bits.value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bits.width"><code class="docutils literal notranslate"><span class="pre">Bits.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle"><code class="docutils literal notranslate"><span class="pre">Bundle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.as_list"><code class="docutils literal notranslate"><span class="pre">Bundle.as_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.attribute"><code class="docutils literal notranslate"><span class="pre">Bundle.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.connect"><code class="docutils literal notranslate"><span class="pre">Bundle.connect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.exclude"><code class="docutils literal notranslate"><span class="pre">Bundle.exclude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.io_list"><code class="docutils literal notranslate"><span class="pre">Bundle.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.name_before_component"><code class="docutils literal notranslate"><span class="pre">Bundle.name_before_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.name_until_component"><code class="docutils literal notranslate"><span class="pre">Bundle.name_until_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.reverse"><code class="docutils literal notranslate"><span class="pre">Bundle.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Bundle.rvalue"><code class="docutils literal notranslate"><span class="pre">Bundle.rvalue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CaseExpression"><code class="docutils literal notranslate"><span class="pre">CaseExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CaseExpression.attribute"><code class="docutils literal notranslate"><span class="pre">CaseExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CaseExpression.bstring"><code class="docutils literal notranslate"><span class="pre">CaseExpression.bstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CombineExpression"><code class="docutils literal notranslate"><span class="pre">CombineExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CombineExpression.attribute"><code class="docutils literal notranslate"><span class="pre">CombineExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CombineExpression.op_name"><code class="docutils literal notranslate"><span class="pre">CombineExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CombineExpression.rstring"><code class="docutils literal notranslate"><span class="pre">CombineExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Constant"><code class="docutils literal notranslate"><span class="pre">Constant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CutExpression"><code class="docutils literal notranslate"><span class="pre">CutExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CutExpression.attribute"><code class="docutils literal notranslate"><span class="pre">CutExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CutExpression.op_name"><code class="docutils literal notranslate"><span class="pre">CutExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.CutExpression.rstring"><code class="docutils literal notranslate"><span class="pre">CutExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.EqualExpression"><code class="docutils literal notranslate"><span class="pre">EqualExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.EqualExpression.op_name"><code class="docutils literal notranslate"><span class="pre">EqualExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.EqualExpression.op_str"><code class="docutils literal notranslate"><span class="pre">EqualExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Expression.op_name"><code class="docutils literal notranslate"><span class="pre">Expression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Expression.op_str"><code class="docutils literal notranslate"><span class="pre">Expression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.FanoutExpression"><code class="docutils literal notranslate"><span class="pre">FanoutExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.FanoutExpression.attribute"><code class="docutils literal notranslate"><span class="pre">FanoutExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.FanoutExpression.rstring"><code class="docutils literal notranslate"><span class="pre">FanoutExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterEqualExpression"><code class="docutils literal notranslate"><span class="pre">GreaterEqualExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterEqualExpression.op_name"><code class="docutils literal notranslate"><span class="pre">GreaterEqualExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterEqualExpression.op_str"><code class="docutils literal notranslate"><span class="pre">GreaterEqualExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterExpression"><code class="docutils literal notranslate"><span class="pre">GreaterExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterExpression.op_name"><code class="docutils literal notranslate"><span class="pre">GreaterExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GreaterExpression.op_str"><code class="docutils literal notranslate"><span class="pre">GreaterExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GroupVar"><code class="docutils literal notranslate"><span class="pre">GroupVar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.GroupVar.exclude"><code class="docutils literal notranslate"><span class="pre">GroupVar.exclude()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup"><code class="docutils literal notranslate"><span class="pre">IOGroup</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.exclude"><code class="docutils literal notranslate"><span class="pre">IOGroup.exclude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.io_list"><code class="docutils literal notranslate"><span class="pre">IOGroup.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.reverse"><code class="docutils literal notranslate"><span class="pre">IOGroup.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.verilog_def"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.verilog_inst"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_inst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOGroup.verilog_outer_def"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_outer_def</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig"><code class="docutils literal notranslate"><span class="pre">IOSig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig.verilog_def"><code class="docutils literal notranslate"><span class="pre">IOSig.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig.verilog_def_as_list"><code class="docutils literal notranslate"><span class="pre">IOSig.verilog_def_as_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig.verilog_inst"><code class="docutils literal notranslate"><span class="pre">IOSig.verilog_inst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig.verilog_outer_def"><code class="docutils literal notranslate"><span class="pre">IOSig.verilog_outer_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.IOSig.verilog_outer_def_as_list_io"><code class="docutils literal notranslate"><span class="pre">IOSig.verilog_outer_def_as_list_io</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Inout"><code class="docutils literal notranslate"><span class="pre">Inout</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Inout.reverse"><code class="docutils literal notranslate"><span class="pre">Inout.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Inout.template"><code class="docutils literal notranslate"><span class="pre">Inout.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Input.lstring"><code class="docutils literal notranslate"><span class="pre">Input.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Input.reverse"><code class="docutils literal notranslate"><span class="pre">Input.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Input.rstring"><code class="docutils literal notranslate"><span class="pre">Input.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Input.template"><code class="docutils literal notranslate"><span class="pre">Input.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.InverseExpression"><code class="docutils literal notranslate"><span class="pre">InverseExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.InverseExpression.op_name"><code class="docutils literal notranslate"><span class="pre">InverseExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.InverseExpression.op_str"><code class="docutils literal notranslate"><span class="pre">InverseExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LeftShift"><code class="docutils literal notranslate"><span class="pre">LeftShift</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LeftShift.attribute"><code class="docutils literal notranslate"><span class="pre">LeftShift.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LeftShift.op_name"><code class="docutils literal notranslate"><span class="pre">LeftShift.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LeftShift.op_str"><code class="docutils literal notranslate"><span class="pre">LeftShift.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessEqualExpression"><code class="docutils literal notranslate"><span class="pre">LessEqualExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessEqualExpression.op_name"><code class="docutils literal notranslate"><span class="pre">LessEqualExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessEqualExpression.op_str"><code class="docutils literal notranslate"><span class="pre">LessEqualExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessExpression"><code class="docutils literal notranslate"><span class="pre">LessExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessExpression.op_name"><code class="docutils literal notranslate"><span class="pre">LessExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.LessExpression.op_str"><code class="docutils literal notranslate"><span class="pre">LessExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.ListExpression"><code class="docutils literal notranslate"><span class="pre">ListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.ListExpression.rstring"><code class="docutils literal notranslate"><span class="pre">ListExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MulExpression"><code class="docutils literal notranslate"><span class="pre">MulExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MulExpression.attribute"><code class="docutils literal notranslate"><span class="pre">MulExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MulExpression.op_name"><code class="docutils literal notranslate"><span class="pre">MulExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MulExpression.op_str"><code class="docutils literal notranslate"><span class="pre">MulExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MultiListExpression"><code class="docutils literal notranslate"><span class="pre">MultiListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MultiListExpression.attribute"><code class="docutils literal notranslate"><span class="pre">MultiListExpression.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MultiSameListExpression"><code class="docutils literal notranslate"><span class="pre">MultiSameListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.MultiSameListExpression.attribute"><code class="docutils literal notranslate"><span class="pre">MultiSameListExpression.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotEqualExpression"><code class="docutils literal notranslate"><span class="pre">NotEqualExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotEqualExpression.op_name"><code class="docutils literal notranslate"><span class="pre">NotEqualExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotEqualExpression.op_str"><code class="docutils literal notranslate"><span class="pre">NotEqualExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotExpression"><code class="docutils literal notranslate"><span class="pre">NotExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotExpression.op_name"><code class="docutils literal notranslate"><span class="pre">NotExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.NotExpression.op_str"><code class="docutils literal notranslate"><span class="pre">NotExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpBitExpressionTest"><code class="docutils literal notranslate"><span class="pre">OneOpBitExpressionTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpBitExpressionTest.attribute"><code class="docutils literal notranslate"><span class="pre">OneOpBitExpressionTest.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpExpression"><code class="docutils literal notranslate"><span class="pre">OneOpExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpExpression.rstring"><code class="docutils literal notranslate"><span class="pre">OneOpExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpU1Expression"><code class="docutils literal notranslate"><span class="pre">OneOpU1Expression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OneOpU1Expression.attribute"><code class="docutils literal notranslate"><span class="pre">OneOpU1Expression.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrExpression"><code class="docutils literal notranslate"><span class="pre">OrExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrExpression.op_name"><code class="docutils literal notranslate"><span class="pre">OrExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrExpression.op_str"><code class="docutils literal notranslate"><span class="pre">OrExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrListExpression"><code class="docutils literal notranslate"><span class="pre">OrListExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrListExpression.op_name"><code class="docutils literal notranslate"><span class="pre">OrListExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.OrListExpression.op_str"><code class="docutils literal notranslate"><span class="pre">OrListExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Output"><code class="docutils literal notranslate"><span class="pre">Output</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Output.lstring"><code class="docutils literal notranslate"><span class="pre">Output.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Output.reverse"><code class="docutils literal notranslate"><span class="pre">Output.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Output.rstring"><code class="docutils literal notranslate"><span class="pre">Output.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Output.template"><code class="docutils literal notranslate"><span class="pre">Output.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Parameter.lstring"><code class="docutils literal notranslate"><span class="pre">Parameter.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Parameter.rstring"><code class="docutils literal notranslate"><span class="pre">Parameter.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Parameter.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">Parameter.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Parameter.verilog_def"><code class="docutils literal notranslate"><span class="pre">Parameter.verilog_def</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Reg"><code class="docutils literal notranslate"><span class="pre">Reg</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Reg.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Reg.verilog_def"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Reg.verilog_def_as_list"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_def_as_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.RightShift"><code class="docutils literal notranslate"><span class="pre">RightShift</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.RightShift.attribute"><code class="docutils literal notranslate"><span class="pre">RightShift.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.RightShift.op_name"><code class="docutils literal notranslate"><span class="pre">RightShift.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.RightShift.op_str"><code class="docutils literal notranslate"><span class="pre">RightShift.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SInt"><code class="docutils literal notranslate"><span class="pre">SInt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfAndExpression"><code class="docutils literal notranslate"><span class="pre">SelfAndExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfAndExpression.op_name"><code class="docutils literal notranslate"><span class="pre">SelfAndExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfAndExpression.op_str"><code class="docutils literal notranslate"><span class="pre">SelfAndExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfOrExpression"><code class="docutils literal notranslate"><span class="pre">SelfOrExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfOrExpression.op_name"><code class="docutils literal notranslate"><span class="pre">SelfOrExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfOrExpression.op_str"><code class="docutils literal notranslate"><span class="pre">SelfOrExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXnorExpression"><code class="docutils literal notranslate"><span class="pre">SelfXnorExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXnorExpression.op_name"><code class="docutils literal notranslate"><span class="pre">SelfXnorExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXnorExpression.op_str"><code class="docutils literal notranslate"><span class="pre">SelfXnorExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXorExpression"><code class="docutils literal notranslate"><span class="pre">SelfXorExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXorExpression.op_name"><code class="docutils literal notranslate"><span class="pre">SelfXorExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SelfXorExpression.op_str"><code class="docutils literal notranslate"><span class="pre">SelfXorExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SingleVar"><code class="docutils literal notranslate"><span class="pre">SingleVar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SingleVar.attribute"><code class="docutils literal notranslate"><span class="pre">SingleVar.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SingleVar.lstring"><code class="docutils literal notranslate"><span class="pre">SingleVar.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SingleVar.rstring"><code class="docutils literal notranslate"><span class="pre">SingleVar.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SingleVar.width"><code class="docutils literal notranslate"><span class="pre">SingleVar.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SubExpression"><code class="docutils literal notranslate"><span class="pre">SubExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SubExpression.attribute"><code class="docutils literal notranslate"><span class="pre">SubExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SubExpression.op_name"><code class="docutils literal notranslate"><span class="pre">SubExpression.op_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.SubExpression.op_str"><code class="docutils literal notranslate"><span class="pre">SubExpression.op_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoOpExpression"><code class="docutils literal notranslate"><span class="pre">TwoOpExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoOpExpression.rstring"><code class="docutils literal notranslate"><span class="pre">TwoOpExpression.rstring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoSameOpBitExpression"><code class="docutils literal notranslate"><span class="pre">TwoSameOpBitExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoSameOpBitExpression.attribute"><code class="docutils literal notranslate"><span class="pre">TwoSameOpBitExpression.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoSameOpExpression"><code class="docutils literal notranslate"><span class="pre">TwoSameOpExpression</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoSameOpU1Expression"><code class="docutils literal notranslate"><span class="pre">TwoSameOpU1Expression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.TwoSameOpU1Expression.attribute"><code class="docutils literal notranslate"><span class="pre">TwoSameOpU1Expression.attribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.UInt"><code class="docutils literal notranslate"><span class="pre">UInt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value"><code class="docutils literal notranslate"><span class="pre">Value</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.attribute"><code class="docutils literal notranslate"><span class="pre">Value.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.bstring"><code class="docutils literal notranslate"><span class="pre">Value.bstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.check_rvalue"><code class="docutils literal notranslate"><span class="pre">Value.check_rvalue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.des_connect"><code class="docutils literal notranslate"><span class="pre">Value.des_connect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.lstring"><code class="docutils literal notranslate"><span class="pre">Value.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.rstring"><code class="docutils literal notranslate"><span class="pre">Value.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Value.src_connect"><code class="docutils literal notranslate"><span class="pre">Value.src_connect</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.ValueRoot"><code class="docutils literal notranslate"><span class="pre">ValueRoot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable"><code class="docutils literal notranslate"><span class="pre">Variable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.attribute"><code class="docutils literal notranslate"><span class="pre">Variable.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.name_before_component"><code class="docutils literal notranslate"><span class="pre">Variable.name_before_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.name_until_component"><code class="docutils literal notranslate"><span class="pre">Variable.name_until_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.rvalue"><code class="docutils literal notranslate"><span class="pre">Variable.rvalue</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.var_name"><code class="docutils literal notranslate"><span class="pre">Variable.var_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Variable.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">Variable.verilog_assignment</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression"><code class="docutils literal notranslate"><span class="pre">WhenExpression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.Ohterwise"><code class="docutils literal notranslate"><span class="pre">WhenExpression.Ohterwise()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.Then"><code class="docutils literal notranslate"><span class="pre">WhenExpression.Then()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.When"><code class="docutils literal notranslate"><span class="pre">WhenExpression.When()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.attribute"><code class="docutils literal notranslate"><span class="pre">WhenExpression.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.bstring"><code class="docutils literal notranslate"><span class="pre">WhenExpression.bstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.otherwise"><code class="docutils literal notranslate"><span class="pre">WhenExpression.otherwise()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.then"><code class="docutils literal notranslate"><span class="pre">WhenExpression.then()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WhenExpression.when"><code class="docutils literal notranslate"><span class="pre">WhenExpression.when()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Wire"><code class="docutils literal notranslate"><span class="pre">Wire</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Wire.verilog_def"><code class="docutils literal notranslate"><span class="pre">Wire.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.Wire.verilog_def_as_list"><code class="docutils literal notranslate"><span class="pre">Wire.verilog_def_as_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Variable.WireSig"><code class="docutils literal notranslate"><span class="pre">WireSig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.core.html#module-pysrc.uhdl.core">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Add"><code class="docutils literal notranslate"><span class="pre">Add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.And"><code class="docutils literal notranslate"><span class="pre">And()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AndList"><code class="docutils literal notranslate"><span class="pre">AndList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AnyConstant"><code class="docutils literal notranslate"><span class="pre">AnyConstant</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AnyConstant.attribute"><code class="docutils literal notranslate"><span class="pre">AnyConstant.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AnyConstant.lstring"><code class="docutils literal notranslate"><span class="pre">AnyConstant.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AnyConstant.rstring"><code class="docutils literal notranslate"><span class="pre">AnyConstant.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.AnyConstant.template"><code class="docutils literal notranslate"><span class="pre">AnyConstant.template</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Assign"><code class="docutils literal notranslate"><span class="pre">Assign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitAnd"><code class="docutils literal notranslate"><span class="pre">BitAnd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitAndList"><code class="docutils literal notranslate"><span class="pre">BitAndList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitMask"><code class="docutils literal notranslate"><span class="pre">BitMask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitOr"><code class="docutils literal notranslate"><span class="pre">BitOr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitOrList"><code class="docutils literal notranslate"><span class="pre">BitOrList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitXnor"><code class="docutils literal notranslate"><span class="pre">BitXnor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitXnorList"><code class="docutils literal notranslate"><span class="pre">BitXnorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitXor"><code class="docutils literal notranslate"><span class="pre">BitXor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.BitXorList"><code class="docutils literal notranslate"><span class="pre">BitXorList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle"><code class="docutils literal notranslate"><span class="pre">Bundle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.as_list"><code class="docutils literal notranslate"><span class="pre">Bundle.as_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.attribute"><code class="docutils literal notranslate"><span class="pre">Bundle.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.connect"><code class="docutils literal notranslate"><span class="pre">Bundle.connect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.exclude"><code class="docutils literal notranslate"><span class="pre">Bundle.exclude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.io_list"><code class="docutils literal notranslate"><span class="pre">Bundle.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.name_before_component"><code class="docutils literal notranslate"><span class="pre">Bundle.name_before_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.name_until_component"><code class="docutils literal notranslate"><span class="pre">Bundle.name_until_component</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.reverse"><code class="docutils literal notranslate"><span class="pre">Bundle.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Bundle.rvalue"><code class="docutils literal notranslate"><span class="pre">Bundle.rvalue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Case"><code class="docutils literal notranslate"><span class="pre">Case()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Circuit"><code class="docutils literal notranslate"><span class="pre">Circuit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Combine"><code class="docutils literal notranslate"><span class="pre">Combine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component"><code class="docutils literal notranslate"><span class="pre">Component</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.PARAM"><code class="docutils literal notranslate"><span class="pre">Component.PARAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.compile"><code class="docutils literal notranslate"><span class="pre">Component.compile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.component_list"><code class="docutils literal notranslate"><span class="pre">Component.component_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.create"><code class="docutils literal notranslate"><span class="pre">Component.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.create_all_vfile"><code class="docutils literal notranslate"><span class="pre">Component.create_all_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.create_this_vfile"><code class="docutils literal notranslate"><span class="pre">Component.create_this_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.expose_io"><code class="docutils literal notranslate"><span class="pre">Component.expose_io()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.generate_filelist"><code class="docutils literal notranslate"><span class="pre">Component.generate_filelist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.generate_verilog"><code class="docutils literal notranslate"><span class="pre">Component.generate_verilog()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.get_circuit_list"><code class="docutils literal notranslate"><span class="pre">Component.get_circuit_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.get_component_list"><code class="docutils literal notranslate"><span class="pre">Component.get_component_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.get_io"><code class="docutils literal notranslate"><span class="pre">Component.get_io()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.get_io_list"><code class="docutils literal notranslate"><span class="pre">Component.get_io_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.input_list"><code class="docutils literal notranslate"><span class="pre">Component.input_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.inter_sig_list"><code class="docutils literal notranslate"><span class="pre">Component.inter_sig_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.io_list"><code class="docutils literal notranslate"><span class="pre">Component.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.lint"><code class="docutils literal notranslate"><span class="pre">Component.lint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.lvalue_list"><code class="docutils literal notranslate"><span class="pre">Component.lvalue_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.module_name"><code class="docutils literal notranslate"><span class="pre">Component.module_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.outer_lvalue_list"><code class="docutils literal notranslate"><span class="pre">Component.outer_lvalue_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.output_list"><code class="docutils literal notranslate"><span class="pre">Component.output_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.output_path"><code class="docutils literal notranslate"><span class="pre">Component.output_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.param_list"><code class="docutils literal notranslate"><span class="pre">Component.param_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.reg_list"><code class="docutils literal notranslate"><span class="pre">Component.reg_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.run_lint"><code class="docutils literal notranslate"><span class="pre">Component.run_lint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.run_struct_check"><code class="docutils literal notranslate"><span class="pre">Component.run_struct_check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.run_undriven_check"><code class="docutils literal notranslate"><span class="pre">Component.run_undriven_check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.var_list"><code class="docutils literal notranslate"><span class="pre">Component.var_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.verilog_def"><code class="docutils literal notranslate"><span class="pre">Component.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.verilog_inst"><code class="docutils literal notranslate"><span class="pre">Component.verilog_inst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.verilog_outer_def_as_list"><code class="docutils literal notranslate"><span class="pre">Component.verilog_outer_def_as_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.vfile"><code class="docutils literal notranslate"><span class="pre">Component.vfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Component.wire_list"><code class="docutils literal notranslate"><span class="pre">Component.wire_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Cut"><code class="docutils literal notranslate"><span class="pre">Cut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.EmptyWhen"><code class="docutils literal notranslate"><span class="pre">EmptyWhen()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Equal"><code class="docutils literal notranslate"><span class="pre">Equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Fanout"><code class="docutils literal notranslate"><span class="pre">Fanout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Greater"><code class="docutils literal notranslate"><span class="pre">Greater()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.GreaterEqual"><code class="docutils literal notranslate"><span class="pre">GreaterEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup"><code class="docutils literal notranslate"><span class="pre">IOGroup</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.exclude"><code class="docutils literal notranslate"><span class="pre">IOGroup.exclude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.io_list"><code class="docutils literal notranslate"><span class="pre">IOGroup.io_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.reverse"><code class="docutils literal notranslate"><span class="pre">IOGroup.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.verilog_def"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.verilog_inst"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_inst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.IOGroup.verilog_outer_def"><code class="docutils literal notranslate"><span class="pre">IOGroup.verilog_outer_def</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Inout"><code class="docutils literal notranslate"><span class="pre">Inout</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Inout.reverse"><code class="docutils literal notranslate"><span class="pre">Inout.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Inout.template"><code class="docutils literal notranslate"><span class="pre">Inout.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Input.lstring"><code class="docutils literal notranslate"><span class="pre">Input.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Input.reverse"><code class="docutils literal notranslate"><span class="pre">Input.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Input.rstring"><code class="docutils literal notranslate"><span class="pre">Input.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Input.template"><code class="docutils literal notranslate"><span class="pre">Input.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Inverse"><code class="docutils literal notranslate"><span class="pre">Inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.LCA"><code class="docutils literal notranslate"><span class="pre">LCA()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Less"><code class="docutils literal notranslate"><span class="pre">Less()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.LessEqual"><code class="docutils literal notranslate"><span class="pre">LessEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Linkable"><code class="docutils literal notranslate"><span class="pre">Linkable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Mul"><code class="docutils literal notranslate"><span class="pre">Mul()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Not"><code class="docutils literal notranslate"><span class="pre">Not()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.NotEqual"><code class="docutils literal notranslate"><span class="pre">NotEqual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Or"><code class="docutils literal notranslate"><span class="pre">Or()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.OrList"><code class="docutils literal notranslate"><span class="pre">OrList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Output"><code class="docutils literal notranslate"><span class="pre">Output</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Output.lstring"><code class="docutils literal notranslate"><span class="pre">Output.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Output.reverse"><code class="docutils literal notranslate"><span class="pre">Output.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Output.rstring"><code class="docutils literal notranslate"><span class="pre">Output.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Output.template"><code class="docutils literal notranslate"><span class="pre">Output.template()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Parameter.lstring"><code class="docutils literal notranslate"><span class="pre">Parameter.lstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Parameter.rstring"><code class="docutils literal notranslate"><span class="pre">Parameter.rstring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Parameter.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">Parameter.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Parameter.verilog_def"><code class="docutils literal notranslate"><span class="pre">Parameter.verilog_def</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Reg"><code class="docutils literal notranslate"><span class="pre">Reg</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Reg.verilog_assignment"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_assignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Reg.verilog_def"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Reg.verilog_def_as_list"><code class="docutils literal notranslate"><span class="pre">Reg.verilog_def_as_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SInt"><code class="docutils literal notranslate"><span class="pre">SInt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SelfAnd"><code class="docutils literal notranslate"><span class="pre">SelfAnd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SelfOr"><code class="docutils literal notranslate"><span class="pre">SelfOr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SelfXnor"><code class="docutils literal notranslate"><span class="pre">SelfXnor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SelfXor"><code class="docutils literal notranslate"><span class="pre">SelfXor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.SmartAssign"><code class="docutils literal notranslate"><span class="pre">SmartAssign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Sub"><code class="docutils literal notranslate"><span class="pre">Sub()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.UInt"><code class="docutils literal notranslate"><span class="pre">UInt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Unpack"><code class="docutils literal notranslate"><span class="pre">Unpack()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent"><code class="docutils literal notranslate"><span class="pre">VComponent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.create_this_vfile"><code class="docutils literal notranslate"><span class="pre">VComponent.create_this_vfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.module_name"><code class="docutils literal notranslate"><span class="pre">VComponent.module_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.VComponent.parse_ast"><code class="docutils literal notranslate"><span class="pre">VComponent.parse_ast()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.When"><code class="docutils literal notranslate"><span class="pre">When()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Wire"><code class="docutils literal notranslate"><span class="pre">Wire</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Wire.verilog_def"><code class="docutils literal notranslate"><span class="pre">Wire.verilog_def</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.Wire.verilog_def_as_list"><code class="docutils literal notranslate"><span class="pre">Wire.verilog_def_as_list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.assign"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.get_circuit"><code class="docutils literal notranslate"><span class="pre">get_circuit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.join_name"><code class="docutils literal notranslate"><span class="pre">join_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.linkable"><code class="docutils literal notranslate"><span class="pre">linkable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.set_circuit"><code class="docutils literal notranslate"><span class="pre">set_circuit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.smart_assign"><code class="docutils literal notranslate"><span class="pre">smart_assign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc.uhdl.core.when"><code class="docutils literal notranslate"><span class="pre">when()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-pysrc.uhdl">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pysrc.uhdl" title="此标题的永久链接"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
