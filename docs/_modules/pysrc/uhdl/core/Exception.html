@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core.Exception &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core.Exception</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.core.Exception 源代码</h1><div class="highlight"><pre>
+<span></span>
+<div class="viewcode-block" id="ErrUHDL"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrUHDL">[文档]</a><span class="k">class</span> <span class="nc">ErrUHDL</span><span class="p">(</span><span class="ne">ArithmeticError</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ErrUHDLStr"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrUHDLStr">[文档]</a><span class="k">class</span> <span class="nc">ErrUHDLStr</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="n">str_in</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">str</span></div>
+
+<div class="viewcode-block" id="ErrBitsValOverflow"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrBitsValOverflow">[文档]</a><span class="k">class</span> <span class="nc">ErrBitsValOverflow</span><span class="p">(</span><span class="n">ErrUHDLStr</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ErrBitsInvalidStr"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrBitsInvalidStr">[文档]</a><span class="k">class</span> <span class="nc">ErrBitsInvalidStr</span><span class="p">(</span><span class="n">ErrUHDLStr</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ErrVarCmpWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrVarCmpWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrVarCmpWrong</span><span class="p">(</span><span class="n">ErrUHDLStr</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+    <span class="c1">#def __init__(self,str_in):</span>
+    <span class="c1">#    self.str = str_in</span>
+
+    <span class="c1">#def __str__(self):</span>
+    <span class="c1">#    return self.str</span>
+
+
+<div class="viewcode-block" id="ErrNeedBool"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrNeedBool">[文档]</a><span class="k">class</span> <span class="nc">ErrNeedBool</span><span class="p">(</span><span class="n">ErrUHDLStr</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+    <span class="c1">#def __init__(self,str_in):</span>
+    <span class="c1">#    self.str = str_in</span>
+
+    <span class="c1">#def __str__(self):</span>
+    <span class="c1">#    return self.str</span>
+
+<div class="viewcode-block" id="ErrAssignTypeWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAssignTypeWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrAssignTypeWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">variable</span><span class="p">,</span><span class="n">right_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span>    <span class="o">=</span> <span class="n">variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_value</span> <span class="o">=</span> <span class="n">right_value</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is expected to be connected by &quot;Rvalue(rhs)&quot;,but is currently connected by </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">right_value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrConstInWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrConstInWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrConstInWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">bits</span><span class="p">,</span><span class="n">int_or_string</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bits</span>           <span class="o">=</span> <span class="n">bits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">int_or_string</span>  <span class="o">=</span> <span class="n">int_or_string</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is expected a &quot;int&quot; or &quot;string&quot; to declare width (and value),but get &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bits</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">int_or_string</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrAttrTypeWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAttrTypeWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrAttrTypeWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">variable</span><span class="p">,</span><span class="n">attribute</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable</span>  <span class="o">=</span> <span class="n">variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="n">attribute</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> expect a &quot;Constant(Bits,UInt,SInt or ...)&quot; as attribute,but get &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="o">.</span><span class="n">var_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">attribute</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrListExpNeedMultiOp"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrListExpNeedMultiOp">[文档]</a><span class="k">class</span> <span class="nc">ErrListExpNeedMultiOp</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">,</span><span class="o">*</span><span class="n">var_list</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span>        <span class="o">=</span> <span class="n">str_in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span>   <span class="o">=</span> <span class="n">var_list</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;MutiListExpression need more than one </span><span class="se">\&quot;</span><span class="s2">Right Value(rhs)</span><span class="se">\&quot;</span><span class="s2">,but only get </span><span class="si">%s</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_list</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span><span class="p">])</span> </div>
+
+
+<div class="viewcode-block" id="ErrLogicSigAttrWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrLogicSigAttrWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrLogicSigAttrWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="n">str_in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">op</span> <span class="o">=</span> <span class="n">op</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n\t</span><span class="si">%s</span><span class="s2"> must have the same attribute as UInt(1) as a boolean rhs,but it&#39;s attribute is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">str</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">op</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">attribute</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrExpInTypeWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrExpInTypeWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrExpInTypeWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="n">var</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">op</span>        <span class="o">=</span> <span class="n">op</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span>       <span class="o">=</span> <span class="n">str_in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span>       <span class="o">=</span> <span class="n">var</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> Expression expect a </span><span class="se">\&quot;</span><span class="s2">Right Value(rhs)</span><span class="se">\&quot;</span><span class="s2"> input but get a </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> with value </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">str</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">op_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrAttrMismatch"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrAttrMismatch">[文档]</a><span class="k">class</span> <span class="nc">ErrAttrMismatch</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">,</span><span class="o">*</span><span class="n">var_list</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span>        <span class="o">=</span> <span class="n">str_in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span>   <span class="o">=</span> <span class="n">var_list</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span><span class="p">])</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s2">Attribute Mismatch:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">str</span><span class="p">,</span><span class="n">string</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrCutExpSliceInvalid"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrCutExpSliceInvalid">[文档]</a><span class="k">class</span> <span class="nc">ErrCutExpSliceInvalid</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exp</span><span class="p">,</span><span class="n">str_in</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="o">=</span> <span class="n">exp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="n">str_in</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> has invalid slice [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]:</span><span class="se">\n\t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">hbound</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">lbound</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">str</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrWhenExpOperateWrong"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Exception.ErrWhenExpOperateWrong">[文档]</a><span class="k">class</span> <span class="nc">ErrWhenExpOperateWrong</span><span class="p">(</span><span class="n">ErrUHDL</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="n">str_in</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;The When expression is incorrectly constructed,and the order of using the construction method is incorrect:</span><span class="se">\t\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">str</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

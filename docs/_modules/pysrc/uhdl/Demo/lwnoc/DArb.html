@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.DArb &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.DArb</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.DArb 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># pylint: enable  =unused-wildcard-import</span>
+
+<span class="kn">from</span> <span class="nn">.CmnArb</span> <span class="kn">import</span> <span class="n">CmnAgeMtx</span>
+<span class="kn">from</span> <span class="nn">.BasciHdsk</span> <span class="kn">import</span> <span class="n">BasicHdsk</span>
+
+<div class="viewcode-block" id="DArb"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.DArb.DArb">[文档]</a><span class="k">class</span> <span class="nc">DArb</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="k">if</span> <span class="n">id_type</span> <span class="o">==</span> <span class="s1">&#39;tgt&#39;</span><span class="p">:</span>    <span class="n">used_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_list</span>
+        <span class="k">else</span><span class="p">:</span>                   <span class="n">used_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">src_list</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">used_list</span><span class="p">)</span>
+
+        <span class="c1"># Create IO</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clk</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">pld_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;in</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+
+        <span class="c1"># Arbiter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_update_en</span> <span class="o">=</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_update_en</span> <span class="o">+=</span> <span class="n">Combine</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">AndList</span><span class="p">(</span><span class="n">var_in</span><span class="o">.</span><span class="n">vld</span><span class="p">,</span> <span class="n">var_in</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="n">var_in</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="k">for</span> <span class="n">var_in</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_list</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_msg</span> <span class="o">=</span> <span class="n">CmnAgeMtx</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_msg</span><span class="o">.</span><span class="n">update_en</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg_update_en</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_msg</span><span class="o">.</span><span class="n">clk</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_msg</span><span class="o">.</span><span class="n">rst_n</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span>
+
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_unlock</span> <span class="o">=</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_unlock</span> <span class="o">+=</span> <span class="n">AndList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">vld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_lock</span> <span class="o">=</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_lock</span> <span class="o">+=</span> <span class="n">AndList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">vld</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_lock_reg</span> <span class="o">=</span> <span class="n">Reg</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arb_lock_reg</span> <span class="o">+=</span> <span class="n">when</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arb_lock</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arb_unlock</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="n">age_bit_masked_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+                <span class="n">age_bit_masked_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arb_msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;age_bits_row_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)[</span><span class="n">j</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;in</span><span class="si">%s</span><span class="s1">_vld&#39;</span> <span class="o">%</span> <span class="n">j</span><span class="p">)))</span>
+            <span class="n">bit_sel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;bit_sel_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">age_bit_masked_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>    <span class="n">bit_sel</span> <span class="o">+=</span> <span class="n">OrList</span><span class="p">(</span><span class="o">*</span><span class="n">age_bit_masked_list</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                               <span class="n">bit_sel</span> <span class="o">+=</span> <span class="n">age_bit_masked_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bit_sel</span><span class="p">)</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_reg_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="n">bit_set_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;bit_set_reg_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">Reg</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_n</span><span class="p">))</span>
+            <span class="n">bit_set_reg</span> <span class="o">+=</span> <span class="n">when</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arb_lock</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_reg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bit_set_reg</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_locked_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="n">bit_set_locked</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;bit_set_locked_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span> 
+            <span class="n">bit_set_locked</span> <span class="o">+=</span> <span class="n">when</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arb_lock_reg</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_reg_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_locked_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bit_set_locked</span><span class="p">)</span>
+
+
+
+        <span class="n">in_list_exclude_rdy</span> <span class="o">=</span> <span class="p">[</span><span class="n">var_in</span><span class="o">.</span><span class="n">as_list</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rdy&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">var_in</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_list</span><span class="p">]</span>
+
+        <span class="n">out_exclude_rdy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">as_list</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rdy&#39;</span><span class="p">])</span>
+
+
+
+
+
+        <span class="c1"># data mux</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">out_slice</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out_exclude_rdy</span><span class="p">):</span>
+            <span class="n">in_slice_list_masked</span> <span class="o">=</span> <span class="p">[</span><span class="n">BitMask</span><span class="p">(</span><span class="n">in_exclude_rdy</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_locked_list</span><span class="p">[</span><span class="n">in_idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">in_idx</span><span class="p">,</span> <span class="n">in_exclude_rdy</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">in_list_exclude_rdy</span><span class="p">)]</span>
+            <span class="n">out_slice</span> <span class="o">+=</span> <span class="n">BitOrList</span><span class="p">(</span><span class="o">*</span><span class="n">in_slice_list_masked</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var_in</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in_list</span><span class="p">):</span>
+            <span class="n">var_in</span><span class="o">.</span><span class="n">rdy</span> <span class="o">+=</span> <span class="n">And</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bit_sel_locked_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">rdy</span><span class="p">)</span></div>
+
+
+        <span class="c1">#for i in range(num):</span>
+        <span class="c1">#self.msg_update_en_list.append(AndList(self.get(&#39;in%s_vld&#39; % i), self.get(&#39;in%s_rdy&#39; % i), self.get(&#39;in%s_head&#39; % i)))</span>
+        <span class="c1">#self.msg_update_en_list = </span>
+
+
+        <span class="c1">#   # Output payload merge</span>
+        <span class="c1">#   vld_masked_list     = []</span>
+        <span class="c1">#   pld_masked_list     = []</span>
+        <span class="c1">#   mst_id_masked_list  = []</span>
+        <span class="c1">#   slv_id_masked_list  = []</span>
+        <span class="c1">#   head_masked_list    = []</span>
+        <span class="c1">#   tail_masked_list    = []</span>
+        <span class="c1">#   for i in range(num):</span>
+            <span class="c1">#   vld_masked_list.append(And(self.vld_list[i], self.bit_sel_locked_list[i]))</span>
+            <span class="c1">#   head_masked_list.append(And(self.head_list[i], self.bit_sel_locked_list[i]))</span>
+            <span class="c1">#   tail_masked_list.append(And(self.tail_list[i], self.bit_sel_locked_list[i]))</span>
+            <span class="c1">#   pld_masked_list.append(BitAnd(self.pld_list[i], Fanout(self.bit_sel_locked_list[i], pld_width)))</span>
+            <span class="c1">#   mst_id_masked_list.append(BitAnd(self.mst_id_list[i], Fanout(self.bit_sel_locked_list[i], master_id_width)))</span>
+            <span class="c1">#   slv_id_masked_list.append(BitAnd(self.slv_id_list[i], Fanout(self.bit_sel_locked_list[i], slave_id_width)))</span>
+
+            <span class="c1">#   self.rdy_list[i] += And(self.bit_sel_locked_list[i], self.out0_rdy)</span>
+
+
+        <span class="c1">#   if num&gt;1:</span>
+            <span class="c1">#   self.out0_vld    += BitOrList(*vld_masked_list)</span>
+            <span class="c1">#   self.out0_head   += BitOrList(*head_masked_list)</span>
+            <span class="c1">#   self.out0_tail   += BitOrList(*tail_masked_list)</span>
+            <span class="c1">#   self.out0_pld    += BitOrList(*pld_masked_list)</span>
+            <span class="c1">#   self.out0_mst_id += BitOrList(*mst_id_masked_list)</span>
+            <span class="c1">#   self.out0_slv_id += BitOrList(*slv_id_masked_list)</span>
+        <span class="c1">#   else:</span>
+            <span class="c1">#   self.out0_vld    += vld_masked_list[0]</span>
+            <span class="c1">#   self.out0_head   += head_masked_list[0]</span>
+            <span class="c1">#   self.out0_tail   += tail_masked_list[0]</span>
+            <span class="c1">#   self.out0_pld    += pld_masked_list[0]</span>
+            <span class="c1">#   self.out0_mst_id += mst_id_masked_list[0]</span>
+            <span class="c1">#   self.out0_slv_id += slv_id_masked_list[0]</span>
+
+
+
+<span class="c1"># class DArb2(Component):</span>
+<span class="c1"># </span>
+<span class="c1">#     def __init__(self, node, pld_width, id_type=&#39;mst&#39;):</span>
+<span class="c1">#         super().__init__()</span>
+<span class="c1">#         self.node = node</span>
+<span class="c1"># </span>
+<span class="c1">#         if id_type == &#39;mst&#39;:    used_list = self.node.dst_list</span>
+<span class="c1">#         else:                   used_list = self.node.src_list</span>
+<span class="c1"># </span>
+<span class="c1">#         num = len(used_list)</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         #pld_width        = node.network.pld_width</span>
+<span class="c1">#         master_id_width  = node.tgt_id_width</span>
+<span class="c1">#         slave_id_width   = node.src_id_width</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Input</span>
+<span class="c1">#         self.clk = Input(UInt(1))</span>
+<span class="c1">#         self.rst_n = Input(UInt(1))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.vld_list    = [self.create(&#39;in%s_vld&#39;      % i, Input(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.rdy_list    = [self.create(&#39;in%s_rdy&#39;      % i, Output(UInt(1)))              for i in range(num)]</span>
+<span class="c1">#         self.head_list   = [self.create(&#39;in%s_head&#39;     % i, Input(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.tail_list   = [self.create(&#39;in%s_tail&#39;     % i, Input(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.pld_list    = [self.create(&#39;in%s_pld&#39;      % i, Input(UInt(pld_width)))       for i in range(num)]</span>
+<span class="c1">#         self.mst_id_list = [self.create(&#39;in%s_mst_id&#39;   % i, Input(UInt(master_id_width))) for i in range(num)]</span>
+<span class="c1">#         self.slv_id_list = [self.create(&#39;in%s_slv_id&#39;   % i, Input(UInt(slave_id_width)))  for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Output</span>
+<span class="c1">#         self.out0_vld    = Output(UInt(1))</span>
+<span class="c1">#         self.out0_rdy    = Input(UInt(1))</span>
+<span class="c1">#         self.out0_head   = Output(UInt(1))</span>
+<span class="c1">#         self.out0_tail   = Output(UInt(1))</span>
+<span class="c1">#         self.out0_pld    = Output(UInt(pld_width))</span>
+<span class="c1">#         self.out0_mst_id = Output(UInt(master_id_width))</span>
+<span class="c1">#         self.out0_slv_id = Output(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         # Arbiter</span>
+<span class="c1">#         self.msg_update_en_list = []</span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             self.msg_update_en_list.append(AndList(self.get(&#39;in%s_vld&#39; % i), self.get(&#39;in%s_rdy&#39; % i), self.get(&#39;in%s_head&#39; % i)))</span>
+<span class="c1">#         self.msg_update_en = Wire(UInt(num))</span>
+<span class="c1">#         self.msg_update_en += Combine(*self.msg_update_en_list)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.arb_msg = CmnAgeMtx(num)</span>
+<span class="c1">#         self.arb_msg.update_en += self.msg_update_en</span>
+<span class="c1"># </span>
+<span class="c1">#         self.bit_sel_list = []</span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             age_bit_masked_list = []</span>
+<span class="c1">#             for j in range(num):</span>
+<span class="c1">#                 age_bit_masked_list.append(And(self.arb_msg.get(&#39;age_bits_row_%s&#39; % i)[j], self.get(&#39;in%s_vld&#39; % j)))</span>
+<span class="c1">#             bit_sel = self.create(&#39;bit_sel_%s&#39; % i, Wire(UInt(1)))</span>
+<span class="c1"># </span>
+<span class="c1">#             if len(age_bit_masked_list) &gt; 1:    bit_sel += OrList(*age_bit_masked_list)</span>
+<span class="c1">#             else:                               bit_sel += age_bit_masked_list[0]</span>
+<span class="c1">#             self.bit_sel_list.append(bit_sel)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.arb_unlock = Wire(UInt(1))</span>
+<span class="c1">#         self.arb_unlock += AndList(self.out0_vld, self.out0_rdy, self.out0_tail)</span>
+<span class="c1">#         self.arb_lock = Wire(UInt(1))</span>
+<span class="c1">#         self.arb_lock += AndList(self.out0_vld, self.out0_rdy, self.out0_head)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.arb_lock_reg = Reg(UInt(1), self.clk, self.rst_n)</span>
+<span class="c1">#         self.arb_lock_reg += when(self.arb_lock).then(UInt(1, 1)).when(self.arb_unlock).then(UInt(1, 0))</span>
+<span class="c1"># </span>
+<span class="c1">#         self.bit_sel_reg_list = []</span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             bit_set_reg = self.create(&#39;bit_set_reg_%s&#39; % i, Reg(UInt(1), self.clk, self.rst_n))</span>
+<span class="c1">#             bit_set_reg += when(self.arb_lock).then(self.bit_sel_list[i])</span>
+<span class="c1">#             self.bit_sel_reg_list.append(bit_set_reg)</span>
+<span class="c1"># </span>
+<span class="c1">#         self.bit_sel_locked_list = []</span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             bit_set_locked = self.create(&#39;bit_set_locked_%s&#39; % i, Wire(UInt(1))) </span>
+<span class="c1">#             bit_set_locked += when(self.arb_lock_reg).then(self.bit_sel_reg_list[i]).otherwise(self.bit_sel_list[i])</span>
+<span class="c1">#             self.bit_sel_locked_list.append(bit_set_locked)</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         # Output payload merge</span>
+<span class="c1">#         vld_masked_list     = []</span>
+<span class="c1">#         pld_masked_list     = []</span>
+<span class="c1">#         mst_id_masked_list  = []</span>
+<span class="c1">#         slv_id_masked_list  = []</span>
+<span class="c1">#         head_masked_list    = []</span>
+<span class="c1">#         tail_masked_list    = []</span>
+<span class="c1">#         for i in range(num):</span>
+<span class="c1">#             vld_masked_list.append(And(self.vld_list[i], self.bit_sel_locked_list[i]))</span>
+<span class="c1">#             head_masked_list.append(And(self.head_list[i], self.bit_sel_locked_list[i]))</span>
+<span class="c1">#             tail_masked_list.append(And(self.tail_list[i], self.bit_sel_locked_list[i]))</span>
+<span class="c1">#             pld_masked_list.append(BitAnd(self.pld_list[i], Fanout(self.bit_sel_locked_list[i], pld_width)))</span>
+<span class="c1">#             mst_id_masked_list.append(BitAnd(self.mst_id_list[i], Fanout(self.bit_sel_locked_list[i], master_id_width)))</span>
+<span class="c1">#             slv_id_masked_list.append(BitAnd(self.slv_id_list[i], Fanout(self.bit_sel_locked_list[i], slave_id_width)))</span>
+<span class="c1"># </span>
+<span class="c1">#             self.rdy_list[i] += And(self.bit_sel_locked_list[i], self.out0_rdy)</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         if num&gt;1:</span>
+<span class="c1">#             self.out0_vld    += BitOrList(*vld_masked_list)</span>
+<span class="c1">#             self.out0_head   += BitOrList(*head_masked_list)</span>
+<span class="c1">#             self.out0_tail   += BitOrList(*tail_masked_list)</span>
+<span class="c1">#             self.out0_pld    += BitOrList(*pld_masked_list)</span>
+<span class="c1">#             self.out0_mst_id += BitOrList(*mst_id_masked_list)</span>
+<span class="c1">#             self.out0_slv_id += BitOrList(*slv_id_masked_list)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             self.out0_vld    += vld_masked_list[0]</span>
+<span class="c1">#             self.out0_head   += head_masked_list[0]</span>
+<span class="c1">#             self.out0_tail   += tail_masked_list[0]</span>
+<span class="c1">#             self.out0_pld    += pld_masked_list[0]</span>
+<span class="c1">#             self.out0_mst_id += mst_id_masked_list[0]</span>
+<span class="c1">#             self.out0_slv_id += slv_id_masked_list[0]</span>
+
+        <span class="c1">#print(&#39;233&#39;)</span>
+        <span class="c1">#print(self.PARAM.UHDL_MODU_NAME_POST_FIX)</span>
+
+
+        <span class="c1">## Output valid merge</span>
+        <span class="c1">#self.out0_vld += SelfOr(Combine(*self.vld_list))</span>
+
+
+
+        <span class="c1"># self.bit_sel_list = []</span>
+        <span class="c1"># for i in range(num):</span>
+<span class="c1">#             self.bit_sel_list.append(self.create(&#39;bit_sel_%s&#39;%i, Wire(UInt(1))))</span>
+
+        <span class="c1"># for i in range(num):</span>
+<span class="c1">#             if i == 0:</span>
+                <span class="c1"># self.bit_sel_list[i] += self.vld_list[i]</span>
+<span class="c1">#             else:</span>
+                <span class="c1"># self.bit_sel_list[i] += And(self.vld_list[i], Not(self.bit_sel_list[i-1]))</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

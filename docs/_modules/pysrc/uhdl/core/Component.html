@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core.Component &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core.Component</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.core.Component 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">inspect</span><span class="o">,</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">operator</span>           <span class="kn">import</span> <span class="n">concat</span>
+<span class="kn">from</span> <span class="nn">functools</span>          <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span>    <span class="kn">import</span> <span class="n">Iterable</span>
+
+<span class="kn">from</span> <span class="nn">.Root</span>              <span class="kn">import</span> <span class="n">Root</span>
+<span class="kn">from</span> <span class="nn">.Variable</span>          <span class="kn">import</span> <span class="n">Wire</span><span class="p">,</span><span class="n">IOSig</span><span class="p">,</span><span class="n">IOGroup</span><span class="p">,</span><span class="n">Variable</span><span class="p">,</span><span class="n">Parameter</span><span class="p">,</span><span class="n">Reg</span><span class="p">,</span><span class="n">Output</span><span class="p">,</span><span class="n">Input</span><span class="p">,</span><span class="n">Inout</span>
+<span class="kn">from</span> <span class="nn">.</span>                  <span class="kn">import</span> <span class="n">FileProcess</span>
+
+<span class="kn">from</span> <span class="nn">.CustConfig</span>        <span class="kn">import</span> <span class="n">ComponentConfig</span>
+<span class="kn">from</span> <span class="nn">.Lint</span>              <span class="kn">import</span> <span class="n">Lint</span>
+
+
+<span class="n">UHDL_GLOBAL_PARAM_DICT</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="PARAM_CONTAINER"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.PARAM_CONTAINER">[文档]</a><span class="k">class</span> <span class="nc">PARAM_CONTAINER</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_caculate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">UHDL_MODU_NAME_POST_FIX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__caculate_iterable_kv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">UHDL_MODU_NAME_POST_FIX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">UHDL_MODU_NAME_POST_FIX</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__caculate_iterable_kv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable_param</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">iterable_param</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#print(k, v)</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="c1">#if    isinstance(v,(int,float,bool,str,)):</span>
+            <span class="c1">#    res = res + &#39;_%s_%s&#39; %(k,v)</span>
+            <span class="c1">#elif  isinstance(v,(dict,)):</span>
+            <span class="c1">#    res = res + &#39;_%s_%s&#39; %(k,self.__caculate_iterable_kv(v))</span>
+            <span class="c1">#elif  isinstance(v,Iterable):</span>
+            <span class="c1">#    res = res + &#39;_%s_%s&#39; %(k,self.__caculate_iterable_varg(v))</span>
+            <span class="c1">#else:</span>
+            <span class="c1">#ID = id(v)</span>
+            <span class="c1">#if ID in UHDL_GLOBAL_PARAM_DICT:</span>
+            <span class="c1">#    seq = UHDL_GLOBAL_PARAM_DICT[ID]</span>
+            <span class="c1">#    UHDL_GLOBAL_PARAM_DICT[ID] = seq + 1</span>
+            <span class="c1">#else:</span>
+            <span class="c1">#    seq = 0</span>
+            <span class="c1">#    UHDL_GLOBAL_PARAM_DICT[ID] = 0</span>
+            <span class="c1">#    res = res + &#39;_%s_%s%s&#39; %(k,type(v).__name__,str(seq))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_E&#39;</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">__caculate_iterable_varg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable_param</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable_param</span><span class="p">:</span>
+            <span class="k">if</span>    <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,(</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">bool</span><span class="p">,</span><span class="nb">str</span><span class="p">,)):</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">elif</span>  <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,(</span><span class="nb">dict</span><span class="p">,)):</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__caculate_iterable_kv</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">elif</span>  <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">Iterable</span><span class="p">):</span> 
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__caculate_iterable_varg</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ID</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ID</span> <span class="ow">in</span> <span class="n">UHDL_GLOBAL_PARAM_DICT</span><span class="p">:</span>
+                    <span class="n">seq</span> <span class="o">=</span> <span class="n">UHDL_GLOBAL_PARAM_DICT</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span>
+                    <span class="n">UHDL_GLOBAL_PARAM_DICT</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">seq</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">UHDL_GLOBAL_PARAM_DICT</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="s1">&#39;_E&#39;</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+
+<div class="viewcode-block" id="Component"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component">[文档]</a><span class="k">class</span> <span class="nc">Component</span><span class="p">(</span><span class="n">Root</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1">#super(Component,self).__init__()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_father_type</span><span class="p">(</span><span class="n">Component</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CFG</span>         <span class="o">=</span> <span class="n">ComponentConfig</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vfile</span>     <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span>      <span class="o">=</span> <span class="n">PARAM_CONTAINER</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__subclass_init_param_get</span><span class="p">()</span>
+        <span class="c1">#self.output_path = &#39;./%s&#39; % self.module_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lint</span>        <span class="o">=</span> <span class="kc">None</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;./</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span>
+
+<div class="viewcode-block" id="Component.create"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create">[文档]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PARAM</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">module_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This scheme attempts to unwrap any data type into a readable unique string, and form the instantiation name from this string</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">PARAM</span><span class="o">.</span><span class="n">UHDL_MODU_NAME_POST_FIX</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vfile</span>
+
+<div class="viewcode-block" id="Component.get_io_list"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_io_list">[文档]</a>    <span class="k">def</span> <span class="nf">get_io_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">has_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="c1">#sub_list = [self.__dict__[k].get_io_list(iteration) for k in self.__dict__ if isinstance(self.__dict__[k],Component) and k != &#39;_father&#39;] if iteration else []</span>
+        <span class="n">sub_list</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">get_io_list</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">]</span> <span class="k">if</span> <span class="n">iteration</span> <span class="k">else</span> <span class="p">[],[])</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_list</span> <span class="k">if</span> <span class="n">has_self</span> <span class="k">else</span> <span class="p">[])</span> <span class="o">+</span> <span class="n">sub_list</span></div>
+        
+<div class="viewcode-block" id="Component.get_component_list"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_component_list">[文档]</a>    <span class="k">def</span> <span class="nf">get_component_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">has_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">sub_list</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">get_component_list</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">]</span> <span class="k">if</span> <span class="n">iteration</span> <span class="k">else</span> <span class="p">[],[])</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component_list</span> <span class="k">if</span> <span class="n">has_self</span> <span class="k">else</span> <span class="p">[])</span> <span class="o">+</span> <span class="n">sub_list</span></div>
+
+<div class="viewcode-block" id="Component.get_circuit_list"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_circuit_list">[文档]</a>    <span class="k">def</span> <span class="nf">get_circuit_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">has_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_component_list</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span><span class="n">has_self</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_io_list</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span><span class="n">has_self</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inter_sig_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="n">Wire</span><span class="p">,</span><span class="n">Reg</span><span class="p">,))]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Input</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Output</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">param_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="n">Parameter</span><span class="p">,))]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">var_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Variable</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">wire_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Wire</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reg_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Reg</span><span class="p">)]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">io_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="n">IOSig</span><span class="p">,</span><span class="n">IOGroup</span><span class="p">))]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">component_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">Component</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;_father&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lvalue_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="n">Wire</span><span class="p">,</span><span class="n">Reg</span><span class="p">,</span><span class="n">Output</span><span class="p">,))]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">outer_lvalue_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="n">Input</span><span class="p">,</span><span class="n">Inout</span><span class="p">,))]</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">verilog_outer_def_as_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1">#return reduce(concat,[i.verilog_outer_def_as_list for i in self.io_list],[])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_outer_def_as_list_io</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">io_list</span><span class="p">]</span>
+        <span class="c1">#print(result)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">__gen_aligned_signal_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">io_para_list</span><span class="p">):</span>
+        <span class="n">max_prefix_length</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_width_length</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_name_length</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="n">io_para_list</span><span class="p">:</span>
+            <span class="n">max_prefix_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">&gt;</span><span class="n">max_prefix_length</span> <span class="k">else</span> <span class="n">max_prefix_length</span>
+            <span class="n">max_width_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">&gt;</span><span class="n">max_width_length</span> <span class="k">else</span> <span class="n">max_width_length</span>
+            <span class="n">max_name_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">&gt;</span><span class="n">max_name_length</span> <span class="k">else</span> <span class="n">max_name_length</span>
+        
+        <span class="n">template_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1">-</span><span class="si">%d</span><span class="s1">s </span><span class="si">%%</span><span class="s1">-</span><span class="si">%d</span><span class="s1">s </span><span class="si">%%</span><span class="s1">-</span><span class="si">%d</span><span class="s1">s&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">max_prefix_length</span><span class="p">,</span><span class="n">max_width_length</span><span class="p">,</span><span class="n">max_name_length</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">template_str</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="n">io_para_list</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">verilog_def</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;module </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span><span class="s1">&#39;#(&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span> <span class="k">else</span> <span class="s1">&#39;(&#39;</span><span class="p">)]</span>
+
+        <span class="c1"># parameter define</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span><span class="p">:</span>
+            <span class="c1"># pylint: disable=no-member</span>
+            <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_def</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span><span class="p">],[]),</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;)(&#39;</span><span class="p">]</span>
+            <span class="c1"># pylint: enable=no-member</span>
+
+        <span class="c1"># module io define</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__gen_aligned_signal_def</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_def_as_list</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">io_list</span><span class="p">]),</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;);&#39;</span><span class="p">)</span>
+
+        <span class="c1"># module wire define</span>
+        <span class="c1">#str_list += [&#39;&#39;,&#39;\t//Wire define for this module.&#39;]</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__gen_aligned_signal_def</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_def_as_list</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inter_sig_list</span><span class="p">]),</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+
+        <span class="c1">#str_list += [&#39;&#39;,&#39;\t//Wire define for sub module.&#39;]</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__gen_aligned_signal_def</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_outer_def_as_list</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">],[])),</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># combine logic assignment</span>
+        <span class="c1">#str_list += [&#39;&#39;,&#39;\t//Wire sub module connect to this module and inter module connect.&#39;]</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_assignment</span> <span class="o">+</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lvalue_list</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">verilog_assignment</span><span class="p">],[]),</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">sub_io_list</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">outer_lvalue_list</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">],[])</span>
+        <span class="c1">#str_list += [&#39;&#39;,&#39;\t//Wire this module connect to sub module.&#39;]</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_assignment</span> <span class="o">+</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sub_io_list</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">verilog_assignment</span><span class="p">],[]),</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># component inst</span>
+        <span class="c1">#str_list += [&#39;&#39;,&#39;\t//module inst.&#39;]</span>
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_inst</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">],[]),</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;endmodule&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str_list</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">verilog_inst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">param_assignment_list</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_assignment</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span><span class="p">],[])</span>
+
+        <span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;#(&#39;</span> <span class="k">if</span> <span class="n">param_assignment_list</span> <span class="k">else</span> <span class="s1">&#39;(&#39;</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">param_assignment_list</span><span class="p">:</span>
+            <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">param_assignment_list</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;)(&#39;</span><span class="p">]</span>
+
+        <span class="n">str_list</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eol_append</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">concat</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="n">verilog_inst</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">io_list</span><span class="p">],[]),</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;);&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">str_list</span>
+
+
+
+<div class="viewcode-block" id="Component.create_this_vfile"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create_this_vfile">[文档]</a>    <span class="k">def</span> <span class="nf">create_this_vfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">FileProcess</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.v&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_def</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Component.create_all_vfile"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.create_all_vfile">[文档]</a>    <span class="k">def</span> <span class="nf">create_all_vfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_this_vfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">create_all_vfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Component.generate_verilog"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.generate_verilog">[文档]</a>    <span class="k">def</span> <span class="nf">generate_verilog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">FileProcess</span><span class="o">.</span><span class="n">refresh_directory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iteration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_all_vfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_this_vfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_generate_filelist_core</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.v&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">:</span>
+            <span class="n">name_list</span> <span class="o">+=</span> <span class="n">component</span><span class="o">.</span><span class="n">_generate_filelist_core</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">name_list</span>
+
+
+<div class="viewcode-block" id="Component.generate_filelist"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.generate_filelist">[文档]</a>    <span class="k">def</span> <span class="nf">generate_filelist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">abs_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="n">path</span>
+
+        <span class="n">file_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_filelist_core</span><span class="p">()</span>
+        <span class="n">file_list</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+        <span class="c1"># remove duplicates</span>
+        <span class="n">new_file_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">file_list</span><span class="p">))</span>
+        <span class="n">new_file_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">file_list</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">FileProcess</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span> <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s1">&#39;filelist.f&#39;</span><span class="p">),</span>
+                                 <span class="n">text</span> <span class="o">=</span> <span class="n">new_file_list</span><span class="p">)</span></div>
+    
+
+<span class="c1">#################################################################################</span>
+<span class="c1"># Lint</span>
+<span class="c1">#################################################################################</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lint</span> <span class="o">=</span> <span class="n">Lint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lint</span>
+
+    <span class="k">def</span> <span class="nf">_run_lint_single_lvl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lint</span><span class="p">,</span> <span class="n">is_top</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">lint</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Start to check module </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_top</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">lvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_list</span><span class="p">:</span>
+                <span class="c1">#print(self.module_name, lvalue,&#39;####&#39;, lvalue.rvalue)</span>
+                <span class="k">if</span> <span class="n">lvalue</span><span class="o">.</span><span class="n">rvalue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">lint</span><span class="o">.</span><span class="n">unconnect</span><span class="p">(</span><span class="n">lvalue</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">lvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lvalue_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lvalue</span><span class="o">.</span><span class="n">rvalue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">lint</span><span class="o">.</span><span class="n">unconnect</span><span class="p">(</span><span class="n">lvalue</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_run_lint_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lint</span><span class="p">,</span> <span class="n">is_top</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_list</span><span class="p">:</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">_run_lint_core</span><span class="p">(</span><span class="n">lint</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_lint_single_lvl</span><span class="p">(</span><span class="n">lint</span><span class="p">,</span> <span class="n">is_top</span><span class="o">=</span><span class="n">is_top</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Component.run_lint"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_lint">[文档]</a>    <span class="k">def</span> <span class="nf">run_lint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#for component in self.component_list:</span>
+        <span class="c1">#    component._run_lint_core(self.lint)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_lint_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lint</span><span class="p">,</span> <span class="n">is_top</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        
+
+
+
+    <span class="k">def</span> <span class="nf">__eol_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">list_in</span><span class="p">,</span><span class="n">common_str</span><span class="p">,</span><span class="n">end_str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">end_str</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end_str</span> <span class="o">=</span> <span class="n">common_str</span>
+        <span class="k">if</span> <span class="n">list_in</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_in</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">common_str</span><span class="p">)</span> <span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">list_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">end_str</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Component.compile"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.compile">[文档]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_undriven_check</span><span class="p">()</span>
+
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Component.run_undriven_check"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_undriven_check">[文档]</a>    <span class="k">def</span> <span class="nf">run_undriven_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">undriven_check_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wire_list</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">reg_list</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_list</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">undriven_check_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">rvalue</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is undriven&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.run_struct_check"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.run_struct_check">[文档]</a>    <span class="k">def</span> <span class="nf">run_struct_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">__subclass_init_param_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Get locals</span>
+        <span class="n">trace_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">Component</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trace_num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
+        <span class="n">local</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span>
+
+        <span class="c1"># Get Var name</span>
+        <span class="n">argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+
+        <span class="c1"># Set Param</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">argspec</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;self&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span><span class="p">,</span><span class="n">arg</span><span class="p">,</span><span class="n">local</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">argspec</span><span class="o">.</span><span class="n">kwonlyargs</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span><span class="p">,</span><span class="n">arg</span><span class="p">,</span><span class="n">local</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">argspec</span><span class="o">.</span><span class="n">varargs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span><span class="p">,</span><span class="n">argspec</span><span class="o">.</span><span class="n">varargs</span><span class="p">,</span><span class="n">local</span><span class="p">[</span><span class="n">argspec</span><span class="o">.</span><span class="n">varargs</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">argspec</span><span class="o">.</span><span class="n">varkw</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span><span class="p">,</span><span class="n">argspec</span><span class="o">.</span><span class="n">varkw</span><span class="p">,</span><span class="n">local</span><span class="p">[</span><span class="n">argspec</span><span class="o">.</span><span class="n">varkw</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_PARAM</span><span class="o">.</span><span class="n">_caculate_name</span><span class="p">()</span>
+
+
+
+<div class="viewcode-block" id="Component.expose_io"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.expose_io">[文档]</a>    <span class="k">def</span> <span class="nf">expose_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">io_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">io</span> <span class="ow">in</span> <span class="n">io_list</span><span class="p">:</span>
+            <span class="n">sub_inst</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">_father</span>
+            <span class="k">if</span> <span class="bp">self</span> <span class="o">!=</span> <span class="n">sub_inst</span><span class="o">.</span><span class="n">_father</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+            <span class="n">new_io_name</span> <span class="o">=</span> <span class="s1">&#39;D_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sub_inst</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">new_io</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">new_io_name</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">template</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_io</span><span class="p">,</span> <span class="n">Input</span><span class="p">):</span>
+                <span class="n">io</span> <span class="o">+=</span> <span class="n">new_io</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_io</span><span class="p">,</span> <span class="n">Output</span><span class="p">):</span>
+                <span class="n">new_io</span> <span class="o">+=</span> <span class="n">io</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span></div>
+
+            <span class="c1">#print(io.template)</span>
+            <span class="c1">#print(new_io_name,io._father._father, io.template)</span>
+
+
+
+<div class="viewcode-block" id="Component.get_io"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.Component.get_io">[文档]</a>    <span class="k">def</span> <span class="nf">get_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="n">match_io_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">io_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                <span class="n">match_io_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">match_io_list</span></div></div>
+
+<div class="viewcode-block" id="isComponent"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Component.isComponent">[文档]</a><span class="k">def</span> <span class="nf">isComponent</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">Component</span><span class="p">)</span></div>
+
+
+        <span class="c1">#print(list_in)</span>
+        <span class="c1">#if len(list_in) == 1:</span>
+        <span class="c1">#    return list_in</span>
+        <span class="c1">#else:</span>
+
+        <span class="c1"># io_inst_str_list = reduce(concat,[i.verilog_inst for i in self.io_list])</span>
+        <span class="c1"># </span>
+        <span class="c1"># for i in io_inst_str_list[0:-1]:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s,&#39; % i )</span>
+        <span class="c1"># str_list.append(&#39;\t%s);&#39; % io_inst_str_list[-1])</span>
+
+        <span class="c1"># comp_inst_str_list = reduce(concat,[i.verilog_inst for i in self.component_list],[])</span>
+        <span class="c1"># for i in comp_inst_str_list:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s&#39; % i)</span>
+
+        <span class="c1"># sub_assign_str_list = reduce(concat,[i.verilog_assignment for i in sub_io_list if i.verilog_assignment],[])</span>
+        <span class="c1"># for i in sub_assign_str_list:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s;&#39; % i)</span>
+
+        <span class="c1"># assign_str_list = reduce(concat,[i.verilog_assignment for i in self.lvalue_list if i.verilog_assignment is not None],[])</span>
+        <span class="c1"># for i in assign_str_list:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s;&#39; % i)</span>
+
+        <span class="c1"># sub_wire_def_str_list = reduce(concat,[i.verilog_outer_def for i in self.component_list],[])</span>
+        <span class="c1"># for i in sub_wire_def_str_list:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s;&#39; % i)</span>
+
+        <span class="c1"># wire_def_str_list = reduce(concat,[i.verilog_def for i in self.wire_list],[])</span>
+        <span class="c1"># for i in wire_def_str_list:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s;&#39; % i)</span>
+
+        <span class="c1">#io_def_str_list = </span>
+        <span class="c1"># for i in io_def_str_list[0:-1]:</span>
+        <span class="c1">#     str_list.append(&#39;\t%s,&#39; % i )</span>
+        <span class="c1"># str_list.append(&#39;\t%s);&#39; % io_def_str_list[-1])</span>
+
+
+                  
+    <span class="c1">#@property</span>
+    <span class="c1">#def output_list(self) -&gt; list:</span>
+    <span class="c1">#    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Output)]</span>
+    <span class="c1">#@property</span>
+    <span class="c1">#def lvalue_list(self):</span>
+    <span class="c1">#    return [self.__dict__[k] for k in self.__dict__ if isinstance(self.__dict__[k],Value)]</span>
+
+        <span class="c1">#self.circuit()</span>
+    <span class="c1">#def __new__(cls):</span>
+    <span class="c1">#    obj = object.__new__(cls)</span>
+    <span class="c1">#    obj.init()    </span>
+    <span class="c1">#    return obj</span>
+
+<span class="c1">#    #def __init__(self):</span>
+<span class="c1">#    #    print(&#39;233&#39;)</span>
+
+    <span class="c1">#def init(self):</span>
+    <span class="c1">#    super(type(self),self).__init__()</span>
+
+
+        <span class="c1">#Entity.__init__(self)</span>
+        <span class="c1"># self.set_name(module_name)</span>
+        <span class="c1">#self.__port = PortContainer(Interface)</span>
+        <span class="c1">#self.__com  = ComponentContainer(Component)</span>
+        <span class="c1">#self.__link_manager = LinkManager()</span>
+        <span class="c1">#self.set_father(self.__port)</span>
+        <span class="c1">#self.set_father(self.__com)</span>
+        <span class="c1">#self.set_father(self.__link_manager)</span>
+
+    <span class="c1">#def set_father_to_sub(self):</span>
+    <span class="c1">#    for l in self.lvalue_list:</span>
+    <span class="c1">#        self.set_father(l)</span>
+
+    <span class="c1">#     p_def = self.__port.gen_rtl_def()</span>
+    <span class="c1">#     text  = [&#39;module %s(&#39; % self.module_name]</span>
+    <span class="c1">#     text += [&#39;    %s,&#39; % t for t in p_def[0:-1]] + [&#39;    %s&#39;% p_def[-1]] if len(p_def)&gt;1 else [&#39;    %s&#39;% p_def[-1]]</span>
+    <span class="c1">#     text += [&#39;);&#39;,&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_io()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__link_manager.gen_rtl_link()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_inst()]</span>
+    <span class="c1">#     text += [&#39;endmodule&#39;]</span>
+
+    <span class="c1"># def gen_rtl_def(self):</span>
+    <span class="c1">#     p_def = self.__port.gen_rtl_def()</span>
+    <span class="c1">#     text  = [&#39;module %s(&#39; % self.module_name]</span>
+    <span class="c1">#     text += [&#39;    %s,&#39; % t for t in p_def[0:-1]] + [&#39;    %s&#39;% p_def[-1]] if len(p_def)&gt;1 else [&#39;    %s&#39;% p_def[-1]]</span>
+    <span class="c1">#     text += [&#39;);&#39;,&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_io()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__link_manager.gen_rtl_link()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_inst()]</span>
+    <span class="c1">#     text += [&#39;endmodule&#39;]</span>
+    <span class="c1">#     return text</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def port(self):</span>
+        <span class="c1">#return self.__port</span>
+    <span class="c1">#    pass</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def component(self):</span>
+        <span class="c1">#return self.__com</span>
+    <span class="c1">#    pass</span>
+
+    <span class="c1"># def new(self,**args):</span>
+    <span class="c1">#     for name,item in args.items():</span>
+    <span class="c1">#         if hasattr(self,name):</span>
+    <span class="c1">#             raise NameError(&quot;The name &#39;%s&#39; has used in this Component.&quot; % name)</span>
+    <span class="c1">#         elif isinstance(item,Component):</span>
+    <span class="c1">#             self.Component.new(**{name:item})</span>
+    <span class="c1">#         elif isinstance(item,Interface):</span>
+    <span class="c1">#             self.port.new(**{name:item})</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             raise TypeError(&quot;The item new in a Component should be a Port or a Component,should not be a %s&quot; % type(item))</span>
+    <span class="c1">#         setattr(self,name,item)</span>
+
+    <span class="c1"># def link(self,*args):</span>
+    <span class="c1">#     self.__link_manager.link(*args)</span>
+
+    <span class="c1">#=============================================================================================</span>
+    <span class="c1"># RTL gen </span>
+    <span class="c1">#=============================================================================================</span>
+
+    <span class="c1"># def gen_rtl_io(self):</span>
+    <span class="c1">#     return self.__port.gen_rtl_io()</span>
+    <span class="c1"># </span>
+    <span class="c1"># def gen_rtl_inst(self):</span>
+    <span class="c1">#     p_inst = self.__port.gen_rtl_inst()</span>
+    <span class="c1">#     text   = [&#39;%s %s (&#39; %(self.module_name,self.name)]</span>
+    <span class="c1">#     text  += [&#39;    %s,&#39; % t for t in p_inst[0:-1]] + [&#39;    %s);&#39;% p_inst[-1]] if len(p_inst)&gt;1 else [&#39;    %s);&#39;% p_inst[-1]]</span>
+    <span class="c1">#     #text  += [&#39;);&#39;]</span>
+    <span class="c1">#     return text</span>
+    <span class="c1"># </span>
+    <span class="c1"># def gen_rtl_def(self):</span>
+    <span class="c1">#     p_def = self.__port.gen_rtl_def()</span>
+    <span class="c1">#     text  = [&#39;module %s(&#39; % self.module_name]</span>
+    <span class="c1">#     text += [&#39;    %s,&#39; % t for t in p_def[0:-1]] + [&#39;    %s&#39;% p_def[-1]] if len(p_def)&gt;1 else [&#39;    %s&#39;% p_def[-1]]</span>
+    <span class="c1">#     text += [&#39;);&#39;,&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_io()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__link_manager.gen_rtl_link()] + [&#39;&#39;]</span>
+    <span class="c1">#     text += [&#39;    %s&#39; % t for t in self.__com.gen_rtl_inst()]</span>
+    <span class="c1">#     text += [&#39;endmodule&#39;]</span>
+    <span class="c1">#     return text</span>
+
+    <span class="c1">#=============================================================================================</span>
+    <span class="c1"># output verilog/file list generate</span>
+    <span class="c1">#=============================================================================================</span>
+
+    <span class="c1">#def check_vfile(self,func):</span>
+
+
+
+    <span class="c1">#    return vfile</span>
+
+    <span class="c1">#@FileProcess.check_vfile</span>
+    <span class="c1"># def gen_vfile(self,path=&#39;-&#39;,recursion=True):</span>
+    <span class="c1">#     path = self.output_path if path == &#39;-&#39; else path</span>
+    <span class="c1">#     </span>
+    <span class="c1">#     sub_vfile   = self.__com.gen_vfile(path=path,recursion=recursion)</span>
+    <span class="c1">#     top_path    = FileProcess.create_file(  path = os.path.join(path,self.module_name+&#39;.v&#39;),</span>
+    <span class="c1">#                                             text = self.gen_rtl_def())</span>
+    <span class="c1">#     file_list   = FileProcess.file_list_dedup(reduce(concat,[p.file_list for p in sub_vfile],[]) + [top_path])</span>
+    <span class="c1">#     </span>
+    <span class="c1">#     #self.__vfile = VFile(path = path,top_path = top_path,file_list = file_list)</span>
+    <span class="c1">#     #return self.__vfile</span>
+    <span class="c1">#     return VFile(path = path,top_path = top_path,file_list = file_list)</span>
+    <span class="c1"># </span>
+    <span class="c1"># </span>
+    <span class="c1"># def gen_flist(self,abs_path=False,path=&#39;-&#39;):</span>
+    <span class="c1">#     path = self.output_path if path == &#39;-&#39; else path</span>
+    <span class="c1">#     FileProcess.create_file( path = os.path.join(path,&#39;flist.f&#39;),</span>
+    <span class="c1">#                              text = [os.path.abspath(f) if abs_path else &#39;./&#39;+os.path.relpath(f,path) for f in self.__vfile.file_list] )</span>
+    <span class="c1"># </span>
+    <span class="c1"># </span>
+    <span class="c1"># def generate(self,abs_path=False,path=&#39;-&#39;,recursion=True):</span>
+    <span class="c1">#     path = self.output_path if path == &#39;-&#39; else path</span>
+    <span class="c1"># </span>
+    <span class="c1">#     FileProcess.refresh_directory(path)</span>
+    <span class="c1"># </span>
+    <span class="c1">#     self.__vfile = self.gen_vfile(path=path,recursion=recursion)</span>
+    <span class="c1">#     self.gen_flist(abs_path=abs_path,path=path)</span>
+
+
+
+        <span class="c1">#if os.path.exists(path):</span>
+        <span class="c1">#    shutil.rmtree(path)</span>
+            <span class="c1">#os.remove(path)</span>
+
+        <span class="c1">#file_list   = self.__file_list_process(reduce(concat,[p.file_list for p in sub_vfile],[]) + [top_path])</span>
+        <span class="c1">#top_path    = self.__gen_file(path=path)</span>
+
+
+    <span class="c1">#def __file_list_process(self,file_list):</span>
+    <span class="c1">#    new_list=list(set(file_list))</span>
+    <span class="c1">#    new_list.sort(key=file_list.index)</span>
+    <span class="c1">#    return new_list </span>
+
+        <span class="c1"># if not os.path.exists(path):</span>
+        <span class="c1">#     os.makedirs(path)</span>
+<span class="c1"># </span>
+        <span class="c1"># f  = os.path.join(path,&#39;flist.f&#39;)</span>
+        <span class="c1"># if os.path.exists(f):</span>
+        <span class="c1">#     os.remove(f)</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+        <span class="c1"># </span>
+<span class="c1"># </span>
+        <span class="c1"># fp = open(f,&#39;w&#39;)</span>
+        <span class="c1"># #print(path)</span>
+        <span class="c1"># #for f in self.__vfile.file_list:</span>
+        <span class="c1"># #    print(f)</span>
+        <span class="c1"># fp.write(&#39;\n&#39;.join([os.path.abspath(f) if abs_path else &#39;./&#39;+os.path.relpath(f,path) for f in self.__vfile.file_list]))</span>
+        <span class="c1"># fp.close()</span>
+
+
+    <span class="c1">#def __gen_file(self,path=&#39;./&#39;):</span>
+    <span class="c1">#    if not os.path.exists(path):</span>
+    <span class="c1">#        os.makedirs(path)</span>
+<span class="c1">#</span>
+    <span class="c1">#    f  = os.path.join(path,&#39;%s.v&#39; % self.module_name)</span>
+    <span class="c1">#    if os.path.exists(f):</span>
+    <span class="c1">#        os.remove(f)</span>
+    <span class="c1">#        </span>
+    <span class="c1">#    fp = open(f,&#39;w&#39;)</span>
+    <span class="c1">#    fp.write(&#39;\n&#39;.join(self.gen_rtl_def()))</span>
+    <span class="c1">#    fp.close()</span>
+    <span class="c1">#    </span>
+    <span class="c1">#    return f </span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

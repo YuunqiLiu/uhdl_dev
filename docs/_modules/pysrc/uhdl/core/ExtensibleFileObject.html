@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core.ExtensibleFileObject &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core.ExtensibleFileObject</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.core.ExtensibleFileObject 源代码</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">hashlib</span><span class="o">,</span><span class="nn">time</span>
+
+<div class="viewcode-block" id="HashableTextBlock"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock">[文档]</a><span class="k">class</span> <span class="nc">HashableTextBlock</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>\
+        <span class="n">block_prefix</span>    <span class="o">=</span><span class="s1">&#39;//Hashable Text Block Start&#39;</span>  <span class="p">,</span>\
+        <span class="n">text</span>            <span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>\
+        <span class="n">algorithm</span>       <span class="o">=</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span>\
+        <span class="n">pre_comment</span>     <span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span>           <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_prefix</span>   <span class="o">=</span> <span class="n">block_prefix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span>           <span class="o">=</span> <span class="n">block_prefix</span> <span class="o">+</span> <span class="s1">&#39; Start&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tail</span>           <span class="o">=</span> <span class="n">block_prefix</span> <span class="o">+</span> <span class="s1">&#39; End&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span>      <span class="o">=</span> <span class="n">algorithm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_comment</span>    <span class="o">=</span> <span class="n">pre_comment</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">wrap_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_comment</span>
+        <span class="n">res</span> <span class="o">+=</span>  <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hash</span><span class="p">())</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hash</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span> 
+
+<div class="viewcode-block" id="HashableTextBlock.get_hash"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.get_hash">[文档]</a>    <span class="k">def</span> <span class="nf">get_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">hashlib</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">)()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="n">obj_digest</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">obj_digest</span></div>
+        <span class="c1">#my_md5 = hashlib.md5()#获取一个MD5的加密算法对象</span>
+        <span class="c1">#my_md5.update(str(str_in).encode(&#39;utf-8&#39;)) #得到MD5消息摘要</span>
+        <span class="c1">#my_md5_Digest = my_md5.hexdigest()#以16进制返回消息摘要，32位</span>
+
+<div class="viewcode-block" id="HashableTextBlock.clean"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.clean">[文档]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+
+<div class="viewcode-block" id="HashableTextBlock.write"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.HashableTextBlock.write">[文档]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="n">text</span></div></div>
+        <span class="c1">#print(self.text)</span>
+
+<div class="viewcode-block" id="VersionControlBlock"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.VersionControlBlock">[文档]</a><span class="k">class</span> <span class="nc">VersionControlBlock</span><span class="p">(</span><span class="n">HashableTextBlock</span><span class="p">):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">wrap_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span>  <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]</span><span class="se">\n</span><span class="s1">&#39;</span>       <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hash</span><span class="p">())</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> Version:</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span>    <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_prefix</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]</span><span class="se">\n</span><span class="s1">&#39;</span>       <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hash</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span> </div>
+
+    
+
+
+
+<span class="c1">#h = HashableTextBlock(text=&#39;233&#39;)</span>
+<span class="c1">#print(h.wrap_text)</span>
+
+<div class="viewcode-block" id="ParamBox"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ParamBox">[文档]</a><span class="k">class</span> <span class="nc">ParamBox</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ExtensibleFileObject"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject">[文档]</a><span class="k">class</span> <span class="nc">ExtensibleFileObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">comment_prefix</span><span class="o">=</span><span class="s1">&#39;//&#39;</span><span class="p">,</span><span class="n">keyword</span><span class="o">=</span><span class="s1">&#39;EFO&#39;</span><span class="p">):</span>
+        <span class="c1">#self.__version_control_blcok = HashableTextBlock()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">=</span> <span class="n">comment_prefix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">KEYWORD</span>        <span class="o">=</span> <span class="n">keyword</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__line_prefix</span>    <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">KEYWORD</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tool_message_block</span>    <span class="o">=</span> <span class="n">HashableTextBlock</span>    <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;Tool Message&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__user_message_block</span>    <span class="o">=</span> <span class="n">HashableTextBlock</span>    <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;User Message&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span>             <span class="o">=</span> <span class="n">HashableTextBlock</span>    <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;Key&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__version_control_block</span> <span class="o">=</span> <span class="n">VersionControlBlock</span>  <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;Version Control&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span>         <span class="o">=</span> <span class="n">HashableTextBlock</span>    <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;Content&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__param_block</span>           <span class="o">=</span> <span class="n">HashableTextBlock</span>    <span class="p">(</span><span class="n">block_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_prefix</span><span class="o">+</span><span class="s1">&#39;Parameter&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__file_explain</span>          <span class="o">=</span>  <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">==========================================================================================================================</span><span class="se">\n</span><span class="s1">&#39;</span>  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Key is used to ensure the consistency of file version and content, and cannot be modified.</span><span class="se">\n</span><span class="s1">&#39;</span>                                  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Version Control is the version number written when the file is generated and cannot be modified.</span><span class="se">\n</span><span class="s1">&#39;</span>                            <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">ToolMessage is used to record related information of any tool that has processed the file and cannot be manually modified.</span><span class="se">\n</span><span class="s1">&#39;</span>  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">UserMessage is used by the user to write any information, which can be modified in any way.</span><span class="se">\n</span><span class="s1">&#39;</span>                                 <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Content is the actual payload of the file.</span><span class="se">\n</span><span class="s1">&#39;</span>                                                                                  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Parameter is the additional parameter information carried by the file and cannot be modified in any way.</span><span class="se">\n</span><span class="s1">&#39;</span>                    <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Key is generated by the hash of Version Control, Content and Parameter to ensure the consistency of the file.</span><span class="se">\n</span><span class="s1">&#39;</span>               <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">These three parts do not allow any individual modification</span><span class="se">\n</span><span class="s1">&#39;</span>                                                                  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">==========================================================================================================================</span><span class="se">\n</span><span class="s1">&#39;</span>  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span> <span class="o">+</span>\
+                                        <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="c1">##self.EDITABLE       = None</span>
+        <span class="c1">#self.CONTENT        = None</span>
+        <span class="c1">#self.__MD5          = None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">line_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__line_prefix</span>
+       <span class="c1"># return &#39;%s[%s]&#39; % (self.COMMENT_PREFIX,self.KEYWORD)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">CONTENT</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span><span class="o">.</span><span class="n">text</span>
+    <span class="nd">@CONTENT</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">CONTENT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def USER_MESSAGE(self):</span>
+    <span class="c1">#    return self.__user_message_block.text</span>
+    <span class="c1">#@USER_MESSAGE.setter</span>
+    <span class="c1">#def USER_MESSAGE(self,value):</span>
+    <span class="c1">#    self.__user_message_block.text = str(value)</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def TOOL_MESSAGE(self):</span>
+    <span class="c1">#    return self.__tool_message_block.text</span>
+    <span class="c1">#@TOOL_MESSAGE.setter</span>
+    <span class="c1">#def TOOL_MESSAGE(self,value):</span>
+    <span class="c1">#    self.__tool_message_block.text = str(value)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PARAMETER</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__param_block</span><span class="o">.</span><span class="n">text</span>
+    <span class="nd">@PARAMETER</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">PARAMETER</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__param_block</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1">#@property</span>
+    <span class="c1">#def USER_MESSAGE(self):</span>
+    <span class="c1">#    return self.__version_control_blcok.text</span>
+    <span class="c1">#@USER_MESSAGE.setter</span>
+    <span class="c1">#def USER_MESSAGE(self,value):</span>
+    <span class="c1">#    self.__version_control_blcok.text = str(value)</span>
+
+<div class="viewcode-block" id="ExtensibleFileObject.write"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write">[文档]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExtensibleFileObject.write_version"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write_version">[文档]</a>    <span class="k">def</span> <span class="nf">write_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__version_control_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExtensibleFileObject.write_tool_message"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.write_tool_message">[文档]</a>    <span class="k">def</span> <span class="nf">write_tool_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tool_message_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExtensibleFileObject.get_MD5"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.get_MD5">[文档]</a>    <span class="k">def</span> <span class="nf">get_MD5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_in</span><span class="p">):</span>
+        <span class="n">my_md5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span><span class="c1">#获取一个MD5的加密算法对象</span>
+        <span class="n">my_md5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">str_in</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span> <span class="c1">#得到MD5消息摘要</span>
+        <span class="n">my_md5_Digest</span> <span class="o">=</span> <span class="n">my_md5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="c1">#以16进制返回消息摘要，32位</span>
+        <span class="k">return</span> <span class="n">my_md5_Digest</span></div>
+
+
+<div class="viewcode-block" id="ExtensibleFileObject.load"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.load">[文档]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ExtensibleFileObject.save"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.ExtensibleFileObject.ExtensibleFileObject.save">[文档]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;test.v&#39;</span><span class="p">):</span>
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_tool_message</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Written by </span><span class="si">%s</span><span class="s1"> in </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">KEYWORD</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Version Control Hash: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__version_control_block</span><span class="o">.</span><span class="n">get_hash</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Content Hash: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span><span class="o">.</span><span class="n">get_hash</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">Parameter Hash: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMMENT_PREFIX</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__param_block</span><span class="o">.</span><span class="n">get_hash</span><span class="p">()))</span>
+        
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__file_explain</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1">#f.write(self.__user_message_block.wrap_text)</span>
+            <span class="c1">#f.write(&#39;\n&#39;)</span>
+            <span class="c1">#f.write(self.__tool_message_block.wrap_text)</span>
+            <span class="c1">#f.write(&#39;\n&#39;)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__key_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__version_control_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__tool_message_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__user_message_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__content_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__param_block</span><span class="o">.</span><span class="n">wrap_text</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+
+<span class="c1"># a = ExtensibleFileObject(keyword=&#39;UHDL&#39;)</span>
+<span class="c1"># a.write(&#39;module .....&#39;)</span>
+<span class="c1"># a.write_version(&#39;1.0.1&#39;)</span>
+<span class="c1"># a.save()</span>
+<span class="c1"># </span>
+<span class="c1"># p = ParamBox()</span>
+<span class="c1"># print(p.__dict__)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core.Operator &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core.Operator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.core.Operator 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.Variable</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="Case"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Case">[文档]</a><span class="k">def</span> <span class="nf">Case</span><span class="p">(</span><span class="n">select</span><span class="p">,</span> <span class="n">casepair</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Case is used to construct a parallel selection circuit,and the input of this function is</span>
+
+<span class="sd">        rhs select    - UInt/SInt(k)</span>
+<span class="sd">        rhs casepair  - list[(UInt/SInt(k),UInt/SInt(v)),...,(UInt/SInt(k),UInt/SInt(v))]</span>
+<span class="sd">        rhs default   - UInt/SInt(v)</span>
+
+<span class="sd">    select is the selection signal.</span>
+
+<span class="sd">    casepair is a lookup table organized in the form of a list.Each item in this list is a tuple.</span>
+<span class="sd">    This tuple is used to express a mapping relationship. </span>
+<span class="sd">    When sel is equal to the first value in the tuple, the output value of the circuit is the second value of the tuple.</span>
+
+<span class="sd">    default is the default output value of the circuit. </span>
+<span class="sd">    When sel does not match any item in the lookup table, the circuit will output this value.</span>
+<span class="sd">    </span>
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(v)</span>
+
+<span class="sd">    A typical example is:</span>
+
+<span class="sd">        O += Case(sel,[(UInt(2,0),Ares),(UInt(2,1),Bres)],DFTres)</span>
+
+<span class="sd">    The corresponding behavior of this selection circuit example it expresses is </span>
+
+<span class="sd">        case(sel)</span>
+<span class="sd">        2&#39;b0:       O = Ares</span>
+<span class="sd">        2&#39;b1:       O = Bres</span>
+<span class="sd">        default:    O = DFTres</span>
+<span class="sd">        endcase</span>
+
+<span class="sd">    select and the first value of tuple in casepair list must have the same attributes, that is, all UInt(k) or SInt(k).</span>
+
+<span class="sd">    default and the second value of tuple in casepair list mus have the sam attributss, that is, all UInt(v) or SInt(v).</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">CaseExpression</span><span class="p">(</span><span class="n">select</span><span class="p">,</span> <span class="n">casepair</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EmptyWhen"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.EmptyWhen">[文档]</a><span class="k">def</span> <span class="nf">EmptyWhen</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    EmptyWhen is used to construct a complex selection circuit, it has no input.</span>
+
+<span class="sd">    EmptyWhen is only used to construct a temporarily empty selection circuit, </span>
+<span class="sd">    which is used to allow users to use &quot;when&quot;, &quot;then&quot;, &quot;otherwise&quot; methods to complete the selection circuit</span>
+<span class="sd">    </span>
+<span class="sd">    A typical example is:</span>
+
+<span class="sd">        ew = EmptyWhen()</span>
+<span class="sd">        for cond,dat in CondDatPair:</span>
+<span class="sd">            ew = ew.when(cond).then(dat)</span>
+<span class="sd">        ew.otherwise(UInt(32,0))</span>
+<span class="sd">        O += ew</span>
+
+<span class="sd">    The behavior model corresponding to this typical example is:</span>
+
+<span class="sd">        if(cond0)       O = dat0</span>
+<span class="sd">        else if(cond1)  O = dat1</span>
+<span class="sd">        else if(cond2)  O = dat2</span>
+<span class="sd">        ..</span>
+<span class="sd">        else if（condN) O = datN</span>
+<span class="sd">        else            O = 32&#39;b0</span>
+
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">WhenExpression</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="When"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.When">[文档]</a><span class="k">def</span> <span class="nf">When</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    When is used to construct a complex selection circuit, and the input of when is </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt(1)</span>
+<span class="sd">        </span>
+<span class="sd">    The return value of when will only be calculated after the when selection circuit is completed. </span>
+<span class="sd">    When the when selection circuit uses multiple &quot;when&quot;, &quot;then&quot;, &quot;otherwise&quot; completions, </span>
+<span class="sd">    the attribute of its return value O will be the same as the input specified by &quot;then&quot; and &quot;otherwise&quot;.</span>
+<span class="sd">    </span>
+<span class="sd">    A typical example is:</span>
+
+<span class="sd">        when(A).then(Ares).when(B).then(Bres).otherwise(DFTres)</span>
+
+<span class="sd">    The corresponding behavior of this selection circuit example it expresses is </span>
+
+<span class="sd">        if(A)       O = Ares</span>
+<span class="sd">        else if(B)  O = Bres</span>
+<span class="sd">        else        O = DFTres</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">when</span> <span class="o">=</span> <span class="n">WhenExpression</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">when</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cut"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Cut">[文档]</a><span class="k">def</span> <span class="nf">Cut</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(a)</span>
+<span class="sd">        int H - 0 &lt;= H &lt; I.width</span>
+<span class="sd">        int L - 0 &lt;= L &lt;= H</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that intercepts the [H:L] bits of A.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(H-L+1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = I[H:L]</span>
+
+<span class="sd">    The attribute type of the return value is the same as the input I.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">CutExpression</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Fanout"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Fanout">[文档]</a><span class="k">def</span> <span class="nf">Fanout</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">F</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">FanoutExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Combine"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Combine">[文档]</a><span class="k">def</span> <span class="nf">Combine</span><span class="p">(</span><span class="o">*</span><span class="n">rhs_list</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs A - UInt/SInt(a)</span>
+<span class="sd">        rhs B - UInt/SInt(b)</span>
+<span class="sd">        ..</span>
+<span class="sd">        rhs N - UInt/SInt(n)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that splices all input signals together.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(a+b+..+n)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = {A,B,...,N}</span>
+
+<span class="sd">    The attribute type of the return value is the same as the input.</span>
+<span class="sd">    </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">CombineExpression</span><span class="p">(</span><span class="o">*</span><span class="n">rhs_list</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inverse"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Inverse">[文档]</a><span class="k">def</span> <span class="nf">Inverse</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize an inverter used to inverse each bit of I.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(x)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = ~ I</span>
+
+<span class="sd">    The attribute type of the return value is the same as the input.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">InverseExpression</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Not"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Not">[文档]</a><span class="k">def</span> <span class="nf">Not</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a comparator used to confirm whether I is not equal to 0.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if (I==0) O = 1&#39;b1</span>
+<span class="sd">        else      O = 1&#39;b0</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">NotExpression</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SelfOr"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfOr">[文档]</a><span class="k">def</span> <span class="nf">SelfOr</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that or all bits of the input signal.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = | I</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SelfOrExpression</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SelfAnd"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfAnd">[文档]</a><span class="k">def</span> <span class="nf">SelfAnd</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that and all bits of the input signal.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = &amp; I</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SelfAndExpression</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SelfXor"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfXor">[文档]</a><span class="k">def</span> <span class="nf">SelfXor</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that xor all bits of the input signal.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = ^ I</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SelfXorExpression</span><span class="p">(</span><span class="n">op</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SelfXnor"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.SelfXnor">[文档]</a><span class="k">def</span> <span class="nf">SelfXnor</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs I - UInt/SInt(x)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize a circuit that xnor all bits of the input signal.</span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = ^~ I</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SelfXnorExpression</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Add"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Add">[文档]</a><span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">        </span>
+<span class="sd">        rhs A - UInt/SInt(a)</span>
+<span class="sd">        rhs B - UInt/SInt(b)</span>
+<span class="sd">    </span>
+<span class="sd">    as input to realize an adder that adds A and B. </span>
+
+<span class="sd">    The return value of this function is </span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(max(a,b)+1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A + B</span>
+
+<span class="sd">    The attribute type of the return value is the same as the input.</span>
+<span class="sd">    </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">AddExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sub"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Sub">[文档]</a><span class="k">def</span> <span class="nf">Sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(a)</span>
+<span class="sd">        rhs B - UInt/SInt(b)</span>
+
+<span class="sd">    as input to realize a subtractor that subtracts A and B. </span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(max(a,b)+1)</span>
+<span class="sd">    </span>
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A - B</span>
+
+<span class="sd">    The attribute type of the return value is the same as the input.</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SubExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Mul"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Mul">[文档]</a><span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(a)</span>
+<span class="sd">        rhs B - UInt/SInt(b)</span>
+
+<span class="sd">    as input to realize a multiplier that multiplies A and B. </span>
+<span class="sd">    </span>
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(a+b)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is</span>
+<span class="sd">    </span>
+<span class="sd">        O = A * B</span>
+<span class="sd">        </span>
+<span class="sd">    The attribute type of the return value is the same as the input.</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">MulExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="BitOr"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitOr">[文档]</a><span class="k">def</span> <span class="nf">BitOr</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ....</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a circuit that &quot;or&quot; A and B and ... and N bit by bit.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(x)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A | B | ... | N</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">BitXorListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+<span class="n">BitOrList</span> <span class="o">=</span> <span class="n">BitOr</span>
+
+<span class="c1">#def BitOrList(*opList):</span>
+<span class="c1">#    return BitOrListExpression(*opList)</span>
+
+
+<div class="viewcode-block" id="BitAnd"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitAnd">[文档]</a><span class="k">def</span> <span class="nf">BitAnd</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ...</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a circuit that &quot;and&quot; A and B and ... and N bit by bit.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(x)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A &amp; B &amp; ... &amp; N</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">BitAndListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+<span class="n">BitAndList</span> <span class="o">=</span> <span class="n">BitAnd</span>
+
+<span class="c1">#def BitAndList(*opList):</span>
+<span class="c1">#    return BitAndListExpression(*opList)</span>
+
+
+
+
+
+
+
+<div class="viewcode-block" id="BitXor"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXor">[文档]</a><span class="k">def</span> <span class="nf">BitXor</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ...</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a circuit that &quot;xor&quot; A and B and ... and N bit by bit.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(x)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A ^ B ^ ... ^ N</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="n">BitXorListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+<span class="n">BitXorList</span> <span class="o">=</span> <span class="n">BitXor</span>
+
+<span class="c1">#def BitXorList(*opList):</span>
+<span class="c1">#    return BitXorListExpression(*opList)</span>
+
+
+<div class="viewcode-block" id="BitXnor"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.BitXnor">[文档]</a><span class="k">def</span> <span class="nf">BitXnor</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ...</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a circuit that &quot;xnor&quot; A and B and ... and N bit by bit.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt/SInt(x)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        O = A ^~ B ^~ ... ^~ N</span>
+
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">BitXnorListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+
+<span class="n">BitXnorList</span> <span class="o">=</span> <span class="n">BitXnor</span>
+<span class="c1">#def BitXnorList(*opList):</span>
+<span class="c1">#    return BitXnorListExpression(*opList)</span>
+
+
+
+<div class="viewcode-block" id="Equal"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Equal">[文档]</a><span class="k">def</span> <span class="nf">Equal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A and B are equal.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A==B) O = 1&#39;b1</span>
+<span class="sd">        else     O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">EqualExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NotEqual"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.NotEqual">[文档]</a><span class="k">def</span> <span class="nf">NotEqual</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A and B are not equal.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A!=B) O = 1&#39;b1</span>
+<span class="sd">        else     O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">NotEqualExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LessEqual"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.LessEqual">[文档]</a><span class="k">def</span> <span class="nf">LessEqual</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A is less equal than B.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A&lt;=B) O = 1&#39;b1</span>
+<span class="sd">        else     O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">LessEqualExpression</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GreaterEqual"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.GreaterEqual">[文档]</a><span class="k">def</span> <span class="nf">GreaterEqual</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span><span class="n">rhs</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A is greater equal than B.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A&gt;=B) O = 1&#39;b1</span>
+<span class="sd">        else     O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">GreaterEqualExpression</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span><span class="n">rhs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Less"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Less">[文档]</a><span class="k">def</span> <span class="nf">Less</span><span class="p">(</span><span class="n">opL</span><span class="p">,</span><span class="n">opR</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A is less than B.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A&lt;B) O = 1&#39;b1</span>
+<span class="sd">        else    O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">LessExpression</span><span class="p">(</span><span class="n">opL</span><span class="p">,</span><span class="n">opR</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Greater"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Greater">[文档]</a><span class="k">def</span> <span class="nf">Greater</span><span class="p">(</span><span class="n">opL</span><span class="p">,</span><span class="n">opR</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether A is greater than B.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if(A&gt;B) O = 1&#39;b1</span>
+<span class="sd">        else    O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">GreaterExpression</span><span class="p">(</span><span class="n">opL</span><span class="p">,</span><span class="n">opR</span><span class="p">)</span></div>
+
+
+
+
+
+
+
+
+<div class="viewcode-block" id="And"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.And">[文档]</a><span class="k">def</span> <span class="nf">And</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ...</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+<span class="sd">    as input to realize a comparator to compare whether both A and B and ... and N not equal to 0.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if((A!=0) &amp;&amp; (B!=0) &amp;&amp; (...!=0) &amp;&amp; (N!=0))  O = 1&#39;b1</span>
+<span class="sd">        else                                        O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">AndListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+<span class="n">AndList</span> <span class="o">=</span> <span class="n">And</span>
+
+<span class="c1">#def AndList(*opList):</span>
+<span class="c1">#    return AndListExpression(*opList)</span>
+
+
+<div class="viewcode-block" id="Or"><a class="viewcode-back" href="../../../../pysrc.uhdl.core.html#pysrc.uhdl.core.Operator.Or">[文档]</a><span class="k">def</span> <span class="nf">Or</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The circuit expressed by this function takes </span>
+<span class="sd">    </span>
+<span class="sd">        rhs A - UInt/SInt(x)</span>
+<span class="sd">        rhs B - UInt/SInt(x)</span>
+<span class="sd">        ...</span>
+<span class="sd">        rhs N - UInt/SInt(x)</span>
+
+
+<span class="sd">    as input to realize a comparator to compare whether A or B or ... or N not equal to 0.</span>
+
+<span class="sd">    The return value of this function is</span>
+<span class="sd">    </span>
+<span class="sd">        rhs O - UInt(1)</span>
+
+<span class="sd">    The corresponding behavior model it expresses is </span>
+<span class="sd">    </span>
+<span class="sd">        if((A!=0) || (B!=0) || (...!=0) || (N!=0))  O = 1&#39;b1</span>
+<span class="sd">        else                                        O = 1&#39;b0</span>
+<span class="sd"> </span>
+<span class="sd">    This function requires its input to have the same type of attributes, that is, all UInt or SInt.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">OrListExpression</span><span class="p">(</span><span class="o">*</span><span class="n">opList</span><span class="p">)</span></div>
+
+<span class="n">OrList</span> <span class="o">=</span> <span class="n">Or</span>
+
+<span class="c1">#def OrList(*opList):</span>
+<span class="c1">#    return OrListExpression(*opList)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

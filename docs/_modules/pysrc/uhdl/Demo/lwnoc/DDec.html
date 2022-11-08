@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.Demo.lwnoc.DDec &mdash; ltool 0.01 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> ltool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ltool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.Demo.lwnoc.DDec</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>pysrc.uhdl.Demo.lwnoc.DDec 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># pylint: enable  =unused-wildcard-import</span>
+<span class="kn">from</span> <span class="nn">.BasciHdsk</span> <span class="kn">import</span> <span class="n">BasicHdsk</span>
+
+
+
+
+
+
+<div class="viewcode-block" id="DDec"><a class="viewcode-back" href="../../../../../pysrc.uhdl.Demo.lwnoc.html#pysrc.uhdl.Demo.lwnoc.DDec.DDec">[文档]</a><span class="k">class</span> <span class="nc">DDec</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">pld_width</span><span class="p">,</span> <span class="n">id_type</span><span class="o">=</span><span class="s1">&#39;tgt&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="k">if</span> <span class="n">id_type</span> <span class="o">==</span> <span class="s1">&#39;tgt&#39;</span><span class="p">:</span>    <span class="n">used_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_list</span>
+        <span class="k">else</span><span class="p">:</span>                   <span class="n">used_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">src_list</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">used_list</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">din</span> <span class="o">=</span> <span class="n">BasicHdsk</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">txn_id_width</span><span class="p">,</span> <span class="n">pld_width</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;out</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span>
+
+        <span class="c1"># bin2onehot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdy_masked_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dst</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">used_list</span><span class="p">):</span>
+            <span class="n">id_hit_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">gid</span> <span class="ow">in</span> <span class="n">dst</span><span class="o">.</span><span class="n">reachable_tgt_id_list</span><span class="p">:</span>
+                <span class="n">id_hit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;id_hit_p</span><span class="si">%s</span><span class="s2">_id</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">gid</span><span class="p">),</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+                <span class="k">if</span> <span class="n">id_type</span> <span class="o">==</span> <span class="s1">&#39;tgt&#39;</span><span class="p">:</span>    <span class="n">id_hit</span> <span class="o">+=</span> <span class="n">Equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">tgt_id</span><span class="p">,</span> <span class="n">UInt</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">tgt_id_width</span><span class="p">,</span> <span class="n">gid</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>                   <span class="n">id_hit</span> <span class="o">+=</span> <span class="n">Equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">src_id</span><span class="p">,</span> <span class="n">UInt</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">src_id_width</span><span class="p">,</span> <span class="n">gid</span><span class="p">))</span>
+
+                <span class="n">id_hit_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">id_hit</span><span class="p">)</span>
+
+            <span class="n">sel_bit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;sel_bit</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">Wire</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="n">sel_bit</span> <span class="o">+=</span> <span class="n">BitOrList</span><span class="p">(</span><span class="o">*</span><span class="n">id_hit_list</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">rdy_masked_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">sel_bit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">rdy</span><span class="p">))</span>
+            
+            <span class="n">vld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">vld</span>
+            <span class="n">vld</span> <span class="o">+=</span> <span class="n">And</span><span class="p">(</span><span class="n">sel_bit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">vld</span><span class="p">)</span>
+
+
+        <span class="n">Assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">rdy</span><span class="p">,</span> <span class="n">OrList</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rdy_masked_list</span><span class="p">))</span>
+
+        <span class="n">out_exclude_vld_rdy</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">as_list</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rdy&#39;</span><span class="p">,</span> <span class="s1">&#39;vld&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_list</span><span class="p">]</span>
+        <span class="n">in_exlucde_vld_rdy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">din</span><span class="o">.</span><span class="n">as_list</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rdy&#39;</span><span class="p">,</span> <span class="s1">&#39;vld&#39;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">out_bundle</span> <span class="ow">in</span> <span class="n">out_exclude_vld_rdy</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">out_slice</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out_bundle</span><span class="p">):</span>
+                <span class="n">out_slice</span> <span class="o">+=</span> <span class="n">in_exlucde_vld_rdy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
+
+        
+
+
+
+        <span class="c1"># good</span>
+        <span class="c1">#rdy = </span>
+        <span class="c1">#rdy += </span>
+
+        <span class="c1"># bad</span>
+        <span class="c1">#self.din.rdy += OrList(*self.rdy_masked_list)</span>
+
+            <span class="c1"># self.head_list[i]   += self.in0_head</span>
+            <span class="c1"># self.tail_list[i]   += self.in0_tail</span>
+            <span class="c1"># self.pld_list[i]    += self.in0_pld</span>
+            <span class="c1"># self.mst_id_list[i] += self.in0_mst_id</span>
+            <span class="c1"># self.slv_id_list[i] += self.in0_slv_id</span>
+
+
+        <span class="c1">#for dst in self.node.dst_list:</span>
+        <span class="c1">#    print(dst.global_id_list)</span>
+
+        <span class="c1">#id_width = node.id_width</span>
+
+        <span class="c1"># self.vld_list = []</span>
+        <span class="c1"># self.rdy_list = []</span>
+        <span class="c1"># self.head_list = []</span>
+        <span class="c1"># self.tail_list = []</span>
+        <span class="c1"># self.pld_list = []</span>
+        <span class="c1"># self.mst_id_list = []</span>
+        <span class="c1"># self.slv_id_list = []</span>
+
+        <span class="c1"># for i in range(num):</span>
+        <span class="c1">#     self.vld_list.append(self.create(&#39;out%s_vld&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.rdy_list.append(self.create(&#39;out%s_rdy&#39; % i, Input(UInt(1))))</span>
+        <span class="c1">#     self.head_list.append(self.create(&#39;out%s_head&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.tail_list.append(self.create(&#39;out%s_tail&#39; % i, Output(UInt(1))))</span>
+        <span class="c1">#     self.pld_list.append(self.create(&#39;out%s_pld&#39; % i, Output(UInt(pld_width))))</span>
+        <span class="c1">#     self.mst_id_list.append(self.create(&#39;out%s_id&#39; % i, Output(UInt(master_id_width))))</span>
+        <span class="c1">#     self.slv_id_list.append(self.create(&#39;out%s_id&#39; % i, Output(UInt(slave_id_width))))</span>
+
+
+
+<span class="c1"># class DDec2(Component):</span>
+<span class="c1"># </span>
+<span class="c1">#     def __init__(self, node, pld_width, id_type=&#39;mst&#39;):</span>
+<span class="c1">#         super().__init__()</span>
+<span class="c1">#         self.node = node</span>
+<span class="c1"># </span>
+<span class="c1">#         if id_type == &#39;mst&#39;:    used_list = self.node.dst_list</span>
+<span class="c1">#         else:                   used_list = self.node.src_list</span>
+<span class="c1"># </span>
+<span class="c1">#         num = len(used_list)</span>
+<span class="c1"># </span>
+<span class="c1">#         #pld_width        = node.network.pld_width</span>
+<span class="c1">#         master_id_width  = node.tgt_id_width</span>
+<span class="c1">#         slave_id_width   = node.src_id_width</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Output</span>
+<span class="c1">#         self.vld_list    = [self.create(&#39;out%s_vld&#39;     % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.rdy_list    = [self.create(&#39;out%s_rdy&#39;     % i, Input(UInt(1)))                for i in range(num)]</span>
+<span class="c1">#         self.head_list   = [self.create(&#39;out%s_head&#39;    % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.tail_list   = [self.create(&#39;out%s_tail&#39;    % i, Output(UInt(1)))               for i in range(num)]</span>
+<span class="c1">#         self.pld_list    = [self.create(&#39;out%s_pld&#39;     % i, Output(UInt(pld_width)))       for i in range(num)]</span>
+<span class="c1">#         self.mst_id_list = [self.create(&#39;out%s_mst_id&#39;  % i, Output(UInt(master_id_width))) for i in range(num)]</span>
+<span class="c1">#         self.slv_id_list = [self.create(&#39;out%s_slv_id&#39;  % i, Output(UInt(slave_id_width)))  for i in range(num)]</span>
+<span class="c1"># </span>
+<span class="c1">#         # Create Input</span>
+<span class="c1">#         self.in0_vld     = Input(UInt(1))</span>
+<span class="c1">#         self.in0_rdy     = Output(UInt(1))</span>
+<span class="c1">#         self.in0_head    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_tail    = Input(UInt(1))</span>
+<span class="c1">#         self.in0_pld     = Input(UInt(pld_width))</span>
+<span class="c1">#         self.in0_mst_id  = Input(UInt(master_id_width))</span>
+<span class="c1">#         self.in0_slv_id  = Input(UInt(slave_id_width))</span>
+<span class="c1"># </span>
+<span class="c1">#         # bin2onehot</span>
+<span class="c1">#         self.rdy_masked_list = []</span>
+<span class="c1">#         for i, dst in enumerate(used_list):</span>
+<span class="c1">#             id_hit_list = []</span>
+<span class="c1">#             for gid in dst.global_master_id_list:</span>
+<span class="c1">#                 id_hit = self.create(&quot;id_hit_p%s_id%s&quot; % (i,gid), Wire(UInt(1)))</span>
+<span class="c1"># </span>
+<span class="c1">#                 if id_type == &#39;mst&#39;:    id_hit += Equal(self.in0_mst_id, UInt(master_id_width, gid))</span>
+<span class="c1">#                 else:                   id_hit += Equal(self.in0_mst_id, UInt(slave_id_width, gid))</span>
+<span class="c1"># </span>
+<span class="c1">#                 id_hit_list.append(id_hit)</span>
+<span class="c1"># </span>
+<span class="c1">#             sel_bit = self.create(&quot;sel_bit%s&quot; % i, Wire(UInt(1)))</span>
+<span class="c1"># </span>
+<span class="c1">#             if len(id_hit_list) &lt; 2:</span>
+<span class="c1">#                 sel_bit += id_hit_list[0]</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 sel_bit += BitOrList(*id_hit_list)</span>
+<span class="c1"># </span>
+<span class="c1">#             self.rdy_masked_list.append(And(sel_bit, self.rdy_list[i]))</span>
+<span class="c1">#             </span>
+<span class="c1">#             self.vld_list[i] += And(sel_bit, self.in0_vld)</span>
+<span class="c1"># </span>
+<span class="c1">#             self.head_list[i]   += self.in0_head</span>
+<span class="c1">#             self.tail_list[i]   += self.in0_tail</span>
+<span class="c1">#             self.pld_list[i]    += self.in0_pld</span>
+<span class="c1">#             self.mst_id_list[i] += self.in0_mst_id</span>
+<span class="c1">#             self.slv_id_list[i] += self.in0_slv_id</span>
+<span class="c1"># </span>
+<span class="c1"># </span>
+<span class="c1">#         if len(self.rdy_masked_list) &lt; 2:</span>
+<span class="c1">#             self.in0_rdy += self.rdy_masked_list[0]</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             self.in0_rdy += OrList(*self.rdy_masked_list)</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
