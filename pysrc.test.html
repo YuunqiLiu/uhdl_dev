@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.test package &mdash; UHDL 0.01 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> UHDL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pysrc.test package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pysrc.test.test_Component">pysrc.test.test_Component module</a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Component.TestComponent"><code class="docutils literal notranslate"><span class="pre">TestComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Component.TestComponent.test_define"><code class="docutils literal notranslate"><span class="pre">TestComponent.test_define()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pysrc-test-test-expression-module">pysrc.test.test_Expression module</a></li>
+<li><a class="reference internal" href="#module-pysrc.test.test_Function">pysrc.test.test_Function module</a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Function.TestAssign"><code class="docutils literal notranslate"><span class="pre">TestAssign</span></code></a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Function.TestAssign.test_Assign_Right"><code class="docutils literal notranslate"><span class="pre">TestAssign.test_Assign_Right()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Function.TestAssign.test_Assign_Wrong"><code class="docutils literal notranslate"><span class="pre">TestAssign.test_Assign_Wrong()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pysrc.test.test_Port">pysrc.test.test_Port module</a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort"><code class="docutils literal notranslate"><span class="pre">TestPort</span></code></a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.setup_port_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.setup_port_contain_any()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_define"><code class="docutils literal notranslate"><span class="pre">TestPort.test_define()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_equal_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_equal_contain_any()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_equal_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_equal_contain_wire()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_expand"><code class="docutils literal notranslate"><span class="pre">TestPort.test_expand()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_not_equal_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_not_equal_contain_any()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_not_equal_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_not_equal_contain_wire()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_reverse_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_reverse_contain_any()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Port.TestPort.test_reverse_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_reverse_contain_wire()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pysrc.test.test_Wire">pysrc.test.test_Wire module</a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire"><code class="docutils literal notranslate"><span class="pre">TestWire</span></code></a><ul>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_define"><code class="docutils literal notranslate"><span class="pre">TestWire.test_define()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_equal"><code class="docutils literal notranslate"><span class="pre">TestWire.test_equal()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_expand"><code class="docutils literal notranslate"><span class="pre">TestWire.test_expand()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_match"><code class="docutils literal notranslate"><span class="pre">TestWire.test_match()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_direction"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_direction()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_name"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_name()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_width"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_width()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_one_direction"><code class="docutils literal notranslate"><span class="pre">TestWire.test_one_direction()</span></code></a></li>
+<li><a class="reference internal" href="#pysrc.test.test_Wire.TestWire.test_reverse"><code class="docutils literal notranslate"><span class="pre">TestWire.test_reverse()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pysrc-test-test-lwnoc-module">pysrc.test.test_lwnoc module</a></li>
+<li><a class="reference internal" href="#pysrc-test-test-name-sys-module">pysrc.test.test_name_sys module</a></li>
+<li><a class="reference internal" href="#pysrc-test-test-quick-start-module">pysrc.test.test_quick_start module</a></li>
+<li><a class="reference internal" href="#pysrc-test-test-run-demo-module">pysrc.test.test_run_demo module</a></li>
+<li><a class="reference internal" href="#module-pysrc.test">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UHDL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">pysrc.test package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pysrc.test.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysrc-test-package">
+<h1>pysrc.test package<a class="headerlink" href="#pysrc-test-package" title="此标题的永久链接"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="此标题的永久链接"></a></h2>
+</section>
+<section id="module-pysrc.test.test_Component">
+<span id="pysrc-test-test-component-module"></span><h2>pysrc.test.test_Component module<a class="headerlink" href="#module-pysrc.test.test_Component" title="此标题的永久链接"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysrc.test.test_Component.TestComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysrc.test.test_Component.</span></span><span class="sig-name descname"><span class="pre">TestComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Component.html#TestComponent"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Component.TestComponent" title="永久链接至目标"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Component.TestComponent.test_define">
+<span class="sig-name descname"><span class="pre">test_define</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Component.html#TestComponent.test_define"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Component.TestComponent.test_define" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pysrc-test-test-expression-module">
+<h2>pysrc.test.test_Expression module<a class="headerlink" href="#pysrc-test-test-expression-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="module-pysrc.test.test_Function">
+<span id="pysrc-test-test-function-module"></span><h2>pysrc.test.test_Function module<a class="headerlink" href="#module-pysrc.test.test_Function" title="此标题的永久链接"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysrc.test.test_Function.TestAssign">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysrc.test.test_Function.</span></span><span class="sig-name descname"><span class="pre">TestAssign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Function.html#TestAssign"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Function.TestAssign" title="永久链接至目标"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Function.TestAssign.test_Assign_Right">
+<span class="sig-name descname"><span class="pre">test_Assign_Right</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Function.html#TestAssign.test_Assign_Right"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Function.TestAssign.test_Assign_Right" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Function.TestAssign.test_Assign_Wrong">
+<span class="sig-name descname"><span class="pre">test_Assign_Wrong</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Function.html#TestAssign.test_Assign_Wrong"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Function.TestAssign.test_Assign_Wrong" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pysrc.test.test_Port">
+<span id="pysrc-test-test-port-module"></span><h2>pysrc.test.test_Port module<a class="headerlink" href="#module-pysrc.test.test_Port" title="此标题的永久链接"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysrc.test.test_Port.</span></span><span class="sig-name descname"><span class="pre">TestPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort" title="永久链接至目标"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.setup_port_contain_any">
+<span class="sig-name descname"><span class="pre">setup_port_contain_any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.setup_port_contain_any"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.setup_port_contain_any" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_define">
+<span class="sig-name descname"><span class="pre">test_define</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_define"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_define" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_equal_contain_any">
+<span class="sig-name descname"><span class="pre">test_equal_contain_any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_equal_contain_any"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_equal_contain_any" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_equal_contain_wire">
+<span class="sig-name descname"><span class="pre">test_equal_contain_wire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_equal_contain_wire"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_equal_contain_wire" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_expand">
+<span class="sig-name descname"><span class="pre">test_expand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_expand"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_expand" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_not_equal_contain_any">
+<span class="sig-name descname"><span class="pre">test_not_equal_contain_any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_not_equal_contain_any"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_not_equal_contain_any" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_not_equal_contain_wire">
+<span class="sig-name descname"><span class="pre">test_not_equal_contain_wire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_not_equal_contain_wire"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_not_equal_contain_wire" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_reverse_contain_any">
+<span class="sig-name descname"><span class="pre">test_reverse_contain_any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_reverse_contain_any"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_reverse_contain_any" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Port.TestPort.test_reverse_contain_wire">
+<span class="sig-name descname"><span class="pre">test_reverse_contain_wire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Port.html#TestPort.test_reverse_contain_wire"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Port.TestPort.test_reverse_contain_wire" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pysrc.test.test_Wire">
+<span id="pysrc-test-test-wire-module"></span><h2>pysrc.test.test_Wire module<a class="headerlink" href="#module-pysrc.test.test_Wire" title="此标题的永久链接"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pysrc.test.test_Wire.</span></span><span class="sig-name descname"><span class="pre">TestWire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire" title="永久链接至目标"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_define">
+<span class="sig-name descname"><span class="pre">test_define</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_define"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_define" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_equal">
+<span class="sig-name descname"><span class="pre">test_equal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_equal"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_equal" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_expand">
+<span class="sig-name descname"><span class="pre">test_expand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_expand"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_expand" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_match">
+<span class="sig-name descname"><span class="pre">test_match</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_match"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_match" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_not_equal_by_direction">
+<span class="sig-name descname"><span class="pre">test_not_equal_by_direction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_not_equal_by_direction"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_direction" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_not_equal_by_name">
+<span class="sig-name descname"><span class="pre">test_not_equal_by_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_not_equal_by_name"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_name" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_not_equal_by_width">
+<span class="sig-name descname"><span class="pre">test_not_equal_by_width</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_not_equal_by_width"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_not_equal_by_width" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_one_direction">
+<span class="sig-name descname"><span class="pre">test_one_direction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_one_direction"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_one_direction" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pysrc.test.test_Wire.TestWire.test_reverse">
+<span class="sig-name descname"><span class="pre">test_reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysrc/test/test_Wire.html#TestWire.test_reverse"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#pysrc.test.test_Wire.TestWire.test_reverse" title="永久链接至目标"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pysrc-test-test-lwnoc-module">
+<h2>pysrc.test.test_lwnoc module<a class="headerlink" href="#pysrc-test-test-lwnoc-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-test-test-name-sys-module">
+<h2>pysrc.test.test_name_sys module<a class="headerlink" href="#pysrc-test-test-name-sys-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-test-test-quick-start-module">
+<h2>pysrc.test.test_quick_start module<a class="headerlink" href="#pysrc-test-test-quick-start-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-test-test-run-demo-module">
+<h2>pysrc.test.test_run_demo module<a class="headerlink" href="#pysrc-test-test-run-demo-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="module-pysrc.test">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pysrc.test" title="此标题的永久链接"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

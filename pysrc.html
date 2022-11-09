@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc package &mdash; UHDL 0.01 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> UHDL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pysrc package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-pysrc">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UHDL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">pysrc package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pysrc.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysrc-package">
+<h1>pysrc package<a class="headerlink" href="#pysrc-package" title="此标题的永久链接"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="此标题的永久链接"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pysrc.debug.html">pysrc.debug package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.debug.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.debug.html#module-pysrc.debug.debug_file_name">pysrc.debug.debug_file_name module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.debug.html#module-pysrc.debug">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pysrc.test.html">pysrc.test package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#module-pysrc.test.test_Component">pysrc.test.test_Component module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Component.TestComponent"><code class="docutils literal notranslate"><span class="pre">TestComponent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Component.TestComponent.test_define"><code class="docutils literal notranslate"><span class="pre">TestComponent.test_define()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#pysrc-test-test-expression-module">pysrc.test.test_Expression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#module-pysrc.test.test_Function">pysrc.test.test_Function module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Function.TestAssign"><code class="docutils literal notranslate"><span class="pre">TestAssign</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Function.TestAssign.test_Assign_Right"><code class="docutils literal notranslate"><span class="pre">TestAssign.test_Assign_Right()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Function.TestAssign.test_Assign_Wrong"><code class="docutils literal notranslate"><span class="pre">TestAssign.test_Assign_Wrong()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#module-pysrc.test.test_Port">pysrc.test.test_Port module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort"><code class="docutils literal notranslate"><span class="pre">TestPort</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.setup_port_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.setup_port_contain_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_define"><code class="docutils literal notranslate"><span class="pre">TestPort.test_define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_equal_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_equal_contain_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_equal_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_equal_contain_wire()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_expand"><code class="docutils literal notranslate"><span class="pre">TestPort.test_expand()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_not_equal_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_not_equal_contain_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_not_equal_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_not_equal_contain_wire()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_reverse_contain_any"><code class="docutils literal notranslate"><span class="pre">TestPort.test_reverse_contain_any()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Port.TestPort.test_reverse_contain_wire"><code class="docutils literal notranslate"><span class="pre">TestPort.test_reverse_contain_wire()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#module-pysrc.test.test_Wire">pysrc.test.test_Wire module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire"><code class="docutils literal notranslate"><span class="pre">TestWire</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_define"><code class="docutils literal notranslate"><span class="pre">TestWire.test_define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_equal"><code class="docutils literal notranslate"><span class="pre">TestWire.test_equal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_expand"><code class="docutils literal notranslate"><span class="pre">TestWire.test_expand()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_match"><code class="docutils literal notranslate"><span class="pre">TestWire.test_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_not_equal_by_direction"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_direction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_not_equal_by_name"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_not_equal_by_width"><code class="docutils literal notranslate"><span class="pre">TestWire.test_not_equal_by_width()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_one_direction"><code class="docutils literal notranslate"><span class="pre">TestWire.test_one_direction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.test.html#pysrc.test.test_Wire.TestWire.test_reverse"><code class="docutils literal notranslate"><span class="pre">TestWire.test_reverse()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#pysrc-test-test-lwnoc-module">pysrc.test.test_lwnoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#pysrc-test-test-name-sys-module">pysrc.test.test_name_sys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#pysrc-test-test-quick-start-module">pysrc.test.test_quick_start module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#pysrc-test-test-run-demo-module">pysrc.test.test_run_demo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.test.html#module-pysrc.test">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pysrc.uhdl.html">pysrc.uhdl package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.Demo.html">pysrc.uhdl.Demo package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.Demo.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pysrc.uhdl.core.html">pysrc.uhdl.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-basicfunction-module">pysrc.uhdl.core.BasicFunction module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-component-module">pysrc.uhdl.core.Component module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-config-module">pysrc.uhdl.core.Config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-connectionproperty-module">pysrc.uhdl.core.ConnectionProperty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-custconfig-module">pysrc.uhdl.core.CustConfig module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-exception-module">pysrc.uhdl.core.Exception module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-extensiblefileobject-module">pysrc.uhdl.core.ExtensibleFileObject module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-fileprocess-module">pysrc.uhdl.core.FileProcess module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-function-module">pysrc.uhdl.core.Function module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-internaltool-module">pysrc.uhdl.core.InternalTool module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-lint-module">pysrc.uhdl.core.Lint module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-operator-module">pysrc.uhdl.core.Operator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-root-module">pysrc.uhdl.core.Root module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-vcomponent-module">pysrc.uhdl.core.VComponent module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-vfile-module">pysrc.uhdl.core.VFile module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#pysrc-uhdl-core-variable-module">pysrc.uhdl.core.Variable module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pysrc.uhdl.core.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pysrc.uhdl.html#module-pysrc.uhdl">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-pysrc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pysrc" title="此标题的永久链接"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

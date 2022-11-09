@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysrc.uhdl.core package &mdash; UHDL 0.01 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> UHDL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pysrc.uhdl.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-basicfunction-module">pysrc.uhdl.core.BasicFunction module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-component-module">pysrc.uhdl.core.Component module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-config-module">pysrc.uhdl.core.Config module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-connectionproperty-module">pysrc.uhdl.core.ConnectionProperty module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-custconfig-module">pysrc.uhdl.core.CustConfig module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-exception-module">pysrc.uhdl.core.Exception module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-extensiblefileobject-module">pysrc.uhdl.core.ExtensibleFileObject module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-fileprocess-module">pysrc.uhdl.core.FileProcess module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-function-module">pysrc.uhdl.core.Function module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-internaltool-module">pysrc.uhdl.core.InternalTool module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-lint-module">pysrc.uhdl.core.Lint module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-operator-module">pysrc.uhdl.core.Operator module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-root-module">pysrc.uhdl.core.Root module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-vcomponent-module">pysrc.uhdl.core.VComponent module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-vfile-module">pysrc.uhdl.core.VFile module</a></li>
+<li><a class="reference internal" href="#pysrc-uhdl-core-variable-module">pysrc.uhdl.core.Variable module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UHDL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">pysrc.uhdl.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pysrc.uhdl.core.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pysrc-uhdl-core-package">
+<h1>pysrc.uhdl.core package<a class="headerlink" href="#pysrc-uhdl-core-package" title="此标题的永久链接"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-basicfunction-module">
+<h2>pysrc.uhdl.core.BasicFunction module<a class="headerlink" href="#pysrc-uhdl-core-basicfunction-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-component-module">
+<h2>pysrc.uhdl.core.Component module<a class="headerlink" href="#pysrc-uhdl-core-component-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-config-module">
+<h2>pysrc.uhdl.core.Config module<a class="headerlink" href="#pysrc-uhdl-core-config-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-connectionproperty-module">
+<h2>pysrc.uhdl.core.ConnectionProperty module<a class="headerlink" href="#pysrc-uhdl-core-connectionproperty-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-custconfig-module">
+<h2>pysrc.uhdl.core.CustConfig module<a class="headerlink" href="#pysrc-uhdl-core-custconfig-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-exception-module">
+<h2>pysrc.uhdl.core.Exception module<a class="headerlink" href="#pysrc-uhdl-core-exception-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-extensiblefileobject-module">
+<h2>pysrc.uhdl.core.ExtensibleFileObject module<a class="headerlink" href="#pysrc-uhdl-core-extensiblefileobject-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-fileprocess-module">
+<h2>pysrc.uhdl.core.FileProcess module<a class="headerlink" href="#pysrc-uhdl-core-fileprocess-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-function-module">
+<h2>pysrc.uhdl.core.Function module<a class="headerlink" href="#pysrc-uhdl-core-function-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-internaltool-module">
+<h2>pysrc.uhdl.core.InternalTool module<a class="headerlink" href="#pysrc-uhdl-core-internaltool-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-lint-module">
+<h2>pysrc.uhdl.core.Lint module<a class="headerlink" href="#pysrc-uhdl-core-lint-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-operator-module">
+<h2>pysrc.uhdl.core.Operator module<a class="headerlink" href="#pysrc-uhdl-core-operator-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-root-module">
+<h2>pysrc.uhdl.core.Root module<a class="headerlink" href="#pysrc-uhdl-core-root-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-vcomponent-module">
+<h2>pysrc.uhdl.core.VComponent module<a class="headerlink" href="#pysrc-uhdl-core-vcomponent-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-vfile-module">
+<h2>pysrc.uhdl.core.VFile module<a class="headerlink" href="#pysrc-uhdl-core-vfile-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="pysrc-uhdl-core-variable-module">
+<h2>pysrc.uhdl.core.Variable module<a class="headerlink" href="#pysrc-uhdl-core-variable-module" title="此标题的永久链接"></a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="此标题的永久链接"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2019, Yunqi Liu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
