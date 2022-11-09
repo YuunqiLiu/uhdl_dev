@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../..'))
 master_doc = 'index'
 # -- Project information -----------------------------------------------------
 
-project = 'ltool'
+project = 'UHDL'
 copyright = '2019, Yunqi Liu'
 author = 'Yunqi Liu'
 
