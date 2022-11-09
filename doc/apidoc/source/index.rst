@@ -24,6 +24,7 @@ UHDL(Unified Hardware Description Language)是一种硬件描述语言，用于�
 .. toctree::
    :maxdepth: 2
    
+   index.rst
    quick_start.rst
    lint.rst
 
