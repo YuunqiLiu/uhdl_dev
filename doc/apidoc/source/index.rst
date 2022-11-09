@@ -28,6 +28,8 @@ UHDL(Unified Hardware Description Language)是一种硬件描述语言，用于�
    :maxdepth: 2
    :caption: Contents:
 
+   quick_start.rst
+
 
 
 Indices and tables
